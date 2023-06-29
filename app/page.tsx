@@ -55,7 +55,7 @@ export default async function Home() {
           768px and up = 2 games per row
           1024px and up = 3 games per row
         */
-        <div className="bg-gray-700 p-8 col-span-4 md:col-span-2 lg:col-span-1 text-white font-bold flex-grow" key={game.id}>
+        <div className="bg-gray-700 p-8 col-span-4 md:col-span-2 lg:col-span-2 text-white font-bold flex-grow" key={game.id}>
           <h1>{game.name}</h1>
           <p>Rating: {game.rating}</p>
           {/* <p>{game.added}</p> */}
