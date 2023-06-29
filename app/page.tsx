@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Sidebar } from "@/components/ui";
 
 interface Game {
   id: number;
@@ -41,12 +42,22 @@ export default async function Home() {
   // console.log("games", games);
 
   return (
-    <main className="m-24 rounded-md grid grid-cols-4 gap-12">
+    <main className="m-24 rounded-md grid grid-cols-4 gap-12 w-full">
+      {/* SIDEBAR
+      <div>Sidebar</div> */}
+
+      {/* GAME CONTENT */}
       {games.map((game) => (
         // col-span-4 takes up all four columns of space making it 1 game per row, for md(768px) we have it display TWO GAMES
-        <div className="bg-white p-8 col-span-4 md:col-span-2" key={game.id}>
+        // <div className="bg-gray-700 p-8 col-span-4 md:col-span-2 lg:col-span-1 text-white font-bold flex-grow" key={game.id}>
+        /* 
+          0px to 640px = 1 game per row
+          768px and up = 2 games per row
+          1024px and up = 3 games per row
+        */
+        <div className="bg-gray-700 p-8 col-span-4 md:col-span-2 lg:col-span-1 text-white font-bold flex-grow" key={game.id}>
           <h1>{game.name}</h1>
-          <p>{game.rating}</p>
+          <p>Rating: {game.rating}</p>
           {/* <p>{game.added}</p> */}
           <div className="aspect-video relative">
             <Image src={game.background_image} fill className="object-cover rounded-md" alt={game.name} />
