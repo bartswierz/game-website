@@ -24,4 +24,4 @@ export const sidebarData: SidebarDataProps[] = [
   },
 ];
 
-// {} object containing a title, and link and linkText
+// {} object containing a title, and link
