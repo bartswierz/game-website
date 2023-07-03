@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { Navbar, Sidebar } from "@/components/ui";
+import { Footer, Navbar, Sidebar } from "@/components/ui";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Sidebar />
           <main className=" p-5">{children}</main>
         </div>
-        {/* Footer Component here */}
+        <Footer />
       </body>
     </html>
   );

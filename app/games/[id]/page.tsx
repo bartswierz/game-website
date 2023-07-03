@@ -4,7 +4,7 @@ import { GameDetails } from "@/types";
 import { getGameDetails } from "@/utils";
 import Link from "next/link";
 
-// Passing in the GAME ID
+// DISPLAY GAME DETAILS FOR A SINGLE GAME BASED ON ID
 const GameDetailsPage = async ({ params }: { params: { id: string; game: GameDetails } }) => {
   const gameDetails = await getGameDetails(params.id);
   console.log("params: ", params);
@@ -12,7 +12,7 @@ const GameDetailsPage = async ({ params }: { params: { id: string; game: GameDet
     <div className="text-white">
       {/* <div>Game Details Page - Slug: {params.id}</div> */}
       <div>
-        {gameDetails.map(({ id, name, released, rating, reviews_count, stores }) => (
+        {gameDetails.map(({ id, name, released, rating, reviews_count, stores }: GameDetails) => (
           <div className="border bg-gray-700">
             <div>id: {id}</div>
             <div>name: {name}</div>
@@ -25,9 +25,9 @@ const GameDetailsPage = async ({ params }: { params: { id: string; game: GameDet
               {stores.map(({ store }) => (
                 <div key={store.id}>
                   {/* <div>{store.name}</div> */}
-                  <a href={`https://${store.domain}`} target="_blank" className="underline hover:text-slate-500">
+                  <Link href={`https://${store.domain}`} target="_blank" className="underline hover:text-slate-500">
                     {store.domain}
-                  </a>
+                  </Link>
                 </div>
               ))}
             </div>
