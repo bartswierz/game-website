@@ -14,7 +14,7 @@ const Sidebar = () => {
 
             <ul className="flex flex-col gap-4">
               {links.map((link) => (
-                <Link href={formatLink(link, title)} className="flex gap-2">
+                <Link href={formatLink(title, link)} className="flex gap-2">
                   <span className="w-6 h-6 bg-slate-500  rounded-md"></span>
                   <li className="cursor-pointer hover:text-gray-500 ">{link}</li>
                 </Link>
