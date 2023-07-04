@@ -62,3 +62,26 @@ export interface GameDetails {
   esrb_rating: { id: number; name: string; slug: string };
   short_screenshots: object[];
 }
+
+export interface GameDevelopersResults {
+  id: number;
+  name: string;
+  slug: string;
+  games_count: number;
+  image_background: string;
+  games: [
+    {
+      id: number;
+      slug: string;
+      name: string;
+      added: number;
+    }
+  ];
+}
+
+export interface GameDevelopers {
+  count: number;
+  next: string;
+  previous: null;
+  results: GameDevelopersResults[];
+}

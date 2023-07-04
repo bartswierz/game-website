@@ -1,4 +1,4 @@
-import { Game, GameDetails } from "@/types";
+import { Game, GameDetails, GameDevelopers } from "@/types";
 
 // Creates a valid URL from a string i.e.) link: "Best of the Year" & title: Top Games" => "best-of-the-year"
 export const formatLink = (title: string, link: string) => {
@@ -15,11 +15,9 @@ export const getGames = async (): Promise<Game[]> => {
   if (!res.ok) {
     throw new Error("Failed to fetch");
   }
-  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   const data = await res.json();
-  // console.log("data", data.results);
-  // console.log("DATA: ", data.results);
+
   return data.results;
 };
 
@@ -30,7 +28,6 @@ export const getGameDetails = async (id: string): Promise<GameDetails[]> => {
   if (!res.ok) {
     throw new Error("Failed to fetch");
   }
-  // await new Promise((resolve) => setTimeout(resolve, 2000));
 
   //All games
   const data = await res.json();
@@ -46,4 +43,37 @@ export const getGameDetails = async (id: string): Promise<GameDetails[]> => {
   });
 
   return gameInfo;
+};
+
+// FETCH GAME DEVELOPERS
+// export const getGameDevelopers = async (page?: number): Promise<GameDevelopers> => {
+export const getGameDevelopers = async (): Promise<GameDevelopers> => {
+  // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
+  console.log("private key: ", process.env.RAWG_API_KEY);
+  const res = await fetch(`https://api.rawg.io/api/developers?key=${process.env.RAWG_API_KEY}`);
+  if (!res.ok) {
+    throw new Error("Failed to fetch");
+  }
+
+  //All games
+  const data: GameDevelopers = await res.json();
+  // console.log("data", data);
+
+  return data;
+};
+
+// FETCH GAME DEVELOPERS PREVIOUS OR NEXT PAGE - PAGINATION
+//TODO - pass in the url
+export const getNextGameDevelopersPage = async (request: string): Promise<GameDevelopers> => {
+  // const res = await fetch(`https://api.rawg.io/api/developers?key=${process.env.RAWG_API_KEY}`);
+  const res = await fetch(request);
+  if (!res.ok) {
+    throw new Error("Failed to fetch");
+  }
+
+  //All games
+  const data: GameDevelopers = await res.json();
+  console.log("data", data);
+
+  return data;
 };
