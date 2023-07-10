@@ -5,12 +5,13 @@ export const formatLink = (title: string, link: string) => {
   const formattedDirectory = title.replaceAll(" ", "-").toLowerCase();
   const formattedLink = link.replaceAll(" ", "-").toLowerCase();
   const formattedURL = "/" + formattedDirectory + "/" + formattedLink;
-  console.log(formattedURL);
+  // console.log(formattedURL);
   return formattedURL;
 };
 
 // FETCHES 20 GAMES FROM RAWG API - USED ON HOME PAGE TO RENDER 20 GAMES
 export const getGames = async (): Promise<Game[]> => {
+  console.log("private key - get Games: ", process.env.RAWG_API_KEY);
   const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
   if (!res.ok) {
     throw new Error("Failed to fetch");
@@ -24,6 +25,7 @@ export const getGames = async (): Promise<Game[]> => {
 // FETCH GAME DETAILS FOR A SPECIFIC GAME
 export const getGameDetails = async (id: string): Promise<GameDetails[]> => {
   // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
+  console.log("private key - getGameDetails: ", process.env.RAWG_API_KEY);
   const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&id=${id}`);
   if (!res.ok) {
     throw new Error("Failed to fetch");
@@ -50,14 +52,16 @@ export const getGameDetails = async (id: string): Promise<GameDetails[]> => {
 export const getGameDevelopers = async (): Promise<GameDevelopers> => {
   // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
   console.log("private key: ", process.env.RAWG_API_KEY);
+
   const res = await fetch(`https://api.rawg.io/api/developers?key=${process.env.RAWG_API_KEY}`);
+  // const res = await fetch(`https://api.rawg.io/api/developers?key=${key}`);
   if (!res.ok) {
     throw new Error("Failed to fetch");
   }
 
   //All games
   const data: GameDevelopers = await res.json();
-  // console.log("data", data);
+  console.log("data", data);
 
   return data;
 };

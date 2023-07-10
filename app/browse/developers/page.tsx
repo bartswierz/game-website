@@ -9,7 +9,8 @@ const Developers = async () => {
   const developers = await getGameDevelopers();
   const { results, next, previous } = developers;
   // const [content, setContent] = useState<GameDevelopers>(developers);
-
+  console.log("next request: ", next);
+  console.log("previous request: ", previous);
   console.log(developers);
   // console.log("content", content);
   return (
