@@ -2,22 +2,33 @@
 interface NavigationButtonProps {
   text: string;
   request: string;
-  onClick: () => void;
+  // getPageContent: (getPage: string) => void;
+  onPageChange: (request: string, pageDirection: string) => void;
+  pageDirection: "next" | "prev";
 }
 
-const NavigationButton = async ({ text, request, onClick }: NavigationButtonProps) => {
+const NavigationButton = async ({ text, request, onPageChange, pageDirection }: NavigationButtonProps) => {
   // TODO - do the API REQUEST CALL HERE TO FETCH NEXT OR PREVIOUS PAGE
   // const response = await fetch(request);
   // const data = await response.json();
 
   const fetchPage = async () => {
-    const response = await fetch(request);
-    const data = await response.json();
-    return data;
+    console.log("inside navigation page fetchPage");
+    // const response = await fetch(request);
+    // const data = await response.json();
+    console.log("request: ", request);
+    //Callback to update state in parent component
+    //TODO - expects request url string and pageDirection string
+    onPageChange(request, pageDirection);
+    // return data;
   };
 
   return (
-    <button type="button" onClick={() => fetchPage()}>
+    <button
+      type="button"
+      onClick={() => fetchPage()}
+      className="border px-4 py-2 hover:bg-slate-600 focus:bg-slate-700 rounded-md m-1"
+    >
       {text}
     </button>
   );

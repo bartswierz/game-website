@@ -70,6 +70,7 @@ export const getGameDevelopers = async (): Promise<GameDevelopers> => {
 //TODO - pass in the url
 export const getNextGameDevelopersPage = async (request: string): Promise<GameDevelopers> => {
   // const res = await fetch(`https://api.rawg.io/api/developers?key=${process.env.RAWG_API_KEY}`);
+  console.log("request NEXT", request);
   const res = await fetch(request);
   if (!res.ok) {
     throw new Error("Failed to fetch");
