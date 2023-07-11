@@ -1,33 +1,29 @@
 // TODO - Pass in text(next or back) & URL to call
 interface NavigationButtonProps {
   text: string;
-  request: string;
+  request: string | null;
   // getPageContent: (getPage: string) => void;
   onPageChange: (request: string, pageDirection: string) => void;
   pageDirection: "next" | "prev";
+  active: "active" | "inactive";
 }
 
-const NavigationButton = async ({ text, request, onPageChange, pageDirection }: NavigationButtonProps) => {
-  // TODO - do the API REQUEST CALL HERE TO FETCH NEXT OR PREVIOUS PAGE
-  // const response = await fetch(request);
-  // const data = await response.json();
-
-  const fetchPage = async () => {
-    console.log("inside navigation page fetchPage");
-    // const response = await fetch(request);
-    // const data = await response.json();
-    console.log("request: ", request);
-    //Callback to update state in parent component
-    //TODO - expects request url string and pageDirection string
-    onPageChange(request, pageDirection);
-    // return data;
+const NavigationButton = async ({ text, request, onPageChange, pageDirection, active }: NavigationButtonProps) => {
+  //Callback to update state in parent component
+  const fetchPage = () => {
+    if (request) onPageChange(request, pageDirection);
   };
+
+  // Active & Inactive Button Styling
+  const activeStyles: string = "hover:bg-blue-700 focus:bg-blue-800";
+  const inactiveStyles: string = "text-white hover:bg-blue-600 opacity-50";
 
   return (
     <button
       type="button"
-      onClick={() => fetchPage()}
-      className="border px-4 py-2 hover:bg-slate-600 focus:bg-slate-700 rounded-md m-1"
+      onClick={fetchPage}
+      className={`px-4 py-2 bg-blue-600 rounded-md m-1 ${active === "active" ? activeStyles : inactiveStyles}`}
+      disabled={active !== "active"}
     >
       {text}
     </button>

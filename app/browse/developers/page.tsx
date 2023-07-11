@@ -1,37 +1,46 @@
 "use client";
-import { getGameDevelopers, getNextGameDevelopersPage } from "@/utils";
+import { getGameDevelopers, getNextGameDevelopersPage, getPage } from "@/utils";
 import React, { useState, useEffect } from "react";
 import { NavigationButton } from "@/components/ui";
 import Image from "next/image";
 import { GameDevelopers } from "@/types";
 
-const Developers = async () => {
+const Developers = () => {
   const [content, setContent] = useState<GameDevelopers | null>(null);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   // Ran once on page load
   useEffect(() => {
     const fetchData = async () => {
       console.log("Fetching data from API...");
       const developers = await getGameDevelopers();
-      const { results, next, previous } = developers;
       setContent(developers);
     };
 
     fetchData();
   }, []);
 
+  // Updates current page number whenever we get a new set of data from API
+  useEffect(() => {
+    // If content.next exists, get the page number from it
+    if (content?.next) {
+      const pageNumber = getPage(content.next);
+      setCurrentPage(pageNumber);
+    }
+  }, [content]);
+
   // Handle page change
-  const handlePageChange = async (request: string, pageDirection: string) => {
+  const handlePageChange = async (request: string | null, pageDirection: string) => {
     console.log(`Fetching data for ${pageDirection} page...`);
     if (pageDirection === "prev") {
       if (content?.previous) {
-        console.log("content.next: ", content.previous);
+        // console.log("content.prev: ", content.previous);
         const newContent = await getNextGameDevelopersPage(request);
         setContent(newContent);
       }
     } else if (pageDirection === "next") {
       if (content?.next) {
-        console.log("content.next: ", content.next);
+        // console.log("content.next: ", content.next);
         const newContent = await getNextGameDevelopersPage(request);
         setContent(newContent);
       }
@@ -41,30 +50,70 @@ const Developers = async () => {
   // While loading data from API
   if (!content) return <div className="text-white text-3xl">Loading...</div>;
 
-  // console.log("content", content);
   // Once data is ready to display
   return (
     <div className="text-white">
       <div>GAME DEVELOPERS INFORMATION</div>
-      <div>count: {content.count}</div>
+      <div># of Developers: {content.count}</div>
+      <div># of Pages: {Math.ceil(content.count / 10)}</div>
       <div>next: {content.next}</div>
       <div>previous: {content.previous}</div>
 
-      {content.previous ? (
-        <NavigationButton text="Prev" request={content.previous} onPageChange={handlePageChange} pageDirection={"prev"} />
-      ) : null}
+      <div className="my-5">
+        {/* PREVIOUS BUTTON */}
+        {content.previous ? (
+          <NavigationButton
+            text="Prev"
+            request={content.previous}
+            onPageChange={handlePageChange}
+            pageDirection={"prev"}
+            active={`${content.previous === null ? "inactive" : "active"}`}
+          />
+        ) : (
+          <NavigationButton
+            text="Prev"
+            request={null}
+            onPageChange={handlePageChange}
+            pageDirection={"prev"}
+            active={`${content.previous === null ? "inactive" : "active"}`}
+          />
+        )}
 
-      <NavigationButton text="Next" request={content.next} onPageChange={handlePageChange} pageDirection={"next"} />
+        {/* Page Counter */}
+        <div className="inline-block px-4 py-2 m-1">
+          Page {currentPage} of {Math.ceil(content.count / 10)}
+        </div>
 
+        {/* NEXT BUTTON */}
+        <NavigationButton
+          text="Next"
+          request={content.next}
+          onPageChange={handlePageChange}
+          pageDirection={"next"}
+          active={`${content.next === null ? "inactive" : "active"}`}
+        />
+      </div>
+
+      {/* TODO - Add useRouter -> id grabber to link to /developer/id */}
       <div className="flex flex-col gap-y-4">
-        {content.results.map((dev, idx: number) => {
+        {content.results.map((dev) => {
           return (
-            <div className="border bg-gray-500" key={idx}>
-              <div>Slug: {dev.slug}</div>
-              <div>Id: {dev.id}</div>
-              <div>Developer Name: {dev.name}</div>
-              <div>Games Count: {dev.games_count}</div>
-              <Image src={dev.image_background} alt="Game Developer" width={300} height={300} />
+            <div className="border bg-gray-500 w-64 h-max rounded-md" key={dev.id}>
+              <div className="object-contain">
+                <Image
+                  src={dev.image_background}
+                  alt="Game Developer"
+                  width={200}
+                  height={200}
+                  className="w-full h-full object-contain rounded-t-md"
+                />
+              </div>
+              <ul className="p-2">
+                <li>Slug: {dev.slug}</li>
+                <li>Id: {dev.id}</li>
+                <li>Developer Name: {dev.name}</li>
+                <li>Games Count: {dev.games_count}</li>
+              </ul>
             </div>
           );
         })}
