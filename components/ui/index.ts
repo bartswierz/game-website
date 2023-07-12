@@ -3,5 +3,6 @@ import Navbar from "./Navbar";
 import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import NavigationButton from "./NavigationButton";
+import Ratings from "./Ratings";
 
-export { Navbar, Sidebar, Footer, NavigationButton };
+export { Navbar, Sidebar, Footer, NavigationButton, Ratings };

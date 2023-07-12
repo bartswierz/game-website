@@ -1,6 +1,8 @@
 import { GameDetails } from "@/types";
 import { getGameDetails } from "@/utils";
+import { Ratings } from "@/components/ui";
 import Link from "next/link";
+import Image from "next/image";
 
 // DISPLAY GAME DETAILS FOR A SINGLE GAME BASED ON ID
 const GameDetailsPage = async ({ params }: { params: { id: string } }) => {
@@ -16,22 +18,28 @@ const GameDetailsPage = async ({ params }: { params: { id: string } }) => {
       <div>
         {/* {gameDetails.map(({ id, name, released, rating, reviews_count, stores }: GameDetails) => ( */}
         <div className="border bg-gray-700">
-          <div>id: {id}</div>
-          <div>name: {name}</div>
-          <div>released: {released}</div>
-          <div>rating: {rating}</div>
-          <div>reviews_count: {reviews_count}</div>
-          <div>
-            tags:{" "}
-            {tags.map(({ id, name, slug, language, games_count, image_background }) => (
-              <div>
-                {/* <div key={id}> */}
-                <div>{name}</div>
-                <div>{language}</div>
-                <div>{image_background}</div>
-              </div>
+          <ul>
+            <li>id: {id}</li>
+            <li>{name}</li>
+            <li>Released: {released}</li>
+            <li>
+              Rating: {rating} ({reviews_count})
+            </li>
+
+            {/* RATINGS */}
+            <Ratings />
+          </ul>
+          {/* <div>reviews_count: {reviews_count}</div> */}
+
+          {/* TAGS */}
+          <ul className="flex flex-row flex-wrap gap-2 text-xs">
+            {tags.map(({ id, name, slug, image_background }) => (
+              <li key={id} className="bg-blue-700 py-1 px-2  rounded-lg">
+                {name}
+              </li>
             ))}
-          </div>
+          </ul>
+
           <br />
           <div>
             Available at Stores:
