@@ -3,9 +3,12 @@ import { getGameDevelopers, getNextGameDevelopersPage, getPage } from "@/utils";
 import React, { useState, useEffect } from "react";
 import { NavigationButton } from "@/components/ui";
 import Image from "next/image";
-import { GameDevelopers } from "@/types";
+import { GameDevelopers, GameDevelopersResults } from "@/types";
+// import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Developers = () => {
+  // const router = useRouter();
   const [content, setContent] = useState<GameDevelopers | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -46,6 +49,13 @@ const Developers = () => {
       }
     }
   };
+
+  // const handleDeveloperInfo = (developerInfo: GameDevelopersResults) => {
+  //   console.log("Developer ID: ", developerInfo);
+
+  //   // TODO - add useRouter here
+  //   router.push(`/developer/${developerInfo.id}`);
+  // };
 
   // While loading data from API
   if (!content) return <div className="text-white text-3xl">Loading...</div>;
@@ -95,10 +105,28 @@ const Developers = () => {
       </div>
 
       {/* TODO - Add useRouter -> id grabber to link to /developer/id */}
-      <div className="flex flex-col gap-y-4">
+      <div className="flex flex-row flex-wrap gap-4">
         {content.results.map((dev) => {
           return (
-            <div className="border bg-gray-500 w-64 h-max rounded-md" key={dev.id}>
+            // <Link href={`developer/${dev.id}`} className="border bg-gray-500 w-64 h-max rounded-md shadow-lg" key={dev.id}>
+
+            // <Link href={`developers/${dev.id}`} className="border bg-gray-500 w-64 h-max rounded-md shadow-lg" key={dev.id}>
+
+            <Link
+              href={{
+                pathname: `developers/${dev.id}`,
+              }}
+              className="border bg-gray-500 w-64 h-max rounded-md shadow-lg"
+              key={dev.id}
+            >
+              {/* <Link
+              href={{
+                pathname: `developers/${dev.id}`,
+                query: { dev: dev.id },
+              }}
+              className="border bg-gray-500 w-64 h-max rounded-md shadow-lg"
+              key={dev.id}
+            > */}
               <div className="object-contain">
                 <Image
                   src={dev.image_background}
@@ -109,12 +137,12 @@ const Developers = () => {
                 />
               </div>
               <ul className="p-2">
-                <li>Slug: {dev.slug}</li>
+                {/* <li>Slug: {dev.slug}</li> */}
+                <li className="text-xl">Dev: {dev.name}</li>
                 <li>Id: {dev.id}</li>
-                <li>Developer Name: {dev.name}</li>
                 <li>Games Count: {dev.games_count}</li>
               </ul>
-            </div>
+            </Link>
           );
         })}
       </div>
