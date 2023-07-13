@@ -257,23 +257,23 @@ export interface DeveloperInfo {
   description: string;
 }
 
+export interface GenreGamesList {
+  id: number;
+  slug: string;
+  name: string;
+  added: number;
+}
+
 export interface GenreResults {
   id: number;
   name: string;
   slug: string;
   games_count: number;
   image_background: string;
-  games: [
-    {
-      id: number;
-      slug: string;
-      name: string;
-      added: number;
-    }
-  ];
+  games: GenreGamesList[];
 }
 
-export interface Genres {
+export interface GameGenres {
   count: number;
   next: string | null;
   previous: string | null;

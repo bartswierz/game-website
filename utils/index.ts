@@ -1,4 +1,4 @@
-import { Game, GameDetails, GameDevelopers, DeveloperInfo, Genres } from "@/types";
+import { Game, GameDetails, GameDevelopers, DeveloperInfo, GameGenres } from "@/types";
 
 // Creates a valid URL from a string i.e.) link: "Best of the Year" & title: Top Games" => "best-of-the-year"
 export const formatLink = (title: string, link: string): string => {
@@ -150,7 +150,7 @@ export const getDeveloperInfo = async (id: string): Promise<DeveloperInfo> => {
 };
 
 // GET ALL GAME GENRES
-export const getGamesGenres = async (): Promise<Genres> => {
+export const getGamesGenres = async (): Promise<GameGenres> => {
   const res = await fetch(`https://api.rawg.io/api/genres?key=${process.env.RAWG_API_KEY}`);
 
   const data = await res.json();
