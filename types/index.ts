@@ -256,3 +256,26 @@ export interface DeveloperInfo {
   image_background: string;
   description: string;
 }
+
+export interface GenreResults {
+  id: number;
+  name: string;
+  slug: string;
+  games_count: number;
+  image_background: string;
+  games: [
+    {
+      id: number;
+      slug: string;
+      name: string;
+      added: number;
+    }
+  ];
+}
+
+export interface Genres {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: GenreResults[];
+}
