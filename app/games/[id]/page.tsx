@@ -13,6 +13,7 @@ const GameDetailsPage = async ({ params }: { params: { id: string } }) => {
     background_image,
     description,
     released,
+    updated,
     rating,
     ratings,
     ratings_count,
@@ -25,6 +26,7 @@ const GameDetailsPage = async ({ params }: { params: { id: string } }) => {
     metacritic_platforms,
   } = gameDetails;
 
+  // FORMATS THE ENGLISH GAME DESCRIPTION
   const formatDescription = (description: string) => {
     const splitByPTag: string[] = description.split("</p>"); // splitByPTag[0] = english description, splitByPTag[1] = Spanish description
     // console.log("splitByPTag: ", splitByPTag);
@@ -38,6 +40,31 @@ const GameDetailsPage = async ({ params }: { params: { id: string } }) => {
 
   const descriptionText: string[] = formatDescription(description);
 
+  // FORMATS UPDATED DATE TO MM/DD/YYYY
+  const formatUpdatedDate = (updated: string) => {
+    const dateTimeString = updated; // "2023-07-13T06:44:16"
+    const dateTime = new Date(dateTimeString);
+    const formattedDateTime = dateTime.toLocaleString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }); //07/10/2023
+
+    return formattedDateTime;
+  };
+
+  const formattedUpdatedDate = formatUpdatedDate(updated);
+
+  // FORMATS RELEASED DATE TO MM/DD/YYYY
+  const formatReleasedDate = (released: string) => {
+    const dateValue = released.split("-"); // ["2023", "07", "13"]
+    const date = dateValue[1] + "/" + dateValue[2] + "/" + dateValue[0]; // "07/13/2023"
+
+    return date;
+  };
+
+  const formattedReleasedDate = formatReleasedDate(released);
+
   return (
     <div className="border bg-gray-800 text-white">
       <div>
@@ -48,7 +75,8 @@ const GameDetailsPage = async ({ params }: { params: { id: string } }) => {
         <ul>
           <li>Game Id: {id}</li>
           <li>{name}</li>
-          <li>Released: {released}</li>
+          <li>Released: {formattedReleasedDate}</li>
+          <li>Updated: {formattedUpdatedDate}</li>
           <li>
             {descriptionText.map((sentence) => (
               <p className="mb-2">{sentence}</p>
@@ -63,7 +91,7 @@ const GameDetailsPage = async ({ params }: { params: { id: string } }) => {
 
         {/* TAGS */}
         <ul className="flex flex-row flex-wrap gap-2 text-xs">
-          {tags.map(({ id, name, slug, image_background }) => (
+          {tags.map(({ id, name, slug }) => (
             <li key={id} className="bg-blue-700 py-1 px-2  rounded-lg">
               {name}
             </li>
