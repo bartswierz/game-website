@@ -66,7 +66,7 @@ const Ratings = ({ averageRating, ratingsList, ratingsCount }: RatingsProps) => 
       {ratingsList.map((rating) => (
         <div className="flex items-center my-4" key={rating.id}>
           {/* RATING TITLE */}
-          <p className="w-28 text-sm pl-2 font-medium text-white">{rating.title.toUpperCase()}</p>
+          <p className="w-28 text-sm font-medium text-white">{rating.title.toUpperCase()}</p>
 
           {/* PERCENTAGE BAR */}
           <div className="flex items-center flex-grow max-w-xs md:min-w-max h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
