@@ -75,17 +75,7 @@ export const getGameDetails = async (id: string): Promise<GameDetails> => {
 
   //All games
   const data: GameDetails = await res.json();
-  console.log("GAME DETAILS: ", data);
-
-  // //Only want the results object containing game info
-  // let gamesInfo: GameDetails[] = data.results;
-
-  // // Grab only 1 game that matches our id
-  // const gameInfo: GameDetails[] = gamesInfo.filter((game: GameDetails) => {
-  //   //Params is always a string so we need to convert our game.id from number to string
-  //   let gameID = game.id.toString();
-  //   return gameID === id;
-  // });
+  // console.log("GAME DETAILS: ", data);
 
   return data;
 };

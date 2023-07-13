@@ -7,10 +7,10 @@ import Image from "next/image";
 // DISPLAY GAME DETAILS FOR A SINGLE GAME BASED ON ID
 const GameDetailsPage = async ({ params }: { params: { id: string } }) => {
   const gameDetails: GameDetails = await getGameDetails(params.id);
-  const { id, name, released, rating, reviews_count, stores, tags } = gameDetails;
+  const { id, name, background_image, released, rating, ratings, ratings_count, stores, tags } = gameDetails;
 
-  console.log("Game Details Page - params: ", params);
-  console.log("Tags: ", tags);
+  // console.log("Game Details Page - params: ", params);
+  // console.log("Tags: ", tags);
 
   return (
     <div className="text-white">
@@ -19,15 +19,17 @@ const GameDetailsPage = async ({ params }: { params: { id: string } }) => {
         {/* {gameDetails.map(({ id, name, released, rating, reviews_count, stores }: GameDetails) => ( */}
         <div className="border bg-gray-700">
           <ul>
+            <li>
+              <Image src={background_image} alt={name} width={300} height={200} />
+            </li>
             <li>id: {id}</li>
             <li>{name}</li>
             <li>Released: {released}</li>
             <li>
-              Rating: {rating} ({reviews_count})
+              Rating: {rating} ({ratings_count})
             </li>
 
-            {/* RATINGS */}
-            <Ratings />
+            <Ratings averageRating={rating} ratingsList={ratings} ratingsCount={ratings_count} />
           </ul>
           {/* <div>reviews_count: {reviews_count}</div> */}
 
