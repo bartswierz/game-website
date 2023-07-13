@@ -15,11 +15,18 @@ const Genres = async () => {
       <div className="flex flex-row flex-wrap gap-4">
         {/* {results.map((genre: GenreResults) => ( */}
         {results.map(({ id, name, slug, games_count, image_background, games }: GenreResults) => (
-          // <Link href={`/browse/genres/${slug}`} className="border cursor-pointer" key={id}>
-          <Link href={`/genres/${slug}`} className="border cursor-pointer" key={id}>
+          <Link
+            href={{
+              pathname: `/genres/${slug}`,
+              query: { id: JSON.stringify(id) },
+            }}
+            className="border cursor-pointer"
+            key={id}
+          >
+            <Image src={image_background} alt="Game Genre" width={300} height={300}></Image>
+            <p>Id: {id}</p>
             <p>{name}</p>
             <p>{games_count}</p>
-            <Image src={image_background} alt="Game Genre" width={200} height={200}></Image>
             {/* TODO - Move this into a Link for individual Genres */}
             {/* <p>
               {games.map(({ id, slug, name, added }: GenreGamesList) => (

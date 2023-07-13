@@ -1,4 +1,4 @@
-import { Game, GameDetails, GameDevelopers, DeveloperInfo, GameGenres } from "@/types";
+import { Game, GameDetails, GameDevelopers, DeveloperInfo, GameGenres, GenreInfo } from "@/types";
 
 // Creates a valid URL from a string i.e.) link: "Best of the Year" & title: Top Games" => "best-of-the-year"
 export const formatLink = (title: string, link: string): string => {
@@ -153,10 +153,29 @@ export const getDeveloperInfo = async (id: string): Promise<DeveloperInfo> => {
 export const getGamesGenres = async (): Promise<GameGenres> => {
   const res = await fetch(`https://api.rawg.io/api/genres?key=${process.env.RAWG_API_KEY}`);
 
+  if (!res.ok) {
+    throw new Error("Failed to fetch All Game Genres");
+  }
+
   const data = await res.json();
   console.log("GENRES: ", data);
 
   return data;
 };
-
 // getGamesGenres();
+
+// TODO - PASS IN GENRE ID TO GET GENRE INFO
+export const getGenreInfo = async (id: string | null): Promise<GenreInfo> => {
+  // https://api.rawg.io/api/genres/{id}?key={key}
+  const res = await fetch(`https://api.rawg.io/api/genres/${id}?key=${process.env.RAWG_API_KEY}`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch Genre Info");
+  }
+
+  const data: GenreInfo = await res.json();
+  console.log("GENRE INFO: ", data);
+
+  return data;
+};
+// getGenreInfo("4");
