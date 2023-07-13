@@ -7,54 +7,36 @@ import Image from "next/image";
 // DISPLAY GAME DETAILS FOR A SINGLE GAME BASED ON ID
 const GameDetailsPage = async ({ params }: { params: { id: string } }) => {
   const gameDetails: GameDetails = await getGameDetails(params.id);
-  const { id, name, background_image, description, released, rating, ratings, ratings_count, stores, tags } = gameDetails;
-
-  // const descriptionFormatted = description.split("<br />");
-  // const replacedText = description.replace(/<br \/>|<\/?p>/g, "\n\n");
-  // const paragraphs = replacedText.split("\n\n");
-
-  // const formatDescription = (description: string) => {
-  //   const replacedText = description.replace(/<br \/>|<\/?p>/g, "\n\n");
-  //   const paragraphs = replacedText.split("\n\n");
-
-  //   return paragraphs;
-  // };
-
-  // const formatDescription = (description: string) => {
-  //   const splitByPTag: string[] = description.split("<p>"); // splitByPTag[1] holds the english description
-  //   // console.log("splitByPTag: ", splitByPTag);
-  //   // console.log("splitByPTag.length: ", splitByPTag.length);
-  //   // console.log("splitByPTag[1]: ", splitByPTag[1]);
-  //   const splitByBRTag: string[] = splitByPTag[1].split("<br />");
-  //   console.log("splitByBRTag: ", splitByBRTag);
-  //   // const descriptionSplitByBreakTag = console.log("descriptionSplitByParagraphs: ", descriptionSplitByParagraphs);
-  //   const replacedText = description.replace(/<br \/>|<\/?p>/g, "\n\n");
-  //   // const paragraphs = replacedText.split("\n\n");
-
-  //   return splitByBRTag;
-  // };
+  const {
+    id,
+    name,
+    background_image,
+    description,
+    released,
+    rating,
+    ratings,
+    ratings_count,
+    stores,
+    tags,
+    reddit_url,
+    reddit_name,
+    reddit_description,
+    metacritic,
+    metacritic_platforms,
+  } = gameDetails;
 
   const formatDescription = (description: string) => {
     const splitByPTag: string[] = description.split("</p>"); // splitByPTag[0] = english description, splitByPTag[1] = Spanish description
-    console.log("splitByPTag: ", splitByPTag);
+    // console.log("splitByPTag: ", splitByPTag);
+
     let englishDescription = splitByPTag[0].replace(/<p>/g, "");
     let englishDescriptionList = englishDescription.split("<br />");
-    console.log("englishDescription: ", englishDescription);
-    // console.log("splitByPTag.length: ", splitByPTag.length);
-    // console.log("splitByPTag[1]: ", splitByPTag[1]);
-    // const splitByBRTag: string[] = splitByPTag[1].split("<br />");
-    // console.log("splitByBRTag: ", splitByBRTag);
-    // const descriptionSplitByBreakTag = console.log("descriptionSplitByParagraphs: ", descriptionSplitByParagraphs);
-    const replacedText = description.replace(/<br \/>|<\/?p>/g, "\n\n");
-    // const paragraphs = replacedText.split("\n\n");
+    // console.log("englishDescription: ", englishDescription);
 
     return englishDescriptionList;
   };
 
   const descriptionText: string[] = formatDescription(description);
-  // console.log("descriptionFormatted: ", descriptionFormatted);
-  // console.log("Game Details Page - params: ", params);
-  // console.log("Tags: ", tags);
 
   return (
     <div className="border bg-gray-800 text-white">
@@ -89,6 +71,8 @@ const GameDetailsPage = async ({ params }: { params: { id: string } }) => {
         </ul>
 
         <br />
+
+        {/* AVAILABLE STORES */}
         <div>
           Available at Stores:
           {stores.map(({ store }) => (
@@ -100,49 +84,43 @@ const GameDetailsPage = async ({ params }: { params: { id: string } }) => {
             </div>
           ))}
         </div>
+
+        {/* REDDIT SECTION */}
+        <div>
+          <h1 className="text-xl mb-1 mt-5">Reddit Information</h1>
+          <Link href={reddit_url} target="_blank">
+            Reddit URL: <span className="underline">{reddit_url}</span>
+          </Link>
+          <p>Reddit Name: {reddit_name}</p>
+          <p>Reddit Description: {reddit_description}</p>
+        </div>
+
+        {/* METACRITIC */}
+        <div>
+          <h1 className="text-xl mt-2">Metascore Information</h1>
+          <p>Metacritic Score: {metacritic}</p>
+
+          {/* METACRITIC PLATFORMS */}
+          <div>
+            {metacritic_platforms.length !== 0 ? (
+              metacritic_platforms.map(({ metascore, url, platform }) => (
+                <div className="my-2">
+                  <p>
+                    {platform.name} - Metascore: {metascore}
+                  </p>
+                  <Link href={url} target="_blank">
+                    Metascore URL: <span className="underline">{url}</span>
+                  </Link>
+                </div>
+              ))
+            ) : (
+              <p>Metacritic Platform Information Unavailable...</p>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default GameDetailsPage;
-
-// import { GameDetails } from "@/types";
-// import { getGameDetails } from "@/utils";
-// import Link from "next/link";
-
-// // DISPLAY GAME DETAILS FOR A SINGLE GAME BASED ON ID
-// const GameDetailsPage = async ({ params }: { params: { id: string } }) => {
-//   const gameDetails = await getGameDetails(params.id);
-//   console.log("Game Details Page - params: ", params);
-//   return (
-//     <div className="text-white">
-//       {/* <div>Game Details Page - Slug: {params.id}</div> */}
-//       <div>
-//         {gameDetails.map(({ id, name, released, rating, reviews_count, stores }: GameDetails) => (
-//           <div className="border bg-gray-700">
-//             <div>id: {id}</div>
-//             <div>name: {name}</div>
-//             <div>released: {released}</div>
-//             <div>rating: {rating}</div>
-//             <div>reviews_count: {reviews_count}</div>
-//             <br />
-//             <div>
-//               Available at Stores:
-//               {stores.map(({ store }) => (
-//                 <div key={store.id}>
-//                   {/* <div>{store.name}</div> */}
-//                   <Link href={`https://${store.domain}`} target="_blank" className="underline hover:text-slate-500">
-//                     {store.domain}
-//                   </Link>
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default GameDetailsPage;
