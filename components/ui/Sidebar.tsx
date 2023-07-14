@@ -24,6 +24,18 @@ const Sidebar = () => {
                 </Link>
               ))}
             </ul>
+
+            {/* PREVIOUS VERSION */}
+            {/* <ul className="flex flex-col gap-4">
+              {links.map((link) => (
+                <Link href={formatLink(title, link)} className="flex gap-2" onClick={() => setIsActive(link)} key={link}>
+                  <span className="w-6 h-6 bg-slate-500  rounded-md"></span>
+                  <li className={`cursor-pointer hover:text-gray-500 ${link === isActive ? "text-blue-700 font-bold" : ""}`}>
+                    {link}
+                  </li>
+                </Link>
+              ))}
+            </ul> */}
           </div>
         );
       })}
