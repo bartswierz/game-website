@@ -1,4 +1,4 @@
-import { Game, GameDetails, GameDevelopers, DeveloperInfo, GameGenres, GenreInfo } from "@/types";
+import { Game, GameDetails, GameDevelopers, DeveloperInfo, GameGenres, GenreInfo, GamesByGenre } from "@/types";
 
 // Creates a valid URL from a string i.e.) link: "Best of the Year" & title: Top Games" => "best-of-the-year"
 export const formatLink = (title: string, link: string): string => {
@@ -34,6 +34,27 @@ export const getGames = async (): Promise<Game[]> => {
   return data.results;
 };
 
+/* FOR REFERENCE: GENRES SLUG & ID VALUES AS OF 7/15/23 
+ action | 4, indie | 51, adventure | 3, rpg | 5, shooter | 2, casual | 40, simulation | 14, puzzle | 7, arcade | 11, platformer | 83, racing | 1, strategy | 10, sports | 15, fighting | 6, family | 19, board-games | 28, educational | 34, card | 17, massively-multiplayer | 59
+*/
+// FETCHES GAMES BASED ON THEIR GENRE TYPE - ex. passed action will search for all games with the action genre
+//TODO - genreID = number | string ex.) genreID = 4 | "action"
+export const getGamesByGenre = async (genre: number | string, page_size: string | null): Promise<GamesByGenre> => {
+  console.log("Inside getGamesByGenre: ", process.env.RAWG_API_KEY);
+  // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
+  const res = await fetch(`https://api.rawg.io/api/games?genres=${genre}&page_size=${page_size}&key=${process.env.RAWG_API_KEY}`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch");
+  }
+
+  const data = await res.json();
+  // console.log("GamesByGenre: data.results", data.results);
+
+  return data.results;
+};
+// getGamesByGenre(4);
+
 // // FETCH GAME DETAILS FOR A SPECIFIC GAME
 // export const getGameDetails = async (id: string): Promise<GameDetails[]> => {
 //   // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
@@ -60,8 +81,8 @@ export const getGames = async (): Promise<Game[]> => {
 //   return gameInfo;
 // };
 
-// FETCH GAME DETAILS FOR A SPECIFIC GAME
-//TODO - replace this with an individual game call instead of pulling the entire section and then filtering. We DO NOT NEED FILTERING
+// FETCH GAME DETAILS FOR A SPECIFIC GAME - ex. GTA 5 ID: 3498 -> fetch(https://api.rawg.io/api/games/3498?key=${process.env.RAWG_API_KEY})
+//TODO - replace this with an individual game call instead of pulling the entire section and then filtering. We DO NOT NEED FILTERING.
 export const getGameDetails = async (id: string): Promise<GameDetails> => {
   // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
   console.log("private key - getGameDetails: ", process.env.RAWG_API_KEY);
@@ -158,23 +179,23 @@ export const getGamesGenres = async (): Promise<GameGenres> => {
   }
 
   const data = await res.json();
-  console.log("GENRES: ", data);
+  // console.log("GENRES: ", data);
 
   return data;
 };
 // getGamesGenres();
 
-// TODO - PASS IN GENRE ID TO GET GENRE INFO
-export const getGenreInfo = async (id: string | null): Promise<GenreInfo> => {
+// TODO - PASS IN GENRE ID TO GET INFORMATION FOR A SPECIFIC GENRE
+export const getGenreInfo = async (genreId: string | null): Promise<GenreInfo> => {
   // https://api.rawg.io/api/genres/{id}?key={key}
-  const res = await fetch(`https://api.rawg.io/api/genres/${id}?key=${process.env.RAWG_API_KEY}`);
+  const res = await fetch(`https://api.rawg.io/api/genres/${genreId}?key=${process.env.RAWG_API_KEY}`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch Genre Info");
   }
 
   const data: GenreInfo = await res.json();
-  console.log("GENRE INFO: ", data);
+  // console.log("GENRE INFO: ", data);
 
   return data;
 };

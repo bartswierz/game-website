@@ -16,8 +16,12 @@ const Genres = async () => {
         {/* {results.map((genre: GenreResults) => ( */}
         {results.map(({ id, name, slug, games_count, image_background, games }: GenreResults) => (
           <Link
+            // href={{
+            //   pathname: `/genres/${slug}`,
+            //   query: { id: JSON.stringify(id) },
+            // }}
             href={{
-              pathname: `/genres/${slug}`,
+              pathname: `/browse/genres/${slug}`,
               query: { id: JSON.stringify(id) },
             }}
             className="border cursor-pointer"
