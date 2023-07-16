@@ -40,7 +40,7 @@ export const getGames = async (): Promise<Game[]> => {
 // FETCHES GAMES BASED ON THEIR GENRE TYPE - ex. passed action will search for all games with the action genre
 //TODO - genreID = number | string ex.) genreID = 4 | "action"
 export const getGamesByGenre = async (genre: number | string, page_size: string | null): Promise<GamesByGenre> => {
-  console.log("Inside getGamesByGenre: ", process.env.RAWG_API_KEY);
+  console.log("Inside getGamesByGenre: ");
   // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
   const res = await fetch(`https://api.rawg.io/api/games?genres=${genre}&page_size=${page_size}&key=${process.env.RAWG_API_KEY}`);
 
@@ -49,9 +49,8 @@ export const getGamesByGenre = async (genre: number | string, page_size: string 
   }
 
   const data = await res.json();
-  // console.log("GamesByGenre: data.results", data.results);
 
-  return data.results;
+  return data;
 };
 // getGamesByGenre(4);
 

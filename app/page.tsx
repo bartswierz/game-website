@@ -21,6 +21,7 @@ export default async function Home() {
         */
         <Link
           //TODO - pass the game content as a param
+          // href={`/games/${game.id}`}
           href={`/games/${game.id}`}
           className="bg-gray-700 p-8 col-span-4 md:col-span-2 lg:col-span-2 text-white font-bold flex-grow"
           key={game.id}

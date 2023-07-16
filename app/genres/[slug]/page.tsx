@@ -8,12 +8,14 @@ import Link from "next/link";
 
 // TODO - GRAB THE SLUG PASSED AND USE IT TO GET THE GENRE GAMES LIST - EX. browse/genres/[action] -> slug = action
 // const GenrePage = async ({ params }: { params: { slug: string } }) => {
+//ex. http://localhost:3000/genres/shooter?genres=action&page_size=6
+//ex. http://localhost:3000/genres/shooter?genres=4&page_size=6
 const GenrePage = async () => {
   // console.log("APP/GENRES/[SLUG]/PAGE.TSX - params: ", params);
   // Grabs the ID from the URL
   const searchParams = useSearchParams();
-  const searchGenreID = searchParams.get("genres");
-  const searchPageSize = searchParams.get("page_size");
+  const searchGenreID = searchParams.get("genres"); // genres=action
+  const searchPageSize = searchParams.get("page_size"); // page_size=6
   console.log("searchGenre = ", searchGenreID);
   console.log("searchPageSize = ", searchPageSize);
   const [gamesInfo, setGamesInfo] = useState<GamesByGenre>();
@@ -25,35 +27,37 @@ const GenrePage = async () => {
       const data: GamesByGenre = await getGamesByGenre(searchID, searchPageSize);
 
       if (data) {
-        console.log("GAMES BY GENRE - data: ", data);
+        // console.log("GAMES BY GENRE - data: ", data);
         setGamesInfo(data);
       } else throw new Error("No data returned from getGenreInfo");
     };
 
-    if (searchGenreID) fetchGamesByGenreInfo(searchGenreID, searchPageSize);
+    if (searchGenreID && searchPageSize) fetchGamesByGenreInfo(searchGenreID, searchPageSize);
   }, [searchGenreID]);
 
   return (
     <div className="border text-white">
       <div>APP - GENRES PAGE - INFO PASSED BELOW</div>
-      <div>
+      <div className="">
         {gamesInfo && (
-          <ul>
-            <li>Games Page: {gamesInfo.count}</li>
-            <li>Next: {gamesInfo.next}</li>
-            <li>Previous: {gamesInfo.previous}</li>
-            {/* <li>
-              Results:
-              {gamesInfo.results.map(({ slug, name, platforms }) => {
-                return (
-                  <div>
-                    <p>{slug}</p>
-                    <p>{name}</p>
-                  </div>
-                );
-              })}
-            </li> */}
-          </ul>
+          <div className="w-[50]">
+            <ul>
+              <li>Games Page: {gamesInfo.count}</li>
+              <li>Next: {gamesInfo.next}</li>
+              <li>Previous: {gamesInfo.previous}</li>
+              <li># of Games Fetched: {gamesInfo.results.length}</li>
+              <div className="flex flex-row flex-wrap gap-4">
+                {gamesInfo.results.map((game) => (
+                  <Link href={`/games/${game.slug}`} key={game.slug} className="border cursor-pointer">
+                    <h2>{game.name}</h2>
+                    <div>
+                      <Image src={game.background_image} width={300} height={300} alt="Game" />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </ul>
+          </div>
         )}
       </div>
     </div>
