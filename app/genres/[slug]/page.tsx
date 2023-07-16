@@ -1,10 +1,11 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { getGamesByGenre } from "@/utils";
+import { getGamesByGenre, getNextGameDevelopersPage, getNextGameGenrePage, getPage } from "@/utils";
 import { GamesByGenre } from "@/types";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { NavigationButton } from "@/components/ui";
 
 // TODO - GRAB THE SLUG PASSED AND USE IT TO GET THE GENRE GAMES LIST - EX. browse/genres/[action] -> slug = action
 // const GenrePage = async ({ params }: { params: { slug: string } }) => {
@@ -18,8 +19,8 @@ const GenrePage = async () => {
   const searchPageSize = searchParams.get("page_size"); // page_size=6
   console.log("searchGenre = ", searchGenreID);
   console.log("searchPageSize = ", searchPageSize);
-  const [gamesInfo, setGamesInfo] = useState<GamesByGenre>();
-
+  const [content, setContent] = useState<GamesByGenre>();
+  const [currentPage, setCurrentPage] = useState<string>("1");
   // Fetch Genre Info using the passed ID from browse/genres Page
   useEffect(() => {
     //ex searchID for action games is 'action' | 4
@@ -28,26 +29,106 @@ const GenrePage = async () => {
 
       if (data) {
         // console.log("GAMES BY GENRE - data: ", data);
-        setGamesInfo(data);
+        setContent(data);
       } else throw new Error("No data returned from getGenreInfo");
     };
 
     if (searchGenreID && searchPageSize) fetchGamesByGenreInfo(searchGenreID, searchPageSize);
   }, [searchGenreID]);
 
+  // Updates current page number whenever we get a new set of data from API
+  useEffect(() => {
+    // If content.next exists, get the page number from it
+    if (content?.next) {
+      // const pageNumber = getPage(content.next);
+      const pageNumber = content.next.split("page=");
+      const strippedPageNumber = pageNumber[1][0];
+      console.log("pageNumber: ", pageNumber);
+      console.log("strippedPageNumber: ", strippedPageNumber);
+      setCurrentPage(strippedPageNumber);
+    }
+  }, [content]);
+
+  // Handle page change
+  //TODO - NAVIGATION IS BROKEN ONCE IT HITS PAGE 10 BECAUSE WE ARE STRIPPING AWAY THE VALUE, we need to find a way to pull it more dynamically
+  const handlePageChange = async (request: string | null, pageDirection: string) => {
+    console.log(`Fetching data for ${pageDirection} page...`);
+    console.log("PAGE CHANGE - request: ", request);
+    if (pageDirection === "prev") {
+      if (content?.previous) {
+        // console.log("content.prev: ", content.previous);
+        const newContent = await getNextGameGenrePage(request);
+        setContent(newContent);
+      }
+    } else if (pageDirection === "next") {
+      if (content?.next) {
+        // console.log("content.next: ", content.next);
+        const newContent = await getNextGameGenrePage(request);
+        setContent(newContent);
+      }
+    }
+  };
+
+  // While loading data from API
+  if (!content) return <div className="text-white text-3xl">Loading...</div>;
+
   return (
     <div className="border text-white">
       <div>APP - GENRES PAGE - INFO PASSED BELOW</div>
+      <div>GAME DEVELOPERS INFORMATION</div>
+      <ul>
+        <li># of Developers: {content.count}</li>
+        <li># of Pages: {Math.ceil(content.count / 10)}</li>
+        <li>next: {content.next}</li>
+        <li>previous: {content.previous}</li>
+        <li># of Games Fetched: {content.results.length}</li>
+      </ul>
+
+      <div className="my-5">
+        {/* PREVIOUS BUTTON */}
+        {content.previous ? (
+          <NavigationButton
+            text="Prev"
+            request={content.previous}
+            onPageChange={handlePageChange}
+            pageDirection={"prev"}
+            active={`${content.previous === null ? "inactive" : "active"}`}
+          />
+        ) : (
+          <NavigationButton
+            text="Prev"
+            request={null}
+            onPageChange={handlePageChange}
+            pageDirection={"prev"}
+            active={`${content.previous === null ? "inactive" : "active"}`}
+          />
+        )}
+
+        {/* Page Counter */}
+        <div className="inline-block px-4 py-2 m-1">
+          Page {currentPage} of {Math.ceil(content.count / 10)}
+        </div>
+
+        {/* NEXT BUTTON */}
+        <NavigationButton
+          text="Next"
+          request={content.next}
+          onPageChange={handlePageChange}
+          pageDirection={"next"}
+          active={`${content.next === null ? "inactive" : "active"}`}
+        />
+      </div>
+
       <div className="">
-        {gamesInfo && (
+        {content && (
           <div className="w-[50]">
             <ul>
-              <li>Games Page: {gamesInfo.count}</li>
-              <li>Next: {gamesInfo.next}</li>
-              <li>Previous: {gamesInfo.previous}</li>
-              <li># of Games Fetched: {gamesInfo.results.length}</li>
+              <li>Games Page: {content.count}</li>
+              <li>Next: {content.next}</li>
+              <li>Previous: {content.previous}</li>
+
               <div className="flex flex-row flex-wrap gap-4">
-                {gamesInfo.results.map((game) => (
+                {content.results.map((game) => (
                   <Link href={`/games/${game.slug}`} key={game.slug} className="border cursor-pointer">
                     <h2>{game.name}</h2>
                     <div>
@@ -65,81 +146,3 @@ const GenrePage = async () => {
 };
 
 export default GenrePage;
-
-// "use client";
-// import { useSearchParams } from "next/navigation";
-// import { getGenreInfo } from "@/utils";
-// import { GenreInfo } from "@/types";
-// import { useState, useEffect } from "react";
-// import Image from "next/image";
-// import Link from "next/link";
-
-// TODO - GRAB THE SLUG PASSED AND USE IT TO GET THE GENRE GAMES LIST - EX. browse/genres/[action] -> slug = action
-// const GenrePage = async ({ params }: { params: { slug: string; query: { id: string } } }) => {
-// const GenrePage = async () => {
-//   // Grabs the ID from the URL
-//   const searchParams = useSearchParams();
-//   const searchID = searchParams.get("id");
-//   const [genreInfo, setGenreInfo] = useState<GenreInfo>();
-
-//   // Fetch Genre Info using the passed ID from browse/genres Page
-//   useEffect(() => {
-//     const fetchGenreInfo = async (searchID: string) => {
-//       const data: GenreInfo = await getGenreInfo(searchID);
-
-//       if (data) {
-//         // console.log("data: ", data);
-//         setGenreInfo(data);
-//       } else throw new Error("No data returned from getGenreInfo");
-//     };
-
-//     if (searchID) fetchGenreInfo(searchID);
-//   }, [searchID]);
-
-//   const removeTags = (description: string): string[] => {
-//     // Removes <p> & </p>
-//     const removeParagraphTags = description.replace(/<\/?p>/g, "");
-
-//     const replaceHex = removeParagraphTags.replace(/&#39;/g, "'");
-
-//     const splitAtBreakTags = replaceHex.split("<br />");
-//     return splitAtBreakTags;
-//   };
-//   // const genreInfo: GenreInfo = await getGenreInfo(searchID);
-
-//   // console.log("genreInfo: ", genreInfo);
-//   // console.log("Genre search ID: ", search);
-//   // console.log("Genre params: ", params.query.id);
-
-//   return (
-//     <div className="border text-white">
-//       <div>APP - GENRES PAGE - INFO PASSED BELOW</div>
-//       {genreInfo && (
-//         <div>
-//           <div>
-//             <Image src={genreInfo.image_background} width={300} height={300} alt="Genre" />
-//           </div>
-//           <ul key={genreInfo.id} className="p-2">
-//             <li>{genreInfo.name}</li>
-//             <li>Total Games: {genreInfo.games_count}</li>
-//             <li>
-//               <h2 className="text-xl">Description:</h2>
-//               {removeTags(genreInfo.description).map((sentence, idx) => (
-//                 <p key={idx} className="my-2">
-//                   {sentence}
-//                 </p>
-//               ))}
-//             </li>
-//             <li>
-//               <Link href={`/genres/${genreInfo.name}`} className="underline">
-//                 View {genreInfo.name} Games
-//               </Link>
-//             </li>
-//           </ul>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default GenrePage;

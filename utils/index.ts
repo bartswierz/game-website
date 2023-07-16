@@ -54,32 +54,6 @@ export const getGamesByGenre = async (genre: number | string, page_size: string 
 };
 // getGamesByGenre(4);
 
-// // FETCH GAME DETAILS FOR A SPECIFIC GAME
-// export const getGameDetails = async (id: string): Promise<GameDetails[]> => {
-//   // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
-//   console.log("private key - getGameDetails: ", process.env.RAWG_API_KEY);
-//   const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&id=${id}`);
-
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch");
-//   }
-
-//   //All games
-//   const data = await res.json();
-
-//   //Only want the results object containing game info
-//   let gamesInfo: GameDetails[] = data.results;
-
-//   // Grab only 1 game that matches our id
-//   const gameInfo: GameDetails[] = gamesInfo.filter((game: GameDetails) => {
-//     //Params is always a string so we need to convert our game.id from number to string
-//     let gameID = game.id.toString();
-//     return gameID === id;
-//   });
-
-//   return gameInfo;
-// };
-
 // FETCH GAME DETAILS FOR A SPECIFIC GAME - ex. GTA 5 ID: 3498 -> fetch(https://api.rawg.io/api/games/3498?key=${process.env.RAWG_API_KEY})
 //TODO - replace this with an individual game call instead of pulling the entire section and then filtering. We DO NOT NEED FILTERING.
 export const getGameDetails = async (id: string): Promise<GameDetails> => {
@@ -199,3 +173,22 @@ export const getGenreInfo = async (genreId: string | null): Promise<GenreInfo> =
   return data;
 };
 // getGenreInfo("4");
+
+// FETCH GAME DEVELOPERS PREVIOUS OR NEXT PAGE - PAGINATION
+export const getNextGameGenrePage = async (request: string | null): Promise<GamesByGenre> => {
+  if (request !== null) {
+    const res = await fetch(request);
+    if (!res.ok) {
+      throw new Error("Failed to fetch");
+    }
+
+    //All games
+    const data: GamesByGenre = await res.json();
+    console.log("data", data);
+
+    return data;
+  }
+
+  // If request is null return empty object
+  return {} as GamesByGenre;
+};

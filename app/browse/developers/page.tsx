@@ -50,13 +50,6 @@ const Developers = () => {
     }
   };
 
-  // const handleDeveloperInfo = (developerInfo: GameDevelopersResults) => {
-  //   console.log("Developer ID: ", developerInfo);
-
-  //   // TODO - add useRouter here
-  //   router.push(`/developer/${developerInfo.id}`);
-  // };
-
   // While loading data from API
   if (!content) return <div className="text-white text-3xl">Loading...</div>;
 

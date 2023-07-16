@@ -25,7 +25,7 @@ const Sidebar = () => {
               {/* TODO - FIND A WAY TO NOT PASS query to the BROWSE SECTION */}
               {links.map((link) => (
                 <Link
-                  href={{ pathname: `/${title}/${link}`, query: { genres: link, page_size: "6" } }}
+                  href={{ pathname: `/${title}/${link}`, query: { genres: link, page_size: "12" } }}
                   className="flex gap-2"
                   onClick={() => setIsActive(link)}
                   key={link}
