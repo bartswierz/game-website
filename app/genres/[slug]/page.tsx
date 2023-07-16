@@ -122,21 +122,17 @@ const GenrePage = async () => {
       <div className="">
         {content && (
           <div className="w-[50]">
-            <ul>
-              <li>Games Page: {content.count}</li>
-              <li>Next: {content.next}</li>
-              <li>Previous: {content.previous}</li>
-
-              <div className="flex flex-row flex-wrap gap-4">
-                {content.results.map((game) => (
-                  <Link href={`/games/${game.slug}`} key={game.slug} className="border cursor-pointer">
+            <ul className="flex flex-row flex-wrap gap-4">
+              {content.results.map((game) => (
+                <li className="border cursor-pointer">
+                  <Link href={`/games/${game.slug}`} key={game.slug} className="">
                     <h2>{game.name}</h2>
                     <div>
                       <Image src={game.background_image} width={300} height={300} alt="Game" />
                     </div>
                   </Link>
-                ))}
-              </div>
+                </li>
+              ))}
             </ul>
           </div>
         )}
