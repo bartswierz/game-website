@@ -79,8 +79,8 @@ const GenrePage = async () => {
       <ul>
         <li># of Developers: {content.count}</li>
         <li># of Pages: {Math.ceil(content.count / 10)}</li>
-        <li>next: {content.next}</li>
-        <li>previous: {content.previous}</li>
+        {/* <li>next: {content.next}</li>
+        <li>previous: {content.previous}</li> */}
         <li># of Games Fetched: {content.results.length}</li>
       </ul>
 
