@@ -1,4 +1,14 @@
-import { Game, GameDetails, GameDevelopers, DeveloperInfo, GameGenres, GenreInfo, GamesByGenre, GameStores } from "@/types";
+import {
+  Game,
+  GameDetails,
+  GameDevelopers,
+  DeveloperInfo,
+  GameGenres,
+  GenreInfo,
+  GamesByGenre,
+  GameStores,
+  GamePlatforms,
+} from "@/types";
 
 // Creates a valid URL from a string i.e.) link: "Best of the Year" & title: Top Games" => "best-of-the-year"
 export const formatLink = (title: string, link: string): string => {
@@ -195,14 +205,28 @@ export const getNextGameGenrePage = async (request: string | null): Promise<Game
 
 // FETCHES GAME STORES
 export const getStores = async (): Promise<GameStores> => {
-  console.log("inside getStores");
   const res = await fetch(`https://api.rawg.io/api/stores?key=${process.env.RAWG_API_KEY}`);
 
   if (!res.ok) throw new Error("Failed to fetch Game Stores");
 
   const data: GameStores = await res.json();
-  console.log("data from getStores: ", data);
+  // console.log("data from getStores: ", data);
   // If null return empty object
   return data;
 };
 // getStores();
+
+//FETCH ALL GAME PLATFORMS AVAILABLE - TODO add page_size
+export const getPlatforms = async (): Promise<GamePlatforms> => {
+  // console.log("inside getPlatforms");
+  const res = await fetch(`https://api.rawg.io/api/platforms?key=${process.env.RAWG_API_KEY}`);
+
+  if (!res.ok) throw new Error("Failed to fetch Game Platforms");
+
+  const data: GamePlatforms = await res.json();
+  // console.log("data from getPlatforms: ", data);
+
+  // If null return empty object
+  return data;
+};
+getPlatforms();
