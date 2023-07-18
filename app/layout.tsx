@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} bg-gray-900`}>
         {/* Navigation Component here */}
         <Navbar />
-        <div className="flex border w-full">
+        <div className="flex w-full">
           <Sidebar />
           <main className=" p-5">{children}</main>
         </div>

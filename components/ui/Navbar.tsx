@@ -3,7 +3,7 @@ import Link from "next/link";
 const Navbar = () => {
   return (
     <header>
-      <nav className="flex flex-row justify-between bg-gray-900 p-4 border-b-1 border-slate-800 shadow text-white font-bold">
+      <nav className="flex flex-row justify-between bg-gray-900 p-4 border-b border-white shadow text-white font-bold">
         <Link href="/" className="cursor-pointer hover:text-gray-300">
           Next-Level Games
         </Link>
