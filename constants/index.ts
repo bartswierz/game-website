@@ -12,7 +12,7 @@ export const sidebarData: SidebarDataProps[] = [
   // },
   {
     title: "browse",
-    links: ["genres", "developers"],
+    links: ["genres", "developers", "stores"],
     // params: "",
     // ORIGINAL
     // links: ["Platforms", "Stores", "Collections", "Reviews", "Genres", "Creators", "Tags", "Developers", "Publishers"],
