@@ -21,6 +21,7 @@ const GenrePage = async () => {
   console.log("searchPageSize = ", searchPageSize);
   const [content, setContent] = useState<GamesByGenre>();
   const [currentPage, setCurrentPage] = useState<string>("1");
+
   // Fetch Genre Info using the passed ID from browse/genres Page
   useEffect(() => {
     //ex searchID for action games is 'action' | 4
@@ -73,7 +74,7 @@ const GenrePage = async () => {
   if (!content) return <div className="text-white text-3xl">Loading...</div>;
 
   return (
-    <div className="border text-white">
+    <div className=" text-white">
       <div>APP - GENRES PAGE - INFO PASSED BELOW</div>
       <div>GAME DEVELOPERS INFORMATION</div>
       <ul>
@@ -121,14 +122,19 @@ const GenrePage = async () => {
 
       <div className="">
         {content && (
-          <div className="w-[50]">
+          <div className="w-[50]-">
             <ul className="flex flex-row flex-wrap gap-4">
               {content.results.map((game) => (
-                <li className="border cursor-pointer">
-                  <Link href={`/games/${game.slug}`} key={game.slug} className="">
-                    <h2>{game.name}</h2>
-                    <div>
-                      <Image src={game.background_image} width={300} height={300} alt="Game" />
+                <li className="cursor-pointer rounded-lg overflow-hidden">
+                  <Link href={`/games/${game.slug}`} key={game.slug}>
+                    {/* <h2>{game.name}</h2> */}
+                    <div className="w-80 h-80 relative  ">
+                      <Image src={game.background_image} width={300} height={300} alt="Game" className="w-full h-full object-cover" />
+                      {/* GRADIENT BACKGROUND EFFECT */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+
+                      {/* GAME NAME TEXT */}
+                      <p className="absolute text-white  bottom-5 w-full h-5 text-center">{game.name}</p>
                     </div>
                   </Link>
                 </li>

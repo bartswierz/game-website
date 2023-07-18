@@ -14,7 +14,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="border w-72 h-max p-4 m-4 rounded-lg">
+    <div className="border min-w-[260px] h-max p-4 m-4 rounded-lg">
       {sidebarData.map(({ title, links }, idx: number) => {
         return (
           <div className="text-white" key={idx}>
