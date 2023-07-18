@@ -97,36 +97,23 @@ const Developers = () => {
         />
       </div>
 
-      {/* TODO - Add useRouter -> id grabber to link to /developer/id */}
       <div className="flex flex-row flex-wrap gap-4">
         {content.results.map((dev) => {
           return (
-            // <Link href={`developer/${dev.id}`} className="border bg-gray-500 w-64 h-max rounded-md shadow-lg" key={dev.id}>
-
-            // <Link href={`developers/${dev.id}`} className="border bg-gray-500 w-64 h-max rounded-md shadow-lg" key={dev.id}>
-
             <Link
               href={{
                 pathname: `developers/${dev.id}`,
               }}
-              className="border bg-gray-500 w-64 h-max rounded-md shadow-lg"
+              className="bg-gray-500 w-80 rounded-md shadow-lg "
               key={dev.id}
             >
-              {/* <Link
-              href={{
-                pathname: `developers/${dev.id}`,
-                query: { dev: dev.id },
-              }}
-              className="border bg-gray-500 w-64 h-max rounded-md shadow-lg"
-              key={dev.id}
-            > */}
-              <div className="object-contain">
+              <div className="w-80 h-64">
                 <Image
                   src={dev.image_background}
                   alt="Game Developer"
                   width={200}
                   height={200}
-                  className="w-full h-full object-contain rounded-t-md"
+                  className="w-full h-full object-cover rounded-t-md"
                 />
               </div>
               <ul className="p-2">

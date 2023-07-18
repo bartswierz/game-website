@@ -16,32 +16,25 @@ const Genres = async () => {
         {/* {results.map((genre: GenreResults) => ( */}
         {results.map(({ id, name, slug, games_count, image_background, games }: GenreResults) => (
           <Link
-            // href={{
-            //   pathname: `/genres/${slug}`,
-            //   query: { id: JSON.stringify(id) },
-            // }}
             href={{
               pathname: `/browse/genres/${slug}`,
               query: { id: JSON.stringify(id) },
             }}
-            className="border cursor-pointer"
+            className="relative cursor-pointer rounded-lg overflow-hidden"
             key={id}
           >
-            <Image src={image_background} alt="Game Genre" width={300} height={300}></Image>
-            <p>Id: {id}</p>
-            <p>{name}</p>
-            <p>{games_count}</p>
-            {/* TODO - Move this into a Link for individual Genres */}
-            {/* <p>
-              {games.map(({ id, slug, name, added }: GenreGamesList) => (
-                <div className="border">
-                  <div>Game: {id}</div>
-                  <div>Game: {slug}</div>
-                  <div>Game: {name}</div>
-                  <div>Game: {added}</div>
-                </div>
-              ))}
-            </p> */}
+            <div className="w-80 h-64">
+              <Image src={image_background} alt="Game Genre" width={200} height={200} className="w-full h-full object-cover"></Image>
+            </div>
+
+            <ul className="absolute p-2 bottom-2 w-full text-center z-10">
+              <li>Id: {id}</li>
+              <li>{name}</li>
+              <li>{games_count}</li>
+            </ul>
+
+            {/* LINEAR GRADIENT BACKGROUND EFFECT */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent text-white"></div>
           </Link>
         ))}
       </div>
