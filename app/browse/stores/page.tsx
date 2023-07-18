@@ -37,7 +37,7 @@ const Stores = async () => {
             <p className="text-xl font-semibold">
               {store.name} - ID: {store.id}
             </p>
-            <Link href={`https://${store.domain}`} className="underline" target="_blank">
+            <Link href={`https://${store.domain}`} className="underline hover:text-blue-500" target="_blank">
               Go to {store.name}
             </Link>
             <p>
