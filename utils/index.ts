@@ -217,9 +217,10 @@ export const getStores = async (): Promise<GameStores> => {
 // getStores();
 
 //FETCH ALL GAME PLATFORMS AVAILABLE - TODO add page_size
-export const getPlatforms = async (): Promise<GamePlatforms> => {
+export const getPlatforms = async (page_size: number): Promise<GamePlatforms> => {
   // console.log("inside getPlatforms");
-  const res = await fetch(`https://api.rawg.io/api/platforms?key=${process.env.RAWG_API_KEY}`);
+  // const res = await fetch(`https://api.rawg.io/api/platforms?key=${process.env.RAWG_API_KEY}`);
+  const res = await fetch(`https://api.rawg.io/api/platforms?key=${process.env.RAWG_API_KEY}&page_size=${page_size}`);
 
   if (!res.ok) throw new Error("Failed to fetch Game Platforms");
 
@@ -230,3 +231,22 @@ export const getPlatforms = async (): Promise<GamePlatforms> => {
   return data;
 };
 getPlatforms();
+
+// FETCH GAME DEVELOPERS PREVIOUS OR NEXT PAGE - PAGINATION
+export const getNextPlatformPage = async (request: string | null): Promise<GamePlatforms> => {
+  if (request !== null) {
+    const res = await fetch(request);
+    if (!res.ok) {
+      throw new Error("Failed to fetch");
+    }
+
+    //All games
+    const data: GamePlatforms = await res.json();
+    console.log("data", data);
+
+    return data;
+  }
+
+  // If request is null return empty object
+  return {} as GamePlatforms;
+};
