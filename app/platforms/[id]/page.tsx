@@ -140,7 +140,7 @@ const PlatformPage = () => {
               </div>
 
               {/* TEXT CONTAINER */}
-              <div className="p-4">
+              <div className="w-full p-4">
                 <h2 className="text-xl pb-2">{game.name}</h2>
                 {/* <p>Slug: {game.slug}</p> */}
                 {/* <p className="flex flex-row"> */}
@@ -160,18 +160,25 @@ const PlatformPage = () => {
                   </div>
 
                   {/* AVAILABLE STORES */}
-                  <div className="flex flex-row gap-x-2 items-center">
-                    <h2>Stores: </h2>
-                    {game.stores.map((store) => (
-                      <Link
-                        href={getPlatformStoreLink(store.store.slug)}
-                        target="_blank"
-                        className="flex flex-col items-center p-3 border border-blue-500 hover:bg-gray-700 rounded-full ring-1"
-                      >
-                        {getPlatformIcon(store.store.slug)}
-                        {/* <span>{store.store.name}</span> */}
-                      </Link>
-                    ))}
+                  <div className="flex justify-between items-center">
+                    <div className="flex flex-row gap-x-2 items-center">
+                      <h2>Stores: </h2>
+                      {game.stores.map((store) => (
+                        <Link
+                          href={getPlatformStoreLink(store.store.slug)}
+                          target="_blank"
+                          className="flex flex-col items-center p-3 border border-blue-500 hover:bg-gray-700 rounded-full ring-1"
+                        >
+                          {getPlatformIcon(store.store.slug)}
+                          {/* <span>{store.store.name}</span> */}
+                        </Link>
+                      ))}
+                    </div>
+
+                    {/* NAVIGATES USER TO GAMES PAGE -> i.e.) http://localhost:3000/games/marvels-spider-man */}
+                    <Link href={`/games/${game.slug}`} className="underline text-lg hover:text-blue-500">
+                      See Game Details
+                    </Link>
                   </div>
                 </div>
               </div>
