@@ -10,6 +10,8 @@ import {
   GamePlatforms,
   GamesByPlatform,
 } from "@/types";
+import { FaSteam, FaPlaystation, FaXbox, FaApple, FaGooglePlay } from "react-icons/fa";
+import { SiNintendo, SiGogdotcom, SiItchdotio, SiEpicgames } from "react-icons/si";
 
 // Creates a valid URL from a string i.e.) link: "Best of the Year" & title: Top Games" => "best-of-the-year"
 export const formatLink = (title: string, link: string): string => {
@@ -253,7 +255,6 @@ export const getNextPlatformPage = async (request: string | null): Promise<GameP
 };
 
 export const getGamesByPlatform = async (platformID: string | null, page_size: number): Promise<GamesByPlatform> => {
-  console.log("inside getGamesByPlatform");
   const res = await fetch(
     `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&platforms=${platformID}&page_size=${page_size}`
   );
@@ -261,8 +262,6 @@ export const getGamesByPlatform = async (platformID: string | null, page_size: n
   if (!res.ok) throw new Error("Failed to fetch Games by Platform");
 
   const data: GamesByPlatform = await res.json();
-  console.log("data - GamesByPlatform: ", data);
+
   return data;
 };
-// getGamesByPlatform(187, 6);
-//TODO - stopped at connecting the getGamesByPlatform to work with the platform links on the sidebar, we will need to pass the id of the platform to the getGamesByPlatform function as a search param
