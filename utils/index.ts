@@ -8,6 +8,7 @@ import {
   GamesByGenre,
   GameStores,
   GamePlatforms,
+  GamesByPlatform,
 } from "@/types";
 
 // Creates a valid URL from a string i.e.) link: "Best of the Year" & title: Top Games" => "best-of-the-year"
@@ -230,7 +231,7 @@ export const getPlatforms = async (page_size: number): Promise<GamePlatforms> =>
   // If null return empty object
   return data;
 };
-getPlatforms();
+// getPlatforms();
 
 // FETCH GAME DEVELOPERS PREVIOUS OR NEXT PAGE - PAGINATION
 export const getNextPlatformPage = async (request: string | null): Promise<GamePlatforms> => {
@@ -250,3 +251,18 @@ export const getNextPlatformPage = async (request: string | null): Promise<GameP
   // If request is null return empty object
   return {} as GamePlatforms;
 };
+
+export const getGamesByPlatform = async (platformID: string | null, page_size: number): Promise<GamesByPlatform> => {
+  console.log("inside getGamesByPlatform");
+  const res = await fetch(
+    `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&platforms=${platformID}&page_size=${page_size}`
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch Games by Platform");
+
+  const data: GamesByPlatform = await res.json();
+  console.log("data - GamesByPlatform: ", data);
+  return data;
+};
+// getGamesByPlatform(187, 6);
+//TODO - stopped at connecting the getGamesByPlatform to work with the platform links on the sidebar, we will need to pass the id of the platform to the getGamesByPlatform function as a search param

@@ -4,6 +4,7 @@ import { getNextPlatformPage, getPage, getPlatforms } from "@/utils";
 import { GamePlatforms } from "@/types";
 import Image from "next/image";
 import { NavigationButton } from "@/components/ui";
+import Link from "next/link";
 
 // type Props = {};
 
@@ -100,7 +101,7 @@ const Platforms = async () => {
 
       <div className="flex flex-wrap gap-4">
         {content.results.map((platform) => (
-          <div key={platform.id} className="border">
+          <Link href={{ pathname: `/platforms/${platform.slug}`, query: { id: platform.id } }} key={platform.id} className="border">
             <div className="p-2">
               <div>id: {platform.id}</div>
               <div>name: {platform.name}</div>
@@ -116,7 +117,7 @@ const Platforms = async () => {
                 className="w-full h-full object-cover"
               />
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
