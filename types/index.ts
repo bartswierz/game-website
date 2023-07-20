@@ -1,6 +1,19 @@
 export interface SidebarDataProps {
-  title: string;
-  links: string[];
+  browse: {
+    title: string;
+    linkList: string[];
+  };
+  platforms: {
+    title: string;
+    linkList: {
+      link: string;
+      platformID: number;
+    }[];
+  };
+  genres: {
+    title: string;
+    linkList: string[];
+  };
 }
 
 export interface Game {
@@ -402,7 +415,7 @@ export interface GamesByPlatform {
         slug: string;
       };
     }[];
-    stores: {
+    stores?: {
       store: {
         id: number;
         name: string;

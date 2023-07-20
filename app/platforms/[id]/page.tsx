@@ -163,16 +163,20 @@ const PlatformPage = () => {
                   <div className="flex justify-between items-center">
                     <div className="flex flex-row gap-x-2 items-center">
                       <h2>Stores: </h2>
-                      {game.stores.map((store) => (
-                        <Link
-                          href={getPlatformStoreLink(store.store.slug)}
-                          target="_blank"
-                          className="flex flex-col items-center p-3 border border-blue-500 hover:bg-gray-700 rounded-full ring-1"
-                        >
-                          {getPlatformIcon(store.store.slug)}
-                          {/* <span>{store.store.name}</span> */}
-                        </Link>
-                      ))}
+                      {game.stores ? (
+                        game.stores.map((store) => (
+                          <Link
+                            href={getPlatformStoreLink(store.store.slug)}
+                            target="_blank"
+                            className="flex flex-col items-center p-3 border border-blue-500 hover:bg-gray-700 rounded-full ring-1"
+                          >
+                            {getPlatformIcon(store.store.slug)}
+                            {/* <span>{store.store.name}</span> */}
+                          </Link>
+                        ))
+                      ) : (
+                        <p>Currently Unavailable...</p>
+                      )}
                     </div>
 
                     {/* NAVIGATES USER TO GAMES PAGE -> i.e.) http://localhost:3000/games/marvels-spider-man */}
