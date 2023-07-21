@@ -487,3 +487,5 @@ export interface GamesByPlatform {
     }[];
   }[];
 }
+
+export interface GameSearch extends GamesByPlatform {}
