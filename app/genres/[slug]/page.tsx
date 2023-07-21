@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { NavigationButton } from "@/components/ui";
 
-// TODO - GRAB THE SLUG PASSED AND USE IT TO GET THE GENRE GAMES LIST - EX. browse/genres/[action] -> slug = action
+// TODO - GRAB THE SLUG PASSED FROM browse/genres/[id] AND USE IT TO GET THE GENRE GAMES LIST - EX. browse/genres/[action] -> slug = action
 // const GenrePage = async ({ params }: { params: { slug: string } }) => {
 //ex. http://localhost:3000/genres/shooter?genres=action&page_size=6
 //ex. http://localhost:3000/genres/shooter?genres=4&page_size=6

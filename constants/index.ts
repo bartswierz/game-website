@@ -3,7 +3,7 @@ import { SidebarDataProps } from "@/types";
 const obj = { data: { test: "text" } };
 console.log("obj", obj.data.test);
 
-// Hardcoded Sidebar Data due to different requirements needed for each category(browse, platforms, generes, etc.) to display properly in the URL. Within the platforms, we have decided to hardcode the ID because the IDs aren't expected to be changed and saves us seconds of load time fetching and filtering through a large data request from the RAWG API.
+// Hardcoded Sidebar Data due to different requirements needed for each route category(browse, platforms, generes, etc.) to display properly in the URL. Within the platforms, we have decided to hardcode the ID because the IDs aren't expected to be changed and saves us seconds of load time fetching and filtering through a large data request from the RAWG API.
 export const sidebarData: SidebarDataProps = {
   // BROWSE DATA
   browse: { title: "browse", linkList: ["genres", "developers", "stores", "platforms"] },
