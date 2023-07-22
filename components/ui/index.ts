@@ -4,5 +4,5 @@ import Sidebar from "./Sidebar";
 import Footer from "./Footer";
 import NavigationButton from "./NavigationButton";
 import Ratings from "./Ratings";
-
-export { Navbar, Sidebar, Footer, NavigationButton, Ratings };
+import Searchbar from "./Searchbar";
+export { Navbar, Sidebar, Footer, NavigationButton, Ratings, Searchbar };

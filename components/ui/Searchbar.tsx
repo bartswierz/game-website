@@ -4,6 +4,7 @@ import { getGamesSearch } from "@/utils";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { BiSearch } from "react-icons/bi";
+import { useRouter } from "next/navigation";
 /*
 TODO - add user interactivity such as form, search type options, etc.
 TODO - BUILD FORM TO COLLECT USER INPUT AND PASS IT TO THE RAWG API UPON SUBMIT
@@ -24,36 +25,31 @@ REQUIREMENTS: FORM must specify the following:
 */
 
 const Searchbar = () => {
+  const router = useRouter();
   const [searchTerm, setSearchTerm] = useState<string>("");
-  // const [platformSearch, setpPlatformSearch] = useState<string>("");
-  // const [genreSearch, setGenreSearch] = useState<string>("");
-  // const [request, setRequest] = useState<string>("");
-  const [content, setContent] = useState<GamesSearch | null>(null);
 
-  const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
+  // We want to navigate to the /search page AND PASS THE searchTerm as a query
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("SEARCHBAR - handleSearch - e: ", e);
 
-    // ONCE
-    const fetchedGamesData: GamesSearch = await getGamesSearch(searchTerm);
-
-    if (!fetchedGamesData) {
-      throw new Error("No content returned from getGamesSearch()");
-    }
-
-    setContent(fetchedGamesData);
-    // return content;
+    // Navigate to the 'search' page with the searchTerm as a query parameter
+    router.push({
+      pathname: "/search", // Replace '/search' with the actual URL of your 'search' page
+      query: { search: searchTerm }, // Pass the searchTerm as a query parameter
+    });
   };
-
   //ADD useEffect to check for content changes, whenever user hits submit, we will make the call to the RAWG API which should return the game data and update the content, causing our useEffect to fire off again, and update the content
 
   return (
-    <div className="border p-2">
-      <h2>Search Games: </h2>
+    // <div className="border p-2">
+    <div className="">
+      {/* <h2>Search Games: </h2> */}
       <form onSubmit={handleSearch} className="flex flex-row p-2 gap-2">
         <label htmlFor="search" className="w-64 border flex flex-row gap-y-0.5 bg-slate-800 ">
           <input
             type="text"
+            name="search"
             placeholder="Search 850,000+ games"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -64,7 +60,8 @@ const Searchbar = () => {
           <BiSearch size={18} />
         </button>
       </form>
-      <div>
+
+      {/* <div>
         Game Search:{" "}
         {searchTerm ? (
           <span>
@@ -73,9 +70,9 @@ const Searchbar = () => {
         ) : (
           "No text yet..."
         )}
-      </div>
+      </div> */}
 
-      <div>
+      {/* <div>
         {content ? (
           <div className="flex flex-row flex-wrap gap-2">
             {content.results.map((game) => (
@@ -105,7 +102,7 @@ const Searchbar = () => {
         ) : (
           "No data to display yet..."
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
