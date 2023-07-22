@@ -7,7 +7,7 @@ const Footer = () => {
       <Link href="https://rawg.io/apidocs" target="_blank" className="underline">
         RAWG API
       </Link>
-      <span> - Over 500,000+ Games!</span>
+      <span> - Over 850,000+ Games!</span>
     </footer>
   );
 };

@@ -17,7 +17,7 @@ const Sidebar = () => {
     return link.toLowerCase().replaceAll(" ", "-");
   };
 
-  console.log("sidebarData", sidebarData);
+  // console.log("sidebarData", sidebarData);
   // Destructuring our three arrays from sidebarData for readability
   const { browse, platforms, genres } = sidebarData;
 
