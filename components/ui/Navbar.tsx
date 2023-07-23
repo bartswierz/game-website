@@ -21,7 +21,7 @@ const Navbar = () => {
         </div> */}
 
         {/* TEMP DIV TO KEEP SEARCH BAR IN THE CENTER - NAV-ITEMS WILL BE ADDED IN FUTURE */}
-        <div></div>
+        <div>Menu</div>
       </nav>
     </header>
   );

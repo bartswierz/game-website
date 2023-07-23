@@ -5,6 +5,7 @@ import { GamePlatforms } from "@/types";
 import Image from "next/image";
 import { NavigationButton } from "@/components/ui";
 import Link from "next/link";
+import GameLinkBasic from "@/components/ui/GameLinkBasic";
 
 // type Props = {};
 
@@ -100,24 +101,8 @@ const Platforms = async () => {
       </div>
 
       <div className="flex flex-wrap gap-4">
-        {content.results.map((platform) => (
-          <Link href={{ pathname: `/platforms/${platform.slug}`, query: { id: platform.id } }} key={platform.id} className="border">
-            <div className="p-2">
-              <div>id: {platform.id}</div>
-              <div>name: {platform.name}</div>
-              <div>slug: {platform.slug}</div>
-              <div>games_count: {platform.games_count}</div>
-            </div>
-            <div className="w-80 h-64">
-              <Image
-                src={platform.image_background}
-                width={200}
-                height={200}
-                alt="Platform Game Display"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </Link>
+        {content.results.map(({ id, name, games_count, games }) => (
+          <GameLinkBasic id={id} name={name} games_count={games_count} games={games} />
         ))}
       </div>
     </div>
