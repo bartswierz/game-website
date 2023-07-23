@@ -34,10 +34,20 @@ const Searchbar = () => {
     console.log("SEARCHBAR - handleSearch - e: ", e);
 
     // Navigate to the 'search' page with the searchTerm as a query parameter
-    router.push({
-      pathname: "/search", // Replace '/search' with the actual URL of your 'search' page
-      query: { search: searchTerm }, // Pass the searchTerm as a query parameter
-    });
+    // router.push({
+    //   pathname: `/search`, // Replace '/search' with the actual URL of your 'search' page
+    //   query: { search: searchTerm }, // Pass the searchTerm as a query parameter
+    // });
+
+    router.push(
+      `/search/${searchTerm}` // Replace '/search' with the actual URL of your 'search' page
+      // query: { search: searchTerm }, // Pass the searchTerm as a query parameter
+    );
+
+    // router.push(
+    //   `/search`, // Replace '/search' with the actual URL of your 'search' page,
+    //   searchTerm // Pass the searchTerm as a query parameter
+    // );
   };
   //ADD useEffect to check for content changes, whenever user hits submit, we will make the call to the RAWG API which should return the game data and update the content, causing our useEffect to fire off again, and update the content
 
@@ -60,8 +70,14 @@ const Searchbar = () => {
           <BiSearch size={18} />
         </button>
       </form>
+    </div>
+  );
+};
 
-      {/* <div>
+export default Searchbar;
+
+{
+  /* <div>
         Game Search:{" "}
         {searchTerm ? (
           <span>
@@ -70,9 +86,11 @@ const Searchbar = () => {
         ) : (
           "No text yet..."
         )}
-      </div> */}
+      </div> */
+}
 
-      {/* <div>
+{
+  /* <div>
         {content ? (
           <div className="flex flex-row flex-wrap gap-2">
             {content.results.map((game) => (
@@ -102,9 +120,5 @@ const Searchbar = () => {
         ) : (
           "No data to display yet..."
         )}
-      </div> */}
-    </div>
-  );
-};
-
-export default Searchbar;
+      </div> */
+}

@@ -5,8 +5,7 @@ import { GamesByGenre } from "@/types";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { NavigationButton } from "@/components/ui";
-
+import { NavigationButton, GameLink } from "@/components/ui";
 // TODO - GRAB THE SLUG PASSED FROM browse/genres/[id] AND USE IT TO GET THE GENRE GAMES LIST - EX. browse/genres/[action] -> slug = action
 // const GenrePage = async ({ params }: { params: { slug: string } }) => {
 //ex. http://localhost:3000/genres/shooter?genres=action&page_size=6
@@ -122,21 +121,12 @@ const GenrePage = async () => {
 
       <div className="">
         {content && (
-          <div className="w-[50]-">
+          <div>
             <ul className="flex flex-row flex-wrap gap-4">
-              {content.results.map((game) => (
-                <li className="cursor-pointer rounded-lg overflow-hidden">
-                  <Link href={`/games/${game.slug}`} key={game.slug}>
-                    {/* <h2>{game.name}</h2> */}
-                    <div className="w-80 h-80 relative  ">
-                      <Image src={game.background_image} width={300} height={300} alt="Game" className="w-full h-full object-cover" />
-                      {/* GRADIENT BACKGROUND EFFECT */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-
-                      {/* GAME NAME TEXT */}
-                      <p className="absolute text-white  bottom-5 w-full h-5 text-center">{game.name}</p>
-                    </div>
-                  </Link>
+              {content.results.map(({ slug, name, background_image }) => (
+                // Creates a Game Display for each game in the list as a link to the game page
+                <li key={slug}>
+                  <GameLink slug={slug} name={name} background_image={background_image} />
                 </li>
               ))}
             </ul>

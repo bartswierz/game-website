@@ -269,6 +269,7 @@ export const getGamesByPlatform = async (platformID: string | null, page_size: n
 
 // https://api.rawg.io/api/games?key=19bf6456aed44d52b0a064df2f54ef4a&search=diablo
 export const getGamesSearch = async (searchTerm: string): Promise<GamesSearch> => {
+  console.log("inside getGamesSearch...");
   const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}`);
 
   if (!res.ok) throw new Error("Failed to fetch Games by Search Term");

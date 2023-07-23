@@ -14,7 +14,7 @@ export default async function Home() {
       {/* SIDEBAR
       <div>Sidebar</div> */}
       <div className="text-white border">
-        <Searchbar />
+        <div>Inside App Home</div>
       </div>
       {/* <div className="m-24 rounded-md grid grid-cols-4 gap-12 w-full"> */}
     </main>

@@ -5,4 +5,7 @@ import Footer from "./Footer";
 import NavigationButton from "./NavigationButton";
 import Ratings from "./Ratings";
 import Searchbar from "./Searchbar";
-export { Navbar, Sidebar, Footer, NavigationButton, Ratings, Searchbar };
+import GameLink from "./GameLink";
+
+// Export all components as a single object for cleaner imports in other files
+export { Navbar, Sidebar, Footer, NavigationButton, Ratings, Searchbar, GameLink };
