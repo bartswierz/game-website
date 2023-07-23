@@ -33,28 +33,11 @@ const Searchbar = () => {
     e.preventDefault();
     console.log("SEARCHBAR - handleSearch - e: ", e);
 
-    // Navigate to the 'search' page with the searchTerm as a query parameter
-    // router.push({
-    //   pathname: `/search`, // Replace '/search' with the actual URL of your 'search' page
-    //   query: { search: searchTerm }, // Pass the searchTerm as a query parameter
-    // });
-
-    router.push(
-      `/search/${searchTerm}` // Replace '/search' with the actual URL of your 'search' page
-      // query: { search: searchTerm }, // Pass the searchTerm as a query parameter
-    );
-
-    // router.push(
-    //   `/search`, // Replace '/search' with the actual URL of your 'search' page,
-    //   searchTerm // Pass the searchTerm as a query parameter
-    // );
+    router.push(`/search/${searchTerm}`);
   };
-  //ADD useEffect to check for content changes, whenever user hits submit, we will make the call to the RAWG API which should return the game data and update the content, causing our useEffect to fire off again, and update the content
 
   return (
-    // <div className="border p-2">
     <div className="">
-      {/* <h2>Search Games: </h2> */}
       <form onSubmit={handleSearch} className="flex flex-row p-2 gap-2">
         <label htmlFor="search" className="w-64 border flex flex-row gap-y-0.5 bg-slate-800 ">
           <input
@@ -75,50 +58,3 @@ const Searchbar = () => {
 };
 
 export default Searchbar;
-
-{
-  /* <div>
-        Game Search:{" "}
-        {searchTerm ? (
-          <span>
-            https://api.rawg.io/api/games?key={process.env.RAWG_API_KEY}&search={searchTerm}
-          </span>
-        ) : (
-          "No text yet..."
-        )}
-      </div> */
-}
-
-{
-  /* <div>
-        {content ? (
-          <div className="flex flex-row flex-wrap gap-2">
-            {content.results.map((game) => (
-              <div className="border">
-                {game.background_image && (
-                  <div className="w-64 h-64">
-                    <Image
-                      src={game.background_image}
-                      width={200}
-                      height={200}
-                      alt="Game Card"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                )}
-                <p>{game.slug}</p>
-                <p>{game.name}</p>
-                <p>{game.released}</p>
-                <p>{game.rating}</p>
-                <p>{game.id}</p>
-                <p>{game.rating_top}</p>
-                <p>{game.ratings_count}</p>
-                <p>{game.clip && game.clip}</p>
-              </div>
-            ))}
-          </div>
-        ) : (
-          "No data to display yet..."
-        )}
-      </div> */
-}

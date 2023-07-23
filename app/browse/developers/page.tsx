@@ -6,8 +6,8 @@ import Image from "next/image";
 import { GameDevelopers, GameDevelopersResults } from "@/types";
 // import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { BsFillArrowRightCircleFill } from "react-icons/bs";
-
+// import { BsFillArrowRightCircleFill } from "react-icons/bs";
+import { BsBoxArrowRight } from "react-icons/bs";
 const Developers = () => {
   // const router = useRouter();
   const [content, setContent] = useState<GameDevelopers | null>(null);
@@ -120,7 +120,7 @@ const Developers = () => {
 
                     {/* GAME NAME TEXT */}
                     <p className="absolute flex  justify-center items-center text-white  bottom-5 w-full text-center ">
-                      <BsFillArrowRightCircleFill size={40} color="gray" className="group-hover:fill-white" />
+                      <BsBoxArrowRight size={40} color="gray" className="group-hover:fill-white" />
                     </p>
                   </Link>
                 ))}
