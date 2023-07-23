@@ -37,7 +37,7 @@ const Searchbar = () => {
   };
 
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <form onSubmit={handleSearch} className="flex p-2 gap-2 w-full justify-center">
         {/* <label htmlFor="search" className="w-64 border flex flex-row gap-y-0.5 "> */}
         <label htmlFor="search" className="relative  w-3/4 flex flex-row transition-colors duration-500 ease-in-out">
@@ -47,11 +47,11 @@ const Searchbar = () => {
             placeholder="Search 850,000+ games"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="min-w-full bg-slate-800 w-64 rounded-full border hover:placeholder:text-white "
+            className="min-w-full bg-slate-800 w-64 h-14 pl-10 rounded-full border hover:placeholder:text-white "
             // className="min-w-full bg-slate-800 w-64 rounded-full border hover:placeholder:text-white "
           />
-          <button type="submit" className="absolute rounded-full px-4 py-2 right-1 bottom-1">
-            <BiSearch size={16} className="hover:red" />
+          <button type="submit" className="absolute rounded-full h-14 px-4 py-2left-[0%] bottom-[0%]">
+            <BiSearch size={20} className="hover:red" />
           </button>
         </label>
       </form>

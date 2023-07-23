@@ -32,11 +32,11 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
   return (
     // <div className="border p-2">
     <div className="text-white">
-      <h2>Search Games: </h2>
+      {/* <h2>Results for: {searchTerm}</h2> */}
       <div>
         {content && (
           <div className="">
-            <ul className="flex flex-row flex-wrap gap-4">
+            <ul className="flex flex-row flex-wrap gap-5">
               {content.results.map(({ slug, name, background_image }) => (
                 <li key={slug}>
                   <GameLink slug={slug} name={name} background_image={background_image} />
