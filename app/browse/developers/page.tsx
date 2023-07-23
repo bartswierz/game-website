@@ -109,7 +109,7 @@ const Developers = () => {
 
               <div className="flex flex-row flex-wrap gap-4 mb-4">
                 {games.map(({ id, slug, name }) => (
-                  <div className="relative flex flex-col shadow-xl w-56 h-64 group cursor-pointer">
+                  <Link href={`/games/${slug}`} key={slug} className="relative flex flex-col shadow-xl w-56 h-64 group cursor-pointer">
                     <div className="text-center pt-6">
                       <p className="text-xl text-bold">{name}</p>
                       <p>id: {id}</p>
@@ -122,7 +122,7 @@ const Developers = () => {
                     <p className="absolute flex  justify-center items-center text-white  bottom-5 w-full text-center ">
                       <BsFillArrowRightCircleFill size={40} color="gray" className="group-hover:fill-white" />
                     </p>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>

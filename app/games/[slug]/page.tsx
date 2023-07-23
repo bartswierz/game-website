@@ -5,8 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 // DISPLAY GAME DETAILS FOR A SINGLE GAME BASED ON ID
-const GameDetailsPage = async ({ params }: { params: { id: string } }) => {
-  const gameDetails: GameDetails = await getGameDetails(params.id);
+const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
+  console.log("params.slug: ", params);
+  const gameDetails: GameDetails = await getGameDetails(params.slug);
 
   // Destructuring props from GameDetails
   const {
