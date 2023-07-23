@@ -1,11 +1,12 @@
 "use client";
 import { getGameDevelopers, getNextGameDevelopersPage, getPage } from "@/utils";
 import React, { useState, useEffect } from "react";
-import { NavigationButton } from "@/components/ui";
+import { GameLink, NavigationButton } from "@/components/ui";
 import Image from "next/image";
 import { GameDevelopers, GameDevelopersResults } from "@/types";
 // import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { BsFillArrowRightCircleFill } from "react-icons/bs";
 
 const Developers = () => {
   // const router = useRouter();
@@ -97,32 +98,34 @@ const Developers = () => {
         />
       </div>
 
-      <div className="flex flex-row flex-wrap gap-4">
-        {content.results.map((dev) => {
+      <div className="flex flex-row flex-wrap gap-y-10">
+        {/* {content.results.map(({ id, name, slug, image_background }: GameDevelopersResults) => { */}
+        {content.results.map(({ id, name, slug, games_count, image_background, games }: GameDevelopersResults) => {
           return (
-            <Link
-              href={{
-                pathname: `developers/${dev.id}`,
-              }}
-              className="bg-gray-500 w-80 rounded-md shadow-lg "
-              key={dev.id}
-            >
-              <div className="w-80 h-64">
-                <Image
-                  src={dev.image_background}
-                  alt="Game Developer"
-                  width={200}
-                  height={200}
-                  className="w-full h-full object-cover rounded-t-md"
-                />
+            <div key={id}>
+              <h2 className="mb-6">
+                <span className="text-3xl font-bold">{name}</span> <span className="text-gray-500 pl-1">{games_count}+ Games</span>
+              </h2>
+
+              <div className="flex flex-row flex-wrap gap-4 mb-4">
+                {games.map(({ id, slug, name }) => (
+                  <div className="relative flex flex-col shadow-xl w-56 h-64 group cursor-pointer">
+                    <div className="text-center pt-6">
+                      <p className="text-xl text-bold">{name}</p>
+                      <p>id: {id}</p>
+                    </div>
+
+                    {/* GRADIENT BACKGROUND EFFECT */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+
+                    {/* GAME NAME TEXT */}
+                    <p className="absolute flex  justify-center items-center text-white  bottom-5 w-full text-center ">
+                      <BsFillArrowRightCircleFill size={40} color="gray" className="group-hover:fill-white" />
+                    </p>
+                  </div>
+                ))}
               </div>
-              <ul className="p-2">
-                {/* <li>Slug: {dev.slug}</li> */}
-                <li className="text-xl">Dev: {dev.name}</li>
-                <li>Id: {dev.id}</li>
-                <li>Games Count: {dev.games_count}</li>
-              </ul>
-            </Link>
+            </div>
           );
         })}
       </div>
