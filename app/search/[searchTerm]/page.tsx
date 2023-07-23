@@ -43,26 +43,6 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
                 </li>
               ))}
             </ul>
-            {/* // <div className="border">
-              //   {game.background_image && (
-              //     <div className="w-64 h-64">
-              //       <Image
-              //         src={game.background_image}
-              //         width={200}
-              //         height={200}
-              //         alt="Game Card"
-              //         className="w-full h-full object-cover"
-              //       />
-              //     </div>
-              //   )}
-              //   <p>Slug: {game.slug}</p>
-              //   <p>name: {game.name}</p>
-              //   <p>released: {game.released}</p>
-              //   <p>rating: {game.rating}</p>
-              //   <p>id: {game.id}</p>
-              //   <p>rating_top: {game.rating_top}</p>
-              //   <p>ratings_count: {game.ratings_count}</p>
-              // </div> */}
           </div>
         )}
       </div>
