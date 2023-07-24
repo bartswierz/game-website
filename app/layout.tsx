@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="flex w-full">
           {/* <Sidebar /> */}
           <AdvancedSidebar />
-          <main className=" p-5">{children}</main>
+          <main className="p-5 ml-72">{children}</main>
         </div>
         <Footer />
 

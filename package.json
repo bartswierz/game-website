@@ -20,6 +20,7 @@
     "flowbite": "^1.7.0",
     "flowbite-react": "^0.4.11",
     "lucide-react": "^0.255.0",
+    "nanoid": "^4.0.2",
     "next": "^13.4.8",
     "postcss": "8.4.24",
     "react": "18.2.0",

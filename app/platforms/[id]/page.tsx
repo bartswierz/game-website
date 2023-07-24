@@ -127,7 +127,7 @@ const PlatformPage = () => {
 
         <div className="flex flex-col gap-y-4">
           {content.results.map((game) => (
-            <div className="border flex flex-row">
+            <div key={game.slug} className="border flex flex-row">
               {/* GAME IMAGE */}
               <div className="w-64 h-64">
                 <Image
