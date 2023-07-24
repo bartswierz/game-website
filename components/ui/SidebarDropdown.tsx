@@ -34,7 +34,7 @@ const SidebarDropdown = ({ pathname, linkTitle, linkList }: SidebarDropdownProps
       {/* {`dropdown-example-${idx}`} - We update the dropdown-exampleby attaching an id to hallow unique IDs for each item otherwise only the first tab item would open for all */}
       <button
         type="button"
-        className="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+        className="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-gray-800 "
         aria-controls={`dropdown-example-${dropdownUID}`}
         data-collapse-toggle={`dropdown-example-${dropdownUID}`}
         // aria-controls="dropdown-example"
@@ -57,7 +57,7 @@ const SidebarDropdown = ({ pathname, linkTitle, linkList }: SidebarDropdownProps
             <Link
               href={{ pathname: `/${pathname}/${slugify(link)}`, query: { id: platformID } }}
               // href="#"
-              className="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+              className="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-11 group hover:bg-gray-800 "
             >
               {link}
             </Link>

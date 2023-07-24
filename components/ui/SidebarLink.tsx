@@ -24,7 +24,7 @@ const SidebarLink = ({ pathname, linkTitle, linkObj }: SidebarLinkProps) => {
     <li>
       <Link
         href={{ pathname: `/${pathname}/${slugify(link)}`, query: { id: platformID } }}
-        className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+        className="flex items-center p-2 text-white rounded-lg  hover:bg-gray-800  group"
       >
         <IoGameControllerOutline />
         <span className="ml-3">{linkTitle}</span>
