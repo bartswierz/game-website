@@ -118,7 +118,7 @@ const PlatformPage = () => {
   if (!content) return <div className="text-white">Loading...</div>;
 
   return (
-    <div className="text-white">
+    <div className="text-white ">
       <p>SEARCH PARAMS ID: {searchParamsID}</p>
       <div>
         <p>Games Count: {content.count}</p>
@@ -149,12 +149,9 @@ const PlatformPage = () => {
                   {/* AVAILABLE PLATFORMS */}
                   <div className="flex flex-row flex-wrap gap-x-2">
                     <h2>Available for: </h2>
-                    {game.platforms.map((platform) => (
-                      <div className="flex flex-col items-center justify-center">
-                        {/* <div className="flex flex-col items-center justify-center p-2 border border-blue-500 rounded-lg min-w-[100px]"> */}
-                        {/* <p>{platform.platform.id}</p> */}
-                        {/* <div>{getPlatformIcon(platform.platform.slug)}</div> */} <span> {platform.platform.name}</span>
-                        {/* <p>{platform.platform.slug}</p> */}
+                    {game.platforms.map(({ platform }) => (
+                      <div className="flex flex-col items-center justify-center" key={platform.id}>
+                        <span> {platform.name}</span>
                       </div>
                     ))}
                   </div>
@@ -164,13 +161,14 @@ const PlatformPage = () => {
                     <div className="flex flex-row gap-x-2 items-center">
                       <h2>Stores: </h2>
                       {game.stores ? (
-                        game.stores.map((store) => (
+                        game.stores.map(({ store }) => (
                           <Link
-                            href={getPlatformStoreLink(store.store.slug)}
+                            href={getPlatformStoreLink(store.slug)}
                             target="_blank"
                             className="flex flex-col items-center p-3 border border-blue-500 hover:bg-gray-700 rounded-full ring-1"
+                            key={store.id}
                           >
-                            {getPlatformIcon(store.store.slug)}
+                            {getPlatformIcon(store.slug)}
                             {/* <span>{store.store.name}</span> */}
                           </Link>
                         ))

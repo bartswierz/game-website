@@ -29,6 +29,10 @@ const SidebarDropdown = ({ pathname, linkTitle, linkList }: SidebarDropdownProps
     return link.toLowerCase().replaceAll(" ", "-");
   };
 
+  const generateUID = () => {
+    return nanoid(10);
+  };
+
   return (
     <li>
       {/* {`dropdown-example-${idx}`} - We update the dropdown-exampleby attaching an id to hallow unique IDs for each item otherwise only the first tab item would open for all */}
@@ -44,7 +48,7 @@ const SidebarDropdown = ({ pathname, linkTitle, linkList }: SidebarDropdownProps
         <span className="flex-1 ml-3 text-left whitespace-nowrap">{linkTitle}</span>
         {/* DROPDOWN ICON */}
         <svg className="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
+          <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
         </svg>
       </button>
 
@@ -53,7 +57,7 @@ const SidebarDropdown = ({ pathname, linkTitle, linkList }: SidebarDropdownProps
         {/* PUT THE MAP HERE */}
 
         {linkList.map(({ link, platformID }) => (
-          <li key={platformID}>
+          <li key={generateUID()}>
             <Link
               href={{ pathname: `/${pathname}/${slugify(link)}`, query: { id: platformID } }}
               // href="#"

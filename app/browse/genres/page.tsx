@@ -11,8 +11,7 @@ const Genres = async () => {
 
   return (
     <div className="text-white">
-      <p>GENRES PAGE</p>
-      <div className="flex flex-row flex-wrap gap-4">
+      <div className="flex flex-row flex-wrap gap-4 justify-center">
         {/* {results.map((genre: GenreResults) => ( */}
         {results.map(({ id, name, slug, games_count, image_background, games }: GenreResults) => (
           <Link
