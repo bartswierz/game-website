@@ -11,6 +11,13 @@ export const sidebarData = {
   // PLATFORMS DATA
   // platforms: {
   pc: { link: "PC", platformID: 4 },
+  iOS: { link: "iOS", platformID: 3 },
+  android: { link: "Android", platformID: 21 },
+  linux: { link: "Linux", platformID: 6 },
+  commodore: { link: "Commodore / Amiga", platformID: 166 },
+  "3DO": { link: "3DO", platformID: 111 },
+  "Neo Geo": { link: "Neo Geo", platformID: 12 },
+
   xbox: [
     { link: "Xbox Series X", platformID: 186 },
     { link: "Xbox One", platformID: 1 },
@@ -26,25 +33,11 @@ export const sidebarData = {
     { link: "PS Vita", platformID: 19 },
     { link: "PSP", platformID: 17 },
   ],
-  // linkList: [
-
-  iOS: { link: "iOS", platformID: 3 },
-
-  //Android
-  android: { link: "Android", platformID: 21 },
-
-  //Apple Macintosh
   macOS: [
     { link: "macOS", platformID: 5 },
     { link: "Classic Macintosh", platformID: 55 },
     { link: "Apple II", platformID: 41 },
   ],
-
-  // Linux
-  linux: { link: "Linux", platformID: 6 },
-
-  //Nintendo
-
   nintendo: [
     { link: "Nintendo Switch", platformID: 7 },
     { link: "Nintendo 3DS", platformID: 8 },
@@ -60,9 +53,6 @@ export const sidebarData = {
     { link: "SNES", platformID: 79 },
     { link: "NES", platformID: 49 },
   ],
-
-  //Atari
-
   atari: [
     { link: "Atari 7800", platformID: 28 },
     { link: "Atari 5200", platformID: 31 },
@@ -74,12 +64,6 @@ export const sidebarData = {
     { link: "Atari XEGS", platformID: 50 },
     { link: "Jaguar", platformID: 112 },
   ],
-
-  //Commodore
-  commodore: { link: "Commodore / Amiga", platformID: 166 },
-
-  //SEGA
-
   SEGA: [
     { link: "Genesis", platformID: 167 },
     { link: "SEGA Saturn", platformID: 107 },
@@ -89,12 +73,6 @@ export const sidebarData = {
     { link: "Dreamcast", platformID: 106 },
     { link: "Game Gear", platformID: 77 },
   ],
-
-  //3DO
-  "3DO": { link: "3DO", platformID: 111 },
-
-  //Neo Geo
-  "Neo Geo": { link: "Neo Geo", platformID: 12 },
 
   // GENRES DATA
   genres: {

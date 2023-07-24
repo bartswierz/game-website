@@ -1,11 +1,21 @@
+"use client";
 import { sidebarData } from "@/constants";
 import Link from "next/link";
 import { IoGameController, IoGameControllerOutline } from "react-icons/io5";
 import SidebarDropdown from "./SidebarDropdown";
 import { SidebarLink } from "@/components/ui";
+import { useState } from "react";
 
 const AdvancedSidebar = () => {
-  const { pc, xbox, playstation, iOS, android, macOS, linux, nintendo, atari, commodore, SEGA } = sidebarData;
+  const [isActive, setIsActive] = useState<string | null>(null);
+
+  const { pc, xbox, playstation, iOS, android, macOS, linux, nintendo, atari, commodore, SEGA, browse, genres } = sidebarData;
+
+  // CAPITALIZES FIRST LETTER
+  const capitalizeWord = (link: string) => {
+    if (link === "rpg") return link.toUpperCase();
+    else return link.charAt(0).toUpperCase() + link.slice(1);
+  };
 
   const slugify = (link: string) => {
     return link.toLowerCase().replaceAll(" ", "-");
@@ -39,38 +49,52 @@ const AdvancedSidebar = () => {
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
           <ul className="space-y-2 font-medium">
-            {/* PC - INDIVIDUAL ITEM */}
+            {/* BROWSE LINKS */}
+            {browse.linkList.map((link) => (
+              <li key={link}>
+                <Link
+                  href={{ pathname: `/${browse.title}/${link}` }}
+                  className="flex gap-2"
+                  onClick={() => setIsActive(link)}
+                  key={link}
+                >
+                  <span className="w-6 h-6 bg-slate-500  rounded-md"></span>
+                  <span className={`cursor-pointer hover:text-gray-500 ${link === isActive ? "text-blue-700 font-bold" : ""}`}>
+                    {capitalizeWord(link)}
+                  </span>
+                </Link>
+              </li>
+            ))}
+
+            {/* PLATFORMS LINKS */}
             <SidebarLink pathname={"platforms"} linkTitle={"PC"} linkObj={pc} />
-
-            {/* XBOX - DROPDOWN */}
-            <SidebarDropdown pathname={"platforms"} linkTitle={"Xbox2"} linkList={xbox} />
-
-            {/* PLAYSTATION - DROPDOWN */}
+            <SidebarDropdown pathname={"platforms"} linkTitle={"Xbox"} linkList={xbox} />
             <SidebarDropdown pathname={"platforms"} linkTitle={"Playstation"} linkList={playstation} />
-
-            {/* iOS - DROPDOWN */}
-            <SidebarLink pathname={"platforms"} linkTitle={"iOS"} linkObj={iOS} />
-
-            {/* ANDROID - DROPDOWN */}
-            <SidebarLink pathname={"platforms"} linkTitle={"Android"} linkObj={android} />
-
-            {/* MACOS - DROPDOWN */}
-            <SidebarDropdown pathname={"platforms"} linkTitle={"macOS"} linkList={macOS} />
-
-            {/* LINUX - DROPDOWN */}
-            <SidebarLink pathname={"platforms"} linkTitle={"Linux"} linkObj={linux} />
-
-            {/* NINTENDO - DROPDOWN */}
             <SidebarDropdown pathname={"platforms"} linkTitle={"Nintendo"} linkList={nintendo} />
-
-            {/* ATARI - DROPDOWN */}
+            <SidebarLink pathname={"platforms"} linkTitle={"iOS"} linkObj={iOS} />
+            <SidebarLink pathname={"platforms"} linkTitle={"Android"} linkObj={android} />
+            <SidebarDropdown pathname={"platforms"} linkTitle={"macOS"} linkList={macOS} />
+            <SidebarLink pathname={"platforms"} linkTitle={"Linux"} linkObj={linux} />
             <SidebarDropdown pathname={"platforms"} linkTitle={"Atari"} linkList={atari} />
-
-            {/* COMMODORE - DROPDOWN */}
             <SidebarLink pathname={"platforms"} linkTitle={"Commodore"} linkObj={commodore} />
-
-            {/* SEGA - DROPDOWN */}
             <SidebarDropdown pathname={"platforms"} linkTitle={"SEGA"} linkList={SEGA} />
+
+            {/* GENRES LINKS */}
+            {genres.linkList.map((link) => (
+              <li key={link}>
+                <Link
+                  href={{ pathname: `/${genres.title}/${link}`, query: { genres: link, page_size: "12" } }}
+                  className="flex gap-2"
+                  onClick={() => setIsActive(link)}
+                  key={link}
+                >
+                  <span className="w-6 h-6 bg-slate-500 rounded-md"></span>
+                  <span className={`cursor-pointer hover:text-gray-500 ${link === isActive ? "text-blue-700 font-bold" : ""}`}>
+                    {capitalizeWord(link)}
+                  </span>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </aside>
