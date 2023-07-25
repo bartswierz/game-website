@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import { IoGameControllerOutline } from "react-icons/io5";
-import { nanoid } from "nanoid";
 import { useEffect, useState } from "react";
 
 interface SidebarDropdownProps {
@@ -11,27 +10,17 @@ interface SidebarDropdownProps {
     link: string;
     platformID: number;
   }[];
+  uid: number;
 }
 // CONTAINS THE DROPDOWN MENU FOR SIDEBAR LINKS
-const SidebarDropdown = ({ pathname, linkTitle, linkList }: SidebarDropdownProps) => {
-  // const dropdownUID = nanoid(10);
-  // console.log("dropdownUID", dropdownUID);
-  // const dropdownUID = "";
-  const [dropdownUID, setDropdownUID] = useState("");
-
-  useEffect(() => {
-    const dropdownUID = nanoid(10);
-    setDropdownUID(dropdownUID);
-    console.log("dropdownUID", dropdownUID);
-  }, []);
-
+const SidebarDropdown = ({ pathname, linkTitle, linkList, uid }: SidebarDropdownProps) => {
   const slugify = (link: string) => {
     return link.toLowerCase().replaceAll(" ", "-");
   };
 
-  const generateUID = () => {
-    return nanoid(10);
-  };
+  // TODO - ISSUE UPON STARTING THE APP OF THE DROPDOWNUID BEING UNDEFINED SO ALL DROPDOWNS ONLY OPEN THE FIRST ONE -> dropdown-example-${dropdownUID} -> dropdown-example- . Need to update it so that it is unique for each dropdown
+  // const generateUID = () => setDropdownUID(nanoid(5));
+  if (!uid) return <div></div>;
 
   return (
     <li>
@@ -39,8 +28,8 @@ const SidebarDropdown = ({ pathname, linkTitle, linkList }: SidebarDropdownProps
       <button
         type="button"
         className="flex items-center w-full p-2 text-base text-white transition duration-75 rounded-lg group hover:bg-gray-800 "
-        aria-controls={`dropdown-example-${dropdownUID}`}
-        data-collapse-toggle={`dropdown-example-${dropdownUID}`}
+        aria-controls={`dropdown-example-${uid}`}
+        data-collapse-toggle={`dropdown-example-${uid}`}
         // aria-controls="dropdown-example"
         // data-collapse-toggle="dropdown-example"
       >
@@ -53,11 +42,11 @@ const SidebarDropdown = ({ pathname, linkTitle, linkList }: SidebarDropdownProps
       </button>
 
       {/* 2ND LEVEL DROPDOWN ITEM */}
-      <ul id={`dropdown-example-${dropdownUID}`} className="hidden py-2 space-y-2">
+      <ul id={`dropdown-example-${uid}`} className="hidden py-2 space-y-2">
         {/* PUT THE MAP HERE */}
 
         {linkList.map(({ link, platformID }) => (
-          <li key={generateUID()}>
+          <li key={platformID}>
             <Link
               href={{ pathname: `/${pathname}/${slugify(link)}`, query: { id: platformID } }}
               // href="#"

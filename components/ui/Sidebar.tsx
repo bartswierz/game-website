@@ -70,18 +70,19 @@ const Sidebar = () => {
 
             {/* PLATFORMS LINKS */}
             <ul>
+              {/* Passing uid to differentiate dropdown open actions for each dropdown */}
               <span className="text-xl text-white">Platforms</span>
               <SidebarLink pathname={"platforms"} linkTitle={"PC"} linkObj={pc} />
-              <SidebarDropdown pathname={"platforms"} linkTitle={"Xbox"} linkList={xbox} />
-              <SidebarDropdown pathname={"platforms"} linkTitle={"Playstation"} linkList={playstation} />
-              <SidebarDropdown pathname={"platforms"} linkTitle={"Nintendo"} linkList={nintendo} />
+              <SidebarDropdown pathname={"platforms"} linkTitle={"Xbox"} linkList={xbox} uid={1} />
+              <SidebarDropdown pathname={"platforms"} linkTitle={"Playstation"} linkList={playstation} uid={2} />
+              <SidebarDropdown pathname={"platforms"} linkTitle={"Nintendo"} linkList={nintendo} uid={3} />
               <SidebarLink pathname={"platforms"} linkTitle={"iOS"} linkObj={iOS} />
               <SidebarLink pathname={"platforms"} linkTitle={"Android"} linkObj={android} />
-              <SidebarDropdown pathname={"platforms"} linkTitle={"macOS"} linkList={macOS} />
+              <SidebarDropdown pathname={"platforms"} linkTitle={"macOS"} linkList={macOS} uid={4} />
               <SidebarLink pathname={"platforms"} linkTitle={"Linux"} linkObj={linux} />
-              <SidebarDropdown pathname={"platforms"} linkTitle={"Atari"} linkList={atari} />
+              <SidebarDropdown pathname={"platforms"} linkTitle={"Atari"} linkList={atari} uid={5} />
               <SidebarLink pathname={"platforms"} linkTitle={"Commodore"} linkObj={commodore} />
-              <SidebarDropdown pathname={"platforms"} linkTitle={"SEGA"} linkList={SEGA} />
+              <SidebarDropdown pathname={"platforms"} linkTitle={"SEGA"} linkList={SEGA} uid={6} />
             </ul>
 
             {/* GENRES LINKS */}

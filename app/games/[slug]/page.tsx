@@ -29,7 +29,7 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
     metacritic_platforms,
   } = gameDetails;
 
-  // FORMATS THE ENGLISH GAME DESCRIPTION
+  // FORMATS THE ENGLISH GAME DESCRIPTION - TODO UPDATE THIS
   const formatDescription = (description: string) => {
     const splitByPTag: string[] = description.split("</p>"); // splitByPTag[0] = english description, splitByPTag[1] = Spanish description
     // console.log("splitByPTag: ", splitByPTag);
@@ -69,28 +69,55 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
   const formattedReleasedDate = formatReleasedDate(released);
 
   return (
-    <div className="border bg-gray-800 text-white">
-      <div>
-        <Image src={background_image} alt={name} width={300} height={200} />
-      </div>
+    <div className="border bg-gray-800 text-white flex flex-row flex-auto gap-12">
+      {/* LEFT COLUMN */}
+      <div className="p-2 flex-[60] border-2 border-red-500">
+        <div className="flex flex-col gap-4">
+          {/* RELEASED */}
+          <span className="bg-gray-200 text-gray-500 text-base font-semibold py-1 px-2 rounded-lg w-max">
+            Released {formattedReleasedDate}
+          </span>
 
-      <div className="p-2">
-        <ul>
-          <li>Game Id: {id}</li>
-          <li>{name}</li>
-          <li>Released: {formattedReleasedDate}</li>
-          <li>Updated: {formattedUpdatedDate}</li>
-          <li>
+          {/* GAME TITLE & GAME ID */}
+          <h2 className="text-4xl font-bold">
+            {name} <span className="text-gray-500 text-base">#{id}</span>
+          </h2>
+
+          {/* UPDATED */}
+          <span className="bg-gray-200 text-gray-500 text-base font-semibold py-1 px-2 rounded-lg w-max">
+            Updated {formattedUpdatedDate}
+          </span>
+
+          {/* DESCRIPTION */}
+
+          <h2 className="text-3xl font-bold">About</h2>
+          <div className="flex flex-col gap-6">
             {descriptionText.map((sentence) => (
-              <p className="mb-2">{sentence}</p>
+              <p className="border">{sentence}</p>
             ))}
-          </li>
+          </div>
+
+          {/* RATING */}
           <li>
             Rating: {rating} ({ratings_count})
           </li>
 
           <Ratings averageRating={rating} ratingsList={ratings} ratingsCount={ratings_count} />
-        </ul>
+
+          {/* CONTAINER HOLDING: Platforms, Metascore, Genre, Release Date, Developer, Publisher, Age Rating, Other game in the series, Tags, Website */}
+          <div className="flex flex-row flex-wrap border ">
+            {/* PLATFORMS */}
+            <div className="m-2">
+              <h2 className="text-gray-500 font-semibold">Platforms</h2>
+              <ul>
+                <li>Xbox Series S/X</li>
+              </ul>
+            </div>
+
+            {/* METASCORE */}
+            <div></div>
+          </div>
+        </div>
 
         {/* TAGS */}
         <ul className="flex flex-row flex-wrap gap-2 text-xs">
@@ -149,6 +176,11 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
             )}
           </div>
         </div>
+      </div>
+
+      {/* RIGHT COLUMN */}
+      <div className="flex-[40] bg-gray-500 border-2 border-green-500">
+        <Image src={background_image} alt={name} width={300} height={200} />
       </div>
     </div>
   );
