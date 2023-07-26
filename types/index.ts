@@ -75,7 +75,7 @@ export interface Platforms {
     image_background: string;
   };
   released_at: string;
-  requirements: {} | { minimum: string; recommended: string };
+  requirements?: { minimum: string; recommended: string };
 }
 
 export interface Stores {
@@ -167,7 +167,7 @@ export interface GameDetails {
   ratings_count: number;
   suggestions_count: number;
   alternative_names: string[];
-  metacritic_url: string;
+  metacritic_url?: string;
   parents_count: number;
   additions_count: number;
   game_series_count: number;
@@ -589,4 +589,19 @@ export interface GamesSearch {
   }[];
 
   user_platforms: boolean;
+}
+
+export interface GameScreenshots {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: [
+    {
+      id: number;
+      image: string;
+      width: number;
+      height: number;
+      is_deleted: boolean;
+    }
+  ];
 }

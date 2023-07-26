@@ -82,6 +82,15 @@
   width: 12px; /* Set the width of the scrollbar */
 }
 
+.val {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 /* Track (the background of the scrollbar) */
 ::-webkit-scrollbar-track {
   /* Make the track invisible */

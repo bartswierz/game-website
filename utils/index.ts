@@ -10,6 +10,7 @@ import {
   GamePlatforms,
   GamesByPlatform,
   GamesSearch,
+  GameScreenshots,
 } from "@/types";
 import { FaSteam, FaPlaystation, FaXbox, FaApple, FaGooglePlay } from "react-icons/fa";
 import { SiNintendo, SiGogdotcom, SiItchdotio, SiEpicgames } from "react-icons/si";
@@ -269,13 +270,24 @@ export const getGamesByPlatform = async (platformID: string | null, page_size: n
 
 // https://api.rawg.io/api/games?key=19bf6456aed44d52b0a064df2f54ef4a&search=diablo
 export const getGamesSearch = async (searchTerm: string): Promise<GamesSearch> => {
-  console.log("inside getGamesSearch...");
   const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}`);
 
   if (!res.ok) throw new Error("Failed to fetch Games by Search Term");
 
   const data: GamesSearch = await res.json();
-  console.log("data - getGamesSearch: ", data);
+  // console.log("data - getGamesSearch: ", data);
 
   return data;
 };
+
+export const getGameScreenshots = async (slug: string): Promise<GameScreenshots> => {
+  // console.log("inside getGamesScreenshots");
+  const res = await fetch(`https://api.rawg.io/api/games/${slug}/screenshots?key=${process.env.RAWG_API_KEY}`);
+
+  if (!res.ok) throw new Error("Failed to fetch Game Screenshots");
+
+  const data: GameScreenshots = await res.json();
+  // console.log("data - getGameScreenshots: ", data);
+  return data;
+};
+// getGameScreenshots("diablo-iv");

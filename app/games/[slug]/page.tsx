@@ -1,33 +1,58 @@
-import { GameDetails } from "@/types";
-import { getGameDetails } from "@/utils";
+// "use client";
+// import { useState, useEffect } from "react";
+import { GameDetails, Platforms } from "@/types";
+import { getGameDetails, getGameScreenshots } from "@/utils";
 import { Ratings } from "@/components/ui";
 import Link from "next/link";
 import Image from "next/image";
 
 // DISPLAY GAME DETAILS FOR A SINGLE GAME BASED ON ID
 const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
+  // const [minimumRequirements, setMinimumRequirements] = useState<Platforms[]>([]);
+
   console.log("params.slug: ", params);
   const gameDetails: GameDetails = await getGameDetails(params.slug);
 
+  const gameScreenshots = await getGameScreenshots(params.slug);
+  console.log("gameScreenshots: ", gameScreenshots);
   // Destructuring props from GameDetails
   const {
-    id,
-    name,
     background_image,
     description,
-    released,
-    updated,
+    description_raw,
+    developers,
+    esrb_rating,
+    genres,
+    id,
+    metacritic,
+    metacritic_platforms,
+    metacritic_url,
+    name,
+    platforms,
+    publishers,
     rating,
     ratings,
     ratings_count,
+    reddit_description,
+    reddit_name,
+    reddit_url,
+    released,
     stores,
     tags,
-    reddit_url,
-    reddit_name,
-    reddit_description,
-    metacritic,
-    metacritic_platforms,
+    updated,
+    website,
   } = gameDetails;
+
+  const getMinRequirements = (platforms: Platforms[]) => {
+    console.log("inside getMinRequirements");
+    platforms.filter((platform) => {
+      console.log("platform.requirements", platform.requirements);
+      // return platform.name === "PC";
+    });
+  };
+
+  getMinRequirements(platforms);
+  // console.log("platforms: ", platforms);
 
   // FORMATS THE ENGLISH GAME DESCRIPTION - TODO UPDATE THIS
   const formatDescription = (description: string) => {
@@ -69,118 +94,182 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
   const formattedReleasedDate = formatReleasedDate(released);
 
   return (
-    <div className="border bg-gray-800 text-white flex flex-row flex-auto gap-12">
+    <div className="border bg-gray-800 text-white flex flex-row flex-auto gap-12 max-w-full">
       {/* LEFT COLUMN */}
       <div className="p-2 flex-[60] border-2 border-red-500">
         <div className="flex flex-col gap-4">
-          {/* RELEASED */}
-          <span className="bg-gray-200 text-gray-500 text-base font-semibold py-1 px-2 rounded-lg w-max">
-            Released {formattedReleasedDate}
-          </span>
+          <div className="flex gap-x-2">
+            {/* RELEASED */}
+            <span className="bg-gray-200 text-gray-500 text-base font-semibold py-1 px-2 rounded-lg w-max">
+              Released {formattedReleasedDate}
+            </span>
+
+            {/* UPDATED */}
+            <span className="bg-gray-200 text-gray-500 text-base font-semibold py-1 px-2 rounded-lg w-max">
+              Updated {formattedUpdatedDate}
+            </span>
+          </div>
 
           {/* GAME TITLE & GAME ID */}
           <h2 className="text-4xl font-bold">
             {name} <span className="text-gray-500 text-base">#{id}</span>
           </h2>
 
-          {/* UPDATED */}
-          <span className="bg-gray-200 text-gray-500 text-base font-semibold py-1 px-2 rounded-lg w-max">
-            Updated {formattedUpdatedDate}
-          </span>
-
-          {/* DESCRIPTION */}
-
+          {/* ABOUT/DESCRIPTION */}
           <h2 className="text-3xl font-bold">About</h2>
           <div className="flex flex-col gap-6">
             {descriptionText.map((sentence) => (
               <p className="border">{sentence}</p>
             ))}
+            {/* {description_raw} */}
           </div>
 
-          {/* RATING */}
-          <li>
-            Rating: {rating} ({ratings_count})
-          </li>
-
-          <Ratings averageRating={rating} ratingsList={ratings} ratingsCount={ratings_count} />
-
           {/* CONTAINER HOLDING: Platforms, Metascore, Genre, Release Date, Developer, Publisher, Age Rating, Other game in the series, Tags, Website */}
-          <div className="flex flex-row flex-wrap border ">
+          <div className="flex flex-row flex-wrap mt-8 border gap-4">
             {/* PLATFORMS */}
-            <div className="m-2">
-              <h2 className="text-gray-500 font-semibold">Platforms</h2>
+            <div className="">
+              <h2 className="text-gray-500 font-semibold mb-2">Platforms</h2>
               <ul>
                 <li>Xbox Series S/X</li>
               </ul>
             </div>
 
             {/* METASCORE */}
-            <div></div>
+            <div>
+              <h2 className="text-gray-500 font-semibold mb-2">Metascore</h2>
+              <span className="border border-[rgba(109,200,73,.4)] text-[#6dc849] py-1 px-2 rounded-md">{metacritic}</span>
+            </div>
+
+            {/* GENRES */}
+            <div>
+              <h2 className="text-gray-500 font-semibold mb-2">Genre</h2>
+              <ul className="flex flex-row">
+                {genres.map(({ id, name }) => (
+                  <li key={id} className="pr-2">
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* RELEASE DATE */}
+            <div>
+              <h2 className="text-gray-500 font-semibold mb-2">Release Date</h2>
+              <span>{formattedReleasedDate}</span>
+            </div>
+
+            {/* DEVELOPER */}
+            <div>
+              <h2 className="text-gray-500 font-semibold mb-2">Developer</h2>
+              <ul>
+                {developers.map(({ id, name }) => (
+                  <li key={id}>{name}</li>
+                ))}
+              </ul>
+            </div>
+
+            {/* PUBLISHER */}
+            <div>
+              <h2 className="text-gray-500 font-semibold mb-2">Publisher(s)</h2>
+              <ul>
+                {publishers.map(({ id, name }) => (
+                  <li key={id} className="pr-2">
+                    {name}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* AGE RATING */}
+            {/* <div>
+              <h2 className="text-gray-500 font-semibold mb-2">Age Rating</h2>
+              {esrb_rating.name && <span>{esrb_rating.name === "Mature" ? `17+ ${esrb_rating.name}` : esrb_rating.name}</span>}
+            </div> */}
+
+            {/* TAGS */}
+            <div>
+              <h2 className="text-gray-500 font-semibold mb-2">Tags</h2>
+              <ul className="flex flex-row flex-wrap">
+                {tags.map(({ id, name, slug }) => (
+                  <li key={id} className="pr-2">
+                    {name},
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* WEBSITE */}
+            <div>
+              <h2 className="text-gray-500 font-semibold mb-2">Website(s)</h2>
+              <div className="flex flex-col gap-2">
+                <Link href={website} className="underline" target="_blank">
+                  {website}
+                </Link>
+
+                <Link href={reddit_url} target="_blank" className="underline">
+                  {reddit_url}
+                </Link>
+              </div>
+            </div>
+
+            {/* METACRITIC WEBSITE - IF IT EXISTS RENDER */}
+            {metacritic_url && (
+              <div>
+                <h2 className="text-gray-500 font-semibold mb-2">Metacritic Website</h2>
+                <Link href={metacritic_url} className="underline" target="_blank">
+                  {metacritic_url}
+                </Link>
+              </div>
+            )}
           </div>
         </div>
-
-        {/* TAGS */}
-        <ul className="flex flex-row flex-wrap gap-2 text-xs">
-          {tags.map(({ id, name, slug }) => (
-            <li key={id} className="bg-blue-700 py-1 px-2  rounded-lg">
-              {name}
-            </li>
-          ))}
-        </ul>
 
         <br />
 
         {/* AVAILABLE STORES */}
         <div>
-          Available at Stores:
-          {stores.map(({ store }) => (
-            <div key={store.id}>
-              {/* <div>{store.name}</div> */}
-              <Link href={`https://${store.domain}`} target="_blank" className="underline hover:text-slate-500">
-                {store.domain}
+          <h2 className="text-gray-500">Available Stores</h2>
+          <div className="flex flex-row border">
+            {stores.map(({ store }) => (
+              <Link
+                href={`https://${store.domain}`}
+                target="_blank"
+                className="bg-gray-200 text-gray-500 font-semibold rounded-md py-1 px-2 text-base hover:text-slate-500"
+                key={store.id}
+              >
+                {/* {store.domain} */}
+                {store.name}
               </Link>
-            </div>
-          ))}
-        </div>
-
-        {/* REDDIT SECTION */}
-        <div>
-          <h1 className="text-xl mb-1 mt-5">Reddit Information</h1>
-          <Link href={reddit_url} target="_blank">
-            Reddit URL: <span className="underline">{reddit_url}</span>
-          </Link>
-          <p>Reddit Name: {reddit_name}</p>
-          <p>Reddit Description: {reddit_description}</p>
-        </div>
-
-        {/* METACRITIC */}
-        <div>
-          <h1 className="text-xl mt-2">Metascore Information</h1>
-          <p>Metacritic Score: {metacritic}</p>
-
-          {/* METACRITIC PLATFORMS */}
-          <div>
-            {metacritic_platforms.length !== 0 ? (
-              metacritic_platforms.map(({ metascore, url, platform }) => (
-                <div className="my-2">
-                  <p>
-                    {platform.name} - Metascore: {metascore}
-                  </p>
-                  <Link href={url} target="_blank">
-                    Metascore URL: <span className="underline">{url}</span>
-                  </Link>
-                </div>
-              ))
-            ) : (
-              <p>Metacritic Platform Information Unavailable...</p>
-            )}
+            ))}
           </div>
+        </div>
+
+        {/* RATING */}
+        <div>
+          <li>
+            Rating: {rating} ({ratings_count})
+          </li>
+
+          <Ratings averageRating={rating} ratingsList={ratings} ratingsCount={ratings_count} />
+        </div>
+
+        {/* PLATFORM - REQUIREMENTS */}
+        <div>
+          <h2>Minimum Requirements</h2>
+          {/* <p>{platforms.requirements ? platforms.requirements : "N/A"}</p> */}
         </div>
       </div>
 
       {/* RIGHT COLUMN */}
-      <div className="flex-[40] bg-gray-500 border-2 border-green-500">
-        <Image src={background_image} alt={name} width={300} height={200} />
+      <div className="flex-[40] border-2 border-green-500">
+        {/* <Image src={background_image} alt={name} width={300} height={200} /> */}
+
+        {/* SCREENSHOTS */}
+        <div className="flex flex-row flex-wrap gap-4">
+          {gameScreenshots.results.map(({ id, image }) => (
+            <Image src={image} alt={name} width={184} height={102} key={id} className="rounded-lg" />
+          ))}
+        </div>
       </div>
     </div>
   );
