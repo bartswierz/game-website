@@ -91,7 +91,7 @@ const Sidebar = () => {
               {genres.linkList.map((link) => (
                 <li key={link}>
                   <Link
-                    href={{ pathname: `/${genres.title}/${link}`, query: { genres: link, page_size: "12" } }}
+                    href={{ pathname: `/${genres.title}/${link}`, query: { genres: link } }}
                     // className="flex gap-2"
                     className="flex items-center p-2 text-white rounded-lg hover:bg-gray-800  group"
                     onClick={() => setIsActive(link)}

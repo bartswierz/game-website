@@ -17,7 +17,7 @@ const Genres = async () => {
           <Link
             href={{
               pathname: `/browse/genres/${slug}`,
-              query: { id: JSON.stringify(id) },
+              query: { id: id },
             }}
             className="relative cursor-pointer rounded-lg overflow-hidden"
             key={id}

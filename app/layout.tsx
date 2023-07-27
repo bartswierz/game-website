@@ -18,12 +18,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} bg-gray-900`}>
         {/* Navigation Component here */}
         <Navbar />
-        <div className="flex w-full">
-          <Sidebar />
-          <main className="p-5 ml-72">{children}</main>
-        </div>
-        <Footer />
+        <div className="flex flex-row relative">
+          <div className="flex-[15]">
+            <Sidebar />
+          </div>
 
+          <main className="p-5 flex-[85]">{children}</main>
+        </div>
+
+        {/* FOOTER */}
+        <Footer />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
       </body>
     </html>

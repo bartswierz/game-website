@@ -6,8 +6,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { NavigationButton, GameLink } from "@/components/ui";
-// TODO - GRAB THE SLUG PASSED FROM browse/genres/[id] AND USE IT TO GET THE GENRE GAMES LIST - EX. browse/genres/[action] -> slug = action
-// const GenrePage = async ({ params }: { params: { slug: string } }) => {
+
 //ex. http://localhost:3000/genres/shooter?genres=action&page_size=6
 //ex. http://localhost:3000/genres/shooter?genres=4&page_size=6
 const GenrePage = async () => {
@@ -15,17 +14,17 @@ const GenrePage = async () => {
   // Grabs the ID from the URL
   const searchParams = useSearchParams();
   const searchGenreID = searchParams.get("genres"); // genres=action
-  const searchPageSize = searchParams.get("page_size"); // page_size=6
+  // const searchPageSize = searchParams.get("page_size"); // page_size=6
   console.log("searchGenre = ", searchGenreID);
-  console.log("searchPageSize = ", searchPageSize);
+  // console.log("searchPageSize = ", searchPageSize);
   const [content, setContent] = useState<GamesByGenre>();
   const [currentPage, setCurrentPage] = useState<string>("1");
 
   // Fetch Genre Info using the passed ID from browse/genres Page
   useEffect(() => {
     //ex searchID for action games is 'action' | 4
-    const fetchGamesByGenreInfo = async (searchID: string | number, searchPageSize: string | null) => {
-      const data: GamesByGenre = await getGamesByGenre(searchID, searchPageSize);
+    const fetchGamesByGenre = async (searchID: string | number) => {
+      const data: GamesByGenre = await getGamesByGenre(searchID);
 
       if (data) {
         // console.log("GAMES BY GENRE - data: ", data);
@@ -33,7 +32,7 @@ const GenrePage = async () => {
       } else throw new Error("No data returned from getGenreInfo");
     };
 
-    if (searchGenreID && searchPageSize) fetchGamesByGenreInfo(searchGenreID, searchPageSize);
+    if (searchGenreID) fetchGamesByGenre(searchGenreID);
   }, [searchGenreID]);
 
   // Updates current page number whenever we get a new set of data from API
@@ -52,8 +51,6 @@ const GenrePage = async () => {
   // Handle page change
   //TODO - NAVIGATION IS BROKEN ONCE IT HITS PAGE 10 BECAUSE WE ARE STRIPPING AWAY THE VALUE, we need to find a way to pull it more dynamically
   const handlePageChange = async (request: string | null, pageDirection: string) => {
-    console.log(`Fetching data for ${pageDirection} page...`);
-    console.log("PAGE CHANGE - request: ", request);
     if (pageDirection === "prev") {
       if (content?.previous) {
         // console.log("content.prev: ", content.previous);
@@ -73,9 +70,8 @@ const GenrePage = async () => {
   if (!content) return <div className="text-white text-3xl">Loading...</div>;
 
   return (
-    <div className=" text-white">
-      <div>APP - GENRES PAGE - INFO PASSED BELOW</div>
-      <div>GAME DEVELOPERS INFORMATION</div>
+    <div className="text-white">
+      <div className="text-4xl font-semibold">GAME DEVELOPERS</div>
       <ul>
         <li># of Developers: {content.count}</li>
         <li># of Pages: {Math.ceil(content.count / 10)}</li>

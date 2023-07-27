@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { getNextPlatformPage, getPage, getPlatforms } from "@/utils";
 import { GamePlatforms } from "@/types";
-import Image from "next/image";
 import { NavigationButton } from "@/components/ui";
-import Link from "next/link";
 import GameLinkBasic from "@/components/ui/GameLinkBasic";
 
 // type Props = {};
@@ -13,14 +11,11 @@ import GameLinkBasic from "@/components/ui/GameLinkBasic";
 const Platforms = async () => {
   const [content, setContent] = useState<GamePlatforms | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  // # of items per page
-  const page_size = 9;
 
   // Ran once on page load
   useEffect(() => {
     const fetchData = async () => {
-      // const page_size = 6;
-      const data = await getPlatforms(page_size);
+      const data = await getPlatforms();
       setContent(data);
     };
 
@@ -60,9 +55,13 @@ const Platforms = async () => {
 
   return (
     <div className="text-white">
-      <div>count: {content.count}</div>
-      <div>next: {content.next}</div>
-      <div>previous: {content.previous}</div>
+      <h1>
+        <span className="text-4xl font-semibold">Platforms</span>{" "}
+        <span className="text-gray-500 text-base">{content.count} Platforms</span>
+      </h1>
+
+      {/* <div>next: {content.next}</div>
+      <div>previous: {content.previous}</div> */}
 
       {/* NAVIGATION BUTTONS */}
       <div className="my-5">
@@ -87,7 +86,7 @@ const Platforms = async () => {
 
         {/* Page Counter */}
         <div className="inline-block px-4 py-2 m-1">
-          Page {currentPage} of {Math.ceil(content.count / page_size)}
+          Page {currentPage} of {Math.ceil(content.count / 12)}
         </div>
 
         {/* NEXT BUTTON */}

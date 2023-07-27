@@ -44,7 +44,7 @@ const GenrePage = async () => {
 
   return (
     <div className="border text-white">
-      <div>APP - GENRES PAGE - INFO PASSED BELOW</div>
+      <div>APP - GENRES PAGE - INFO PASSED BELOW2</div>
       {genreInfo && (
         <div>
           <div>

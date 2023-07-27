@@ -11,14 +11,14 @@ import { BsAndroid2 } from "react-icons/bs";
 
 import Link from "next/link";
 const PlatformPage = () => {
-  const [content, setContent] = useState<GamesByPlatform | null>(null);
+  const [content, setContent] = useState<GamesByPlatform>();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const searchParams = useSearchParams();
   const searchParamsID = searchParams.get("id");
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getGamesByPlatform(searchParamsID, 6);
+      const data = await getGamesByPlatform(searchParamsID);
       setContent(data);
     };
 
@@ -121,7 +121,7 @@ const PlatformPage = () => {
     <div className="text-white ">
       <p>SEARCH PARAMS ID: {searchParamsID}</p>
       <div>
-        <p>Games Count: {content.count}</p>
+        <p># Of Platforms: {content.count}</p>
         <p>Next: {content.next}</p>
         <p>Previous: {content.previous}</p>
 
