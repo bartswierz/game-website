@@ -11,6 +11,7 @@ import {
   GamesByPlatform,
   GamesSearch,
   GameScreenshots,
+  StoresWithGame,
 } from "@/types";
 import { FaSteam, FaPlaystation, FaXbox, FaApple, FaGooglePlay } from "react-icons/fa";
 import { SiNintendo, SiGogdotcom, SiItchdotio, SiEpicgames } from "react-icons/si";
@@ -280,9 +281,10 @@ export const getGamesSearch = async (searchTerm: string): Promise<GamesSearch> =
   return data;
 };
 
-export const getGameScreenshots = async (slug: string): Promise<GameScreenshots> => {
+// Fetch Game Screenshots by passing in game slug i.e. 'rocket-league'
+export const getGameScreenshots = async (game_slug: string): Promise<GameScreenshots> => {
   // console.log("inside getGamesScreenshots");
-  const res = await fetch(`https://api.rawg.io/api/games/${slug}/screenshots?key=${process.env.RAWG_API_KEY}`);
+  const res = await fetch(`https://api.rawg.io/api/games/${game_slug}/screenshots?key=${process.env.RAWG_API_KEY}`);
 
   if (!res.ok) throw new Error("Failed to fetch Game Screenshots");
 
@@ -290,4 +292,17 @@ export const getGameScreenshots = async (slug: string): Promise<GameScreenshots>
   // console.log("data - getGameScreenshots: ", data);
   return data;
 };
-// getGameScreenshots("diablo-iv");
+
+//Passing in slug i.e. 'rocket-league' to find store link for the game
+export const findStoresForGame = async (game_slug: string): Promise<StoresWithGame> => {
+  console.log("findStoresForGame - game_slug: ", game_slug);
+
+  const res = await fetch(`https://api.rawg.io/api/games/${game_slug}/stores?key=${process.env.RAWG_API_KEY}`);
+
+  if (!res.ok) throw new Error("Failed to fetch store link(s) for game");
+
+  const data: StoresWithGame = await res.json();
+
+  return data;
+};
+// findStoreWithGame("rocket-league");

@@ -595,13 +595,23 @@ export interface GameScreenshots {
   count: number;
   next: string | null;
   previous: string | null;
-  results: [
-    {
-      id: number;
-      image: string;
-      width: number;
-      height: number;
-      is_deleted: boolean;
-    }
-  ];
+  results: {
+    id: number;
+    image: string;
+    width: number;
+    height: number;
+    is_deleted: boolean;
+  }[];
+}
+
+export interface StoresWithGame {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: {
+    id: number;
+    game_id: number;
+    store_id: number;
+    url: string;
+  }[];
 }

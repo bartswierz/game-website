@@ -1,20 +1,48 @@
-// "use client";
-// import { useState, useEffect } from "react";
-import { GameDetails, Platforms } from "@/types";
-import { getGameDetails, getGameScreenshots } from "@/utils";
+import { GameDetails, GameScreenshots, Platforms, StoresWithGame } from "@/types";
+import { findStoresForGame, getGameDetails, getGameScreenshots } from "@/utils";
 import { Ratings } from "@/components/ui";
 import Link from "next/link";
 import Image from "next/image";
 
 // DISPLAY GAME DETAILS FOR A SINGLE GAME BASED ON ID
 const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
-  // const [minimumRequirements, setMinimumRequirements] = useState<Platforms[]>([]);
-
-  console.log("params.slug: ", params);
+  //We are using the passed slug(i.e. 'rocket-league' in this case) to get the game details from the API
   const gameDetails: GameDetails = await getGameDetails(params.slug);
 
-  const gameScreenshots = await getGameScreenshots(params.slug);
-  console.log("gameScreenshots: ", gameScreenshots);
+  //Passing slug to get the game screenshots from the API
+  const gameScreenshots: GameScreenshots = await getGameScreenshots(params.slug);
+
+  // Destructuring results from the StoresWithGame object upon return from the API
+  const { results: gameStoreList }: StoresWithGame = await findStoresForGame(params.slug);
+  console.log("storesWithGame in component: ", gameStoreList);
+
+  const getStoreNameById = (store_id: number) => {
+    switch (store_id) {
+      case 1:
+        return "Steam Store";
+      case 2:
+        return "Xbox Store";
+      case 3:
+        return "Playstation Store";
+      case 4:
+        return "App Store";
+      case 5:
+        return "GOG Store";
+      case 6:
+        return "Nintendo Store";
+      case 7:
+        return "Xbox 360 Store";
+      case 8:
+        return "Google Play Store";
+      case 9:
+        return "itch.io Store";
+      case 11:
+        return "Epic Games Store";
+      default:
+        break;
+    }
+  };
+
   // Destructuring props from GameDetails
   const {
     background_image,
@@ -98,7 +126,7 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
       {/* LEFT COLUMN */}
       <div className="p-2 flex-[60] border-2 border-red-500">
         <div className="flex flex-col gap-4">
-          <div className="flex gap-x-2">
+          <div className="flex flex-wrap gap-2">
             {/* RELEASED */}
             <span className="bg-gray-200 text-gray-500 text-base font-semibold py-1 px-2 rounded-lg w-max">
               Released {formattedReleasedDate}
@@ -137,7 +165,11 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
             {/* METASCORE */}
             <div>
               <h2 className="text-gray-500 font-semibold mb-2">Metascore</h2>
-              <span className="border border-[rgba(109,200,73,.4)] text-[#6dc849] py-1 px-2 rounded-md">{metacritic}</span>
+              {metacritic ? (
+                <span className="border border-[rgba(109,200,73,.4)] text-[#6dc849] py-1 px-2 rounded-md">{metacritic}</span>
+              ) : (
+                "N/A"
+              )}
             </div>
 
             {/* GENRES */}
@@ -228,9 +260,21 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
 
         {/* AVAILABLE STORES */}
         <div>
-          <h2 className="text-gray-500">Available Stores</h2>
-          <div className="flex flex-row border">
-            {stores.map(({ store }) => (
+          <h2 className="text-gray-500 mb-2">Available Stores</h2>
+          <div className="flex flex-row flex-wrap gap-2">
+            {gameStoreList.map(({ id, game_id, store_id, url }) => (
+              <Link
+                href={url}
+                target="_blank"
+                // className=" text-gray-200 font-semibold text-base hover:text-slate-500"
+                className="bg-gray-200 text-gray-500 text-sm font-semibold rounded-md py-1 px-2 hover:bg-gray-300 w-max"
+                key={id}
+              >
+                {/* {url} */}
+                {getStoreNameById(store_id)}
+              </Link>
+            ))}
+            {/* {stores.map(({ store }) => (
               <Link
                 href={`https://${store.domain}`}
                 target="_blank"
@@ -238,9 +282,9 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
                 key={store.id}
               >
                 {/* {store.domain} */}
-                {store.name}
+            {/* {store.name}
               </Link>
-            ))}
+            ))} */}
           </div>
         </div>
 
