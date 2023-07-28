@@ -19,11 +19,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Navigation Component here */}
         <Navbar />
         <div className="flex flex-row relative">
-          <div className="flex-[15]">
+          {/* <div className="w-72">
             <Sidebar />
-          </div>
+          </div> */}
 
-          <main className="p-5 flex-[85]">{children}</main>
+          <main className="p-5 md:ml-72">{children}</main>
         </div>
 
         {/* FOOTER */}

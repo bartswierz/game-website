@@ -86,7 +86,7 @@ const Platforms = async () => {
 
         {/* Page Counter */}
         <div className="inline-block px-4 py-2 m-1">
-          Page {currentPage} of {Math.ceil(content.count / 12)}
+          Page {currentPage} of {Math.ceil(content.count / 6)}
         </div>
 
         {/* NEXT BUTTON */}
