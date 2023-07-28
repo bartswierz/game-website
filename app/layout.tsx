@@ -14,6 +14,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" />
+        <link rel="icon" type="image/svg" href="../app/SiteLogo.svg" sizes="32x32" />
       </head>
       <body className={`${inter.className} bg-gray-900`}>
         {/* Navigation Component here */}

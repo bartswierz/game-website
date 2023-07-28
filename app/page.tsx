@@ -7,7 +7,7 @@ export default async function Home() {
     // <main className="m-24 rounded-md grid grid-cols-4 gap-12 w-full">
     <main>
       <div className="text-white">
-        <div>Inside App Home</div>
+        <div>HOME PAGE</div>
         {/* RENDER GAMES HERE FOR HOME PAGE */}
       </div>
     </main>

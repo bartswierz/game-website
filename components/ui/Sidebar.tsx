@@ -49,27 +49,27 @@ const Sidebar = () => {
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style={{ height: "60px", width: "60px" }}>
               <defs>
                 <filter id="shadow-1" height="300%" width="300%" x="-100%" y="-100%">
-                  <feFlood flood-color="rgba(255, 255, 255, 1)" result="flood"></feFlood>
+                  <feFlood floodColor="rgba(255, 255, 255, 1)" result="flood"></feFlood>
                   <feComposite in="flood" in2="SourceGraphic" operator="atop" result="composite"></feComposite>
                   <feGaussianBlur in="composite" stdDeviation="15" result="blur"></feGaussianBlur>
                   <feOffset dx="0" dy="0" result="offset"></feOffset>
                   <feComposite in="SourceGraphic" in2="offset" operator="over"></feComposite>
                 </filter>
                 <linearGradient id="caro-asercion-warlord-helmet-gradient-0" x1="0" x2="1" y1="1" y2="0">
-                  <stop offset="0%" stop-color="#02a5f6" stop-opacity="1"></stop>
-                  <stop offset="100%" stop-color="#0101d3" stop-opacity="1"></stop>
+                  <stop offset="0%" stopColor="#02a5f6" stopOpacity="1"></stop>
+                  <stop offset="100%" stopColor="#0101d3" stopOpacity="1"></stop>
                 </linearGradient>
                 <linearGradient x1="0" x2="1" y1="0" y2="1" id="caro-asercion-warlord-helmet-gradient-1">
-                  <stop offset="0%" stop-color="#ffffff" stop-opacity="1"></stop>
-                  <stop offset="100%" stop-color="#000000" stop-opacity="1"></stop>
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="1"></stop>
+                  <stop offset="100%" stopColor="#000000" stopOpacity="1"></stop>
                 </linearGradient>
               </defs>
               <polygon
                 points="256,494,18,256,256,18,494,256"
                 fill="url(#caro-asercion-warlord-helmet-gradient-0)"
                 stroke="#464646"
-                stroke-opacity="1"
-                stroke-width="18"
+                strokeOpacity="1"
+                strokeWidth="18"
               ></polygon>
               <g transform="translate(0,-22)">
                 <path
@@ -77,8 +77,8 @@ const Sidebar = () => {
                   fill="url(#caro-asercion-warlord-helmet-gradient-1)"
                   transform="translate(0, 0) scale(1, 1) rotate(-360, 256, 256) skewX(0) skewY(0)"
                   stroke="#ffffff"
-                  stroke-opacity="1"
-                  stroke-width="8"
+                  strokeOpacity="1"
+                  strokeWidth="8"
                   filter="url(#shadow-1)"
                 ></path>
               </g>
