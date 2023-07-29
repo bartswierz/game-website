@@ -20,9 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Navigation Component here */}
         <Navbar />
         <div className="flex flex-row relative">
-          {/* <div className="w-72">
-            <Sidebar />
-          </div> */}
+          <div className="w-96 bg-gray-red">{/* <Sidebar /> */}</div>
 
           <main className="p-5 md:ml-72">{children}</main>
         </div>

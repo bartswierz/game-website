@@ -34,10 +34,10 @@ const Searchbar = () => {
   };
 
   return (
-    <div className="w-full">
-      <form onSubmit={handleSearch} className="flex p-2 gap-2 ml-8 w-3/4 min-w-[330px] justify-center">
+    <div className="border">
+      <form onSubmit={handleSearch} className="flex p-2 gap-2 w-full min-w-[150px] justify-center">
         {/* <label htmlFor="search" className="w-64 border flex flex-row gap-y-0.5 "> */}
-        <label htmlFor="search" className="relative  w-3/4 flex flex-row transition-colors duration-500 ease-in-out group">
+        <label htmlFor="search" className="relative w-full flex flex-row transition-colors duration-500 ease-in-out group">
           <input
             type="text"
             name="search"
@@ -45,7 +45,7 @@ const Searchbar = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             // className="min-w-full bg-slate-800 w-64 h-14 pl-10 rounded-full border hover:placeholder:text-white "
-            className="text-white min-w-full bg-gray-800 w-64 h-14 pl-10 rounded-full group-hover:bg-white group-hover:text-gray-900"
+            className="text-white min-w-full bg-gray-800 w-64- h-14 pl-10 rounded-full group-hover:bg-white group-hover:text-gray-900"
             // className="min-w-full bg-slate-800 w-64 rounded-full border hover:placeholder:text-white "
           />
           <button type="submit" className="absolute rounded-full h-14 px-4 py-2 left-[0%] bottom-[0%]">
