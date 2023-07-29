@@ -19,10 +19,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.className} bg-gray-900`}>
         {/* Navigation Component here */}
         <Navbar />
-        <div className="flex flex-row relative">
-          <div className="w-96 bg-gray-red">{/* <Sidebar /> */}</div>
-
-          <main className="p-5 md:ml-72">{children}</main>
+        <div className="flex">
+          {/* <div className="w-[400px] bg-gray-red">-</div> */}
+          {/* <div className=" bg-red-500 md:hidden"></div> */}
+          {/* <div className="md:w-full"> */}
+          <Sidebar />
+          {/* </div> */}
+          {/* <main className="p-5 md:ml-72 border">{children}</main> */}
+          {/* <div className="w-2/3- justify-end mx-auto"> */}
+          {/* <main className="md:ml-12 p-5 border bg-gray-400 md:w-[82%] max-w-[1000px]">{children}</main> */}
+          <main className="container p-5 border-4 w-full">{children}</main>
+          {/* </div> */}
         </div>
 
         {/* FOOTER */}

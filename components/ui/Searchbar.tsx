@@ -35,7 +35,7 @@ const Searchbar = () => {
 
   return (
     <div className="border">
-      <form onSubmit={handleSearch} className="flex p-2 gap-2 w-full min-w-[150px] justify-center">
+      <form onSubmit={handleSearch} className="flex flex-[50%] p-2 gap-2 w-full- min-w-[150px] justify-center">
         {/* <label htmlFor="search" className="w-64 border flex flex-row gap-y-0.5 "> */}
         <label htmlFor="search" className="relative w-full flex flex-row transition-colors duration-500 ease-in-out group">
           <input
