@@ -1,4 +1,7 @@
-//PayloadAction is the TYPE - req for TypeScript
+/*
+AUTH SLICE IS FOR BRUSHING UP ON REDUX TOOLKIT - AUTHENTICATION MAY BE ADDED VIA MONGODB
+PayloadAction is the TYPE - req for TypeScript
+*/
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type InitialStateProps = {

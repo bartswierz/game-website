@@ -1,7 +1,6 @@
 "use client";
 import LogIn from "@/components/ui/log-in";
 import { useAppSelector } from "@/redux/store";
-import { useSelector } from "react-redux";
 
 export default async function Home() {
   // const gameData: GameDataProps = await getGames();
