@@ -27,9 +27,9 @@ const Genres = async () => {
             </div>
 
             <ul className="absolute p-2 bottom-2 w-full text-center z-10">
-              <li>Id: {id}</li>
-              <li>{name}</li>
-              <li>{games_count}</li>
+              {/* <li>Id: {id}</li> */}
+              <li className="text-lg font-bold">{name}</li>
+              <li className="text-gray-400">{games_count}+ Games</li>
             </ul>
 
             {/* LINEAR GRADIENT BACKGROUND EFFECT */}

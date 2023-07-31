@@ -9,7 +9,7 @@ module.exports = {
     "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    // extend: {},
     container: {
       center: true,
       padding: "2rem",

@@ -28,7 +28,7 @@ const GameLink = ({ slug, name, background_image }: GameLinkProps) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
 
           {/* GAME NAME TEXT */}
-          <p className="absolute text-white  bottom-5 w-full h-5 text-center">{name}</p>
+          <p className="absolute text-white  bottom-8 w-full h-5 text-center">{name}</p>
         </div>
       </Link>
     </div>
