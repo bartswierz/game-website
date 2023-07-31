@@ -9,5 +9,18 @@ import GameLink from "./GameLink";
 import SidebarLink from "./SidebarLink";
 import SidebarDropdown from "./SidebarDropdown";
 import BrandLogo from "./BrandLogo";
+import HamburgerMenu from "./HamburgerMenu";
 // Export all components as a single object for cleaner imports in other files
-export { Navbar, Sidebar, Footer, NavigationButton, Ratings, Searchbar, GameLink, SidebarLink, SidebarDropdown, BrandLogo };
+export {
+  Navbar,
+  Sidebar,
+  Footer,
+  NavigationButton,
+  Ratings,
+  Searchbar,
+  GameLink,
+  SidebarLink,
+  SidebarDropdown,
+  BrandLogo,
+  HamburgerMenu,
+};

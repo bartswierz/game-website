@@ -18,13 +18,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/svg" href="../app/SiteLogo.svg" sizes="32x32" />
       </head>
       <body className={`${inter.className} bg-gray-900`}>
-        {/* <ReduxProvider>{children}</ReduxProvider> */}
         {/* Wrapping children & layout components to have access to our REDUX STORE */}
         <ReduxProvider>
           <Navbar />
           <div className="flex">
             <Sidebar />
-            <main className="container p-5 border-4 w-full">{children}</main>
+            <main className="container p-5 border w-full">{children}</main>
           </div>
           <Footer />
         </ReduxProvider>

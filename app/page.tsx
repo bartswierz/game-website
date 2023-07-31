@@ -29,10 +29,10 @@ export default async function Home() {
         <div>HOME PAGE</div>
         {/* RENDER GAMES HERE FOR HOME PAGE */}
         {/* TESTING PURPOSES */}
-        <LogIn />
+        {/* <LogIn />
 
         <h1>Username: {username}</h1>
-        {isModerator && <h1>This user is a moderator</h1>}
+        {isModerator && <h1>This user is a moderator</h1>} */}
       </div>
     </main>
   );

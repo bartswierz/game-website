@@ -3,7 +3,6 @@ import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { useRouter } from "next/navigation";
 /*
-TODO - add user interactivity such as form, search type options, etc.
 TODO - BUILD FORM TO COLLECT USER INPUT AND PASS IT TO THE RAWG API UPON SUBMIT
 REQUIREMENTS: FORM must specify the following:
   - Search Type (Game, Genre, Platform, etc.)
@@ -34,7 +33,7 @@ const Searchbar = () => {
   };
 
   return (
-    <div className="max-w-[1000px]- max-w-[50vw] mx-auto w-full border">
+    <div className="max-w-[50vw] w-full mx-auto ">
       <form onSubmit={handleSearch} className="max-w-1/2 flex flex-[50%] p-2 gap-2 w-full- min-w-[150px] justify-center">
         <label htmlFor="search" className="relative w-full flex flex-row transition-colors duration-500 ease-in-out group">
           <input
