@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Footer, Navbar, Sidebar } from "@/components/ui";
+import { ReduxProvider } from "@/redux/features/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,23 +18,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/svg" href="../app/SiteLogo.svg" sizes="32x32" />
       </head>
       <body className={`${inter.className} bg-gray-900`}>
-        {/* Navigation Component here */}
-        <Navbar />
-        <div className="flex">
-          {/* <div className="w-[400px] bg-gray-red">-</div> */}
-          {/* <div className=" bg-red-500 md:hidden"></div> */}
-          {/* <div className="md:w-full"> */}
-          <Sidebar />
-          {/* </div> */}
-          {/* <main className="p-5 md:ml-72 border">{children}</main> */}
-          {/* <div className="w-2/3- justify-end mx-auto"> */}
-          {/* <main className="md:ml-12 p-5 border bg-gray-400 md:w-[82%] max-w-[1000px]">{children}</main> */}
-          <main className="container p-5 border-4 w-full">{children}</main>
-          {/* </div> */}
-        </div>
-
-        {/* FOOTER */}
-        <Footer />
+        {/* <ReduxProvider>{children}</ReduxProvider> */}
+        {/* Wrapping children & layout components to have access to our REDUX STORE */}
+        <ReduxProvider>
+          <Navbar />
+          <div className="flex">
+            <Sidebar />
+            <main className="container p-5 border-4 w-full">{children}</main>
+          </div>
+          <Footer />
+        </ReduxProvider>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
       </body>
     </html>
