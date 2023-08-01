@@ -11,7 +11,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" />
+        {/* <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" /> */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -28,11 +28,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           <div className="flex">
             <Sidebar />
-            <main className="container p-5 border w-full">{children}</main>
+            <main className="container border w-full">{children}</main>
           </div>
           <Footer />
         </ReduxProvider>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script>
+        {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script> */}
       </body>
     </html>
   );

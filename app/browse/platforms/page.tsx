@@ -5,8 +5,6 @@ import { GamePlatforms } from "@/types";
 import { NavigationButton } from "@/components/ui";
 import GameLinkBasic from "@/components/ui/GameLinkBasic";
 
-// type Props = {};
-
 //{ params }: { params: { genres: string; page_size: number } }
 const Platforms = async () => {
   const [content, setContent] = useState<GamePlatforms | null>(null);
@@ -48,8 +46,6 @@ const Platforms = async () => {
       }
     }
   };
-
-  // const platformData: GamePlatforms = await getPlatforms();
 
   if (!content) return <div className="text-white">Loading...</div>;
 
