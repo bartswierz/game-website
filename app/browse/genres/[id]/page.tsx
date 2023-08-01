@@ -28,16 +28,6 @@ const GenrePage = async () => {
     if (searchID) fetchGenreInfo(searchID);
   }, [searchID]);
 
-  // const removeTags = (description: string): string[] => {
-  //   // Removes <p> & </p>
-  //   const removeParagraphTags = description.replace(/<\/?p>/g, "");
-
-  //   const replaceHex = removeParagraphTags.replace(/&#39;/g, "'");
-
-  //   const splitAtBreakTags = replaceHex.split("<br />");
-  //   return splitAtBreakTags;
-  // };
-
   return (
     <div className="border text-white">
       {genreInfo && (
@@ -56,12 +46,6 @@ const GenrePage = async () => {
           <ul key={genreInfo.id} className="p-2">
             <li>
               <h2 className="text-xl">Description:</h2>
-              {/* {removeTags(genreInfo.description).map((sentence, idx) => (
-                <p key={idx} className="my-2">
-                  {sentence}
-                </p>
-              ))} */}
-              {/* ADD SHOWMORE HERE */}
               <ShowMore text={genreInfo.description} />
             </li>
             <li>

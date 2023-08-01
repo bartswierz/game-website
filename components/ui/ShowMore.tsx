@@ -1,35 +1,37 @@
 "use client";
-import { useState } from "react";
+import { Key, useState } from "react";
 
 interface ShowMoreProps {
   text: string;
 }
-//TODO pass in text
+
 const ShowMore = ({ text }: ShowMoreProps) => {
   const [showText, setShowText] = useState(false);
-
-  console.log("text: ", text);
 
   //REMOVES TAGS AND OTHER UNWANTED TEXT FROM DESCRIPTION
   const formatText = (description: string): string[] => {
     // Removes <p> & </p>
-    const removeParagraphTags = description.replace(/<\/?p>/g, "");
+    const removeParagraphTags: string = description.replace(/<\/?p>/g, "");
 
-    const replaceHex = removeParagraphTags.replace(/&#39;/g, "'");
+    const replaceHex: string = removeParagraphTags.replace(/&#39;/g, "'");
 
-    const splitAtBreakTags = replaceHex.split("<br />");
+    const splitAtBreakTags: string[] = replaceHex.split("<br />");
     return splitAtBreakTags;
   };
 
-  //TODO - REMOVE TAGS HERE THEN PASS TO RETURN
-  console.log("before: ", text);
-  const formattedText: string[] = formatText(text);
-  console.log("after: ", formattedText);
+  // List because some descriptions fetched from API may have multiple paragraphs
+  const formattedTextList: string[] = formatText(text);
 
-  //DESTRUCTURE
-  // return <p>{description} TEST</p>;
-  // return <p>{description} TEST</p>;
-  return <p>Text</p>;
+  return (
+    <div>
+      {showText
+        ? formattedTextList.map((paragraph, idx: Key) => <p key={idx}>{paragraph}</p>)
+        : `${formattedTextList[0].slice(0, 350)}...`}
+      <button className="bg-gray-200 text-gray-700 text-xs rounded p-1 hover:bg-gray-300" onClick={() => setShowText(!showText)}>
+        {showText ? "Show less" : "Show more"}
+      </button>
+    </div>
+  );
 };
 
 export default ShowMore;
