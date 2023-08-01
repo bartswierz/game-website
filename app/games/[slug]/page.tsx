@@ -267,7 +267,6 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
                   className="bg-gray-200 text-gray-500 text-sm font-semibold rounded-md py-1 px-2 hover:bg-gray-300 w-max"
                   key={id}
                 >
-                  {/* {url} */}
                   {getStoreNameById(store_id)}
                 </Link>
               ))}

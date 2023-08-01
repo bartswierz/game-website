@@ -5,6 +5,7 @@ import { GenreInfo } from "@/types";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ShowMore } from "@/components/ui";
 
 // const GenrePage = async ({ params }: { params: { slug: string; query: { id: string } } }) => {
 const GenrePage = async () => {
@@ -27,39 +28,41 @@ const GenrePage = async () => {
     if (searchID) fetchGenreInfo(searchID);
   }, [searchID]);
 
-  const removeTags = (description: string): string[] => {
-    // Removes <p> & </p>
-    const removeParagraphTags = description.replace(/<\/?p>/g, "");
+  // const removeTags = (description: string): string[] => {
+  //   // Removes <p> & </p>
+  //   const removeParagraphTags = description.replace(/<\/?p>/g, "");
 
-    const replaceHex = removeParagraphTags.replace(/&#39;/g, "'");
+  //   const replaceHex = removeParagraphTags.replace(/&#39;/g, "'");
 
-    const splitAtBreakTags = replaceHex.split("<br />");
-    return splitAtBreakTags;
-  };
-  // const genreInfo: GenreInfo = await getGenreInfo(searchID);
-
-  // console.log("genreInfo: ", genreInfo);
-  // console.log("Genre search ID: ", search);
-  // console.log("Genre params: ", params.query.id);
+  //   const splitAtBreakTags = replaceHex.split("<br />");
+  //   return splitAtBreakTags;
+  // };
 
   return (
     <div className="border text-white">
-      <div>APP - GENRES PAGE - INFO PASSED BELOW2</div>
       {genreInfo && (
         <div>
+          {/* IMAGE BACKGROUND */}
           <div>
             <Image src={genreInfo.image_background} width={300} height={300} alt="Genre" />
           </div>
+
+          {/* PLATFORMS HEADER */}
+          <h1>
+            <span className="text-4xl font-semibold">{genreInfo.name}</span>{" "}
+            <span className="text-gray-500 text-base">{genreInfo.games_count}+ Games</span>
+          </h1>
+
           <ul key={genreInfo.id} className="p-2">
-            <li>{genreInfo.name}</li>
-            <li>Total Games: {genreInfo.games_count}</li>
             <li>
               <h2 className="text-xl">Description:</h2>
-              {removeTags(genreInfo.description).map((sentence, idx) => (
+              {/* {removeTags(genreInfo.description).map((sentence, idx) => (
                 <p key={idx} className="my-2">
                   {sentence}
                 </p>
-              ))}
+              ))} */}
+              {/* ADD SHOWMORE HERE */}
+              <ShowMore text={genreInfo.description} />
             </li>
             <li>
               {/* NAVIGATES USER TO INDIVIDUAL GENRE PAGE - ex. /genres/action */}
@@ -68,9 +71,8 @@ const GenrePage = async () => {
                   pathname: `/genres/${genreInfo.name.toLowerCase()}`,
                   query: { genres: `${genreInfo.name.toLowerCase()}`, page_size: 6 },
                 }}
-                className="underline"
+                className="bg-gray-200 text-gray-500 text-sm font-semibold rounded-md py-1 px-2 hover:bg-gray-300 w-max"
               >
-                {/* <Link href={`/genres/?genres=${genreInfo.name.toLowerCase()}`} className="underline"> */}
                 View {genreInfo.name} Games
               </Link>
             </li>

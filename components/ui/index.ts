@@ -10,6 +10,8 @@ import SidebarLink from "./SidebarLink";
 import SidebarDropdown from "./SidebarDropdown";
 import BrandLogo from "./BrandLogo";
 import HamburgerMenu from "./HamburgerMenu";
+import ShowMore from "./ShowMore";
+
 // Export all components as a single object for cleaner imports in other files
 export {
   Navbar,
@@ -23,4 +25,5 @@ export {
   SidebarDropdown,
   BrandLogo,
   HamburgerMenu,
+  ShowMore,
 };
