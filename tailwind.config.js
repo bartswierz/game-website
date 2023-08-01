@@ -17,7 +17,14 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    fontSize: {
+      xxs: "0.625rem",
+    },
     extend: {
+      screens: {
+        xxsm: "320px",
+        xsm: "480px",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
