@@ -87,7 +87,7 @@ export const getGameDevelopers = async (): Promise<GameDevelopers> => {
   // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
   console.log("private key: ", process.env.RAWG_API_KEY);
 
-  const res = await fetch(`https://api.rawg.io/api/developers?key=${process.env.RAWG_API_KEY}`);
+  const res = await fetch(`https://api.rawg.io/api/developers?key=${process.env.RAWG_API_KEY}&page_size=6`);
   // const res = await fetch(`https://api.rawg.io/api/developers?key=${key}`);
 
   if (!res.ok) {
