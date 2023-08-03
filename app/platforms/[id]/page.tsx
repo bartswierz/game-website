@@ -118,18 +118,18 @@ const PlatformPage = () => {
   if (!content) return <div className="text-white">Loading...</div>;
 
   return (
-    <div className="text-white ">
+    <div className="text-white">
       <p>SEARCH PARAMS ID: {searchParamsID}</p>
       <div>
         <p># Of Platforms: {content.count}</p>
-        <p>Next: {content.next}</p>
-        <p>Previous: {content.previous}</p>
+        {/* <p>Next: {content.next}</p> */}
+        {/* <p>Previous: {content.previous}</p> */}
 
         <div className="flex flex-col gap-y-4">
           {content.results.map((game) => (
-            <div key={game.slug} className="border flex flex-row">
+            <div key={game.slug} className="flex flex-col max-w-[500px] rounded-xl overflow-hidden bg-gray-800">
               {/* GAME IMAGE */}
-              <div className="w-64 h-64">
+              <div className="w-64- h-64-">
                 <Image
                   src={game.background_image}
                   width={200}
@@ -140,48 +140,34 @@ const PlatformPage = () => {
               </div>
 
               {/* TEXT CONTAINER */}
-              <div className="w-full p-4">
-                <h2 className="text-xl pb-2">{game.name}</h2>
-                {/* <p>Slug: {game.slug}</p> */}
-                {/* <p className="flex flex-row"> */}
+              <div className="text-center p-4">
+                <h2 className="text-xl pb-2 font-bold">{game.name}</h2>
 
-                <div className="flex flex-col content-between justify-between h-3/4 ">
-                  {/* AVAILABLE PLATFORMS */}
-                  <div className="flex flex-row flex-wrap gap-x-2">
-                    <h2>Available for: </h2>
-                    {game.platforms.map(({ platform }) => (
-                      <div className="flex flex-col items-center justify-center" key={platform.id}>
-                        <span> {platform.name}</span>
-                      </div>
-                    ))}
-                  </div>
-
+                <div className="flex flex-col gap-y-4 p-2">
                   {/* AVAILABLE STORES */}
-                  <div className="flex justify-between items-center">
-                    <div className="flex flex-row gap-x-2 items-center">
-                      <h2>Stores: </h2>
-                      {game.stores ? (
-                        game.stores.map(({ store }) => (
-                          <Link
-                            href={getPlatformStoreLink(store.slug)}
-                            target="_blank"
-                            className="flex flex-col items-center p-3 border border-blue-500 hover:bg-gray-700 rounded-full ring-1"
-                            key={store.id}
-                          >
-                            {getPlatformIcon(store.slug)}
-                            {/* <span>{store.store.name}</span> */}
-                          </Link>
-                        ))
-                      ) : (
-                        <p>Currently Unavailable...</p>
-                      )}
-                    </div>
+                  {game.stores ? (
+                    game.stores.map(({ store }) => (
+                      <Link
+                        href={getPlatformStoreLink(store.slug)}
+                        target="_blank"
+                        className="flex gap-x-2 items-center justify-center py-2 border border-blue-500 hover:bg-gray-700 rounded-full hover:ring-2"
+                        key={store.id}
+                      >
+                        {getPlatformIcon(store.slug)}
+                        <span>{store.name}</span>
+                      </Link>
+                    ))
+                  ) : (
+                    <p>Currently Unavailable...</p>
+                  )}
 
-                    {/* NAVIGATES USER TO GAMES PAGE -> i.e.) http://localhost:3000/games/marvels-spider-man */}
-                    <Link href={`/games/${game.slug}`} className="underline text-lg hover:text-blue-500">
-                      See Game Details
-                    </Link>
-                  </div>
+                  {/* NAVIGATES USER TO GAMES PAGE -> i.e.) http://localhost:3000/games/marvels-spider-man */}
+                  <Link
+                    href={`/games/${game.slug}`}
+                    className="flex justify-center items-center rounded-full underline- text-lg hover:text-blue-500 border  bg-gray-300 text-gray-700 px-2 py-1  max-w-1/2"
+                  >
+                    See Game Details
+                  </Link>
                 </div>
               </div>
             </div>
