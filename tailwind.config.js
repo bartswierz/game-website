@@ -10,21 +10,29 @@ module.exports = {
   ],
   theme: {
     // extend: {},
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
-    fontSize: {
-      xxs: "0.625rem",
-    },
+
     extend: {
       screens: {
         xxsm: "320px",
         xsm: "480px",
       },
+      fontSize: {
+        xxs: "0.625rem",
+        // xs: "0.75rem",
+        // sm: "0.875rem",
+        // base: "1rem",
+        // lg: "1.125rem",
+        // xl: "1.25rem",
+        // "2xl": "1.5rem",
+        // "3xl": "1.875rem",
+      },
+      // container: {
+      //   center: true,
+      //   padding: "2rem",
+      //   screens: {
+      //     "2xl": "1400px",
+      //   },
+      // },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -28,7 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           <div className="flex">
             <Sidebar />
-            <main className="container border w-full">{children}</main>
+            <main className="container mx-auto m-6 px-4 p-8- border border-blue-500 w-full">{children}</main>
           </div>
           <Footer />
         </ReduxProvider>

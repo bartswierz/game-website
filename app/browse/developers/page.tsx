@@ -1,18 +1,16 @@
 "use client";
 import { getGameDevelopers, getNextGameDevelopersPage, getPage } from "@/utils";
 import React, { useState, useEffect } from "react";
-import { GameLink, NavigationButton } from "@/components/ui";
-import Image from "next/image";
+import { NavigationButton } from "@/components/ui";
 import { GameDevelopers, GameDevelopersResults } from "@/types";
-// import { useRouter } from "next/navigation";
-import Link from "next/link";
-// import { BsFillArrowRightCircleFill } from "react-icons/bs";
-import { BsBoxArrowRight } from "react-icons/bs";
 import GameLinkBasic from "@/components/ui/GameLinkBasic";
+import Image from "next/image";
+
 const Developers = () => {
   // const router = useRouter();
   const [content, setContent] = useState<GameDevelopers | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const maxLimit = 3;
 
   // Ran once on page load
   useEffect(() => {
@@ -57,15 +55,17 @@ const Developers = () => {
 
   // Once data is ready to display
   return (
-    <div className="text-white">
-      <div>GAME DEVELOPERS INFORMATION</div>
-      <div># of Developers: {content.count}</div>
-      <div># of Pages: {Math.ceil(content.count / 10)}</div>
+    <div className="text-white border-4">
+      <div className="text-4xl font-bold">
+        DEVELOPERS <span className="text-sm text-gray-500">{content.count}+ Developers</span>
+      </div>
+
+      <div># of Pages: {Math.ceil(content.count / 6)}</div>
       <div>next: {content.next}</div>
       <div>previous: {content.previous}</div>
 
       <div className="my-5">
-        {/* PREVIOUS BUTTON */}
+        {/* PREVIOUS BUTTON - IF NULL - FADED*/}
         {content.previous ? (
           <NavigationButton
             text="Prev"
@@ -75,6 +75,7 @@ const Developers = () => {
             active={`${content.previous === null ? "inactive" : "active"}`}
           />
         ) : (
+          // NULL - NO PREVIOUS PAGE AVAILABLE
           <NavigationButton
             text="Prev"
             request={null}
@@ -99,10 +100,16 @@ const Developers = () => {
         />
       </div>
 
-      <div className="flex flex-row flex-wrap gap-y-10">
-        {/* {content.results.map(({ id, name, slug, image_background }: GameDevelopersResults) => { */}
+      <div className="flex flex-wrap gap-10">
+        {/* slice will return 3 DEVELOPERS instead of 6 DEVELOPERS */}
         {content.results.map(({ id, name, games_count, games }: GameDevelopersResults) => {
-          return <GameLinkBasic id={id} name={name} games_count={games_count} games={games} />;
+          // games.slice(0, 3) will return 3 GAMES instead of 6 GAMES
+          // TODO - FIX THIS - CENTER THE GAMES - ADD A SEE MORE BUTTON IN THE FOURTH POSITION, WHICH WILL DISP
+          return (
+            <div key={id}>
+              <GameLinkBasic id={id} name={name} games_count={games_count} games={games} />
+            </div>
+          );
         })}
       </div>
     </div>
