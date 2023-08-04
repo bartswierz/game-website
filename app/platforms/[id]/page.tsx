@@ -121,11 +121,11 @@ const PlatformPage = () => {
     <div className="text-white">
       <p>SEARCH PARAMS ID: {searchParamsID}</p>
       <div>
-        <p># Of Platforms: {content.count}</p>
+        <p>Results: {content.count}</p>
         {/* <p>Next: {content.next}</p> */}
         {/* <p>Previous: {content.previous}</p> */}
 
-        <div className="flex flex-col gap-y-4">
+        <div className="flex flex-col- flex-row flex-wrap gap-y-4- gap-4 h-max">
           {content.results.map((game) => (
             <div key={game.slug} className="flex flex-col max-w-[500px] rounded-xl overflow-hidden bg-gray-800">
               {/* GAME IMAGE */}
