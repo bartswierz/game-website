@@ -125,11 +125,11 @@ const PlatformPage = () => {
         {/* <p>Next: {content.next}</p> */}
         {/* <p>Previous: {content.previous}</p> */}
 
-        <div className="flex flex-col- flex-row flex-wrap gap-y-4- gap-4 h-max">
+        <div className="flex flex-row flex-wrap gap-4 border justify-center">
           {content.results.map((game) => (
-            <div key={game.slug} className="flex flex-col max-w-[500px] rounded-xl overflow-hidden bg-gray-800">
+            <div key={game.slug} className="flex flex-col max-w-[500px] rounded-xl overflow-hidden bg-gray-800 w-72 h-max">
               {/* GAME IMAGE */}
-              <div className="w-64- h-64-">
+              <div className="w-72 h-48  ">
                 <Image
                   src={game.background_image}
                   width={200}
@@ -164,7 +164,7 @@ const PlatformPage = () => {
                   {/* NAVIGATES USER TO GAMES PAGE -> i.e.) http://localhost:3000/games/marvels-spider-man */}
                   <Link
                     href={`/games/${game.slug}`}
-                    className="flex justify-center items-center rounded-full underline- text-lg hover:text-blue-500 border  bg-gray-300 text-gray-700 px-2 py-1  max-w-1/2"
+                    className="flex justify-center items-center font-semibold rounded-full text-lg hover:bg-gray-400 border  bg-gray-300 text-gray-700 px-2 py-1  max-w-1/2"
                   >
                     See Game Details
                   </Link>
