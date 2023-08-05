@@ -18,7 +18,7 @@ const PlatformPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getGamesByPlatform(searchParamsID);
+      const data: GamesByPlatform = await getGamesByPlatform(searchParamsID);
       setContent(data);
     };
 
@@ -125,7 +125,7 @@ const PlatformPage = () => {
         {/* <p>Next: {content.next}</p> */}
         {/* <p>Previous: {content.previous}</p> */}
 
-        <div className="flex flex-row flex-wrap gap-4 border justify-center">
+        <div className="flex flex-row flex-wrap gap-4 justify-center">
           {content.results.map((game) => (
             <div key={game.slug} className="flex flex-col max-w-[500px] rounded-xl overflow-hidden bg-gray-800 w-72 h-max">
               {/* GAME IMAGE */}

@@ -115,20 +115,19 @@ const GenrePage = async () => {
         />
       </div>
 
-      <div className="">
-        {content && (
-          <div>
-            <ul className="flex flex-row flex-wrap gap-4">
-              {content.results.map(({ slug, name, background_image }) => (
-                // Creates a Game Display for each game in the list as a link to the game page
-                <li key={slug}>
-                  <GameLink slug={slug} name={name} background_image={background_image} />
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+      {content && (
+        <div className="border border-green-500">
+          {/* <ul className="flex flex-row flex-wrap gap-4"> */}
+          <ul className="grid grid-cols-1 px-2 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-auto gap-4 ">
+            {content.results.map(({ slug, name, background_image }) => (
+              // Creates a Game Display for each game in the list as a link to the game page
+              <li key={slug} className="h-64">
+                <GameLink slug={slug} name={name} background_image={background_image} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

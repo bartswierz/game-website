@@ -12,18 +12,25 @@ interface GameLinkProps {
 const GameLink = ({ slug, name, background_image }: GameLinkProps) => {
   // const { slug, name, background_image } = props;
 
+  //BACKGROUND IMAGE USING PASSED IMAGE URL & FALLBACK IMAGE IF NO IMAGE URL
+  const BackgroundImage = () => {
+    return background_image ? (
+      <Image src={background_image} width={300} height={300} alt="Game" className="w-full h-full object-cover" />
+    ) : (
+      <div className="flex justify-center items-center h-full">
+        <MdBrokenImage size={80} color="grey" />
+      </div>
+    );
+  };
+
   return (
-    <div className="cursor-pointer rounded-xl overflow-hidden">
-      <Link href={`/games/${slug}`} key={slug} className="cursor-pointer rounded-lg overflow-hidden">
+    // <div className="cursor-pointer rounded-xl overflow-hidden">
+    <div className="cursor-pointer rounded-xl overflow-hidden w-full h-full">
+      <Link href={`/games/${slug}`} key={slug} className="cursor-pointer rounded-lg overflow-hidden h-full">
         {/* <h2>{game.name}</h2> */}
-        <div className="w-80 h-80 relative">
-          {background_image ? (
-            <Image src={background_image} width={300} height={300} alt="Game" className="w-full h-full object-cover" />
-          ) : (
-            <div className="flex justify-center items-center h-full w-full">
-              <MdBrokenImage size={80} color="grey" />
-            </div>
-          )}
+        <div className="relative h-full">
+          <BackgroundImage />
+
           {/* GRADIENT BACKGROUND EFFECT */}
           <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
 
