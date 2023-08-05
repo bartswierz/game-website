@@ -74,10 +74,10 @@ const GenrePage = async () => {
       <div className="text-4xl font-semibold">GAME DEVELOPERS</div>
       <ul>
         <li># of Developers: {content.count}</li>
-        <li># of Pages: {Math.ceil(content.count / 10)}</li>
+        <li># of Pages: {Math.ceil(content.count / 12)}</li>
         {/* <li>next: {content.next}</li>
         <li>previous: {content.previous}</li> */}
-        <li># of Games Fetched: {content.results.length}</li>
+        {/* <li># of Games Fetched: {content.results.length}</li> */}
       </ul>
 
       <div className="my-5">
@@ -102,7 +102,7 @@ const GenrePage = async () => {
 
         {/* Page Counter */}
         <div className="inline-block px-4 py-2 m-1">
-          Page {currentPage} of {Math.ceil(content.count / 10)}
+          Page {currentPage} of {Math.ceil(content.count / 12)}
         </div>
 
         {/* NEXT BUTTON */}

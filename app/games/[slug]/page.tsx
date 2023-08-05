@@ -123,26 +123,42 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className="container">
-      <div className="border text-white flex flex-row flex-auto gap-8 max-w-[1200px]">
+      {/* <div className="border text-white flex flex-row flex-auto- gap-8 max-w-[1200px]"> */}
+      <div className="border text-white flex flex-row gap-8 max-w-[1500px]">
         {/* LEFT COLUMN */}
-        <div className="p-2 flex-[60]  w-1/3">
+        <div className="p-2 flex-[60]  w-1/3-">
           <div className="flex flex-col gap-4">
-            <div className="flex flex-wrap gap-2">
-              {/* RELEASED */}
-              <span className="bg-gray-200 text-gray-500 text-base font-semibold py-1 px-2 rounded-lg w-max">
-                Released {formattedReleasedDate}
-              </span>
+            <div className="border border-green-500">
+              <div className="flex flex-wrap gap-2">
+                {/* RELEASED */}
+                <span className="bg-gray-200 text-gray-500 text-base font-semibold py-1 px-2 rounded-lg w-max">
+                  Released {formattedReleasedDate}
+                </span>
 
-              {/* UPDATED */}
-              <span className="bg-gray-200 text-gray-500 text-base font-semibold py-1 px-2 rounded-lg w-max">
-                Updated {formattedUpdatedDate}
-              </span>
+                {/* UPDATED */}
+                <span className="bg-gray-200 text-gray-500 text-base font-semibold py-1 px-2 rounded-lg w-max">
+                  Updated {formattedUpdatedDate}
+                </span>
+              </div>
+
+              {/* GAME TITLE & GAME ID */}
+              <h2 className="text-4xl font-bold">
+                {name} <span className="text-gray-500 text-base">#{id}</span>
+              </h2>
             </div>
 
-            {/* GAME TITLE & GAME ID */}
-            <h2 className="text-4xl font-bold">
-              {name} <span className="text-gray-500 text-base">#{id}</span>
-            </h2>
+            {/* <div className=" border-2 "> */}
+            {/* <Image src={background_image} alt={name} width={300} height={200} /> */}
+
+            {/* SCREENSHOTS */}
+            <div className="grid grid-cols-1 xsm:grid-cols-2 gap-4 border border-green-500 block- lg:hidden">
+              {gameScreenshots.results.map(({ id, image }) => (
+                <div className="h-32">
+                  <Image src={image} alt={name} width={300} height={200} key={id} className="rounded-lg w-full h-full object-cover" />
+                </div>
+              ))}
+            </div>
+            {/* </div> */}
 
             {/* ABOUT/DESCRIPTION */}
             <h2 className="text-3xl font-bold">About</h2>
@@ -232,20 +248,36 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
               </div>
 
               {/* WEBSITE */}
-              <div>
+              <div className="w-full">
                 <h2 className="text-gray-500 font-semibold mb-2">Website(s)</h2>
-                <div className="flex flex-col gap-2">
-                  <Link href={website} className="underline" target="_blank">
-                    {website}
+                <div className="flex flex-wrap gap-2 pr-2 border border-green-500 overflow-clip- ">
+                  <Link
+                    href={website}
+                    className="overflow-ellipsis w-max px-2 py-1 text-sm font-semibold rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300"
+                    target="_blank"
+                  >
+                    {/* {website} */}
+                    Publisher Site
                   </Link>
 
-                  <Link href={reddit_url} target="_blank" className="underline">
-                    {reddit_url}
-                  </Link>
+                  {reddit_url && (
+                    <Link
+                      href={reddit_url}
+                      target="_blank"
+                      className="overflow-ellipsis w-max px-2 py-1 text-sm font-semibold rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300"
+                    >
+                      {reddit_url}
+                    </Link>
+                  )}
 
                   {metacritic_url && (
-                    <Link href={metacritic_url} className="underline" target="_blank">
-                      {metacritic_url}
+                    <Link
+                      href={metacritic_url}
+                      className="overflow-ellipsis w-max px-2 py-1 text-sm font-semibold rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      target="_blank"
+                    >
+                      {/* {metacritic_url} */}
+                      Metacritic Game Review
                     </Link>
                   )}
                 </div>
@@ -264,7 +296,7 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
                   href={url}
                   target="_blank"
                   // className=" text-gray-200 font-semibold text-base hover:text-slate-500"
-                  className="bg-gray-200 text-gray-500 text-sm font-semibold rounded-md py-1 px-2 hover:bg-gray-300 w-max"
+                  className="w-max text-sm font-semibold rounded-md py-1 px-2 bg-gray-200 text-gray-700 hover:bg-gray-300"
                   key={id}
                 >
                   {getStoreNameById(store_id)}
@@ -283,20 +315,19 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
           </div>
 
           {/* PLATFORM - REQUIREMENTS */}
-          <div>
+          {/* <div>
             <h2>Minimum Requirements</h2>
-            {/* <p>{platforms.requirements ? platforms.requirements : "N/A"}</p> */}
-          </div>
+            <p>{platforms.requirements ? platforms.requirements : "N/A"}</p>
+          </div> */}
         </div>
 
-        {/* RIGHT COLUMN */}
-        <div className="flex-[40] border-2 border-green-500">
-          {/* <Image src={background_image} alt={name} width={300} height={200} /> */}
-
-          {/* SCREENSHOTS */}
-          <div className="flex flex-row flex-wrap gap-4">
+        {/* SCREENSHOTS - RIGHT COLUMN */}
+        <div className="hidden lg:block flex-[30]">
+          <div className="grid grid-cols-1 3xl:grid-cols-2 gap-4">
             {gameScreenshots.results.map(({ id, image }) => (
-              <Image src={image} alt={name} width={300} height={200} key={id} className="rounded-lg" />
+              <div className="h-36 max-w-96">
+                <Image src={image} alt={name} width={300} height={200} key={id} className="rounded-lg w-full h-full object-cover" />
+              </div>
             ))}
           </div>
         </div>
