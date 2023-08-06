@@ -33,19 +33,17 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
     // <div className="border p-2">
     <div className="text-white">
       {/* <h2>Results for: {searchTerm}</h2> */}
-      <div>
-        {content && (
-          <div className="">
-            <ul className="flex flex-row flex-wrap gap-5">
-              {content.results.map(({ slug, name, background_image }) => (
-                <li key={slug}>
-                  <GameLink slug={slug} name={name} background_image={background_image} />
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+      {content && (
+        <div>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 px-4 md:px-0 gap-5">
+            {content.results.map(({ slug, name, background_image }) => (
+              <li key={slug} className="h-64 p-4">
+                <GameLink slug={slug} name={name} background_image={background_image} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

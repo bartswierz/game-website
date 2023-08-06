@@ -15,7 +15,9 @@ const GameLink = ({ slug, name, background_image }: GameLinkProps) => {
   //BACKGROUND IMAGE USING PASSED IMAGE URL & FALLBACK IMAGE IF NO IMAGE URL
   const BackgroundImage = () => {
     return background_image ? (
-      <Image src={background_image} width={300} height={300} alt="Game" className="w-full h-full object-cover" />
+      <div className="w-64">
+        <Image src={background_image} width={300} height={300} alt="Game" className="w-full h-full object-cover" />
+      </div>
     ) : (
       <div className="flex justify-center items-center h-full">
         <MdBrokenImage size={80} color="grey" />
@@ -27,7 +29,6 @@ const GameLink = ({ slug, name, background_image }: GameLinkProps) => {
     // <div className="cursor-pointer rounded-xl overflow-hidden">
     <div className="cursor-pointer rounded-xl overflow-hidden w-full h-full">
       <Link href={`/games/${slug}`} key={slug} className="cursor-pointer rounded-lg overflow-hidden h-full">
-        {/* <h2>{game.name}</h2> */}
         <div className="relative h-full">
           <BackgroundImage />
 

@@ -31,7 +31,7 @@ const GameLinkBasic = ({ id, name, games_count, games }: GameLinkBasicProps) => 
   };
 
   return (
-    <div key={id} className="z-40 h-max">
+    <div key={id} className="z-40 h-max max-w-[650px]">
       <h2 className="mb-6">
         <span className="text-3xl font-bold">{name}</span> <span className="text-gray-500 pl-1">{games_count}+ Games</span>
       </h2>

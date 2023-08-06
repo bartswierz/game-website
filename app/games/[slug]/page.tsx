@@ -124,11 +124,11 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
   return (
     <div className="container">
       {/* <div className="border text-white flex flex-row flex-auto- gap-8 max-w-[1200px]"> */}
-      <div className="border text-white flex flex-row gap-8 max-w-[1500px]">
+      <div className="text-white flex flex-row gap-8 max-w-[1500px]">
         {/* LEFT COLUMN */}
-        <div className="p-2 flex-[60]  w-1/3-">
-          <div className="flex flex-col gap-4">
-            <div className="border border-green-500">
+        <div className="p-4 flex-[60]">
+          <div className="flex flex-col gap-4 w-full">
+            <div>
               <div className="flex flex-wrap gap-2">
                 {/* RELEASED */}
                 <span className="bg-gray-200 text-gray-500 text-base font-semibold py-1 px-2 rounded-lg w-max">
@@ -151,7 +151,7 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
             {/* <Image src={background_image} alt={name} width={300} height={200} /> */}
 
             {/* SCREENSHOTS */}
-            <div className="grid grid-cols-1 xsm:grid-cols-2 gap-4 border border-green-500 block- lg:hidden">
+            <div className="grid grid-cols-1 xsm:grid-cols-2 gap-4 lg:hidden">
               {gameScreenshots.results.map(({ id, image }) => (
                 <div className="h-32">
                   <Image src={image} alt={name} width={300} height={200} key={id} className="rounded-lg w-full h-full object-cover" />
@@ -162,15 +162,15 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
 
             {/* ABOUT/DESCRIPTION */}
             <h2 className="text-3xl font-bold">About</h2>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 w-full">
               {descriptionText.map((sentence) => (
-                <p className="border">{sentence}</p>
+                <p>{sentence}</p>
               ))}
               {/* {description_raw} */}
             </div>
 
             {/* CONTAINER HOLDING: Platforms, Metascore, Genre, Release Date, Developer, Publisher, Age Rating, Other game in the series, Tags, Website */}
-            <div className="flex flex-row flex-wrap mt-8 border gap-4">
+            <div className="flex flex-row flex-wrap mt-8 gap-4">
               {/* PLATFORMS */}
               <div className="">
                 <h2 className="text-gray-500 font-semibold mb-2">Platforms</h2>
@@ -250,7 +250,7 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
               {/* WEBSITE */}
               <div className="w-full">
                 <h2 className="text-gray-500 font-semibold mb-2">Website(s)</h2>
-                <div className="flex flex-wrap gap-2 pr-2 border border-green-500 overflow-clip- ">
+                <div className="flex flex-wrap gap-2 pr-2 ">
                   <Link
                     href={website}
                     className="overflow-ellipsis w-max px-2 py-1 text-sm font-semibold rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -266,7 +266,8 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
                       target="_blank"
                       className="overflow-ellipsis w-max px-2 py-1 text-sm font-semibold rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300"
                     >
-                      {reddit_url}
+                      {/* {reddit_url} */}
+                      Reddit Game Discussion
                     </Link>
                   )}
 
@@ -306,13 +307,13 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
           </div>
 
           {/* RATING */}
-          <div>
+          {/* <div>
             <li>
               Rating: {rating} ({ratings_count})
             </li>
 
             <Ratings averageRating={rating} ratingsList={ratings} ratingsCount={ratings_count} />
-          </div>
+          </div> */}
 
           {/* PLATFORM - REQUIREMENTS */}
           {/* <div>
