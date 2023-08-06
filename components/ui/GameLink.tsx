@@ -15,7 +15,7 @@ const GameLink = ({ slug, name, background_image }: GameLinkProps) => {
   //BACKGROUND IMAGE USING PASSED IMAGE URL & FALLBACK IMAGE IF NO IMAGE URL
   const BackgroundImage = () => {
     return background_image ? (
-      <div className="w-64">
+      <div className="w-full h-full">
         <Image src={background_image} width={300} height={300} alt="Game" className="w-full h-full object-cover" />
       </div>
     ) : (

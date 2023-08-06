@@ -116,7 +116,7 @@ const GenrePage = async () => {
       </div>
 
       {content && (
-        <div className="border border-green-500">
+        <div>
           {/* <ul className="flex flex-row flex-wrap gap-4"> */}
           <ul className="grid grid-cols-1 px-2 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-auto gap-4 ">
             {content.results.map(({ slug, name, background_image }) => (
