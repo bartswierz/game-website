@@ -29,7 +29,7 @@ const GenrePage = async () => {
   }, [searchID]);
 
   return (
-    <div className="flex- justify-center- max-w-[1200px] text-white border border-slate-600 bg-slate-800 rounded-lg overflow-hidden">
+    <div className="max-w-[1200px] text-white border border-slate-600 bg-slate-800 rounded-lg overflow-hidden mx-4 lg:mx-0">
       <div>
         {genreInfo && (
           <div className="flex flex-col lg:flex-row">
