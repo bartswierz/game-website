@@ -29,12 +29,12 @@ const GenrePage = async () => {
   }, [searchID]);
 
   return (
-    <div className="max-w-[1200px] text-white border border-slate-600 bg-slate-800 rounded-lg overflow-hidden mx-4 lg:mx-0">
+    <div className="max-w-[1200px] text-white bg-slate-800 rounded-lg overflow-hidden mx-4 lg:mx-0">
       <div>
         {genreInfo && (
           <div className="flex flex-col lg:flex-row">
             {/* IMAGE BACKGROUND */}
-            <div className="w-full border">
+            <div className="w-full min-w-[348px]">
               <Image src={genreInfo.image_background} width={300} height={300} alt="Genre" className="w-full h-full object-cover" />
             </div>
 
