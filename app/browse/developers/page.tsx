@@ -58,7 +58,7 @@ const Developers = () => {
         DEVELOPERS <span className="text-sm text-gray-500">{content.count} Developers</span>
       </div>
 
-      <div># of Pages: {Math.ceil(content.count / 6)}</div>
+      {/* <div># of Pages: {Math.ceil(content.count / 6)}</div> */}
       {/* <div className="truncate">next: {content.next}</div> */}
       {/* <div>previous: {content.previous}</div> */}
 
