@@ -11,7 +11,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        {/* <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.css" rel="stylesheet" /> */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link
@@ -21,7 +20,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" type="image/svg" href="../app/SiteLogo.svg" sizes="32x32" />
       </head>
       {/* <body className={`${inter.className} bg-gray-900`}> */}
-      {/* <body className={`${poppins.variable} bg-gray-900`}> */}
       <body className={`bg-gray-900`}>
         {/* Wrapping children & layout components to have access to our REDUX STORE */}
         <ReduxProvider>
@@ -32,7 +30,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
           <Footer />
         </ReduxProvider>
-        {/* <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.7.0/flowbite.min.js"></script> */}
       </body>
     </html>
   );
