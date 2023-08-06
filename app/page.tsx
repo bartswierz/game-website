@@ -1,11 +1,12 @@
 // "use client";
 
 import { getGames } from "@/utils";
+import Image from "next/image";
 // import { GameDataProps } from "@/types";
 
 export default async function Home() {
-  const gameData = await getGames();
-  const games = await getGames();
+  // const gameData = await getGames();
+  // const games = await getGames();
   // console.log("games", games);
 
   return (
@@ -13,7 +14,11 @@ export default async function Home() {
     <main>
       <div className="text-white">
         <div>HOME PAGE</div>
-        <div>{games.map((game) => game.background_image)}</div>
+        {/* <div>
+          {games.map((game) => (
+            <Image src={game.background_image} width={300} height={300} alt="Game Display" />
+          ))}
+        </div> */}
       </div>
     </main>
   );
