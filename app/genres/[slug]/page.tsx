@@ -72,8 +72,12 @@ const GenrePage = async () => {
   return (
     <div className="text-white mx-4 xsm:mx-0">
       {/* <div className="text-4xl font-semibold">GAME DEVELOPERS</div> */}
-      <div className="text-4xl font-semibold">
+      {/* <div className="text-4xl font-semibold">
         {searchGenreID?.toUpperCase()} GAMES<span className="text-base text-gray-500 ml-2">{content.count}+ Games</span>
+      </div> */}
+      <div className="text-4xl font-semibold uppercase flex flex-wrap">
+        {searchGenreID} GAMES
+        <span className="text-base text-gray-500 ml-2 items-end self-end justify-end">{content.count}+ Games</span>
       </div>
       <ul>
         {/* <li># of Developers: {content.count}</li> */}

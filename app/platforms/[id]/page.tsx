@@ -119,9 +119,13 @@ const PlatformPage = () => {
 
   return (
     <div className="text-white">
-      <p>SEARCH PARAMS ID: {searchParamsID}</p>
+      {/* <div className="text-4xl font-semibold mb-6 flex flex-col xsm:flex-row items-end"> */}
+      <div className="text-4xl font-semibold mb-6 flex">
+        <span>PLATFORM GAMES</span>
+        <span className="text-base text-gray-500 ml-2 text-end">{content.count}+ Games</span>
+      </div>
       <div>
-        <p>Results: {content.count}</p>
+        {/* BELOW ARE FOR DEVELOPING PURPOSES */}
         {/* <p>Next: {content.next}</p> */}
         {/* <p>Previous: {content.previous}</p> */}
 
