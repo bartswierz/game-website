@@ -1,7 +1,7 @@
 "use client";
 import { useInView } from "react-intersection-observer";
 import { useState, useEffect } from "react";
-import { fetchNextPagePlatforms } from "@/utils";
+import { fetchNextPagePlatformGames } from "@/utils";
 import Image from "next/image";
 import { GamesByPlatform, GamesByPlatformResults } from "@/types";
 import { Spinner } from "@/components/ui";
@@ -12,7 +12,7 @@ interface LoadMoreProps {
   searchQuery: string;
 }
 // Button that will render another page of results to the screen when clicked once the user reaches the bottom of the page
-const LoadMore = ({ searchQuery }: LoadMoreProps) => {
+const LoadMorePlatform = ({ searchQuery }: LoadMoreProps) => {
   const [pagesLoaded, setPagesLoaded] = useState<number>(1);
   const [content, setContent] = useState<GamesByPlatformResults[]>([]);
 
@@ -31,7 +31,7 @@ const LoadMore = ({ searchQuery }: LoadMoreProps) => {
     const nextPage = pagesLoaded + 1;
 
     try {
-      const fetchedContent: GamesByPlatform = await fetchNextPagePlatforms(nextPage, searchQuery);
+      const fetchedContent: GamesByPlatform = await fetchNextPagePlatformGames(nextPage, searchQuery);
       const { results } = fetchedContent;
 
       // Add the new results to the existing content towards the bottom of the page
@@ -111,4 +111,4 @@ const LoadMore = ({ searchQuery }: LoadMoreProps) => {
   );
 };
 
-export default LoadMore;
+export default LoadMorePlatform;

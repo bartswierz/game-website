@@ -11,7 +11,8 @@ import SidebarDropdown from "./SidebarDropdown";
 import BrandLogo from "./BrandLogo";
 import HamburgerMenu from "./HamburgerMenu";
 import ShowMore from "./ShowMore";
-import LoadMorePlatform from "./LoadMorePlatform";
+import LoadMorePlatformGames from "./LoadMorePlatformGames";
+import LoadMoreGenreGames from "./LoadMoreGenreGames";
 import Spinner from "./Spinner";
 // Export all components as a single object for cleaner imports in other files
 export {
@@ -27,6 +28,7 @@ export {
   BrandLogo,
   HamburgerMenu,
   ShowMore,
-  LoadMorePlatform,
+  LoadMorePlatformGames,
+  LoadMoreGenreGames,
   Spinner,
 };

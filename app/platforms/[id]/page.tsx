@@ -8,7 +8,7 @@ import { FaSteam, FaPlaystation, FaXbox, FaApple, FaGooglePlay } from "react-ico
 import { SiNintendo, SiGogdotcom, SiItchdotio, SiEpicgames, SiNintendoswitch } from "react-icons/si";
 import { PiDesktopTowerDuotone } from "react-icons/pi";
 import { BsAndroid2 } from "react-icons/bs";
-import { LoadMorePlatform } from "@/components/ui";
+import { LoadMorePlatformGames } from "@/components/ui";
 import Link from "next/link";
 
 export const getPlatformStoreLink = (storeSlug: string) => {
@@ -115,12 +115,6 @@ const PlatformPage = () => {
     if (searchParamsID) fetchData();
   }, []);
 
-  // console.log("searchParams in platform page: ", searchParamsID);
-
-  const testComponent = () => {
-    return <div>Test</div>;
-  };
-
   if (!content) return <div className="text-white">Loading...</div>;
 
   return (
@@ -186,7 +180,7 @@ const PlatformPage = () => {
         </div>
 
         {/* LOADING ICON AT THE BOTTOM */}
-        {searchParamsID && <LoadMorePlatform searchQuery={searchParamsID} />}
+        {searchParamsID && <LoadMorePlatformGames searchQuery={searchParamsID} />}
       </div>
     </div>
   );
