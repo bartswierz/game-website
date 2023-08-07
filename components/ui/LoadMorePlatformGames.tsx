@@ -6,7 +6,10 @@ import Image from "next/image";
 import { GamesByPlatform, GamesByPlatformResults } from "@/types";
 import { Spinner } from "@/components/ui";
 import Link from "next/link";
-import { getPlatformIcon, getPlatformStoreLink } from "@/app/platforms/[id]/page";
+import { FaSteam, FaPlaystation, FaXbox, FaApple, FaGooglePlay } from "react-icons/fa";
+import { SiNintendo, SiGogdotcom, SiItchdotio, SiEpicgames, SiNintendoswitch } from "react-icons/si";
+import { PiDesktopTowerDuotone } from "react-icons/pi";
+import { BsAndroid2 } from "react-icons/bs";
 
 interface LoadMoreProps {
   searchQuery: string;
@@ -25,6 +28,95 @@ const LoadMorePlatform = ({ searchQuery }: LoadMoreProps) => {
       loadMorePages();
     }
   }, [inView]);
+
+  const getPlatformStoreLink = (storeSlug: string): string => {
+    switch (storeSlug.toLowerCase()) {
+      case "steam":
+        return "https://store.steampowered.com/";
+      case "xbox-store":
+        return "https://www.microsoft.com/";
+      case "xbox360":
+        return "https://marketplace.xbox.com/";
+      case "xbox-one":
+        return "https://www.microsoft.com/";
+      case "xbox-series-x":
+        return "https://www.microsoft.com/";
+      case "playstation-store":
+        return "https://store.playstation.com/";
+      case "playstation5":
+        return "https://store.playstation.com/";
+      case "playstation4":
+        return "https://store.playstation.com/";
+      case "playstation3":
+        return "https://store.playstation.com/";
+      case "apple-appstore":
+        return "https://www.apple.com/";
+      case "gog":
+        return "https://www.gog.com/";
+      case "nintendo":
+        return "https://www.nintendo.com/";
+      case "nintendo-switch":
+        return "https://www.nintendo.com/";
+      case "google-play":
+        return "https://play.google.com/";
+      case "itch.io":
+        return "https://itch.io/";
+      case "epic-games":
+        return "https://store.epicgames.com/";
+      default:
+        return "N/A";
+    }
+  };
+
+  // // Pass in a slug and return the appropriate icon
+  const getPlatformIcon = (storeSlug: string) => {
+    // console.log("companyDescription passed:", companyDescription);
+    const size = 20;
+    switch (storeSlug.toLowerCase()) {
+      case "steam":
+        return <FaSteam size={size} />;
+      case "xbox-store":
+        return <FaXbox size={size} />;
+      case "xbox360":
+        return <FaXbox size={size} />;
+      case "xbox-one":
+        return <FaXbox size={size} />;
+      case "xbox-series-x":
+        return <FaXbox size={size} />;
+      case "playstation-store":
+        return <FaPlaystation size={size} />;
+      case "playstation5":
+        return <FaPlaystation size={size} />;
+      case "playstation4":
+        return <FaPlaystation size={size} />;
+      case "playstation3":
+        return <FaPlaystation size={size} />;
+      case "apple-appstore":
+        return <FaApple size={size} />;
+      case "android":
+        return <BsAndroid2 size={size} />;
+      case "gog":
+        return <SiGogdotcom size={size} />;
+      case "nintendo":
+        return <SiNintendo size={size} />;
+      case "nintendo-switch":
+        return <SiNintendoswitch size={size} />;
+      case "google-play":
+        return <FaGooglePlay size={size} />;
+      case "itch.io":
+        return <SiItchdotio size={size} />;
+      case "epic-games":
+        return <SiEpicgames size={size} />;
+      case "pc":
+        return <PiDesktopTowerDuotone size={size} />;
+      case "macos":
+        return <PiDesktopTowerDuotone size={size} />;
+      case "linux":
+        return <PiDesktopTowerDuotone size={size} />;
+      default:
+        return "N/A";
+    }
+  };
 
   //Each page contains 10-12 games, depending on our page_size parameter passed in the call which can be adjusted. Current page size is 12
   const loadMorePages = async () => {
