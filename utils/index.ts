@@ -307,3 +307,13 @@ export const fetchNextPagePlatforms = async (pageNumber: number): Promise<GamePl
 
   return data;
 };
+
+export const fetchNextDevelopersPage = async (pageNumber: number): Promise<GameDevelopers> => {
+  const res = await fetch(`https://api.rawg.io/api/developers?key=${process.env.RAWG_API_KEY}&page=${pageNumber}&page_size=6`);
+
+  if (!res.ok) throw new Error("Failed to fetch Game Developers");
+
+  const data: GameDevelopers = await res.json();
+
+  return data;
+};

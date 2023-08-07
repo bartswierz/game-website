@@ -1,17 +1,14 @@
 "use client";
 import { useInView } from "react-intersection-observer";
 import { useState, useEffect } from "react";
-import { fetchNextPageGenreGames } from "@/utils";
-import { GamesByGenreResults, GamesByGenre } from "@/types";
-import { GameLink, Spinner } from "@/components/ui";
+import { fetchNextDevelopersPage } from "@/utils";
+import { GameDevelopers, GameDevelopersResults } from "@/types";
+import { Spinner, GameLinkBasic } from "@/components/ui";
 
-interface LoadMoreGenreProps {
-  searchQuery: string;
-}
 // Button that will render another page of results to the screen when clicked once the user reaches the bottom of the page
-const LoadMoreGenreGames = ({ searchQuery }: LoadMoreGenreProps) => {
+const LoadMoreDevelopers = () => {
   const [pagesLoaded, setPagesLoaded] = useState<number>(1);
-  const [content, setContent] = useState<GamesByGenreResults[]>([]);
+  const [content, setContent] = useState<GameDevelopersResults[]>([]);
 
   //Tracks window intersection to determine when to load more results(when user reaches the bottom of the page, load more)
   const { ref, inView, entry } = useInView();
@@ -28,7 +25,7 @@ const LoadMoreGenreGames = ({ searchQuery }: LoadMoreGenreProps) => {
     const nextPage = pagesLoaded + 1;
 
     try {
-      const fetchedContent: GamesByGenre = await fetchNextPageGenreGames(nextPage, searchQuery);
+      const fetchedContent: GameDevelopers = await fetchNextDevelopersPage(nextPage);
       const { results } = fetchedContent;
 
       // Add the new results to the existing content towards the bottom of the page
@@ -45,17 +42,13 @@ const LoadMoreGenreGames = ({ searchQuery }: LoadMoreGenreProps) => {
 
   return (
     <>
-      <div className="mt-4">
-        {content && (
-          <div className="grid grid-cols-1 px-2 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-auto gap-4">
-            {content.map(({ slug, name, background_image }) => (
-              // Creates a Game Display for each game in the list as a link to the game page
-              <div key={slug} className="h-64">
-                <GameLink slug={slug} name={name} background_image={background_image} />
-              </div>
-            ))}
-          </div>
-        )}
+      <div className="mt-6">
+        {/* <div className="flex flex-wrap gap-4"> */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {content.map(({ id, name, games_count, games }) => (
+            <GameLinkBasic id={id} name={name} games_count={games_count} games={games} />
+          ))}
+        </div>
 
         {/* Using 'ref' to trigger our useEffect for another API Call once the spinner is in view */}
         <div ref={ref} className="flex justify-center w-full">
@@ -66,4 +59,4 @@ const LoadMoreGenreGames = ({ searchQuery }: LoadMoreGenreProps) => {
   );
 };
 
-export default LoadMoreGenreGames;
+export default LoadMoreDevelopers;

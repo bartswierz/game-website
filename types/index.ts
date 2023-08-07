@@ -187,6 +187,7 @@ export interface GameDetails {
   description_raw: string;
 }
 
+//******************** */
 export interface GameDevelopersResults {
   id: number;
   name: string;
@@ -210,6 +211,7 @@ export interface GameDevelopers {
   results: GameDevelopersResults[];
 }
 
+//******************** */
 export interface DeveloperInfo {
   id: number;
   name: string;

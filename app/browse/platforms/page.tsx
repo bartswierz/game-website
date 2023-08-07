@@ -8,7 +8,6 @@ import LoadMorePlatforms from "@/components/ui/LoadMorePlatforms";
 //{ params }: { params: { genres: string; page_size: number } }
 const Platforms = async () => {
   const [content, setContent] = useState<GamePlatforms | null>(null);
-  const [currentPage, setCurrentPage] = useState<number>(1);
 
   // Ran once on page load
   useEffect(() => {

@@ -13,6 +13,9 @@ import HamburgerMenu from "./HamburgerMenu";
 import ShowMore from "./ShowMore";
 import LoadMorePlatformGames from "./LoadMorePlatformGames";
 import LoadMoreGenreGames from "./LoadMoreGenreGames";
+import LoadMorePlatforms from "./LoadMorePlatforms";
+import LoadMoreDevelopers from "./LoadMoreDevelopers";
+import GameLinkBasic from "./GameLinkBasic";
 import Spinner from "./Spinner";
 // Export all components as a single object for cleaner imports in other files
 export {
@@ -30,5 +33,8 @@ export {
   ShowMore,
   LoadMorePlatformGames,
   LoadMoreGenreGames,
+  LoadMorePlatforms,
+  LoadMoreDevelopers,
   Spinner,
+  GameLinkBasic,
 };
