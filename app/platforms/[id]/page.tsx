@@ -11,7 +11,7 @@ import { BsAndroid2 } from "react-icons/bs";
 import { LoadMorePlatformGames } from "@/components/ui";
 import Link from "next/link";
 
-export const getPlatformStoreLink = (storeSlug: string) => {
+export const getPlatformStoreLink = (storeSlug: string): string => {
   switch (storeSlug.toLowerCase()) {
     case "steam":
       return "https://store.steampowered.com/";

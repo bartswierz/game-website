@@ -376,28 +376,31 @@ export interface GameStores {
   }[];
 }
 
+//**************
+export interface GamePlatformResults {
+  id: number;
+  name: string;
+  slug: string;
+  games_count: number;
+  image_background: string;
+  image: null;
+  year_start: null;
+  year_end: null;
+  games: [
+    {
+      id: number;
+      slug: string;
+      name: string;
+      added: number;
+    }
+  ];
+}
+
 export interface GamePlatforms {
   count: number;
   next: string | null;
   previous: string | null;
-  results: {
-    id: number;
-    name: string;
-    slug: string;
-    games_count: number;
-    image_background: string;
-    image: null;
-    year_start: null;
-    year_end: null;
-    games: [
-      {
-        id: number;
-        slug: string;
-        name: string;
-        added: number;
-      }
-    ];
-  }[];
+  results: GamePlatformResults[];
 }
 
 export interface GamesByPlatformResults {
@@ -490,6 +493,7 @@ export interface GamesByPlatform {
   results: GamesByPlatformResults[];
 }
 
+// ****************************
 // TODO - same as GamesByGenre - Cleanup repetitive types in file
 export interface GamesSearch {
   count: number;

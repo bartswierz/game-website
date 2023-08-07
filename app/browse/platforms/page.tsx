@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { getNextPlatformPage, getPage, getPlatforms } from "@/utils";
+import { getPlatforms } from "@/utils";
 import { GamePlatforms } from "@/types";
-import { NavigationButton } from "@/components/ui";
 import GameLinkBasic from "@/components/ui/GameLinkBasic";
+import LoadMorePlatforms from "@/components/ui/LoadMorePlatforms";
 
 //{ params }: { params: { genres: string; page_size: number } }
 const Platforms = async () => {
@@ -20,80 +20,14 @@ const Platforms = async () => {
     fetchData();
   }, []);
 
-  // Updates current page number whenever we get a new set of data from API
-  useEffect(() => {
-    // If content.next exists, get the page number from it
-    if (content?.next) {
-      const pageNumber = getPage(content.next);
-      setCurrentPage(pageNumber);
-    }
-  }, [content]);
-
-  // Handle page change
-  const handlePageChange = async (request: string | null, pageDirection: string) => {
-    console.log(`Fetching data for ${pageDirection} page...`);
-    if (pageDirection === "prev") {
-      if (content?.previous) {
-        // console.log("content.prev: ", content.previous);
-        const newContent = await getNextPlatformPage(request);
-        setContent(newContent);
-      }
-    } else if (pageDirection === "next") {
-      if (content?.next) {
-        // console.log("content.next: ", content.next);
-        const newContent = await getNextPlatformPage(request);
-        setContent(newContent);
-      }
-    }
-  };
-
   if (!content) return <div className="text-white">Loading...</div>;
 
   return (
     <div className="text-white">
-      <h1>
+      <h1 className="mb-8">
         <span className="text-4xl font-semibold">Platforms</span>{" "}
         <span className="text-gray-500 text-base">{content.count} Platforms</span>
       </h1>
-
-      {/* <div>next: {content.next}</div>
-      <div>previous: {content.previous}</div> */}
-
-      {/* NAVIGATION BUTTONS */}
-      <div className="my-5">
-        {/* PREVIOUS BUTTON */}
-        {content.previous ? (
-          <NavigationButton
-            text="Prev"
-            request={content.previous}
-            onPageChange={handlePageChange}
-            pageDirection={"prev"}
-            active={`${content.previous === null ? "inactive" : "active"}`}
-          />
-        ) : (
-          <NavigationButton
-            text="Prev"
-            request={null}
-            onPageChange={handlePageChange}
-            pageDirection={"prev"}
-            active={`${content.previous === null ? "inactive" : "active"}`}
-          />
-        )}
-
-        {/* Page Counter */}
-        <div className="inline-block px-4 py-2 m-1">
-          Page {currentPage} of {Math.ceil(content.count / 6)}
-        </div>
-
-        {/* NEXT BUTTON */}
-        <NavigationButton
-          text="Next"
-          request={content.next}
-          onPageChange={handlePageChange}
-          pageDirection={"next"}
-          active={`${content.next === null ? "inactive" : "active"}`}
-        />
-      </div>
 
       {/* <div className="flex flex-wrap gap-4"> */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -101,6 +35,8 @@ const Platforms = async () => {
           <GameLinkBasic id={id} name={name} games_count={games_count} games={games} />
         ))}
       </div>
+
+      <LoadMorePlatforms />
     </div>
   );
 };

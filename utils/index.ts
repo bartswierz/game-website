@@ -284,11 +284,26 @@ export const fetchNextPagePlatformGames = async (pageNumber: number, searchQuery
   return data;
 };
 
+// Fetches the next 12 Genre Games for the Genre/[id] page
 export const fetchNextPageGenreGames = async (pageNumber: number, searchQuery: string | number) => {
-  console.log("inside fetchNextPageGenre - pageNumber: ", pageNumber);
   const res = await fetch(
     `https://api.rawg.io/api/games?genres=${searchQuery}&key=${process.env.RAWG_API_KEY}&page=${pageNumber}&page_size=12`
   );
+
+  if (!res.ok) throw new Error("Failed to fetch");
+
+  const data = await res.json();
+
+  return data;
+};
+
+// Fetches the next 6 Platform types for the Browse/Platform page
+export const fetchNextPagePlatforms = async (pageNumber: number) => {
+  console.log("inside fetchNextPageGenre - pageNumber: ", pageNumber);
+  // const res = await fetch(
+  //   `https://api.rawg.io/api/games?genres=${searchQuery}&key=${process.env.RAWG_API_KEY}&page=${pageNumber}&page_size=12`
+  // );
+  const res = await fetch(`https://api.rawg.io/api/platforms?key=${process.env.RAWG_API_KEY}&page_size=6&page=${pageNumber}`);
 
   if (!res.ok) throw new Error("Failed to fetch");
 
