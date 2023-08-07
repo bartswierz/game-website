@@ -126,9 +126,9 @@ const PlatformPage = () => {
   return (
     <div className="text-white">
       {/* <div className="text-4xl font-semibold mb-6 flex flex-col xsm:flex-row items-end"> */}
-      <div className="text-4xl font-semibold mb-6 flex">
+      <div className="flex text-4xl font-semibold mb-6">
         <span>PLATFORM GAMES</span>
-        <span className="text-base text-gray-500 ml-2 text-end">{content.count}+ Games</span>
+        <span className="text-base text-gray-500 ml-2 self-end">{content.count}+ Games</span>
       </div>
       <div>
         {/* BELOW ARE FOR DEVELOPING PURPOSES */}
