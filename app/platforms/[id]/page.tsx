@@ -8,7 +8,7 @@ import { FaSteam, FaPlaystation, FaXbox, FaApple, FaGooglePlay } from "react-ico
 import { SiNintendo, SiGogdotcom, SiItchdotio, SiEpicgames, SiNintendoswitch } from "react-icons/si";
 import { PiDesktopTowerDuotone } from "react-icons/pi";
 import { BsAndroid2 } from "react-icons/bs";
-import { LoadMore } from "@/components/ui";
+import { LoadMorePlatform } from "@/components/ui";
 import Link from "next/link";
 
 export const getPlatformStoreLink = (storeSlug: string) => {
@@ -117,6 +117,10 @@ const PlatformPage = () => {
 
   // console.log("searchParams in platform page: ", searchParamsID);
 
+  const testComponent = () => {
+    return <div>Test</div>;
+  };
+
   if (!content) return <div className="text-white">Loading...</div>;
 
   return (
@@ -131,13 +135,14 @@ const PlatformPage = () => {
         {/* <p>Next: {content.next}</p> */}
         {/* <p>Previous: {content.previous}</p> */}
 
-        <div className="flex flex-row flex-wrap gap-4 justify-center">
-          {content.results.map((game) => (
-            <div key={game.slug} className="flex flex-col max-w-[500px] rounded-xl overflow-hidden bg-gray-800 w-72 h-max">
+        {/* <div className="flex flex-row flex-wrap gap-4 justify-center"> */}
+        <div className="grid grid-cols-1 px-4 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 justify-center">
+          {content.results.map(({ slug, background_image, name, stores }) => (
+            <div key={slug} className="flex flex-col max-w-[500px] rounded-xl overflow-hidden bg-gray-800 h-max">
               {/* GAME IMAGE */}
-              <div className="w-72 h-48  ">
+              <div className="h-48">
                 <Image
-                  src={game.background_image}
+                  src={background_image}
                   width={200}
                   height={200}
                   alt="Game Cover Display"
@@ -147,12 +152,12 @@ const PlatformPage = () => {
 
               {/* TEXT CONTAINER */}
               <div className="text-center p-4">
-                <h2 className="text-xl pb-2 font-bold">{game.name}</h2>
+                <h2 className="text-xl pb-2 font-bold">{name}</h2>
 
                 <div className="flex flex-col gap-y-4 p-2">
                   {/* AVAILABLE STORES */}
-                  {game.stores ? (
-                    game.stores.map(({ store }) => (
+                  {stores ? (
+                    stores.map(({ store }) => (
                       <Link
                         href={getPlatformStoreLink(store.slug)}
                         target="_blank"
@@ -169,7 +174,7 @@ const PlatformPage = () => {
 
                   {/* NAVIGATES USER TO GAMES PAGE -> i.e.) http://localhost:3000/games/marvels-spider-man */}
                   <Link
-                    href={`/games/${game.slug}`}
+                    href={`/games/${slug}`}
                     className="flex justify-center items-center font-semibold rounded-full text-lg hover:bg-gray-400 border  bg-gray-300 text-gray-700 px-2 py-1  max-w-1/2"
                   >
                     See Game Details
@@ -178,13 +183,10 @@ const PlatformPage = () => {
               </div>
             </div>
           ))}
-          {/* MORE LOADING CONTENT */}
-          {/* <div className="border border-green-500"> */}
-          {/* </div> */}
-          <div className="bg-green-500">
-            <LoadMore nextCall={content.next} />
-          </div>
         </div>
+
+        {/* LOADING ICON AT THE BOTTOM */}
+        {searchParamsID && <LoadMorePlatform searchQuery={searchParamsID} />}
       </div>
     </div>
   );

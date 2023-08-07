@@ -71,21 +71,11 @@ const GenrePage = async () => {
 
   return (
     <div className="text-white mx-4 xsm:mx-0">
-      {/* <div className="text-4xl font-semibold">GAME DEVELOPERS</div> */}
-      {/* <div className="text-4xl font-semibold">
-        {searchGenreID?.toUpperCase()} GAMES<span className="text-base text-gray-500 ml-2">{content.count}+ Games</span>
-      </div> */}
       <div className="text-4xl font-semibold uppercase flex flex-wrap">
         {searchGenreID} GAMES
         <span className="text-base text-gray-500 ml-2 items-end self-end justify-end">{content.count}+ Games</span>
       </div>
-      <ul>
-        {/* <li># of Developers: {content.count}</li> */}
-        {/* <li># of Pages: {Math.ceil(content.count / 12)}</li> */}
-        {/* <li>next: {content.next}</li>
-        <li>previous: {content.previous}</li> */}
-        {/* <li># of Games Fetched: {content.results.length}</li> */}
-      </ul>
+      <ul></ul>
 
       <div className="my-5">
         {/* PREVIOUS BUTTON */}
