@@ -272,7 +272,7 @@ export const findStoresForGame = async (game_slug: string): Promise<StoresWithGa
 
 //"next": "https://api.rawg.io/api/games?key=19bf6456aed44d52b0a064df2f54ef4a&page=2&page_size=2&platforms=4",
 // export const fetchNextPage = async (apiCall: string | null, pageNumber: number) => {
-export const fetchNextPagePlatformGames = async (pageNumber: number, searchQuery: string) => {
+export const fetchNextPagePlatformGames = async (pageNumber: number, searchQuery: string): Promise<GamesByPlatform> => {
   const res = await fetch(
     `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&page=${pageNumber}&page_size=12&platforms=${searchQuery}`
   );
@@ -285,7 +285,7 @@ export const fetchNextPagePlatformGames = async (pageNumber: number, searchQuery
 };
 
 // Fetches the next 12 Genre Games for the Genre/[id] page
-export const fetchNextPageGenreGames = async (pageNumber: number, searchQuery: string | number) => {
+export const fetchNextPageGenreGames = async (pageNumber: number, searchQuery: string | number): Promise<GamesByGenre> => {
   const res = await fetch(
     `https://api.rawg.io/api/games?genres=${searchQuery}&key=${process.env.RAWG_API_KEY}&page=${pageNumber}&page_size=12`
   );
@@ -298,11 +298,7 @@ export const fetchNextPageGenreGames = async (pageNumber: number, searchQuery: s
 };
 
 // Fetches the next 6 Platform types for the Browse/Platform page
-export const fetchNextPagePlatforms = async (pageNumber: number) => {
-  console.log("inside fetchNextPageGenre - pageNumber: ", pageNumber);
-  // const res = await fetch(
-  //   `https://api.rawg.io/api/games?genres=${searchQuery}&key=${process.env.RAWG_API_KEY}&page=${pageNumber}&page_size=12`
-  // );
+export const fetchNextPagePlatforms = async (pageNumber: number): Promise<GamePlatforms> => {
   const res = await fetch(`https://api.rawg.io/api/platforms?key=${process.env.RAWG_API_KEY}&page_size=6&page=${pageNumber}`);
 
   if (!res.ok) throw new Error("Failed to fetch");
