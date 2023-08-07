@@ -269,3 +269,16 @@ export const findStoresForGame = async (game_slug: string): Promise<StoresWithGa
 
   return data;
 };
+
+//"next": "https://api.rawg.io/api/games?key=19bf6456aed44d52b0a064df2f54ef4a&page=2&page_size=2&platforms=4",
+// export const fetchNextPage = async (apiCall: string | null, pageNumber: number) => {
+export const fetchNextPage = async (pageNumber: number) => {
+  console.log("inside fetchNextPage - pageNumber: ", pageNumber);
+  const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&page=${pageNumber}&page_size=12&platforms=4`);
+
+  if (!res.ok) throw new Error("Failed to fetch");
+
+  const data = await res.json();
+
+  return data;
+};
