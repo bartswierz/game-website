@@ -17,6 +17,7 @@ import LoadMorePlatforms from "./LoadMorePlatforms";
 import LoadMoreDevelopers from "./LoadMoreDevelopers";
 import GameLinkBasic from "./GameLinkBasic";
 import Spinner from "./Spinner";
+import HomepageLinks from "./HomepageLinks";
 // Export all components as a single object for cleaner imports in other files
 export {
   Navbar,
@@ -37,4 +38,5 @@ export {
   LoadMoreDevelopers,
   Spinner,
   GameLinkBasic,
+  HomepageLinks,
 };
