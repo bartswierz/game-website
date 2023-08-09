@@ -195,7 +195,7 @@ const LoadMorePlatform = ({ searchQuery }: LoadMoreProps) => {
         </div>
 
         {/* Using 'ref' to trigger our useEffect for another API Call once the spinner is in view */}
-        <div ref={ref} className="flex justify-center w-full">
+        <div ref={ref} className="flex justify-center w-full mt-[3vh]">
           <Spinner />
         </div>
       </div>

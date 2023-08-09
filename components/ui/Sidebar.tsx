@@ -111,7 +111,7 @@ const Sidebar = () => {
         // ${isOpen ? "-translate-x-full fixed" : "sm:translate-x-0 block"} translate-x-0 md:block`}
         // aria-label="Sidebar"
         className={`w-60 md:w-60 z-40 h-screen transition-transform block
-        ${isMenuToggled && "-translate-x-full fixed"} translate-x-0 md:block`}
+        ${isMenuToggled && "-translate-x-full fixed top-0 left-0"} translate-x-0 md:block`}
         aria-label="Sidebar"
       >
         <div className="w-60 h-full px-3 pb-4 overflow-y-auto bg-gray-900 ">
