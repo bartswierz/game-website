@@ -22,6 +22,7 @@ const Sidebar = () => {
 
   //TODO - get the isSidebarOpen value from redux store
   const isSidebarOpen = useAppSelector((state) => state.sidebarSlice.value.isSidebarOpen);
+  const isMenuToggled = useAppSelector((state) => state.sidebarSlice.value.isMenuToggled);
   // console.log("isSidebarOpen fetched from Redux Store: ", isSidebarOpen);
 
   /* SCENARIOS
@@ -41,19 +42,9 @@ const Sidebar = () => {
     } //DESKTOP SCREEN >= 768px
     else {
       if (!isSidebarOpen) dispatch(openSidebar());
+      //do nothing
       else return;
     }
-    // if (isSidebarOpen && windowWidth < 768) {
-    //   dispatch(closeSidebar());
-    //   return;
-    // } else if (!isSidebarOpen && windowWidth >= 768) {
-    //   dispatch(openSidebar());
-    //   return;
-    // } else if (!isSidebarOpen && windowWidth < 768) {
-    //   return; //DO NOTHING
-    // } else if (isSidebarOpen && windowWidth >= 768) {
-    //   return; //DO NOTHING
-    // }
   };
 
   // Used to remove the sidebar width when the viewport is under 768px
@@ -78,7 +69,8 @@ const Sidebar = () => {
   useEffect(() => {
     if (windowWidth < 768) {
       console.log("APP ACCESSED VIA MOBILE - closing sidebar - screen is below 768px");
-      dispatch(toggleSidebar());
+      // dispatch(toggleSidebar());
+      dispatch(closeSidebar());
     }
   }, []);
 
@@ -88,16 +80,38 @@ const Sidebar = () => {
     else return link.charAt(0).toUpperCase() + link.slice(1);
   };
 
+  const handleCloseSidebar = () => {
+    dispatch(toggleSidebar());
+    // dispatch(closeSidebar());
+  };
+
   if (!isSidebarOpen) return null;
 
+  //TODO - IF screen IS DESKTOP then set sidebar to a BLOCK
   return (
     <>
-      {/* {isSidebarOpen ? ( */}
+      {
+        // ADDS BLACK BACKGROUND OPACITY WHEN USER OPENS UP THE SIDEBAR, CLICKING ANYWHERE OUTSIDE THE SIDEBAR WILL REMOVE IT AND CLOSE THE SIDEBAR
+        isMenuToggled && <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-30" onClick={handleCloseSidebar}></div>
+      }
+      {/* {
+        // ADDS BLACK BACKGROUND OPACITY WHEN USER OPENS UP THE SIDEBAR, CLICKING ANYWHERE OUTSIDE THE SIDEBAR WILL REMOVE IT AND CLOSE THE SIDEBAR
+        isSidebarOpen && <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-30" onClick={handleCloseSidebar}></div>
+      } */}
+
       <aside
-        // id="sidebar-multi-level-sidebar"
         // translate-x-0 -> Slides the sidebar to the left OFF SCREEN
-        className={`w-60 md:w-60 z-40 h-screen transition-transform
-        ${isSidebarOpen ? "-translate-x-full" : "sm:translate-x-0"} translate-x-0`}
+        // sm:translate-x-0 block -> block when isSidebarOpen is false, it will be on the page taking up space, when open it will be fixed above the content
+        //TODO - currently it is fixed above content, need ot make it be a block WHEN width is above or equal 768px. I think the issue is in our redux, because when sidebar becomes TRUE when width is above 768px, need to update it so it will ONLY be fixed if user clicks on it
+        //   className={`w-60 md:w-60 z-40 h-screen transition-transform block
+        //   ${isSidebarOpen ? "-translate-x-full fixed" : "sm:translate-x-0 block"} translate-x-0 md:block`}
+        //   aria-label="Sidebar"
+        // >
+        // className={`w-60 md:w-60 z-40 h-screen transition-transform block
+        // ${isOpen ? "-translate-x-full fixed" : "sm:translate-x-0 block"} translate-x-0 md:block`}
+        // aria-label="Sidebar"
+        className={`w-60 md:w-60 z-40 h-screen transition-transform block
+        ${isMenuToggled && "-translate-x-full fixed"} translate-x-0 md:block`}
         aria-label="Sidebar"
       >
         <div className="w-60 h-full px-3 pb-4 overflow-y-auto bg-gray-900 ">
@@ -163,7 +177,6 @@ const Sidebar = () => {
           </ul>
         </div>
       </aside>
-      {/* ) : null} */}
     </>
   );
 };
