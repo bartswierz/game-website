@@ -13,7 +13,6 @@ const Developers = () => {
   // Ran once on page load
   useEffect(() => {
     const fetchData = async () => {
-      // console.log("Fetching data from API...");
       const developers = await getGameDevelopers();
       setContent(developers);
     };

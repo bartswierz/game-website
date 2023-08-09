@@ -8,7 +8,6 @@ const HamburgerMenu = () => {
   const isSidebarOpen: boolean = useAppSelector(({ sidebarSlice }) => sidebarSlice.value.isSidebarOpen);
 
   const handleToggleSidebar = () => {
-    console.log("NAVBAR - MENU BUTTON clicked. Value of isSidebarOpen: ", isSidebarOpen);
     dispatch(toggleSidebar());
   };
   {

@@ -14,7 +14,6 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
 
   // Destructuring results from the StoresWithGame object upon return from the API
   const { results: gameStoreList }: StoresWithGame = await findStoresForGame(params.slug);
-  console.log("storesWithGame in component: ", gameStoreList);
 
   const getStoreNameById = (store_id: number) => {
     switch (store_id) {
@@ -71,25 +70,12 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
     website,
   } = gameDetails;
 
-  const getMinRequirements = (platforms: Platforms[]) => {
-    console.log("inside getMinRequirements");
-    platforms.filter((platform) => {
-      console.log("platform.requirements", platform.requirements);
-      // return platform.name === "PC";
-    });
-  };
-
-  getMinRequirements(platforms);
-  // console.log("platforms: ", platforms);
-
   // FORMATS THE ENGLISH GAME DESCRIPTION - TODO UPDATE THIS
   const formatDescription = (description: string) => {
     const splitByPTag: string[] = description.split("</p>"); // splitByPTag[0] = english description, splitByPTag[1] = Spanish description
-    // console.log("splitByPTag: ", splitByPTag);
 
     let englishDescription = splitByPTag[0].replace(/<p>/g, "");
     let englishDescriptionList = englishDescription.split("<br />");
-    // console.log("englishDescription: ", englishDescription);
 
     return englishDescriptionList;
   };

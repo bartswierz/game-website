@@ -7,8 +7,6 @@ const Genres = async () => {
   const genres: GameGenres = await getGamesGenres();
   const { results } = genres;
 
-  console.log("genres: ", genres);
-
   return (
     <div className="grid gap-5 text-white 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 xsm:grid-cols-1">
       {results.map(({ id, name, slug, games_count, image_background, games }: GenreResults) => (

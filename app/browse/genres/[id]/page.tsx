@@ -20,7 +20,6 @@ const GenrePage = async () => {
       const data: GenreInfo = await getGenreInfo(searchID);
 
       if (data) {
-        // console.log("data: ", data);
         setGenreInfo(data);
       } else throw new Error("No data returned from getGenreInfo");
     };

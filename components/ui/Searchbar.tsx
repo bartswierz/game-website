@@ -27,7 +27,6 @@ const Searchbar = () => {
   // We want to navigate to the /search page AND PASS THE searchTerm as a query
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("SEARCHBAR - handleSearch - e: ", e);
 
     router.push(`/search/${searchTerm}`);
   };

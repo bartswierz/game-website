@@ -70,7 +70,6 @@ const LoadMorePlatform = ({ searchQuery }: LoadMoreProps) => {
 
   // // Pass in a slug and return the appropriate icon
   const getPlatformIcon = (storeSlug: string) => {
-    // console.log("companyDescription passed:", companyDescription);
     const size = 20;
     switch (storeSlug.toLowerCase()) {
       case "steam":

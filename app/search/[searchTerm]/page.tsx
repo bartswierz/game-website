@@ -7,19 +7,13 @@ import { useState, useEffect } from "react";
 
 const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
   const { searchTerm } = params;
-  console.log("searchPage params: ", params);
-  console.log("searchPage search: ", searchTerm);
-
   const [content, setContent] = useState<GamesSearch | null>(null);
-  console.log("Search Page Content: ", content);
 
   useEffect(() => {
     const fetchData = async (searchTerm: string) => {
       const data: GamesSearch = await getGamesSearch(searchTerm);
-      // const data: GamesSearch = await getGamesSearch(searchTerm);
 
       if (data) {
-        // console.log("data: ", data);
         setContent(data);
       } else throw new Error("No data returned from getGamesSearch");
     };

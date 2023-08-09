@@ -11,35 +11,11 @@ type RatingsProps = {
 };
 
 const Ratings = ({ averageRating, ratingsList, ratingsCount }: RatingsProps) => {
-  // console.log("ratingsList: ", ratingsList);
   const [progress, setProgress] = useState(0);
   const [exceptional, setExceptional] = useState({ count: 0, id: -1, percent: 0, title: "" });
   const [recommended, setRecommended] = useState({ count: 0, id: -1, percent: 0, title: "" });
   const [meh, setMeh] = useState({ count: 0, id: -1, percent: 0, title: "" });
   const [skip, setSkip] = useState({ count: 0, id: -1, percent: 0, title: "" });
-
-  // useEffect(() => {
-  //   const timer = setTimeout(() => setProgress(70), 500);
-  //   return () => clearTimeout(timer);
-  // }, []);
-  console.log("ratingsList: ", ratingsList);
-  // useEffect(() => {
-  //   // const exceptional = ratingsList.;
-
-  //   console.log("exceptional Rating: ", exceptional);
-  //   const timer = setTimeout(() => setProgress(ratingsList[0].percent), 500);
-  //   return () => clearTimeout(timer);
-  // }, []);
-
-  // const ProgressRoot = 'position: relative overflow: hidden background: var(--black-a9) border-radius: 99999px width: 300px height: 25px transform: translateZ(0)';
-
-  // const ProgressIndiciator = 'background-color: white width: 100%'
-  // .ProgressIndicator {
-  //   background-color: white;
-  //   width: 100%;
-  //   height: 100%;
-  //   transition: transform 660ms cubic-bezier(0.65, 0, 0.35, 1);
-  // }
 
   return (
     <div>

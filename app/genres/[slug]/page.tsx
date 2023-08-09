@@ -1,22 +1,16 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { getGamesByGenre, getNextGameDevelopersPage, getNextGameGenrePage, getPage } from "@/utils";
+import { getGamesByGenre, getNextGameGenrePage } from "@/utils";
 import { GamesByGenre } from "@/types";
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { NavigationButton, GameLink, LoadMoreGenreGames } from "@/components/ui";
+import { GameLink, LoadMoreGenreGames } from "@/components/ui";
 
 //ex. http://localhost:3000/genres/shooter?genres=action&page_size=6
 //ex. http://localhost:3000/genres/shooter?genres=4&page_size=6
 const GenrePage = async () => {
-  // console.log("APP/GENRES/[SLUG]/PAGE.TSX - params: ", params);
   // Grabs the ID from the URL
   const searchParams = useSearchParams();
   const searchGenreID = searchParams.get("genres"); // genres=action
-  // const searchPageSize = searchParams.get("page_size"); // page_size=6
-  console.log("searchGenre = ", searchGenreID);
-  // console.log("searchPageSize = ", searchPageSize);
   const [content, setContent] = useState<GamesByGenre>();
   const [currentPage, setCurrentPage] = useState<string>("1");
 
@@ -27,7 +21,6 @@ const GenrePage = async () => {
       const data: GamesByGenre = await getGamesByGenre(searchID);
 
       if (data) {
-        // console.log("GAMES BY GENRE - data: ", data);
         setContent(data);
       } else throw new Error("No data returned from getGenreInfo");
     };
@@ -42,8 +35,6 @@ const GenrePage = async () => {
       // const pageNumber = getPage(content.next);
       const pageNumber = content.next.split("page=");
       const strippedPageNumber = pageNumber[1][0];
-      console.log("pageNumber: ", pageNumber);
-      console.log("strippedPageNumber: ", strippedPageNumber);
       setCurrentPage(strippedPageNumber);
     }
   }, [content]);
@@ -53,13 +44,11 @@ const GenrePage = async () => {
   const handlePageChange = async (request: string | null, pageDirection: string) => {
     if (pageDirection === "prev") {
       if (content?.previous) {
-        // console.log("content.prev: ", content.previous);
         const newContent = await getNextGameGenrePage(request);
         setContent(newContent);
       }
     } else if (pageDirection === "next") {
       if (content?.next) {
-        // console.log("content.next: ", content.next);
         const newContent = await getNextGameGenrePage(request);
         setContent(newContent);
       }

@@ -19,7 +19,7 @@ export const formatLink = (title: string, link: string): string => {
   const formattedDirectory = title.replaceAll(" ", "-").toLowerCase();
   const formattedLink = link.replaceAll(" ", "-").toLowerCase();
   const formattedURL = "/" + formattedDirectory + "/" + formattedLink;
-  // console.log(formattedURL);
+
   return formattedURL;
 };
 
@@ -29,14 +29,12 @@ export const getPage = (url: string): number => {
 
   // Converting from string to number and subtracting 1 to get the current page number because the passed url is the NEXT URL TO FETCH
   const pageNumber = Number(splitURL[1]) - 1;
-  // console.log("pageNumber", pageNumber);
 
   return pageNumber;
 };
 
 // FETCHES 20 GAMES FROM RAWG API - USED ON HOME PAGE TO RENDER 20 GAMES
 export const getGames = async (): Promise<Game[]> => {
-  console.log("private key - get Games: ", process.env.RAWG_API_KEY);
   const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
 
   if (!res.ok) {
@@ -95,7 +93,6 @@ export const getGameDevelopers = async (): Promise<GameDevelopers> => {
 
   //All games
   const data: GameDevelopers = await res.json();
-  // console.log("data", data);
 
   return data;
 };
@@ -241,7 +238,6 @@ export const getGamesSearch = async (searchTerm: string): Promise<GamesSearch> =
 
 // Fetch Game Screenshots by passing in game slug i.e. 'rocket-league'
 export const getGameScreenshots = async (game_slug: string): Promise<GameScreenshots> => {
-  // console.log("inside getGamesScreenshots");
   const res = await fetch(`https://api.rawg.io/api/games/${game_slug}/screenshots?key=${process.env.RAWG_API_KEY}`);
 
   if (!res.ok) throw new Error("Failed to fetch Game Screenshots");

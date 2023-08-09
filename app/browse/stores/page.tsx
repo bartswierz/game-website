@@ -7,7 +7,6 @@ import { SiNintendo, SiEpicgames, SiItchdotio, SiGogdotcom } from "react-icons/s
 
 const Stores = async () => {
   const storesList: GameStores = await getStores();
-  // console.log("storesList: ", storesList);
 
   // Company Icon List for Stores
   const iconList = [
