@@ -16,19 +16,17 @@ export const sidebarSlice = createSlice({
     toggleSidebar: (state) => {
       // TOGGLE LOGIC - Flipping value upon user clicking hamburger menu
       state.value.isMenuToggled = !state.value.isMenuToggled;
+
+      // If hamburger menu is toggled, open sidebar
       if (state.value.isMenuToggled) state.value.isSidebarOpen = true;
       else state.value.isSidebarOpen = false;
-      console.log("SLICE - TOGGLE SIDEBAR, isMenuToggled value: ", state.value.isMenuToggled);
     },
-    // toggleSidebar: (state) => {
-    //   // TOGGLE LOGIC - Flipping value upon user clicking hamburger menu
-    //   state.value.isSidebarOpen = !state.value.isSidebarOpen;
-    //   console.log("SLICE - TOGGLE SIDEBAR, isSidebarOpen value: ", state.value.isSidebarOpen);
-    // },
     // FUNCTIONS BELOW AUTOMATICALLY CLOSE/OPEN SIDEBAR AS USER MOVES FROM DESKTOP TO MOBILE AND VICE VERSA
     closeSidebar: (state) => {
       console.log("SLICE - CLOSE SIDEBAR - value", state.value.isSidebarOpen);
       state.value.isSidebarOpen = false;
+      // Closing isMenuToggled incase user increases screen width while hamburger menu is toggled
+      state.value.isMenuToggled = false;
     },
     openSidebar: (state) => {
       console.log("SLICE - OPEN SIDEBAR - value", state.value.isSidebarOpen);

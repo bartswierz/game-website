@@ -3,7 +3,7 @@ import { sidebarData } from "@/constants";
 import Link from "next/link";
 import { IoGameController, IoGameControllerOutline } from "react-icons/io5";
 import SidebarDropdown from "./SidebarDropdown";
-import { SidebarLink } from "@/components/ui";
+import { SidebarLink, BrandLogo, HamburgerMenu } from "@/components/ui";
 import { useState, useEffect } from "react";
 import { useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
@@ -94,27 +94,27 @@ const Sidebar = () => {
         // ADDS BLACK BACKGROUND OPACITY WHEN USER OPENS UP THE SIDEBAR, CLICKING ANYWHERE OUTSIDE THE SIDEBAR WILL REMOVE IT AND CLOSE THE SIDEBAR
         isMenuToggled && <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-30" onClick={handleCloseSidebar}></div>
       }
-      {/* {
-        // ADDS BLACK BACKGROUND OPACITY WHEN USER OPENS UP THE SIDEBAR, CLICKING ANYWHERE OUTSIDE THE SIDEBAR WILL REMOVE IT AND CLOSE THE SIDEBAR
-        isSidebarOpen && <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-30" onClick={handleCloseSidebar}></div>
-      } */}
 
       <aside
-        // translate-x-0 -> Slides the sidebar to the left OFF SCREEN
-        // sm:translate-x-0 block -> block when isSidebarOpen is false, it will be on the page taking up space, when open it will be fixed above the content
-        //TODO - currently it is fixed above content, need ot make it be a block WHEN width is above or equal 768px. I think the issue is in our redux, because when sidebar becomes TRUE when width is above 768px, need to update it so it will ONLY be fixed if user clicks on it
-        //   className={`w-60 md:w-60 z-40 h-screen transition-transform block
-        //   ${isSidebarOpen ? "-translate-x-full fixed" : "sm:translate-x-0 block"} translate-x-0 md:block`}
-        //   aria-label="Sidebar"
-        // >
-        // className={`w-60 md:w-60 z-40 h-screen transition-transform block
-        // ${isOpen ? "-translate-x-full fixed" : "sm:translate-x-0 block"} translate-x-0 md:block`}
-        // aria-label="Sidebar"
-        className={`w-60 md:w-60 z-40 h-screen transition-transform block
-        ${isMenuToggled && "-translate-x-full fixed top-0 left-0"} translate-x-0 md:block`}
+        /* translate-x-0 -> Slides the sidebar to the left OFF SCREEN
+          -translate-x-full -> Slides the sidebar to the right ON SCREEN*/
+        className={`w-60 md:w-60 z-40 h-screen transition-transform block translate-x-0
+        ${isMenuToggled && "-translate-x-full fixed top-0 left-0"}`}
         aria-label="Sidebar"
       >
-        <div className="w-60 h-full px-3 pb-4 overflow-y-auto bg-gray-900 ">
+        <div className={`w-60 h-full px-3 overflow-y-auto bg-gray-900 pb-12 ${isMenuToggled && "pt-6- w-full-"}`}>
+          {
+            //DISPLAYS THE LOGO WITHIN SIDBAR
+            isMenuToggled && (
+              <div className="relative flex flex-col justify-center items-center text-white font-bold text-xl pb-4 pt-6">
+                <BrandLogo />
+                <span>Next-Level Games</span>
+                <div className="absolute top-1 right-[-0.625rem] ">
+                  <HamburgerMenu />
+                </div>
+              </div>
+            )
+          }
           {/* LINKS - EACH LINK ROUTES TO A DYNAMIC PAGE */}
           <ul className="space-y-2 font-medium">
             {/* BROWSE LINKS */}
