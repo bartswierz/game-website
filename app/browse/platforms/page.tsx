@@ -31,7 +31,9 @@ const Platforms = async () => {
       {/* <div className="flex flex-wrap gap-4"> */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {content.results.map(({ id, name, games_count, games }) => (
-          <GameLinkBasic id={id} name={name} games_count={games_count} games={games} />
+          <div key={name}>
+            <GameLinkBasic id={id} name={name} games_count={games_count} games={games} />
+          </div>
         ))}
       </div>
 

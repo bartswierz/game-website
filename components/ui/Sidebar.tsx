@@ -23,7 +23,6 @@ const Sidebar = () => {
   //TODO - get the isSidebarOpen value from redux store
   const isSidebarOpen = useAppSelector((state) => state.sidebarSlice.value.isSidebarOpen);
   const isMenuToggled = useAppSelector((state) => state.sidebarSlice.value.isMenuToggled);
-  // console.log("isSidebarOpen fetched from Redux Store: ", isSidebarOpen);
 
   /* SCENARIOS
    *#1 Mobile - Sidebar open, and width below 768px - CLOSE SIDEBAR
@@ -49,7 +48,6 @@ const Sidebar = () => {
 
   // Used to remove the sidebar width when the viewport is under 768px
   useEffect(() => {
-    console.log("inside handleResize useEffect");
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
     };
@@ -68,8 +66,6 @@ const Sidebar = () => {
   // Checks if user is accessing the app via mobile, if it is on a mobile screen, then we will hide the sidebar
   useEffect(() => {
     if (windowWidth < 768) {
-      console.log("APP ACCESSED VIA MOBILE - closing sidebar - screen is below 768px");
-      // dispatch(toggleSidebar());
       dispatch(closeSidebar());
     }
   }, []);
@@ -82,12 +78,10 @@ const Sidebar = () => {
 
   const handleCloseSidebar = () => {
     dispatch(toggleSidebar());
-    // dispatch(closeSidebar());
   };
 
   if (!isSidebarOpen) return null;
 
-  //TODO - IF screen IS DESKTOP then set sidebar to a BLOCK
   return (
     <>
       {
@@ -124,7 +118,6 @@ const Sidebar = () => {
                 <li key={link}>
                   <Link
                     href={{ pathname: `/${browse.title}/${link}` }}
-                    // className="flex gap-2"
                     className="flex items-center p-2 text-white rounded-lg hover:bg-gray-800 group"
                     onClick={() => setIsActive(link)}
                     key={link}

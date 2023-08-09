@@ -29,7 +29,7 @@ export const getPage = (url: string): number => {
 
   // Converting from string to number and subtracting 1 to get the current page number because the passed url is the NEXT URL TO FETCH
   const pageNumber = Number(splitURL[1]) - 1;
-  console.log("pageNumber", pageNumber);
+  // console.log("pageNumber", pageNumber);
 
   return pageNumber;
 };
@@ -85,7 +85,6 @@ export const getGameDetails = async (id: string): Promise<GameDetails> => {
 // export const getGameDevelopers = async (page?: number): Promise<GameDevelopers> => {
 export const getGameDevelopers = async (): Promise<GameDevelopers> => {
   // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
-  console.log("private key: ", process.env.RAWG_API_KEY);
 
   const res = await fetch(`https://api.rawg.io/api/developers?key=${process.env.RAWG_API_KEY}&page_size=6`);
   // const res = await fetch(`https://api.rawg.io/api/developers?key=${key}`);
@@ -130,8 +129,6 @@ export const getDeveloperInfo = async (id: string): Promise<DeveloperInfo> => {
 
   //All games
   const data = await res.json();
-  //Only want the results object containing game info
-  // let developerData: DeveloperInfo = data.results;
 
   return data;
 };
@@ -145,7 +142,6 @@ export const getGamesGenres = async (): Promise<GameGenres> => {
   }
 
   const data = await res.json();
-  // console.log("GENRES: ", data);
 
   return data;
 };
@@ -160,7 +156,6 @@ export const getGenreInfo = async (genreId: string | null): Promise<GenreInfo> =
   }
 
   const data: GenreInfo = await res.json();
-  // console.log("GENRE INFO: ", data);
 
   return data;
 };
@@ -175,7 +170,6 @@ export const getNextGameGenrePage = async (request: string | null): Promise<Game
 
     //All games
     const data: GamesByGenre = await res.json();
-    console.log("data", data);
 
     return data;
   }
@@ -216,7 +210,6 @@ export const getNextPlatformPage = async (request: string | null): Promise<GameP
 
     //All games
     const data: GamePlatforms = await res.json();
-    console.log("data", data);
 
     return data;
   }
@@ -242,7 +235,6 @@ export const getGamesSearch = async (searchTerm: string): Promise<GamesSearch> =
   if (!res.ok) throw new Error("Failed to fetch Games by Search Term");
 
   const data: GamesSearch = await res.json();
-  // console.log("data - getGamesSearch: ", data);
 
   return data;
 };
@@ -255,7 +247,7 @@ export const getGameScreenshots = async (game_slug: string): Promise<GameScreens
   if (!res.ok) throw new Error("Failed to fetch Game Screenshots");
 
   const data: GameScreenshots = await res.json();
-  // console.log("data - getGameScreenshots: ", data);
+
   return data;
 };
 
