@@ -2,7 +2,6 @@
 import { GameLink } from "@/components/ui";
 import { GamesSearch } from "@/types";
 import { getGamesSearch } from "@/utils";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 
 const SearchPage = ({ params }: { params: { searchTerm: string } }) => {

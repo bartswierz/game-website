@@ -28,6 +28,16 @@ const Searchbar = () => {
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    // const validCharacters = /^[A-Za-z0-9]+$/;
+    const validCharacters = /^[A-Za-z0-9\s-]+$/;
+
+    //IF SEARCH TERM IS EMPTY OR DOES NOT CONTAIN ALPHABET OR NUMBERS, ALERT USER
+    if (!searchTerm || !validCharacters.test(searchTerm)) {
+      alert("Invalid Input - Must contain alphabet or numbers");
+      return;
+    }
+
+    // VALID INPUT - Navigate to the /search page and pass the searchTerm as a query
     router.push(`/search/${searchTerm}`);
   };
 
