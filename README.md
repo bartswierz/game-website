@@ -29,13 +29,19 @@ Next.js web application similar to Steam focused on giving users access to view 
 ## Getting Started
 To run the application locally, follow the steps below(commands added for additional help):
 
-1. Create an empty directory and navigate into the folder: cd game-website
-2. Clone the repository into the folder locally by using git clone: git clone https://github.com/bartswierz/employee-records.git
-3. Navigate into the cloned directory: cd game-website
-4. npm install
-5. Navigate to RAWG API to get your API KEY(REQUIRED) - https://rawg.io/apidocs
+1. Create an empty directory on your desktop
+2. Clone the repository into the folder locally by using git clone: <strong>git clone https://github.com/bartswierz/employee-records.git</strong>
+3. Navigate into the directory:
+   1. <strong>cd game-website</strong>
+4. Install the necessary packages inside package.json:
+   1. <strong>npm install</strong>
+5. Navigate to RAWG API to get your API KEY(REQUIRED) -
+   1. <strong>https://rawg.io/apidocs</strong>
 6. Use the 'Get API Key' Button and create an account to receive your API KEY
-6. Create a .env.local file inside the root of your directory
-7. Add your API key inside the .env.local file: RAWG_API_KEY=[YOUR API KEY]
-7. Start the app: npm run dev
-8. You're all set!       
+7. Create a .env.local file inside the root of your directory
+8. Add your API key inside the .env.local file(only 1 line of code):
+   1. <strong>RAWG_API_KEY=[YOUR API KEY]</strong>
+9. Start the app:
+   1. <strong>npm run dev</strong>
+
+You're all set! The app is ready to go, that's all you have to do to get the app running locally. Enjoy!     
