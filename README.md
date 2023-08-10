@@ -27,3 +27,7 @@ Next.js web application similar to Steam focused on giving users access to view 
 - Shadcn
 
 ## Getting Started
+To run the application locally, follow the steps below:
+
+1. Create an empty directory and navigate into the folder(i.e. cd polaris-project)
+2. Clone the repository into the folder locally by using git clone: git clone https://github.com/bartswierz/employee-records.git
