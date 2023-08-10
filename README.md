@@ -27,7 +27,15 @@ Next.js web application similar to Steam focused on giving users access to view 
 - Shadcn
 
 ## Getting Started
-To run the application locally, follow the steps below:
+To run the application locally, follow the steps below(commands added for additional help):
 
-1. Create an empty directory and navigate into the folder(i.e. cd polaris-project)
+1. Create an empty directory and navigate into the folder: cd game-website
 2. Clone the repository into the folder locally by using git clone: git clone https://github.com/bartswierz/employee-records.git
+3. Navigate into the cloned directory: cd game-website
+4. npm install
+5. Navigate to RAWG API to get your API KEY(REQUIRED) - https://rawg.io/apidocs
+6. Use the 'Get API Key' Button and create an account to receive your API KEY
+6. Create a .env.local file inside the root of your directory
+7. Add your API key inside the .env.local file: RAWG_API_KEY=[YOUR API KEY]
+7. Start the app: npm run dev
+8. You're all set!       
