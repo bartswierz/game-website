@@ -6,7 +6,7 @@
 2. [Features](#features)
 3. [Technologies Used](#technologies-used)
 4. [Getting Started](#getting-started)
-<!-- [Usage](#usage) -->
+5. [Usage](#usage) 
 
 ## Project Overview
 
@@ -52,3 +52,6 @@ To run the application locally, follow the steps below(commands added for additi
    1. **npm run dev**
 
 You're all set! The app is ready to go, that's all you have to do to get the app running locally. Enjoy!     
+
+## Usage
+
