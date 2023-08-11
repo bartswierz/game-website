@@ -21,8 +21,9 @@ View Stores | The stores page features links directly to available digital distr
 View Developers | Access to over 420,000+ developers. Navigate to the developer page using the sidebar.
 Game Page | The individual game page features valuable game information for users such as the following: About Description, Game Screenshots, Available Platforms, Metascore, Genre, Release Date, Developer(s), Publisher(s), Tags, Publisher Website, Reddit Game Posts, Available Stores for Game Purchase(i.e. Xbox, Steam, etc.)
 Game Searchbar | Access to over 850,000+ games! Once the user inputs a game name into the field, games with similar names will be displayed with an infinite scroll.
-Infinite Scroll | As the user reaches the bottom of the page, another 6-20 results(# varies depending on page) will be rendered. This was implemented for an improved user experience(UX) over navigation buttons.
 Sidebar | A responsive sidebar containing an organized collection of available pages for users to choose from. The sidebar also features dropdown menus for various platforms organized by the parent company.
+Infinite Scroll | As the user reaches the bottom of the page, another 6-20 results(# varies depending on page) will be rendered. This was implemented for an improved user experience(UX) over navigation buttons.
+
 
 ## Technologies Used
 - Next.js
