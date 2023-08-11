@@ -17,7 +17,7 @@ Feature  | Description
 ------------- | -------------
 View Genres | **19** available game genres to browse through.
 View Platforms | **51** available platforms to browse through.
-View Stores | The stores page features links directly to available company sites such as Steam, Playstation, Xbox, Epic Games, etc.
+View Stores | The stores page features links directly to available digital distribution services such as Steam, Playstation, Xbox, Epic Games, etc.
 View Developers | Access to over 420,000+ developers. Navigate to the developer page using the sidebar.
 Game Page | The individual game page features valuable game information for users such as the following: About Description, Game Screenshots, Available Platforms, Metascore, Genre, Release Date, Developer(s), Publisher(s), Tags, Publisher Website, Reddit Game Posts, Available Stores for Game Purchase(i.e. Xbox, Steam, etc.)
 Game Searchbar | Access to over 850,000+ games! Once the user inputs a game name into the field, games with similar names will be displayed with an infinite scroll.
