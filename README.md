@@ -1,4 +1,5 @@
 # Next-Level Games
+![NLG-browse-genre](https://github.com/bartswierz/game-website/assets/100662080/10561d73-faa9-4024-9f8a-125152d01777)
 
 ## Table of Contents
 
@@ -54,4 +55,41 @@ To run the application locally, follow the steps below(commands added for additi
 You're all set! The app is ready to go, that's all you have to do to get the app running locally. Enjoy!     
 
 ## Usage
+
+### BROWSE GENRE PAGE PAGE
+- User can browse 19 different genres, upon choosing, the user will be redirected to games based on that genre.
+   
+![NLG-browse-genre](https://github.com/bartswierz/game-website/assets/100662080/10561d73-faa9-4024-9f8a-125152d01777)
+
+### BROWSE PLATFORMS PAGE
+- User can browse 51 platforms, upon choosing, the user will be redirected to the games page with that platform(additional platforms that are available for that game are also included as an icon list)
+   
+![NLG-browse-platforms](https://github.com/bartswierz/game-website/assets/100662080/05ca3134-f6a1-41fd-b64c-320d910d12e0)
+
+### GAME PAGE
+- Game page has an extensive amount of valuable information regarding the game that can prove useful to the user who wants an in-depth overview of the game.
+   
+![NLG-gamepage](https://github.com/bartswierz/game-website/assets/100662080/99fb6852-c4b3-4379-9243-4dca1b10a1a2)
+
+### GENRES PAGE
+- Games are displayed that are within that genre.
+   
+![NLG-genres](https://github.com/bartswierz/game-website/assets/100662080/a2183f7b-ec11-4e8d-9ceb-a41312095144)
+
+### PLATFORMS PAGE
+- Games within the chosen platform are rendered with infinite scroll functionality to increase user experience(UX) to load more games without the need of navigation buttons.
+   
+![NLG-platforms](https://github.com/bartswierz/game-website/assets/100662080/a9dddc41-1c27-40fa-939e-7eaa324a92fd)
+
+### HOME PAGE
+- Home page contains quick links for Genres, Developers, Platforms, and Stores. 
+   
+![NLG-homepage](https://github.com/bartswierz/game-website/assets/100662080/a4f3ceda-bc96-4665-9921-73965a39bb1a)
+
+
+
+
+
+
+
 
