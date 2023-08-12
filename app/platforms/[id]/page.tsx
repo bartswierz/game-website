@@ -10,8 +10,10 @@ import { PiDesktopTowerDuotone } from "react-icons/pi";
 import { BsAndroid2 } from "react-icons/bs";
 import { LoadMorePlatformGames } from "@/components/ui";
 import Link from "next/link";
+import Loading from "./loading";
 
 const PlatformPage = () => {
+  // if (1 === 1) return <Loading />;
   const [content, setContent] = useState<GamesByPlatform>();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const searchParams = useSearchParams();
@@ -114,7 +116,7 @@ const PlatformPage = () => {
     }
   };
 
-  if (!content) return <div className="text-white">Loading...</div>;
+  if (!content) return <Loading />;
 
   return (
     <div className="text-white">
