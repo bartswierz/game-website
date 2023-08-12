@@ -3,9 +3,13 @@ import { findStoresForGame, getGameDetails, getGameScreenshots } from "@/utils";
 import { Ratings } from "@/components/ui";
 import Link from "next/link";
 import Image from "next/image";
+import Loading from "./loading";
 
 // DISPLAY GAME DETAILS FOR A SINGLE GAME BASED ON ID
 const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
+  // FOR SKELETON LOADING DEVELOPMENT PURPOSES
+  // if (params.slug) return <Loading />;
+
   //We are using the passed slug(i.e. 'rocket-league' in this case) to get the game details from the API
   const gameDetails: GameDetails = await getGameDetails(params.slug);
 
@@ -109,7 +113,6 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className="container">
-      {/* <div className="border text-white flex flex-row flex-auto- gap-8 max-w-[1200px]"> */}
       <div className="text-white flex flex-row gap-8 max-w-[1500px]">
         {/* LEFT COLUMN */}
         <div className="p-4 flex-[60]">
@@ -128,7 +131,7 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
               </div>
 
               {/* GAME TITLE & GAME ID */}
-              <h2 className="text-4xl font-bold">
+              <h2 className="text-4xl font-bold mt-2">
                 {name} <span className="text-gray-500 text-base">#{id}</span>
               </h2>
             </div>
@@ -291,21 +294,6 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
               ))}
             </div>
           </div>
-
-          {/* RATING */}
-          {/* <div>
-            <li>
-              Rating: {rating} ({ratings_count})
-            </li>
-
-            <Ratings averageRating={rating} ratingsList={ratings} ratingsCount={ratings_count} />
-          </div> */}
-
-          {/* PLATFORM - REQUIREMENTS */}
-          {/* <div>
-            <h2>Minimum Requirements</h2>
-            <p>{platforms.requirements ? platforms.requirements : "N/A"}</p>
-          </div> */}
         </div>
 
         {/* SCREENSHOTS - RIGHT COLUMN */}

@@ -128,7 +128,6 @@ const PlatformPage = () => {
         {/* <p>Next: {content.next}</p> */}
         {/* <p>Previous: {content.previous}</p> */}
 
-        {/* <div className="flex flex-row flex-wrap gap-4 justify-center"> */}
         <div className="grid grid-cols-1 px-4 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 justify-center">
           {content.results.map(({ slug, background_image, name, stores }) => (
             <div key={slug} className="flex flex-col max-w-[500px] rounded-xl overflow-hidden bg-gray-800 h-max">
