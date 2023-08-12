@@ -1,5 +1,5 @@
 import { getGamesGenres } from "@/utils";
-import { GameGenres, GenreGamesList, GenreResults } from "@/types";
+import { GameGenres, GenreResults } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,7 +15,7 @@ const Genres = async () => {
             pathname: `/browse/genres/${slug}`,
             query: { id: id },
           }}
-          className="relative cursor-pointer rounded-lg overflow-hidden w-72- w-full h-80 justify-self-stretch"
+          className="relative cursor-pointer rounded-lg overflow-hidden w-full h-80 justify-self-stretch"
           key={id}
         >
           <Image src={image_background} alt="Game Genre" width={200} height={200} className="w-full h-full object-cover"></Image>
