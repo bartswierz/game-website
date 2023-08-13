@@ -1,5 +1,4 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import { Key } from "react";
 
 export default function Loading() {
   return (
