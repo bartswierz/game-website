@@ -22,8 +22,6 @@ const Stores = async () => {
     <SiEpicgames size={50} />,
   ];
 
-  if (!storesList) return <div className="text-white">Loading...</div>;
-
   return (
     <div className="flex justify-center flex-wrap gap-4">
       {storesList.results.map((store, idx) => (
@@ -50,8 +48,3 @@ const Stores = async () => {
 };
 
 export default Stores;
-{
-  /* <Link href={`https://${store.domain}`} className="underline hover:text-blue-500" target="_blank">
-              Go to {store.name}
-            </Link> */
-}
