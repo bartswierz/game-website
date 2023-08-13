@@ -5,7 +5,7 @@ export default function Loading() {
   return (
     <div>
       {/* HEADING */}
-      <Skeleton className="font-bold mb-8 w-[440px] h-10"></Skeleton>
+      <Skeleton className="font-bold mb-8 w-full max-w-[440px] h-10"></Skeleton>
 
       {/* 6 CARD GRID */}
       <div className="grid xl:grid-cols-2 gap-10">
