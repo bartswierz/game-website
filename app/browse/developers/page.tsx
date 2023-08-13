@@ -1,13 +1,12 @@
 "use client";
-import { getGameDevelopers, getNextGameDevelopersPage, getPage } from "@/utils";
+import { getGameDevelopers } from "@/utils";
 import React, { useState, useEffect } from "react";
-import { NavigationButton } from "@/components/ui";
 import { GameDevelopers, GameDevelopersResults } from "@/types";
 import GameLinkBasic from "@/components/ui/GameLinkBasic";
 import LoadMoreDevelopers from "@/components/ui/LoadMoreDevelopers";
+import Loading from "./loading";
 
 const Developers = () => {
-  // const router = useRouter();
   const [content, setContent] = useState<GameDevelopers | null>(null);
 
   // Ran once on page load
@@ -21,7 +20,7 @@ const Developers = () => {
   }, []);
 
   // While loading data from API
-  if (!content) return <div className="text-white text-3xl">Loading...</div>;
+  if (!content) return <Loading />;
 
   // Once data is ready to display
   return (
