@@ -19,6 +19,7 @@ const GameLink = ({ slug, name, background_image }: GameLinkProps) => {
         <Image src={background_image} width={300} height={300} alt="Game" className="w-full h-full object-cover" />
       </div>
     ) : (
+      // IF NO IMAGE URL, DISPLAY BROKEN IMAGE ICON
       <div className="flex justify-center items-center h-full">
         <MdBrokenImage size={80} color="grey" />
       </div>

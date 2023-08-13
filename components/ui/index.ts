@@ -15,6 +15,7 @@ import LoadMorePlatformGames from "./LoadMorePlatformGames";
 import LoadMoreGenreGames from "./LoadMoreGenreGames";
 import LoadMorePlatforms from "./LoadMorePlatforms";
 import LoadMoreDevelopers from "./LoadMoreDevelopers";
+import LoadMoreSearchGames from "./LoadMoreSearchGames";
 import GameLinkBasic from "./GameLinkBasic";
 import Spinner from "./Spinner";
 import HomepageLinks from "./HomepageLinks";
@@ -36,6 +37,7 @@ export {
   LoadMoreGenreGames,
   LoadMorePlatforms,
   LoadMoreDevelopers,
+  LoadMoreSearchGames,
   Spinner,
   GameLinkBasic,
   HomepageLinks,

@@ -305,3 +305,39 @@ export const fetchNextDevelopersPage = async (pageNumber: number): Promise<GameD
 
   return data;
 };
+
+// export const fetchNextSearchPage = async (pageNumber: number, searchTerm: string): Promise<GamesSearch> => {
+//   const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&page=${pageNumber}`);
+
+//   if (!res.ok) throw new Error("Failed to fetch Search Results");
+
+//   const data: GamesSearch = await res.json();
+
+// };
+
+export const fetchNextSearchPage = async (nextPage: string | null): Promise<GamesSearch> => {
+  // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&page=${pageNumber}`);
+  // IF THERE IS A NEXT PAGE FETCH IT
+  if (nextPage) {
+    const res = await fetch(nextPage);
+
+    if (!res.ok) throw new Error("Failed to fetch Search Results");
+
+    const data: GamesSearch = await res.json();
+    return data;
+  } else {
+    // REACHED THE END OF THE SEARCH RESULTS
+    return {} as GamesSearch;
+  }
+};
+
+// https://api.rawg.io/api/games?key=19bf6456aed44d52b0a064df2f54ef4a&search=diablo
+export const getGamesSearch2 = async (searchTerm: string): Promise<GamesSearch> => {
+  const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}`);
+
+  if (!res.ok) throw new Error("Failed to fetch Games by Search Term");
+
+  const data: GamesSearch = await res.json();
+
+  return data;
+};
