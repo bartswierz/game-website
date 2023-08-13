@@ -4,7 +4,7 @@ import { getPlatforms } from "@/utils";
 import { GamePlatforms } from "@/types";
 import GameLinkBasic from "@/components/ui/GameLinkBasic";
 import LoadMorePlatforms from "@/components/ui/LoadMorePlatforms";
-
+import Loading from "./loading";
 //{ params }: { params: { genres: string; page_size: number } }
 const Platforms = async () => {
   const [content, setContent] = useState<GamePlatforms | null>(null);
@@ -19,7 +19,7 @@ const Platforms = async () => {
     fetchData();
   }, []);
 
-  if (!content) return <div className="text-white">Loading...</div>;
+  if (!content) return <Loading />;
 
   return (
     <div className="text-white">
