@@ -6,9 +6,11 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ShowMore } from "@/components/ui";
+import Loading from "./loading";
 
 // const GenrePage = async ({ params }: { params: { slug: string; query: { id: string } } }) => {
 const GenrePage = async () => {
+  if (1 == 1) return <Loading />;
   // Grabs the ID from the URL
   const searchParams = useSearchParams();
   const searchID = searchParams.get("id");

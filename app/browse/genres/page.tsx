@@ -2,7 +2,6 @@ import { getGamesGenres } from "@/utils";
 import { GameGenres, GenreResults } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
-
 const Genres = async () => {
   const genres: GameGenres = await getGamesGenres();
   const { results } = genres;
