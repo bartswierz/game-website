@@ -29,7 +29,7 @@ const Developers = () => {
         DEVELOPERS <span className="text-sm text-gray-500">{content.count} Developers</span>
       </div>
 
-      <div className="grid xl:grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         {content.results.map(({ id, name, games_count, games }: GameDevelopersResults) => {
           return (
             <div key={id}>
