@@ -7,7 +7,6 @@ import LoadMoreDevelopers from "@/components/ui/LoadMoreDevelopers";
 import Loading from "./loading";
 
 const Developers = () => {
-  if (1) return <Loading />;
   const [content, setContent] = useState<GameDevelopers | null>(null);
 
   // Ran once on page load
