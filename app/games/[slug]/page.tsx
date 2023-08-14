@@ -59,13 +59,13 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
     metacritic_platforms,
     metacritic_url,
     name,
-    platforms,
+    // platforms,
     publishers,
-    rating,
-    ratings,
-    ratings_count,
-    reddit_description,
-    reddit_name,
+    // rating,
+    // ratings,
+    // ratings_count,
+    // reddit_description,
+    // reddit_name,
     reddit_url,
     released,
     stores,
@@ -74,14 +74,20 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
     website,
   } = gameDetails;
 
-  // FORMATS THE ENGLISH GAME DESCRIPTION - TODO UPDATE THIS
+  // FORMATS THE ENGLISH GAME DESCRIPTION
   const formatDescription = (description: string) => {
-    const splitByPTag: string[] = description.split("</p>"); // splitByPTag[0] = english description, splitByPTag[1] = Spanish description
+    // Split the text into paragraphs by splitting on P TAGS and BR TAGS
+    const paragraphs = description.split(/<\/?p>|<br\s*\/?>/).filter((paragraph) => paragraph.trim() !== "");
 
-    let englishDescription = splitByPTag[0].replace(/<p>/g, "");
-    let englishDescriptionList = englishDescription.split("<br />");
+    // Removes <em> tags, replaces &amp; with & and replaces &#39; with '
+    const cleanedParagraphs = paragraphs.map((paragraph) =>
+      paragraph
+        .replace(/<\/?em\s*\/?>/g, "")
+        .replace(/&amp;/g, "&")
+        .replace(/&#39;/g, "'")
+    );
 
-    return englishDescriptionList;
+    return cleanedParagraphs;
   };
 
   const descriptionText: string[] = formatDescription(description);
@@ -155,7 +161,6 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
               {descriptionText.map((sentence) => (
                 <p>{sentence}</p>
               ))}
-              {/* {description_raw} */}
             </div>
 
             {/* CONTAINER HOLDING: Platforms, Metascore, Genre, Release Date, Developer, Publisher, Age Rating, Other game in the series, Tags, Website */}
@@ -281,17 +286,20 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
           <div>
             <h2 className="text-gray-500 mb-2">Available Stores</h2>
             <div className="flex flex-row flex-wrap gap-2">
-              {gameStoreList.map(({ id, game_id, store_id, url }) => (
-                <Link
-                  href={url}
-                  target="_blank"
-                  // className=" text-gray-200 font-semibold text-base hover:text-slate-500"
-                  className="w-max text-sm font-semibold rounded-md py-1 px-2 bg-gray-200 text-gray-700 hover:bg-gray-300"
-                  key={id}
-                >
-                  {getStoreNameById(store_id)}
-                </Link>
-              ))}
+              {/* Displays list of stores if available, otherwise displays N/A */}
+              {gameStoreList.length !== 0
+                ? gameStoreList.map(({ id, game_id, store_id, url }) => (
+                    <Link
+                      href={url}
+                      target="_blank"
+                      // className=" text-gray-200 font-semibold text-base hover:text-slate-500"
+                      className="w-max text-sm font-semibold rounded-md py-1 px-2 bg-gray-200 text-gray-700 hover:bg-gray-300"
+                      key={id}
+                    >
+                      {getStoreNameById(store_id)}
+                    </Link>
+                  ))
+                : "N/A"}
             </div>
           </div>
         </div>

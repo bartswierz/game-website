@@ -28,7 +28,7 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
     <div className="text-white">
       {content && (
         <div>
-          <Combobox />
+          {/* <Combobox /> */}
           <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 px-4 md:px-0 gap-1">
             {content.results.map(({ slug, name, background_image }) => (
               <li key={slug} className="h-64 p-2">
