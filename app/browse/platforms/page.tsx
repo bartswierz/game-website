@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { getPlatforms } from "@/utils";
 import { GamePlatforms } from "@/types";
 import GameLinkBasic from "@/components/ui/GameLinkBasic";
-import LoadMorePlatforms from "@/components/ui/LoadMorePlatforms";
+import LoadMorePlatforms from "@/components/ui/Loading/LoadMorePlatforms";
 import Loading from "./loading";
 //{ params }: { params: { genres: string; page_size: number } }
 const Platforms = async () => {

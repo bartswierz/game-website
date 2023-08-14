@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { fetchNextPagePlatforms } from "@/utils";
 import { GamePlatformResults, GamePlatforms } from "@/types";
 import { Spinner } from "@/components/ui";
-import GameLinkBasic from "./GameLinkBasic";
+import GameLinkBasic from "../GameLinkBasic";
 
 // Button that will render another page of results to the screen when clicked once the user reaches the bottom of the page
 const LoadMorePlatforms = () => {

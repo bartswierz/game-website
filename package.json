@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@next/font": "^13.4.12",
+    "@radix-ui/react-dialog": "^1.0.4",
+    "@radix-ui/react-popover": "^1.0.6",
+    "@radix-ui/react-slot": "^1.0.2",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/node": "20.3.2",
     "@types/react": "18.2.14",
@@ -17,6 +20,7 @@
     "autoprefixer": "10.4.14",
     "class-variance-authority": "^0.6.1",
     "clsx": "^1.2.1",
+    "cmdk": "^0.2.0",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.7",
     "lucide-react": "^0.255.0",

@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/Shadcn/skeleton";
 
 //MAIN APP LOADING PAGE
 export default function Loading() {

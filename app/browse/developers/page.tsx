@@ -3,7 +3,7 @@ import { getGameDevelopers } from "@/utils";
 import React, { useState, useEffect } from "react";
 import { GameDevelopers, GameDevelopersResults } from "@/types";
 import GameLinkBasic from "@/components/ui/GameLinkBasic";
-import LoadMoreDevelopers from "@/components/ui/LoadMoreDevelopers";
+import LoadMoreDevelopers from "@/components/ui/Loading/LoadMoreDevelopers";
 import Loading from "./loading";
 
 const Developers = () => {

@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 // LINEAR GRADIENT GENERATOR - https://hypercolor.dev/generator
+// LINKS USER TO GENRES, DEVELOPERS, STORES, and PLATFORMS
 const HomepageLinks = () => {
   interface linksProps {
     hrefText: string;
