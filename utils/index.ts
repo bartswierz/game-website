@@ -330,3 +330,18 @@ export const fetchNextSearchPage = async (nextPage: string | null): Promise<Game
     return {} as GamesSearch;
   }
 };
+
+export const formatDescription = (description: string) => {
+  // Split the text into paragraphs by splitting on P TAGS and BR TAGS
+  const paragraphs = description.split(/<\/?p>|<br\s*\/?>/).filter((paragraph) => paragraph.trim() !== "");
+
+  // Removes <em> tags, replaces &amp; with & and replaces &#39; with '
+  const cleanedParagraphs = paragraphs.map((paragraph) =>
+    paragraph
+      .replace(/<\/?em\s*\/?>/g, "")
+      .replace(/&amp;/g, "&")
+      .replace(/&#39;/g, "'")
+  );
+
+  return cleanedParagraphs;
+};

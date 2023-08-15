@@ -19,6 +19,7 @@ import LoadMoreSearchGames from "./Loading/LoadMoreSearchGames";
 import GameLinkBasic from "./GameLinkBasic";
 import Spinner from "./Loading/Spinner";
 import HomepageLinks from "./HomepageLinks";
+import WordList from "./WordList";
 // Export all components as a single object for cleaner imports in other files
 export {
   Navbar,
@@ -41,4 +42,5 @@ export {
   Spinner,
   GameLinkBasic,
   HomepageLinks,
+  WordList,
 };

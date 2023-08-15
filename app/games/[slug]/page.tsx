@@ -1,6 +1,6 @@
 import { GameDetails, GameScreenshots, Platforms, StoresWithGame } from "@/types";
-import { findStoresForGame, getGameDetails, getGameScreenshots } from "@/utils";
-import { Ratings } from "@/components/ui";
+import { findStoresForGame, getGameDetails, getGameScreenshots, formatDescription } from "@/utils";
+import { Ratings, ShowMore, WordList } from "@/components/ui";
 import Link from "next/link";
 import Image from "next/image";
 import Loading from "./loading";
@@ -48,15 +48,15 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
 
   // Destructuring props from GameDetails
   const {
-    background_image,
+    // background_image,
     description,
-    description_raw,
+    // description_raw,
     developers,
-    esrb_rating,
+    // esrb_rating,
     genres,
     id,
     metacritic,
-    metacritic_platforms,
+    // metacritic_platforms,
     metacritic_url,
     name,
     // platforms,
@@ -68,29 +68,13 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
     // reddit_name,
     reddit_url,
     released,
-    stores,
+    // stores,
     tags,
     updated,
     website,
   } = gameDetails;
 
-  // FORMATS THE ENGLISH GAME DESCRIPTION
-  const formatDescription = (description: string) => {
-    // Split the text into paragraphs by splitting on P TAGS and BR TAGS
-    const paragraphs = description.split(/<\/?p>|<br\s*\/?>/).filter((paragraph) => paragraph.trim() !== "");
-
-    // Removes <em> tags, replaces &amp; with & and replaces &#39; with '
-    const cleanedParagraphs = paragraphs.map((paragraph) =>
-      paragraph
-        .replace(/<\/?em\s*\/?>/g, "")
-        .replace(/&amp;/g, "&")
-        .replace(/&#39;/g, "'")
-    );
-
-    return cleanedParagraphs;
-  };
-
-  const descriptionText: string[] = formatDescription(description);
+  // const descriptionText: string[] = formatDescription(description);
 
   // FORMATS UPDATED DATE TO MM/DD/YYYY
   const formatUpdatedDate = (updated: string) => {
@@ -158,9 +142,10 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
             {/* ABOUT/DESCRIPTION */}
             <h2 className="text-3xl font-bold">About</h2>
             <div className="flex flex-col gap-6 w-full">
-              {descriptionText.map((sentence) => (
+              {/* {descriptionText.map((sentence) => (
                 <p>{sentence}</p>
-              ))}
+              ))} */}
+              <ShowMore text={description} />
             </div>
 
             {/* CONTAINER HOLDING: Platforms, Metascore, Genre, Release Date, Developer, Publisher, Age Rating, Other game in the series, Tags, Website */}
@@ -186,13 +171,14 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
               {/* GENRES */}
               <div>
                 <h2 className="text-gray-500 font-semibold mb-2">Genre</h2>
-                <ul className="flex flex-row">
+                {/* <ul className="flex flex-row">
                   {genres.map(({ id, name }) => (
                     <li key={id} className="pr-2">
                       {name}
                     </li>
                   ))}
-                </ul>
+                </ul> */}
+                <WordList stringList={genres} />
               </div>
 
               {/* RELEASE DATE */}
@@ -203,24 +189,30 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
 
               {/* DEVELOPER */}
               <div>
-                <h2 className="text-gray-500 font-semibold mb-2">Developer</h2>
-                <ul>
-                  {developers.map(({ id, name }) => (
-                    <li key={id}>{name}</li>
+                <h2 className="text-gray-500 font-semibold mb-2">Developer(s)</h2>
+                {/* <ul>
+                  {developers.map(({ id, name }, idx) => (
+                    <li key={id}>
+                      {name}
+                      {idx !== publishers.length - 1 && <>,</>}
+                    </li>
                   ))}
-                </ul>
+                </ul> */}
+                <WordList stringList={developers} />
               </div>
 
               {/* PUBLISHER */}
               <div>
                 <h2 className="text-gray-500 font-semibold mb-2">Publisher(s)</h2>
-                <ul>
-                  {publishers.map(({ id, name }) => (
+                {/* <ul>
+                  {publishers.map(({ id, name }, idx) => (
                     <li key={id} className="pr-2">
                       {name}
+                      {idx !== publishers.length - 1 && <>,</>}
                     </li>
                   ))}
-                </ul>
+                </ul> */}
+                <WordList stringList={publishers} />
               </div>
 
               {/* AGE RATING */}
@@ -232,13 +224,15 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
               {/* TAGS */}
               <div>
                 <h2 className="text-gray-500 font-semibold mb-2">Tags</h2>
-                <ul className="flex flex-row flex-wrap">
-                  {tags.map(({ id, name, slug }) => (
+                {/* <ul className="flex flex-row flex-wrap">
+                  {tags.map(({ id, name }, idx) => (
                     <li key={id} className="pr-2">
-                      {name},
+                      {name}
+                      {idx !== tags.length - 1 && <>,</>}
                     </li>
                   ))}
-                </ul>
+                </ul> */}
+                <WordList stringList={tags} />
               </div>
 
               {/* WEBSITE */}
