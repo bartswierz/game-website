@@ -15,7 +15,7 @@ const WordList = ({ stringList }: WordListProps) => {
     <div>
       {stringList.map(({ id, name }, idx) => {
         return (
-          <span key={id} className="border">
+          <span key={id}>
             {name}
             {/* IF NOT LAST WORD IN LIST(OR ONLY 1 WORD), THEN ADD COMMA */}
             {idx !== stringList.length - 1 ? ", " : ""}
