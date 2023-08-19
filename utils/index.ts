@@ -227,13 +227,51 @@ export const getGamesByPlatform = async (platformID: string | null): Promise<Gam
 
 // https://api.rawg.io/api/games?key=19bf6456aed44d52b0a064df2f54ef4a&search=diablo
 export const getGamesSearch = async (searchTerm: string): Promise<GamesSearch> => {
-  const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}`);
+  console.log("searchTerm search: ", searchTerm);
+  // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}`);
+  const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true`);
 
   if (!res.ok) throw new Error("Failed to fetch Games by Search Term");
 
   const data: GamesSearch = await res.json();
 
   return data;
+};
+
+/*
+https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true&ordering=name
+PARAMETERS WILL BE PASSED BASED ON THE COMBOBOX CHOICES USER SELECTS
+*/
+export const getAdvancedGamesSearch = async (searchTerm: string, orderBy?: string): Promise<GamesSearch> => {
+  console.log("searchTerm search: ", searchTerm);
+  console.log("orderBy search: ", orderBy);
+  // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}`);
+  // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true`);
+  // IF ORDER BY EXISTS THEN USE THEM
+  if (orderBy) {
+    const res = await fetch(
+      `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true&ordering=${orderBy}`
+    );
+
+    if (!res.ok) throw new Error("Failed to fetch Games by Search Term & Order By");
+
+    const data: GamesSearch = await res.json();
+
+    return data;
+  } else if (!orderBy) {
+    const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true`);
+
+    if (!res.ok) throw new Error("Failed to fetch Games by Search Term");
+
+    const data: GamesSearch = await res.json();
+
+    return data;
+  }
+
+  // if (!res.ok) throw new Error("Failed to fetch Games by Search Term");
+
+  // const data: GamesSearch = await res.json();
+  return {} as GamesSearch;
 };
 
 // Fetch Game Screenshots by passing in game slug i.e. 'rocket-league'

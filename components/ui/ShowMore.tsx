@@ -28,6 +28,7 @@ const ShowMore = ({ text }: ShowMoreProps) => {
     );
   };
 
+  //Loop through paragraphList array and create a new array of strings that total the limit of characters
   const ShowLess = ({ paragraphList, limit }: ConcatenateStringsProps) => {
     let currCount = 0;
     let result: string[] = [];
