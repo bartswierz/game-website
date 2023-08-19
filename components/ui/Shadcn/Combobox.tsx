@@ -7,7 +7,8 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "
 // import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/Shadcn/popover";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 /* ORDERING FILTER OPTIONS
 Available fields: name, released, added, created, updated, rating, metacritic. You can reverse the sort order adding a hyphen, for example: -released.
 */
@@ -45,31 +46,6 @@ export function Combobox({ searchTerm }: ComboboxProps) {
   //TODO - update value to be a string array to be able to collect multiple value
   const [value, setValue] = useState("");
   console.log("COMBOBOX - value: ", value);
-  const router = useRouter();
-
-  // const handleRouting = () => {
-  //   console.log("inside handRouting - value = ", value);
-  //   setValue(currentValue === value ? "" : currentValue);
-  //   router.push(`/search/${searchTerm}&orderBy=${value}`);
-  // };
-
-  //IF VALUE CHANGES THEN WE WANT TO PUSH TO THE SEARCH PAGE
-  // useEffect(() => {
-  //   // Call the api to get the data and send it to the search page
-  //   if (value) {
-  //     console.log("user selected: ", value);
-  //     <Link
-  //       href={{
-  //         pathname: `/search/genres/${slug}`,
-  //         query: { id: id },
-  //       }}
-  //       // className="relative cursor-pointer rounded-lg overflow-hidden w-full h-80 justify-self-stretch"
-  //       // key={id}
-  //     ></Link>;
-  //   }
-  //   // Else - not selected yet
-  //   console.log("no value selected yet...", value);
-  // }, [value]);
 
   //ON VALUE CHANGE, call the api to get the data and send it to the search page
   return (
@@ -93,35 +69,19 @@ export function Combobox({ searchTerm }: ComboboxProps) {
             <CommandEmpty>No framework found.</CommandEmpty>
             <CommandGroup>
               {orderByOptions.map((framework) => (
-                <CommandItem
-                  key={framework.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
-                    setOpen(false);
-                    /*TODO - CALLING API TO GET UPDATED SEARCH - ISSUE HERE IS WE NEED TO ALSO PASS THE QUERY 
-                    href={{
-                    pathname: `/genres/${genreInfo.name.toLowerCase()}`,
-                    query: { genres: `${genreInfo.name.toLowerCase()}`, page_size: 6 },
-                  }}
-                    */
-                    // router.push(`/search/${searchTerm}`);
-                    // router.push(`/search/${searchTerm}&orderBy=${value}`);
-                    // router.push(`/search/${searchTerm}&orderBy=${value}`);
-                    // handleRouting();
-                    // router.push(`/search/${searchTerm}`, value);
-                    // router.push(`/search/${searchTerm}&${value}`);
-                    // router.push(value);
-                    // options: { orderBy: value }
-                    // query: { orderBy: value },
-                    // query: { genres: `${genreInfo.name.toLowerCase()}`, page_size: 6 });
-                  }}
-                >
-                  {/* <Link href={{ pathname: `/search/${searchTerm}`, query: { orderBy: value } }}> */}
-                  {/* <Link href={{ pathname: `/search/${searchTerm}`, query: { value: value } }}> */}
-                  <Check className={cn("mr-2 h-4 w-4", value === framework.value ? "opacity-100" : "opacity-0")} />
-                  {framework.label}
-                  {/* </Link> */}
-                </CommandItem>
+                <Link href={{ pathname: `/search/${searchTerm}`, query: { ordering: framework.value } }}>
+                  <CommandItem
+                    key={framework.value}
+                    onSelect={(currentValue) => {
+                      setValue(currentValue === value ? "" : currentValue);
+                      setOpen(false);
+                    }}
+                    className="cursor-pointer"
+                  >
+                    <Check className={cn("mr-2 h-4 w-4", value === framework.value ? "opacity-100" : "opacity-0")} />
+                    {framework.label}
+                  </CommandItem>
+                </Link>
               ))}
             </CommandGroup>
           </Command>

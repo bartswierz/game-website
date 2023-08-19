@@ -243,14 +243,11 @@ https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTer
 PARAMETERS WILL BE PASSED BASED ON THE COMBOBOX CHOICES USER SELECTS
 */
 export const getAdvancedGamesSearch = async (searchTerm: string, orderBy?: string): Promise<GamesSearch> => {
-  console.log("searchTerm search: ", searchTerm);
-  console.log("orderBy search: ", orderBy);
-  // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}`);
-  // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true`);
-  // IF ORDER BY EXISTS THEN USE THEM
+  console.log(`searchTerm search: ${searchTerm} & orderBy: ${orderBy}`);
+
   if (orderBy) {
     const res = await fetch(
-      `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true&ordering=${orderBy}`
+      `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true&ordering=${orderBy}`
     );
 
     if (!res.ok) throw new Error("Failed to fetch Games by Search Term & Order By");
@@ -259,7 +256,7 @@ export const getAdvancedGamesSearch = async (searchTerm: string, orderBy?: strin
 
     return data;
   } else if (!orderBy) {
-    const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true`);
+    const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true`);
 
     if (!res.ok) throw new Error("Failed to fetch Games by Search Term");
 

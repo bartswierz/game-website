@@ -27,6 +27,7 @@ const Searchbar = () => {
   // We want to navigate to the /search page AND PASS THE searchTerm as a query
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("inside searchbar handlesearchbar");
 
     // const validCharacters = /^[A-Za-z0-9]+$/;
     const validCharacters = /^[A-Za-z0-9\s-]+$/;
