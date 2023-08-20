@@ -32,6 +32,7 @@ const Platforms = async () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {content.results.map(({ id, name, games_count, games }) => (
           <div key={name}>
+            <span className="font-bold text-3xl text-green-500">ID: {id}</span>
             <GameLinkBasic id={id} name={name} games_count={games_count} games={games} />
           </div>
         ))}

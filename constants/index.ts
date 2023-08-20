@@ -1,3 +1,5 @@
+import { FilterType } from "@/types";
+
 // Hardcoded Sidebar Data due to different requirements needed for each route category(browse, platforms, generes, etc.) to display properly in the URL. Within the platforms, we have decided to hardcode the ID because the IDs aren't expected to be changed and saves us seconds of load time fetching and filtering through a large data request from the RAWG API.
 export const sidebarData = {
   // BROWSE DATA
@@ -94,3 +96,103 @@ export const sidebarData = {
     ],
   },
 };
+
+// ORDERING FILTER OPTIONS
+export const orderingOptions: FilterType[] = [
+  {
+    value: "name",
+    label: "Name",
+  },
+  {
+    value: "released",
+    label: "Released",
+  },
+  {
+    value: "added",
+    label: "Date Added",
+  },
+  {
+    value: "rating",
+    label: "Rating",
+  },
+  {
+    value: "metacritic",
+    label: "Metacritic",
+  },
+];
+
+// PLATFORM FILTER OPTIONS
+export const platformOptions: FilterType[] = [
+  {
+    value: "4",
+    label: "PC",
+  },
+  {
+    value: "187",
+    label: "Playstation 5",
+  },
+  {
+    value: "1",
+    label: "Xbox One",
+  },
+  {
+    value: "18",
+    label: "Playstation 4",
+  },
+  {
+    value: "188",
+    label: "Xbox Series S/X",
+  },
+  {
+    value: "7",
+    label: "Nintendo Switch",
+  },
+  {
+    value: "3",
+    label: "iOS",
+  },
+  {
+    value: "21",
+    label: "Android",
+  },
+  {
+    value: "6",
+    label: "Linux",
+  },
+  {
+    value: "166",
+    label: "Commodore",
+  },
+  {
+    value: "111",
+    label: "3DO",
+  },
+  {
+    value: "12",
+    label: "Neo Geo",
+  },
+  {
+    value: "186",
+    label: "Xbox Series X",
+  },
+  {
+    value: "Xbox One",
+    label: "1",
+  },
+  {
+    value: "",
+    label: "",
+  },
+  {
+    value: "",
+    label: "",
+  },
+  {
+    value: "",
+    label: "",
+  },
+  {
+    value: "",
+    label: "",
+  },
+];

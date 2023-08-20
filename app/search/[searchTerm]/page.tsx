@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { LoadMoreSearchGames } from "@/components/ui";
 import { Combobox } from "@/components/ui/Shadcn/Combobox";
 import { useSearchParams } from "next/navigation";
+
 //TODO - ADD PARAMETERS AS OPTIONAL IF USER SELECTS FILTERS FROM COMBOBOX
 /*
 On combobox change:
@@ -18,38 +19,86 @@ On combobox change:
 // const SearchPage = ({ params }: { params: { searchTerm: string; value?: string }; query: { query: string } }) => {
 // const SearchPage = ({ params }: { params: { searchTerm: string; query?: { value: string } } }) => {
 const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
-  console.log("PARAMS: ", params);
-  // console.log("query: ", params.query);
-  // COLLECTS the data inside query: {...}
-  const searchParams = useSearchParams();
-  // THIS DOES NOT === null
-  const searchOrdering = searchParams.get("ordering");
-  const [ordering, setOrdering] = useState("");
-  // THIS ONE GIVES A VALUE -> 'name'
-  // const searchOrdering2 = searchParams.get("value");
-  console.log("searchOrdering: ", searchOrdering);
-  // console.log("searchOrdering2: ", searchOrdering2);
-  // const SearchPage = ({ params }: { params: { searchTerm: string; value: string } }) => {
-  // const { searchTerm, value } = params;
-  // const { searchTerm, value } = params;
-  // const { searchTerm, value } = params;
   const { searchTerm } = params;
   // const value = params.query?.value;
   const [content, setContent] = useState<GamesSearch | null>(null);
+  // Collects our value inside query passed from Combobox
+  const searchParams = useSearchParams();
+  const searchOrdering = searchParams.get("ordering");
+  const searchPlatforms = searchParams.get("platforms");
 
-  // console.log("value search: ", value);
-  console.log("params: ", params);
-  // console.log("value search QUERY: ", query.query);
+  // const [ordering, setOrdering] = useState("");
+  // const [platforms, setPlatforms] = useState("");
+  // if (searchOrdering) setOrdering(searchOrdering);
+  // if (searchPlatforms) setPlatforms(searchPlatforms);
+  // const [ordering, setOrdering] = useState("");
+  //Set at the beginning, if user doesnt choose any filters, these will be the default
+  //TODO - ordering or platforms is being reset because of the useState, sometimes they arent passed, we don't want to overwrite it with null
+  // const [searchParameters, setSearchParameters] = useState({
+  //   searchTerm: searchTerm,
+  //   ordering: searchOrdering,
+  //   platforms: searchPlatforms,
+  // });
+  const [searchParameters, setSearchParameters] = useState({});
 
+  console.log("searchParameters: ", searchParameters);
+  // const [searchParameters, setSearchParameters] = useState({ searchTerm: searchTerm, ordering: "", platforms: "" });
+  // console.log(`Search Page -\n ${searchTerm}: ${searchTerm},\n ordering: ${searchOrdering},\n platforms: ${searchPlatforms}`);
+  // const paramsObj = {
+  //   searchTerm: searchTerm,
+  //   searchOrdering: searchOrdering,
+  //   platforms: searchPlatforms,
+  // };
+
+  //If searchPlatforms isnt null, that means user chose, update searchParameters.platforms
+  // useEffect(() => {
+  //   // console.log("searchParameters - searchTerm given: ", searchTerm);
+  //   if (!searchTerm) return;
+  //   setSearchParameters({ ...searchParameters, searchTerm: searchTerm });
+  // }, [searchTerm]);
+
+  //If searchOrdering isnt null, that means user chose, update searchParameters.searchOrdering
+  // useEffect(() => {
+  //   // console.log("searchParameters - searchOrdering given: ", searchOrdering);
+  //   if (!searchOrdering) return;
+
+  //   if (searchOrdering === "") {
+  //     setSearchParameters({ ...searchParameters, ordering: null });
+  //     return;
+  //   }
+
+  //   setSearchParameters({ ...searchParameters, ordering: searchOrdering });
+  //   // console.log("searchParameters update: ", searchParameters);
+  // }, [searchOrdering]);
+
+  // //If searchPlatforms isnt null, that means user chose, update searchParameters.platforms
+  // useEffect(() => {
+  //   // console.log("searchParameters - searchPlatforms given: ", searchPlatforms);
+  //   if (!searchPlatforms) return;
+
+  //   if (searchOrdering === "") {
+  //     setSearchParameters({ ...searchParameters, platforms: null });
+  //     return;
+  //   }
+
+  //   setSearchParameters({ ...searchParameters, platforms: searchPlatforms });
+  //   // console.log("searchParameters update: ", searchParameters);
+  // }, [searchPlatforms]);
+
+  // useEffect(() => {
+  //   console.log("UPDATE: ", searchParameters);
+  // }, [searchParameters]);
+  // console.log("paramsObj: ", paramsObj);
   //TODO - update
   useEffect(() => {
     // const fetchData = async (searchTerm: string) => {
     const fetchData = async () => {
-      console.log("fetchData - searchTerm: ", searchTerm);
-      //TODO - update getGamesSearch to accept extra optional parameters
+      // console.log("fetchData - searchTerm: ", searchTerm);
 
       // value can be null or undefined if user only types in the search box
-      const data: GamesSearch = await getAdvancedGamesSearch(searchTerm, searchOrdering);
+      const data: GamesSearch = await getAdvancedGamesSearch(searchTerm, searchOrdering, searchPlatforms);
+      // const data: GamesSearch = await getAdvancedGamesSearch(paramsObj);
+      // const data: GamesSearch = await getAdvancedGamesSearch(searchParameters);
 
       // setContent(data);
       if (data) {
@@ -60,25 +109,8 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
     // If we have a search term, fetch the data
     if (searchTerm) fetchData();
     // fetchData();
-  }, [searchTerm, searchOrdering]);
-
-  //When order is changed we want to update it here
-  // useEffect(() => {
-  //   const searchOrdering = searchParams.get("ordering");
-  // }, [searchOrdering]);
-  // useEffect(() => {
-  //   const fetchData = async (searchTerm: string) => {
-  //     //TODO - update getGamesSearch to accept extra optional parameters
-  //     const data: GamesSearch = await getGamesSearch(searchTerm);
-
-  //     if (data) {
-  //       setContent(data);
-  //     } else throw new Error("No data returned from getGamesSearch");
-  //   };
-
-  //   // If we have a search term, fetch the data
-  //   if (searchTerm) fetchData(searchTerm);
-  // }, [searchTerm]);
+  }, [searchTerm, searchOrdering, searchPlatforms]);
+  // }, [searchParameters]); //If any of the searchParamters change, refetch data
 
   // MOVE SEARCH CONTENT DATA HERE
   return (
@@ -86,7 +118,10 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
     <div className="text-white">
       {content && (
         <div>
-          <Combobox searchTerm={searchTerm} />
+          {/* //TODO pass orderingOptions */}
+          <div className="text-3xl text-green-500">RESULTS: {content.count}</div>
+          <Combobox searchTerm={searchTerm} type="ordering" />
+          {/* <Combobox searchTerm={searchTerm} type="platforms" /> */}
           <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 px-4 md:px-0 gap-1">
             {content.results.map(({ slug, name, background_image }) => (
               <li key={slug} className="h-64 p-2">

@@ -624,3 +624,8 @@ export interface StoresWithGame {
     url: string;
   }[];
 }
+
+export interface FilterType {
+  value: string;
+  label: string;
+}

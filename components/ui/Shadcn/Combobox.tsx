@@ -1,86 +1,74 @@
 "use client";
 import { Check, ChevronsUpDown } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Shadcn/button";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/Shadcn/command";
-// import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/Shadcn/popover";
 import Link from "next/link";
-// import { useRouter } from "next/navigation";
-// import { useSearchParams } from "next/navigation";
+import { orderingOptions, platformOptions } from "@/constants";
+import { FilterType } from "@/types";
 /* ORDERING FILTER OPTIONS
 Available fields: name, released, added, created, updated, rating, metacritic. You can reverse the sort order adding a hyphen, for example: -released.
 */
 //TODO - update types - value will be passed as the parameter for a call
-const orderByOptions = [
-  {
-    value: "name",
-    label: "Name",
-  },
-  {
-    value: "released",
-    label: "Released",
-  },
-  {
-    value: "added",
-    label: "Date Added",
-  },
-  {
-    value: "rating",
-    label: "Rating",
-  },
-  {
-    value: "metacritic",
-    label: "Metacritic",
-  },
-];
 // https://api.rawg.io/api/games?ordering=-metacritic
 
-//TODO - WHEN value changes - meaning user selected an option, then we need to call the api to get the data and send it to the search page
 interface ComboboxProps {
   searchTerm: string;
+  // filterOptions: { value: string; label: string }[];
+  type: "ordering" | "platforms";
 }
-export function Combobox({ searchTerm }: ComboboxProps) {
+
+// export function Combobox({ searchTerm, filterOptions, type }: ComboboxProps) {
+export function Combobox({ searchTerm, type }: ComboboxProps) {
   const [open, setOpen] = useState(false);
   //TODO - update value to be a string array to be able to collect multiple value
   const [value, setValue] = useState("");
-  console.log("COMBOBOX - value: ", value);
-
+  // console.log("COMBOBOX - value: ", value);
+  //TODO - use useState to set content checking if type is platform or ordering
+  const [filterOptions, setFilterOptions] = useState<FilterType[]>(type === "ordering" ? orderingOptions : platformOptions);
+  // console.log("filterOptions: ", filterOptions);
   //ON VALUE CHANGE, call the api to get the data and send it to the search page
   return (
-    <div>
+    <>
       <div>User choice(value): {value}</div>
+      <div>Type passed: {type && type}</div>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             variant="default"
             role="combobox"
             aria-expanded={open}
-            className="w-[200px] justify-between bg-transparent- bg-slate-800 hover:bg-slate-500"
+            className="w-[200px] justify-between bg-slate-800 hover:bg-slate-500"
           >
-            {value ? orderByOptions.find((framework) => framework.value === value)?.label : "Order by..."}
+            {value
+              ? filterOptions.find((option) => option.value === value)?.label
+              : `${type === "ordering" ? `Order by...` : "Platforms"}`}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0">
           <Command>
             <CommandInput placeholder="Search filter..." />
-            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandEmpty>No option found.</CommandEmpty>
             <CommandGroup>
               {/* OUR FILTER LIST OF OPTIONS */}
-              {orderByOptions.map((framework) => (
-                <Link href={{ pathname: `/search/${searchTerm}`, query: { ordering: framework.value } }}>
+              {filterOptions.map((option) => (
+                // type passed is either 'ordering' or 'platforms', option value = slug or id of the option to be passed
+                <Link href={{ pathname: `/search/${searchTerm}`, query: { [type]: option.value } }} key={option.value}>
                   <CommandItem
-                    key={framework.value}
+                    // key={option.value}
                     onSelect={(currentValue) => {
-                      setValue(currentValue === value ? "" : currentValue);
+                      //This would clear the value
+                      // setValue(currentValue === value ? '' : currentValue);
+                      setValue(currentValue === value ? value : currentValue);
                       setOpen(false);
                     }}
                     className="cursor-pointer"
                   >
-                    <Check className={cn("mr-2 h-4 w-4", value === framework.value ? "opacity-100" : "opacity-0")} />
-                    {framework.label}
+                    <Check className={cn("mr-2 h-4 w-4", value === option.value ? "opacity-100" : "opacity-0")} />
+                    {option.label}
                   </CommandItem>
                 </Link>
               ))}
@@ -93,7 +81,7 @@ export function Combobox({ searchTerm }: ComboboxProps) {
                   setValue("");
                 }}
               >
-                <CommandItem key={"clearOrdering"} className="cursor-pointer bg-gray-300 hover:bg-gray-400 font-semibold pl-8">
+                <CommandItem key={type} className="cursor-pointer font-semibold pl-8">
                   Clear Filter
                 </CommandItem>
               </Link>
@@ -101,6 +89,6 @@ export function Combobox({ searchTerm }: ComboboxProps) {
           </Command>
         </PopoverContent>
       </Popover>
-    </div>
+    </>
   );
 }
