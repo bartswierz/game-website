@@ -96,7 +96,7 @@ const Sidebar = () => {
         ${isMenuToggled && "-translate-x-full fixed top-0 left-0"}`}
         aria-label="Sidebar"
       >
-        <div className={`w-60 h-[85vh] px-3 overflow-y-auto bg-gray-900 pb-8 ${isMenuToggled && "pt-6- w-full-"}`}>
+        <div className={`w-60 h-full md:h-[85vh] px-3 overflow-y-auto bg-gray-900 pb-8 ${isMenuToggled && "pt-6- w-full-"}`}>
           {
             //DISPLAYS THE LOGO WITHIN SIDBAR
             isMenuToggled && (

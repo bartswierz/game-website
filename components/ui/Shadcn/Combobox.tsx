@@ -35,8 +35,9 @@ export function Combobox({ searchTerm, type }: ComboboxProps) {
   //ON VALUE CHANGE, call the api to get the data and send it to the search page
   return (
     <div className="flex flex-col">
-      <div>User choice(value): {value}</div>
-      <div>Type passed: {type && type}</div>
+      <div>
+        {type}: {value}
+      </div>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
