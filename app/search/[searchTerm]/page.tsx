@@ -24,6 +24,7 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
   const searchParams = useSearchParams();
   // THIS DOES NOT === null
   const searchOrdering = searchParams.get("ordering");
+  const [ordering, setOrdering] = useState("");
   // THIS ONE GIVES A VALUE -> 'name'
   // const searchOrdering2 = searchParams.get("value");
   console.log("searchOrdering: ", searchOrdering);
@@ -61,6 +62,10 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
     // fetchData();
   }, [searchTerm, searchOrdering]);
 
+  //When order is changed we want to update it here
+  // useEffect(() => {
+  //   const searchOrdering = searchParams.get("ordering");
+  // }, [searchOrdering]);
   // useEffect(() => {
   //   const fetchData = async (searchTerm: string) => {
   //     //TODO - update getGamesSearch to accept extra optional parameters

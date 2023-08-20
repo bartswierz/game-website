@@ -68,6 +68,7 @@ export function Combobox({ searchTerm }: ComboboxProps) {
             <CommandInput placeholder="Search filter..." />
             <CommandEmpty>No framework found.</CommandEmpty>
             <CommandGroup>
+              {/* OUR FILTER LIST OF OPTIONS */}
               {orderByOptions.map((framework) => (
                 <Link href={{ pathname: `/search/${searchTerm}`, query: { ordering: framework.value } }}>
                   <CommandItem
@@ -83,6 +84,19 @@ export function Combobox({ searchTerm }: ComboboxProps) {
                   </CommandItem>
                 </Link>
               ))}
+
+              {/* CLEAR FILTER BUTTON - ROUTE BACK TO DEFAULT GAME PAGE */}
+              <Link
+                href={`/search/${searchTerm}`}
+                onClick={() => {
+                  setOpen(false);
+                  setValue("");
+                }}
+              >
+                <CommandItem key={"clearOrdering"} className="cursor-pointer bg-gray-300 hover:bg-gray-400 font-semibold pl-8">
+                  Clear Filter
+                </CommandItem>
+              </Link>
             </CommandGroup>
           </Command>
         </PopoverContent>
