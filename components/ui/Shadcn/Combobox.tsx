@@ -20,6 +20,9 @@ interface ComboboxProps {
   type: "ordering" | "platforms";
 }
 
+const handleLink = () => {
+  console.log("handleLink clicked");
+};
 // export function Combobox({ searchTerm, filterOptions, type }: ComboboxProps) {
 export function Combobox({ searchTerm, type }: ComboboxProps) {
   const [open, setOpen] = useState(false);
@@ -31,7 +34,7 @@ export function Combobox({ searchTerm, type }: ComboboxProps) {
   // console.log("filterOptions: ", filterOptions);
   //ON VALUE CHANGE, call the api to get the data and send it to the search page
   return (
-    <>
+    <div className="flex flex-col">
       <div>User choice(value): {value}</div>
       <div>Type passed: {type && type}</div>
       <Popover open={open} onOpenChange={setOpen}>
@@ -44,7 +47,7 @@ export function Combobox({ searchTerm, type }: ComboboxProps) {
           >
             {value
               ? filterOptions.find((option) => option.value === value)?.label
-              : `${type === "ordering" ? `Order by...` : "Platforms"}`}
+              : `${type === "ordering" ? `Order by` : "Platforms"}`}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -56,9 +59,12 @@ export function Combobox({ searchTerm, type }: ComboboxProps) {
               {/* OUR FILTER LIST OF OPTIONS */}
               {filterOptions.map((option) => (
                 // type passed is either 'ordering' or 'platforms', option value = slug or id of the option to be passed
-                <Link href={{ pathname: `/search/${searchTerm}`, query: { [type]: option.value } }} key={option.value}>
+                <Link
+                  href={{ pathname: `/search/${searchTerm}`, query: { [type]: option.value } }}
+                  key={`${option.value}`}
+                  onClick={() => handleLink()}
+                >
                   <CommandItem
-                    // key={option.value}
                     onSelect={(currentValue) => {
                       //This would clear the value
                       // setValue(currentValue === value ? '' : currentValue);
@@ -89,6 +95,6 @@ export function Combobox({ searchTerm, type }: ComboboxProps) {
           </Command>
         </PopoverContent>
       </Popover>
-    </>
+    </div>
   );
 }

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { LoadMoreSearchGames } from "@/components/ui";
 import { Combobox } from "@/components/ui/Shadcn/Combobox";
 import { useSearchParams } from "next/navigation";
-
+import { useRouter } from "next/navigation";
 //TODO - ADD PARAMETERS AS OPTIONAL IF USER SELECTS FILTERS FROM COMBOBOX
 /*
 On combobox change:
@@ -19,6 +19,7 @@ On combobox change:
 // const SearchPage = ({ params }: { params: { searchTerm: string; value?: string }; query: { query: string } }) => {
 // const SearchPage = ({ params }: { params: { searchTerm: string; query?: { value: string } } }) => {
 const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
+  // const router = useRouter();
   const { searchTerm } = params;
   // const value = params.query?.value;
   const [content, setContent] = useState<GamesSearch | null>(null);
@@ -26,7 +27,26 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
   const searchParams = useSearchParams();
   const searchOrdering = searchParams.get("ordering");
   const searchPlatforms = searchParams.get("platforms");
+  const [platforms, setPlatforms] = useState(searchOrdering);
+  const [ordering, setOrdering] = useState(searchPlatforms);
+  // const [platforms, setPlatforms] = useState(router.query.platforms);
+  // const [ordering, setOrdering] = useState(router.query.ordering);
+  console.log("platforms: ", platforms, "and ordering: ", ordering);
 
+  // Update state when query parameters change
+  // useEffect(() => {
+  //   setPlatforms(router.platforms || null);
+  //   setOrdering(router.ordering || null);
+  // }, [router.query.platform, router.query.ordering]);
+  useEffect(() => {
+    console.log("searchOrdering passed: ", searchOrdering);
+    setOrdering(searchOrdering);
+  }, [searchOrdering]);
+
+  useEffect(() => {
+    console.log("searchPlatforms passed: ", searchPlatforms);
+    setPlatforms(searchPlatforms);
+  }, [searchPlatforms]);
   // const [ordering, setOrdering] = useState("");
   // const [platforms, setPlatforms] = useState("");
   // if (searchOrdering) setOrdering(searchOrdering);
@@ -120,8 +140,12 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
         <div>
           {/* //TODO pass orderingOptions */}
           <div className="text-3xl text-green-500">RESULTS: {content.count}</div>
-          <Combobox searchTerm={searchTerm} type="ordering" />
-          {/* <Combobox searchTerm={searchTerm} type="platforms" /> */}
+
+          <div className="flex gap-4 mb-4">
+            <Combobox searchTerm={searchTerm} type="ordering" />
+            <Combobox searchTerm={searchTerm} type="platforms" />
+          </div>
+
           <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 px-4 md:px-0 gap-1">
             {content.results.map(({ slug, name, background_image }) => (
               <li key={slug} className="h-64 p-2">

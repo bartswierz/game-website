@@ -128,8 +128,16 @@ export const platformOptions: FilterType[] = [
     label: "PC",
   },
   {
+    value: "188",
+    label: "Xbox Series S/X",
+  },
+  {
     value: "187",
     label: "Playstation 5",
+  },
+  {
+    value: "7",
+    label: "Nintendo Switch",
   },
   {
     value: "1",
@@ -139,60 +147,28 @@ export const platformOptions: FilterType[] = [
     value: "18",
     label: "Playstation 4",
   },
-  {
-    value: "188",
-    label: "Xbox Series S/X",
-  },
-  {
-    value: "7",
-    label: "Nintendo Switch",
-  },
-  {
-    value: "3",
-    label: "iOS",
-  },
-  {
-    value: "21",
-    label: "Android",
-  },
-  {
-    value: "6",
-    label: "Linux",
-  },
-  {
-    value: "166",
-    label: "Commodore",
-  },
-  {
-    value: "111",
-    label: "3DO",
-  },
-  {
-    value: "12",
-    label: "Neo Geo",
-  },
-  {
-    value: "186",
-    label: "Xbox Series X",
-  },
-  {
-    value: "Xbox One",
-    label: "1",
-  },
-  {
-    value: "",
-    label: "",
-  },
-  {
-    value: "",
-    label: "",
-  },
-  {
-    value: "",
-    label: "",
-  },
-  {
-    value: "",
-    label: "",
-  },
+  // {
+  //   value: "3",
+  //   label: "iOS",
+  // },
+  // {
+  //   value: "21",
+  //   label: "Android",
+  // },
+  // {
+  //   value: "6",
+  //   label: "Linux",
+  // },
+  // {
+  //   value: "166",
+  //   label: "Commodore",
+  // },
+  // {
+  //   value: "111",
+  //   label: "3DO",
+  // },
+  // {
+  //   value: "12",
+  //   label: "Neo Geo",
+  // },
 ];

@@ -281,6 +281,7 @@ export const getAdvancedGamesSearch = async (searchTerm: string, ordering?: stri
   // let orderingExists = ordering ? true : false;
   // let platformsExists = platforms ? true : false;
   // if (orderingExists) {
+  // if (ordering) {
   //   console.log("ordering exists: ", ordering);
   // } else {
   //   console.log("ordering does not exist");
@@ -292,26 +293,37 @@ export const getAdvancedGamesSearch = async (searchTerm: string, ordering?: stri
   //   console.log("platforms does not exist");
   // }
 
-  // let parameters = '';
-  // if(ordering && platforms) { parameters = `&ordering=${ordering}&platforms=${platforms}`; }
-  // else if(ordering && !platforms) { parameters = `&ordering=${ordering}`; }
-  // else if(!ordering && platforms) { parameters = `&platforms=${platforms}`; }
-  // else { parameters = ''; }
+  let parameters = "";
+  if (ordering && platforms) {
+    parameters = `&ordering=${ordering}&platforms=${platforms}`;
+  } else if (ordering && !platforms) {
+    parameters = `&ordering=${ordering}`;
+  } else if (!ordering && platforms) {
+    parameters = `&platforms=${platforms}`;
+  } else {
+    parameters = "";
+  }
   // console.log(`searchTerm search: ${searchTerm} & orderBy: ${ordering}`);
   // let platforms2 = 4;
   console.log(
     "FETCH REQUEST: ",
     `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
-      ordering && `&ordering=${ordering}`
-    }${platforms && `&platforms=${platforms}`}`
+      parameters && `${parameters}`
+    }`
   );
 
   const res = await fetch(
     `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
-      ordering && `&ordering=${ordering}`
-    }${platforms && `&platforms=${platforms}`}`
-    // `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true&ordering=${orderBy}`
+      parameters && `${parameters}`
+    }`
   );
+  // `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true&ordering=${orderBy}`
+  // const res = await fetch(
+  //   `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
+  //     ordering && `&ordering=${ordering}`
+  //   }${platforms && `&platforms=${platforms}`}`
+  //   // `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true&ordering=${orderBy}`
+  // );
   // const res = await fetch(
   //   `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
   //     ordering && `&ordering=${ordering}`
