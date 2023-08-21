@@ -91,7 +91,7 @@ export function ComboboxPlatforms({ searchTerm, ordering }: ComboboxPlatformsPro
     if (!selectedOption) return "Platforms";
 
     // IF MATCH, RETURN SELECTED OPTION TEXT TO DISPLAY IN COMBOBOX
-    return selectedOption;
+    return <span className="truncate">{selectedOption}</span>;
   };
 
   return (
