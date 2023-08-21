@@ -101,14 +101,14 @@ export function ComboboxOrdering({ searchTerm, platforms }: ComboboxOrderingProp
             variant="default"
             role="combobox"
             aria-expanded={open}
-            className="w-[200px] justify-between bg-slate-800 hover:bg-slate-500"
+            className="w-[143px] xsm:w-[200px] justify-between bg-slate-800 hover:bg-slate-500"
           >
             {/* Display Selected text in Combobox */}
             <SelectedFilterText />
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[200px] p-0">
+        <PopoverContent className="w-[143px] xsm:w-[200px] p-0">
           <Command>
             <CommandInput placeholder="Search filter" />
             <CommandEmpty>No option found.</CommandEmpty>

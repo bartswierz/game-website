@@ -102,16 +102,15 @@ export function ComboboxPlatforms({ searchTerm, ordering }: ComboboxPlatformsPro
             variant="default"
             role="combobox"
             aria-expanded={open}
-            className="w-[200px] justify-between bg-slate-800 hover:bg-slate-500"
+            className="w-[143px] xsm:w-[200px] justify-between bg-slate-800 hover:bg-slate-500"
+            // className="w-[200px] justify-between bg-slate-800 hover:bg-slate-500"
           >
-            {/* Display default text 'Platforms' or the SELECTED VALUE */}
-            {/* {platforms ? filterOptions.find((option) => option.value === platforms)?.label : "Platforms"} */}
             {/* Display Selected text in Combobox */}
             <SelectedFilterText />
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[200px] p-0">
+        <PopoverContent className="w-[143px] xsm:w-[200px] p-0">
           <Command>
             <CommandInput placeholder="Search filter" />
             <CommandEmpty>No option found.</CommandEmpty>
