@@ -7,25 +7,11 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/Shadcn/popover";
 import Link from "next/link";
 import { platformOptions } from "@/constants";
-// import { FilterType } from "@/types";
-/* ORDERING FILTER OPTIONS
-Available fields: name, released, added, created, updated, rating, metacritic. You can reverse the sort order adding a hyphen, for example: -released.
-*/
-//TODO - update types - value will be passed as the parameter for a call
-// https://api.rawg.io/api/games?ordering=-metacritic
 
 interface ComboboxPlatformsProps {
   searchTerm: string;
   ordering: string | null;
 }
-
-const handleLink = () => {
-  console.log("handleLink clicked");
-};
-// export function Combobox({ searchTerm, filterOptions, type }: ComboboxProps) {
-/*
- * we will pass the other filter option as a prop to this combobox, after a user chooses and option we will pass the two value together to the search page. If the other is null then we will only pass the value of the current combobox
- */
 
 type FilterType = {
   value: string;
@@ -34,20 +20,13 @@ type FilterType = {
 
 export function ComboboxPlatforms({ searchTerm, ordering }: ComboboxPlatformsProps) {
   const [open, setOpen] = useState(false);
-  //TODO - update value to be a string array to be able to collect multiple value
   const [platforms, setPlatforms] = useState("");
   const [orderingFilter, setOrderingFilter] = useState(ordering);
 
-  // console.log("COMBOBOX - value: ", value);
-  //TODO - use useState to set content checking if type is platform or ordering
   const [filterOptions, setFilterOptions] = useState<FilterType[]>(platformOptions);
-  // console.log("filterOptions: ", filterOptions);
-  useEffect(() => {
-    console.log("comboboxPlatforms - orderingFilter value: ", orderingFilter);
-  });
 
+  //UPDATING ORDERING FILTER STATE TO BE READY FOR THE NEXT FILTER SEARCH
   useEffect(() => {
-    console.log("new platforms passed to combobox: ", platforms);
     setOrderingFilter(ordering);
   }, [ordering]);
 
@@ -72,16 +51,14 @@ export function ComboboxPlatforms({ searchTerm, ordering }: ComboboxPlatformsPro
     return (
       <>
         {filterOptions.map((option) => (
-          // type passed is either 'ordering' or 'platforms', option value = slug or id of the option to be passed
+          //IF ORDERING FILTER IS CURRENTLY USED, THEN PASS IT ALONG OTHERWISE ONLY PASS THE PLATFORM FILTER
           <Link
-            // href={{ pathname: `/search/${searchTerm}`, query: { platforms: option.value } }}
             href={
               orderingFilter
                 ? { pathname: `/search/${searchTerm}`, query: { platforms: option.value, ordering: orderingFilter } }
                 : { pathname: `/search/${searchTerm}`, query: { platforms: option.value } }
             }
             key={`${option.value}`}
-            onClick={() => handleLink()}
           >
             <CommandItem
               onSelect={(currentValue) => {
@@ -100,34 +77,6 @@ export function ComboboxPlatforms({ searchTerm, ordering }: ComboboxPlatformsPro
       </>
     );
   };
-
-  // const FilterOptions = () => {
-  //   return (
-  //     <>
-  //       {filterOptions.map((option) => (
-  //         // type passed is either 'ordering' or 'platforms', option value = slug or id of the option to be passed
-  //         <Link
-  //           href={{ pathname: `/search/${searchTerm}`, query: { platforms: option.value } }}
-  //           key={`${option.value}`}
-  //           onClick={() => handleLink()}
-  //         >
-  //           <CommandItem
-  //             onSelect={(currentValue) => {
-  //               //This would clear the value
-  //               // setValue(currentValue === value ? '' : currentValue);
-  //               setPlatforms(currentValue === platforms ? platforms : currentValue);
-  //               setOpen(false);
-  //             }}
-  //             className="cursor-pointer"
-  //           >
-  //             <Check className={cn("mr-2 h-4 w-4", ordering === option.value ? "opacity-100" : "opacity-0")} />
-  //             {option.label}
-  //           </CommandItem>
-  //         </Link>
-  //       ))}
-  //     </>
-  //   );
-  // };
 
   return (
     <div className="flex flex-col">

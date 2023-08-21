@@ -7,28 +7,11 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/Shadcn/popover";
 import Link from "next/link";
 import { orderingOptions } from "@/constants";
-// import { FilterType } from "@/types";
-/* ORDERING FILTER OPTIONS
-Available fields: name, released, added, created, updated, rating, metacritic. You can reverse the sort order adding a hyphen, for example: -released.
-*/
-//TODO - update types - value will be passed as the parameter for a call
-// https://api.rawg.io/api/games?ordering=-metacritic
 
 interface ComboboxOrderingProps {
   searchTerm: string;
-  // filterOptions: { value: string; label: string }[];
-  // type: "ordering" | "platforms";
   platforms: string | null;
-  // ordering: string | null;
 }
-
-const handleLink = () => {
-  console.log("handleLink clicked");
-};
-// export function Combobox({ searchTerm, filterOptions, type }: ComboboxProps) {
-/*
- * we will pass the other filter option as a prop to this combobox, after a user chooses and option we will pass the two value together to the search page. If the other is null then we will only pass the value of the current combobox
- */
 
 type FilterType = {
   value: string;
@@ -37,18 +20,13 @@ type FilterType = {
 
 export function ComboboxOrdering({ searchTerm, platforms }: ComboboxOrderingProps) {
   const [open, setOpen] = useState(false);
-  //TODO - update value to be a string array to be able to collect multiple value
   const [ordering, setOrdering] = useState("");
   const [platformFilter, setPlatformFilter] = useState(platforms);
+  const [filterOptions, setFilterOptions] = useState<FilterType[]>(orderingOptions);
 
   useEffect(() => {
-    console.log("new platforms passed to combobox: ", platforms);
     setPlatformFilter(platforms);
   }, [platforms]);
-  // console.log("COMBOBOX - value: ", value);
-  //TODO - use useState to set content checking if type is platform or ordering
-  const [filterOptions, setFilterOptions] = useState<FilterType[]>(orderingOptions);
-  // console.log("filterOptions: ", filterOptions);
 
   const ClearOrderingFilter = () => {
     return (
@@ -58,7 +36,6 @@ export function ComboboxOrdering({ searchTerm, platforms }: ComboboxOrderingProp
           href={platformFilter ? { pathname: `/search/${searchTerm}`, query: { platforms: platformFilter } } : `/search/${searchTerm}`}
           onClick={() => {
             setOpen(false);
-            //TODO here - if type is ordering, we will set the orderingFilter to null, if type is platform, we will set the platformFilter to null and vice versa
             setOrdering("");
           }}
         >
@@ -73,9 +50,8 @@ export function ComboboxOrdering({ searchTerm, platforms }: ComboboxOrderingProp
     return (
       <>
         {filterOptions.map((option) => (
-          // type passed is either 'ordering' or 'platforms', option value = slug or id of the option to be passed
+          //IF PLATFORM FILTER IS CURRENTLY USED, THEN PASS IT ALONG OTHERWISE ONLY PASS THE ORDERING FILTER
           <Link
-            // href={{ pathname: `/search/${searchTerm}`, query: { ordering: option.value, platforms: platformFilter } }}
             href={
               platformFilter
                 ? { pathname: `/search/${searchTerm}`, query: { ordering: option.value, platforms: platformFilter } }
