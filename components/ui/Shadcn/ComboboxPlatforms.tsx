@@ -30,6 +30,7 @@ export function ComboboxPlatforms({ searchTerm, ordering }: ComboboxPlatformsPro
     setOrderingFilter(ordering);
   }, [ordering]);
 
+  // CLEAR PLATFORMS SELECTED FILTER & ROUTE BACK TO DEFAULT SEARCH PAGE PASSING THE ORDERING FILTER(IF EXISTS) OR DEFAULT SEARCH PAGE
   const ClearOrderingFilter = () => {
     return (
       <>
@@ -78,6 +79,21 @@ export function ComboboxPlatforms({ searchTerm, ordering }: ComboboxPlatformsPro
     );
   };
 
+  //USER CHOICE DISPLAYED IN THE COMBOBOX
+  const SelectedFilterText = () => {
+    // SEARCH FOR MATCHING ORDERING VALUE IN OUR FILTER OPTIONS
+    const selectedOption = filterOptions.find((option) => {
+      return option.label.toLowerCase() === platforms.toLowerCase();
+      // return option.value === ordering;
+    })?.label;
+
+    // IF NOT MATCH, RETURN DEFAULT TEXT
+    if (!selectedOption) return "Platforms";
+
+    // IF MATCH, RETURN SELECTED OPTION TEXT TO DISPLAY IN COMBOBOX
+    return selectedOption;
+  };
+
   return (
     <div className="flex flex-col">
       <Popover open={open} onOpenChange={setOpen}>
@@ -89,7 +105,9 @@ export function ComboboxPlatforms({ searchTerm, ordering }: ComboboxPlatformsPro
             className="w-[200px] justify-between bg-slate-800 hover:bg-slate-500"
           >
             {/* Display default text 'Platforms' or the SELECTED VALUE */}
-            {platforms ? filterOptions.find((option) => option.value === platforms)?.label : "Platforms"}
+            {/* {platforms ? filterOptions.find((option) => option.value === platforms)?.label : "Platforms"} */}
+            {/* Display Selected text in Combobox */}
+            <SelectedFilterText />
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>

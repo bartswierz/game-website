@@ -238,6 +238,7 @@ export const getGamesSearch = async (searchTerm: string): Promise<GamesSearch> =
   return data;
 };
 
+//Checks if tere was ordering or platforms parameters passed, and if they were, adds the parameters to the URL
 function checkForParameters(ordering?: string, platforms?: string) {
   if (ordering && platforms) {
     return `&ordering=${ordering}&platforms=${platforms}`;

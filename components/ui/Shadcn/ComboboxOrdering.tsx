@@ -28,6 +28,7 @@ export function ComboboxOrdering({ searchTerm, platforms }: ComboboxOrderingProp
     setPlatformFilter(platforms);
   }, [platforms]);
 
+  // CLEAR ORDERING SELECTED FILTER & ROUTE BACK TO DEFAULT SEARCH PAGE PASSING THE PLATFORMS FILTER(IF EXISTS) OR DEFAULT SEARCH PAGE
   const ClearOrderingFilter = () => {
     return (
       <>
