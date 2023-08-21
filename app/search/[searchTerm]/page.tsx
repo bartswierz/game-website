@@ -21,6 +21,7 @@ On combobox change:
 const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
   // const router = useRouter();
   const { searchTerm } = params;
+  const gameName = searchTerm.replace(/%20/g, " ");
   // const value = params.query?.value;
   const [content, setContent] = useState<GamesSearch | null>(null);
   // Collects our value inside query passed from Combobox
@@ -128,7 +129,6 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
 
     // If we have a search term, fetch the data
     if (searchTerm) fetchData();
-    // fetchData();
   }, [searchTerm, searchOrdering, searchPlatforms]);
   // }, [searchParameters]); //If any of the searchParamters change, refetch data
 
@@ -139,7 +139,9 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
       {content && (
         <div>
           {/* //TODO pass orderingOptions */}
-          <div className="text-3xl text-green-500">RESULTS: {content.count}</div>
+          <div className="text-3xl font-semibold capitalize">
+            {gameName} - {content.count} results found
+          </div>
 
           <div className="flex gap-4 mb-4">
             <Combobox searchTerm={searchTerm} type="ordering" />
