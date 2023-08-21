@@ -31,7 +31,7 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
   }, [searchPlatforms]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (searchTerm: string, searchOrdering?: string, searchPlatforms?: string) => {
       // value can be null or undefined if user only types in the search box
       const data: GamesSearch = await getAdvancedGamesSearch(searchTerm, searchOrdering, searchPlatforms);
 
@@ -41,7 +41,11 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
     };
 
     // If we have a search term, fetch the data
-    if (searchTerm) fetchData();
+    if (searchTerm) {
+      if (!searchOrdering && !searchPlatforms) fetchData(searchTerm);
+      else if (searchOrdering && !searchPlatforms) fetchData(searchTerm, searchOrdering);
+      else if (!searchOrdering && searchPlatforms) fetchData(searchTerm, searchPlatforms);
+    }
   }, [searchTerm, searchOrdering, searchPlatforms]);
 
   // MOVE SEARCH CONTENT DATA HERE
