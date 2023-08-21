@@ -18,16 +18,22 @@ interface ComboboxProps {
   searchTerm: string;
   // filterOptions: { value: string; label: string }[];
   type: "ordering" | "platforms";
+  platforms: string | null;
+  ordering: string | null;
 }
 
 const handleLink = () => {
   console.log("handleLink clicked");
 };
 // export function Combobox({ searchTerm, filterOptions, type }: ComboboxProps) {
-export function Combobox({ searchTerm, type }: ComboboxProps) {
+/*
+ * we will pass the other filter option as a prop to this combobox, after a user chooses and option we will pass the two value together to the search page. If the other is null then we will only pass the value of the current combobox
+ */
+export function Combobox({ searchTerm, type, platforms, ordering }: ComboboxProps) {
   const [open, setOpen] = useState(false);
   //TODO - update value to be a string array to be able to collect multiple value
   const [value, setValue] = useState("");
+
   // console.log("COMBOBOX - value: ", value);
   //TODO - use useState to set content checking if type is platform or ordering
   const [filterOptions, setFilterOptions] = useState<FilterType[]>(type === "ordering" ? orderingOptions : platformOptions);
@@ -54,7 +60,7 @@ export function Combobox({ searchTerm, type }: ComboboxProps) {
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0">
           <Command>
-            <CommandInput placeholder="Search filter..." />
+            <CommandInput placeholder="Search filter" />
             <CommandEmpty>No option found.</CommandEmpty>
             <CommandGroup>
               {/* OUR FILTER LIST OF OPTIONS */}
@@ -82,9 +88,12 @@ export function Combobox({ searchTerm, type }: ComboboxProps) {
 
               {/* CLEAR FILTER BUTTON - ROUTE BACK TO DEFAULT GAME PAGE */}
               <Link
-                href={`/search/${searchTerm}`}
+                // href={`/search/${searchTerm}`}
+                // href={{ pathname: `/search/${searchTerm}`, query: { [type]: null, [type]: null } }}
+                href={{ pathname: `/search/${searchTerm}`, query: { ordering: null, platforms: null } }}
                 onClick={() => {
                   setOpen(false);
+                  //TODO here - if type is ordering, we will set the orderingFilter to null, if type is platform, we will set the platformFilter to null and vice versa
                   setValue("");
                 }}
               >
@@ -99,3 +108,44 @@ export function Combobox({ searchTerm, type }: ComboboxProps) {
     </div>
   );
 }
+
+// {/* <CommandGroup>
+//               {/* OUR FILTER LIST OF OPTIONS */}
+//               {filterOptions.map((option) => (
+//                 // type passed is either 'ordering' or 'platforms', option value = slug or id of the option to be passed
+//                 <Link
+//                   href={{ pathname: `/search/${searchTerm}`, query: { [type]: option.value } }}
+//                   key={`${option.value}`}
+//                   onClick={() => handleLink()}
+//                 >
+//                   <CommandItem
+//                     onSelect={(currentValue) => {
+//                       //This would clear the value
+//                       // setValue(currentValue === value ? '' : currentValue);
+//                       setValue(currentValue === value ? value : currentValue);
+//                       setOpen(false);
+//                     }}
+//                     className="cursor-pointer"
+//                   >
+//                     <Check className={cn("mr-2 h-4 w-4", value === option.value ? "opacity-100" : "opacity-0")} />
+//                     {option.label}
+//                   </CommandItem>
+//                 </Link>
+//               ))}
+
+//               {/* CLEAR FILTER BUTTON - ROUTE BACK TO DEFAULT GAME PAGE */}
+//               <Link
+//                 // href={`/search/${searchTerm}`}
+//                 // href={{ pathname: `/search/${searchTerm}`, query: { [type]: null, [type]: null } }}
+//                 href={{ pathname: `/search/${searchTerm}`, query: { ordering: null, platforms: null } }}
+//                 onClick={() => {
+//                   setOpen(false);
+//                   //TODO here - if type is ordering, we will set the orderingFilter to null, if type is platform, we will set the platformFilter to null and vice versa
+//                   setValue("");
+//                 }}
+//               >
+//                 <CommandItem key={type} className="cursor-pointer font-semibold pl-8">
+//                   Clear Filter
+//                 </CommandItem>
+//               </Link>
+//             </CommandGroup> */}
