@@ -238,103 +238,38 @@ export const getGamesSearch = async (searchTerm: string): Promise<GamesSearch> =
   return data;
 };
 
-/*
-https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true&ordering=name
-PARAMETERS WILL BE PASSED BASED ON THE COMBOBOX CHOICES USER SELECTS
-*/
-// export const getAdvancedGamesSearch = async (searchTerm: string, orderBy?: string): Promise<GamesSearch> => {
-//   console.log(`searchTerm search: ${searchTerm} & orderBy: ${orderBy}`);
-
-//   if (orderBy) {
-//     const res = await fetch(
-//       `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true&ordering=${orderBy}`
-//     );
-
-//     if (!res.ok) throw new Error("Failed to fetch Games by Search Term & Order By");
-
-//     const data: GamesSearch = await res.json();
-
-//     return data;
-//   } else if (!orderBy) {
-//     const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true`);
-
-//     if (!res.ok) throw new Error("Failed to fetch Games by Search Term");
-
-//     const data: GamesSearch = await res.json();
-
-//     return data;
-//   }
-
-//   // if (!res.ok) throw new Error("Failed to fetch Games by Search Term");
-
-//   // const data: GamesSearch = await res.json();
-//   return {} as GamesSearch;
-// };
+function checkForParameters(ordering?: string, platforms?: string) {
+  if (ordering && platforms) {
+    return `&ordering=${ordering}&platforms=${platforms}`;
+  } else if (ordering && !platforms) {
+    return `&ordering=${ordering}`;
+  } else if (!ordering && platforms) {
+    return `&platforms=${platforms}`;
+  } else {
+    return "";
+  }
+}
 
 export const getAdvancedGamesSearch = async (searchTerm: string, ordering?: string, platforms?: string): Promise<GamesSearch> => {
-  // export const getAdvancedGamesSearch = async (searchParameter: {
-  //   searchTerm: string;
-  //   ordering?: string;
-  //   platforms?: string;
-  // }): Promise<GamesSearch> => {
-  // const { searchTerm, ordering, platforms } = searchParameter;
-  // let orderingExists = ordering ? true : false;
-  // let platformsExists = platforms ? true : false;
-  // if (orderingExists) {
-  // if (ordering) {
-  //   console.log("ordering exists: ", ordering);
-  // } else {
-  //   console.log("ordering does not exist");
-  // }
+  let parameters = checkForParameters(ordering, platforms);
 
-  // if (platformsExists) {
-  //   console.log("platforms exists: ", platforms);
-  // } else {
-  //   console.log("platforms does not exist");
-  // }
-
-  let parameters = "";
-  if (ordering && platforms) {
-    parameters = `&ordering=${ordering}&platforms=${platforms}`;
-  } else if (ordering && !platforms) {
-    parameters = `&ordering=${ordering}`;
-  } else if (!ordering && platforms) {
-    parameters = `&platforms=${platforms}`;
-  } else {
-    parameters = "";
-  }
-  // console.log(`searchTerm search: ${searchTerm} & orderBy: ${ordering}`);
-  // let platforms2 = 4;
-  console.log(
-    "FETCH REQUEST: ",
-    `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
-      parameters && `${parameters}`
-    }`
-  );
+  // console.log(
+  //   "FETCH REQUEST: ",
+  //   `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
+  //     parameters && `${parameters}`
+  //   }`
+  // );
 
   const res = await fetch(
     `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
       parameters && `${parameters}`
     }`
   );
-  // `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true&ordering=${orderBy}`
-  // const res = await fetch(
-  //   `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
-  //     ordering && `&ordering=${ordering}`
-  //   }${platforms && `&platforms=${platforms}`}`
-  //   // `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true&ordering=${orderBy}`
-  // );
-  // const res = await fetch(
-  //   `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
-  //     ordering && `&ordering=${ordering}`
-  //   }${platforms && `&platforms=${platforms}`}`
-  //   // `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true&ordering=${orderBy}`
-  // );
 
   if (!res.ok) throw new Error("Failed to fetch Games by Search Term & Order By");
 
   const data: GamesSearch = await res.json();
-  console.log("DATA: ", data);
+
   return data;
 };
 

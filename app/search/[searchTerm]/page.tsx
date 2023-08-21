@@ -50,10 +50,11 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
       {content && (
         <div>
           <div className="text-3xl font-semibold ">
-            <span className="capitalize">{gameName}</span> <span className="text-xl text-gray-600">{content.count} results found</span>
+            <span className="capitalize">{gameName}</span>{" "}
+            <span className="text-xl text-gray-600">{content.count > 0 ? `${content.count} results found ` : "No results found"}</span>
           </div>
 
-          <div className="flex flex-col justify-center items-center sm:justify-start sm:items-start sm:flex-row gap-4 mb-4">
+          <div className="flex flex-col justify-center items-center sm:justify-start sm:items-start sm:flex-row gap-4 my-4">
             <ComboboxOrdering searchTerm={searchTerm} platforms={platforms} />
             <ComboboxPlatforms searchTerm={searchTerm} ordering={ordering} />
           </div>

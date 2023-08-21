@@ -77,9 +77,23 @@ export function ComboboxOrdering({ searchTerm, platforms }: ComboboxOrderingProp
     );
   };
 
+  //USER CHOICE DISPLAYED IN THE COMBOBOX
+  const SelectedFilterText = () => {
+    // SEARCH FOR MATCHING ORDERING VALUE IN OUR FILTER OPTIONS
+    const selectedOption = filterOptions.find((option) => {
+      return option.label.toLowerCase() === ordering.toLowerCase();
+      // return option.value === ordering;
+    })?.label;
+
+    // IF NOT MATCH, RETURN DEFAULT TEXT
+    if (!selectedOption) return "Order by";
+
+    // IF MATCH, RETURN SELECTED OPTION TEXT TO DISPLAY IN COMBOBOX
+    return selectedOption;
+  };
+
   return (
     <div className="flex flex-col">
-      <div>Ordering: {ordering}</div>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -88,8 +102,8 @@ export function ComboboxOrdering({ searchTerm, platforms }: ComboboxOrderingProp
             aria-expanded={open}
             className="w-[200px] justify-between bg-slate-800 hover:bg-slate-500"
           >
-            {/* Display default text 'Order By' or the SELECTED VALUE */}
-            {ordering ? filterOptions.find((option) => option.value === ordering)?.label : "Order by"}
+            {/* Display Selected text in Combobox */}
+            <SelectedFilterText />
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>

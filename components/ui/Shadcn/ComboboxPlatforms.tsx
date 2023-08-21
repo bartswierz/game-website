@@ -80,7 +80,6 @@ export function ComboboxPlatforms({ searchTerm, ordering }: ComboboxPlatformsPro
 
   return (
     <div className="flex flex-col">
-      <div>Platforms: {platforms}</div>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
