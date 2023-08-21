@@ -7,7 +7,7 @@ import { LoadMoreSearchGames } from "@/components/ui";
 import { useSearchParams } from "next/navigation";
 import { ComboboxOrdering, ComboboxPlatforms } from "@/components/ui";
 
-const SearchPage = async ({ params }: { params: { searchTerm: string } }) => {
+const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
   const searchParams = useSearchParams();
   const { searchTerm } = params;
   const [content, setContent] = useState<GamesSearch | null>(null);

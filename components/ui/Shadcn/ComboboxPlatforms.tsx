@@ -89,7 +89,8 @@ export function ComboboxPlatforms({ searchTerm, ordering }: ComboboxPlatformsPro
             aria-expanded={open}
             className="w-[200px] justify-between bg-slate-800 hover:bg-slate-500"
           >
-            {platforms ? filterOptions.find((option) => option.value === platforms)?.label : "Order by"}
+            {/* Display default text 'Platforms' or the SELECTED VALUE */}
+            {platforms ? filterOptions.find((option) => option.value === platforms)?.label : "Platforms"}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
