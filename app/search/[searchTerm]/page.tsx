@@ -40,11 +40,11 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
       } else throw new Error("No data returned from getGamesSearch");
     };
 
-    // If we have a search term, fetch the data
     if (searchTerm) {
-      if (!searchOrdering && !searchPlatforms) fetchData(searchTerm);
+      if (searchOrdering && searchPlatforms) fetchData(searchTerm, searchOrdering, searchPlatforms);
       else if (searchOrdering && !searchPlatforms) fetchData(searchTerm, searchOrdering);
       else if (!searchOrdering && searchPlatforms) fetchData(searchTerm, searchPlatforms);
+      else fetchData(searchTerm);
     }
   }, [searchTerm, searchOrdering, searchPlatforms]);
 

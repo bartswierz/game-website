@@ -22,7 +22,6 @@ export function ComboboxPlatforms({ searchTerm, ordering }: ComboboxPlatformsPro
   const [open, setOpen] = useState(false);
   const [platforms, setPlatforms] = useState("");
   const [orderingFilter, setOrderingFilter] = useState(ordering);
-
   const [filterOptions, setFilterOptions] = useState<FilterType[]>(platformOptions);
 
   //UPDATING ORDERING FILTER STATE TO BE READY FOR THE NEXT FILTER SEARCH
