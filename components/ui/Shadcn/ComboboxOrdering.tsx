@@ -11,6 +11,7 @@ import { orderingOptions } from "@/constants";
 interface ComboboxOrderingProps {
   searchTerm: string;
   platforms: string | null;
+  path: string; //href="/search/${searchTerm}"
 }
 
 type FilterType = {
@@ -18,7 +19,7 @@ type FilterType = {
   label: string;
 };
 
-export function ComboboxOrdering({ searchTerm, platforms }: ComboboxOrderingProps) {
+export function ComboboxOrdering({ searchTerm, platforms, path }: ComboboxOrderingProps) {
   const [open, setOpen] = useState(false);
   const [ordering, setOrdering] = useState("");
   const [platformFilter, setPlatformFilter] = useState(platforms);
@@ -34,7 +35,7 @@ export function ComboboxOrdering({ searchTerm, platforms }: ComboboxOrderingProp
       <>
         <Link
           // If platformFilter is currently used, then pass it along otherwise pass default search link
-          href={platformFilter ? { pathname: `/search/${searchTerm}`, query: { platforms: platformFilter } } : `/search/${searchTerm}`}
+          href={platformFilter ? { pathname: path, query: { platforms: platformFilter } } : path}
           onClick={() => {
             setOpen(false);
             setOrdering("");
@@ -55,8 +56,8 @@ export function ComboboxOrdering({ searchTerm, platforms }: ComboboxOrderingProp
           <Link
             href={
               platformFilter
-                ? { pathname: `/search/${searchTerm}`, query: { ordering: option.value, platforms: platformFilter } }
-                : { pathname: `/search/${searchTerm}`, query: { ordering: option.value } }
+                ? { pathname: path, query: { ordering: option.value, platforms: platformFilter } }
+                : { pathname: path, query: { ordering: option.value } }
             }
             key={`${option.value}`}
           >

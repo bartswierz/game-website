@@ -254,17 +254,16 @@ function checkForParameters(ordering?: string, platforms?: string) {
 export const getAdvancedGamesSearch = async (searchTerm: string, ordering?: string, platforms?: string): Promise<GamesSearch> => {
   let parameters = checkForParameters(ordering, platforms);
 
-  // console.log(
-  //   "FETCH REQUEST: ",
-  //   `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
-  //     parameters && `${parameters}`
-  //   }`
-  // );
-
+  //search_precise=moderate strictness
+  //search_exact=high strictness
+  //not using either=lowest strictness -> will get much more results but less accruate
   const res = await fetch(
-    `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
+    `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true${
       parameters && `${parameters}`
     }`
+    // `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
+    //   parameters && `${parameters}`
+    // }`
   );
 
   if (!res.ok) throw new Error("Failed to fetch Games by Search Term & Order By");
