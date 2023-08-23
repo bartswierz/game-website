@@ -5,17 +5,19 @@ import { IoGameControllerOutline } from "react-icons/io5";
 // import { useEffect, useState } from "react";
 
 interface SidebarLinkProps {
-  pathname: string;
-  linkTitle: string;
+  pathname: string; // ex. 'platforms'
+  linkTitle: string; // ex. 'PC'
   linkObj: {
-    link: string;
-    platformID: number;
+    link: string; // ex. 'PC'
+    platformID: number; // ex. 4
   };
 }
 // SINGLE SIDEBAR LINK
 const SidebarLink = ({ pathname, linkTitle, linkObj }: SidebarLinkProps) => {
   const { link, platformID } = linkObj;
-
+  // console.log("sidebarLink - pathname: ", pathname);
+  // console.log("sidebarLink - linkTitle: ", linkTitle);
+  // console.log("sidebarLink - linkObj: ", linkObj);
   const slugify = (link: string) => {
     return link.toLowerCase().replaceAll(" ", "-");
   };
@@ -24,6 +26,7 @@ const SidebarLink = ({ pathname, linkTitle, linkObj }: SidebarLinkProps) => {
     <li>
       <Link
         href={{ pathname: `/${pathname}/${slugify(link)}`, query: { id: platformID } }}
+        // href={{ pathname: `/${pathname}/`, query: { id: platformID } }}
         className="flex items-center p-2 text-white rounded-lg  hover:bg-gray-800  group"
       >
         <IoGameControllerOutline />

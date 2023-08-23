@@ -104,19 +104,20 @@ export const orderingOptions: FilterType[] = [
     label: "Name",
   },
   {
-    value: "released",
+    value: "-released",
     label: "Released",
   },
   {
-    value: "added",
+    // value: "-added",
+    value: "-created",
     label: "Date Added",
   },
   {
-    value: "rating",
+    value: "-rating",
     label: "Rating",
   },
   {
-    value: "metacritic",
+    value: "-metacritic",
     label: "Metacritic",
   },
 ];

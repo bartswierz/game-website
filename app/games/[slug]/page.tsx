@@ -1,9 +1,8 @@
-import { GameDetails, GameScreenshots, Platforms, StoresWithGame } from "@/types";
-import { findStoresForGame, getGameDetails, getGameScreenshots, formatDescription } from "@/utils";
+import { GameDetails, GameScreenshots, StoresWithGame } from "@/types";
+import { findStoresForGame, getGameDetails, getGameScreenshots } from "@/utils";
 import { Ratings, ShowMore, WordList } from "@/components/ui";
 import Link from "next/link";
 import Image from "next/image";
-import Loading from "./loading";
 
 // DISPLAY GAME DETAILS FOR A SINGLE GAME BASED ON ID
 const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {

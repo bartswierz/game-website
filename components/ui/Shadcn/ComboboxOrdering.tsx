@@ -7,11 +7,13 @@ import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/Shadcn/popover";
 import Link from "next/link";
 import { orderingOptions } from "@/constants";
+import { useSearchParams } from "next/navigation";
 
 interface ComboboxOrderingProps {
-  searchTerm: string;
-  platforms: string | null;
+  // platforms?: string | null;
+  platforms?: string;
   path: string; //href="/search/${searchTerm}"
+  uid?: string; //Required for platforms page -> href="/platforms/${id}"
 }
 
 type FilterType = {
@@ -19,11 +21,26 @@ type FilterType = {
   label: string;
 };
 
-export function ComboboxOrdering({ searchTerm, platforms, path }: ComboboxOrderingProps) {
+// export function ComboboxOrdering({ platforms, path, uid }: ComboboxOrderingProps) {
+export function ComboboxOrdering({ platforms, path }: ComboboxOrderingProps) {
   const [open, setOpen] = useState(false);
   const [ordering, setOrdering] = useState("");
   const [platformFilter, setPlatformFilter] = useState(platforms);
   const [filterOptions, setFilterOptions] = useState<FilterType[]>(orderingOptions);
+  const searchParams = useSearchParams();
+  const searchID = searchParams.get("id");
+  const [id, setId] = useState(searchID);
+  // const [id, setId] = useState(uid);
+  // const id = uid;
+  console.log("id passed to comboboxordering from searchParams: ", id);
+
+  useEffect(() => {
+    setId(searchID);
+  }, [searchID]);
+
+  // useEffect(() => {
+  //   setId(uid);
+  // }, [uid]);
 
   useEffect(() => {
     setPlatformFilter(platforms);
@@ -47,6 +64,49 @@ export function ComboboxOrdering({ searchTerm, platforms, path }: ComboboxOrderi
     );
   };
 
+  // const handleHref = (optionValue: string, platformFilter?: string, id?: string) => {
+  const handleHref = (optionValue: string) => {
+    /* ORIGINAL
+    platformFilter
+       ? { pathname: path, query: { ordering: option.value, platforms: platformFilter } }
+       : { pathname: path, query: { ordering: option.value } }
+    */
+
+    /*
+    if (platformFilter && id) {
+       return { pathname: path, query: { ordering: optionValue, platforms: platformFilter } };
+     }
+     //IF ONLY ID IS PRESENT, THEN PASS IT ALONG
+     else if (platformFilter && !id) {
+       return { pathname: path, query: { ordering: optionValue, platformFilter: platformFilter } };
+     }
+     //IF ONLY PLATFORM FILTER IS PRESENT, THEN PASS IT ALONG
+     else if (!platformFilter && id) {
+       return { pathname: path, query: { ordering: optionValue, id: id } };
+     }
+     //IF NEITHER ARE PRESENT, THEN PASS ONLY ORDERING FILTER
+     else {
+       return { pathname: path, query: { ordering: optionValue } };
+     }
+    */
+    //IF id exists, then that means we are in the PLATFORMS PAGE, we need to pass the id along with the ordering filter
+    const isPlatformPage = id ? true : false;
+
+    //IF BOTH PLATFORM FILTER AND ID ARE PRESENT, THEN PASS THEM ALONG
+    if (isPlatformPage) {
+      return { pathname: path, query: { id: id, ordering: optionValue } };
+      // return { pathname: path, query: { ordering: optionValue } };
+    } else {
+      //!isPlatformPage - THIS IS A SEARCH PAGE
+      const platformFilterExists = platformFilter ? true : false;
+
+      // IF PLATFORM FILTER EXISTS, THEN PASS IT ALONG WITH THE ORDERING FILTER
+      if (platformFilterExists) return { pathname: path, query: { ordering: optionValue, platforms: platformFilter } };
+      //PLATFORM FILTER DOES NOT EXISTS, ONLY PASS THE ORDERING FILTER
+      else return { pathname: path, query: { ordering: optionValue } };
+    }
+  };
+
   //Creates our filter options list to be displayed
   const FilterOptions = () => {
     return (
@@ -54,11 +114,12 @@ export function ComboboxOrdering({ searchTerm, platforms, path }: ComboboxOrderi
         {filterOptions.map((option) => (
           //IF PLATFORM FILTER IS CURRENTLY USED, THEN PASS IT ALONG OTHERWISE ONLY PASS THE ORDERING FILTER
           <Link
-            href={
-              platformFilter
-                ? { pathname: path, query: { ordering: option.value, platforms: platformFilter } }
-                : { pathname: path, query: { ordering: option.value } }
-            }
+            href={handleHref(option.value)}
+            // href={
+            //   platformFilter
+            //     ? { pathname: path, query: { ordering: option.value, platforms: platformFilter } }
+            //     : { pathname: path, query: { ordering: option.value } }
+            // }
             key={`${option.value}`}
           >
             <CommandItem

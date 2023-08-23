@@ -1,6 +1,6 @@
 "use client";
 import { Key, useState } from "react";
-import { formatDescription } from "@/utils";
+import { formatDescription } from "@/utils/utils";
 
 interface ShowMoreProps {
   text: string;

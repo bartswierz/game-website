@@ -9,7 +9,6 @@ import Link from "next/link";
 import { platformOptions } from "@/constants";
 
 interface ComboboxPlatformsProps {
-  searchTerm: string;
   ordering: string | null;
   path: string; //href="/search/${searchTerm}"
 }
@@ -19,7 +18,7 @@ type FilterType = {
   label: string;
 };
 
-export function ComboboxPlatforms({ searchTerm, ordering, path }: ComboboxPlatformsProps) {
+export function ComboboxPlatforms({ ordering, path }: ComboboxPlatformsProps) {
   const [open, setOpen] = useState(false);
   const [platforms, setPlatforms] = useState("");
   const [orderingFilter, setOrderingFilter] = useState(ordering);

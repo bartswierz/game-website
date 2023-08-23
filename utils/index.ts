@@ -13,25 +13,7 @@ import {
   GameScreenshots,
   StoresWithGame,
 } from "@/types";
-
-// Creates a valid URL from a string i.e.) link: "Best of the Year" & title: Top Games" => "best-of-the-year"
-export const formatLink = (title: string, link: string): string => {
-  const formattedDirectory = title.replaceAll(" ", "-").toLowerCase();
-  const formattedLink = link.replaceAll(" ", "-").toLowerCase();
-  const formattedURL = "/" + formattedDirectory + "/" + formattedLink;
-
-  return formattedURL;
-};
-
-// Get the current page number from the URL by splitting the URL at the "page=". i.e.) https://api.rawg.io/api/developers?key=...&page=2 => page=2 => 2
-export const getPage = (url: string): number => {
-  const splitURL = url.split("page="); // ["https://api.rawg.io/api/developers?key=...", "2"]
-
-  // Converting from string to number and subtracting 1 to get the current page number because the passed url is the NEXT URL TO FETCH
-  const pageNumber = Number(splitURL[1]) - 1;
-
-  return pageNumber;
-};
+import { checkForParameters } from "@/utils/utils";
 
 // FETCHES 20 GAMES FROM RAWG API - USED ON HOME PAGE TO RENDER 20 GAMES
 export const getGames = async (): Promise<Game[]> => {
@@ -215,8 +197,19 @@ export const getNextPlatformPage = async (request: string | null): Promise<GameP
   return {} as GamePlatforms;
 };
 
-export const getGamesByPlatform = async (platformID: string | null): Promise<GamesByPlatform> => {
-  const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&platforms=${platformID}&page_size=12`);
+export const getGamesByPlatform = async (platformID: string | null, ordering?: string): Promise<GamesByPlatform> => {
+  console.log("getGamesByPlatform - ordering passed: ", ordering);
+  let parameters = checkForParameters(ordering); //&ordering=${ordering} -> &ordering=rating
+
+  console.log("Platform Games - parameters: ", parameters);
+  const res = await fetch(
+    `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&platforms=${platformID}&page_size=12&search_exact=true${
+      parameters && `${parameters}`
+    }`
+  );
+  // const res = await fetch(
+  //   `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&platforms=${platformID}&page_size=12&search_exact=true&ordering=${ordering}`
+  // );
 
   if (!res.ok) throw new Error("Failed to fetch Games by Platform");
 
@@ -224,6 +217,15 @@ export const getGamesByPlatform = async (platformID: string | null): Promise<Gam
 
   return data;
 };
+// export const getGamesByPlatform = async (platformID: string | null): Promise<GamesByPlatform> => {
+//   const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&platforms=${platformID}&page_size=12`);
+
+//   if (!res.ok) throw new Error("Failed to fetch Games by Platform");
+
+//   const data: GamesByPlatform = await res.json();
+
+//   return data;
+// };
 
 // https://api.rawg.io/api/games?key=19bf6456aed44d52b0a064df2f54ef4a&search=diablo
 export const getGamesSearch = async (searchTerm: string): Promise<GamesSearch> => {
@@ -238,30 +240,17 @@ export const getGamesSearch = async (searchTerm: string): Promise<GamesSearch> =
   return data;
 };
 
-//Checks if tere was ordering or platforms parameters passed, and if they were, adds the parameters to the URL
-function checkForParameters(ordering?: string, platforms?: string) {
-  if (ordering && platforms) {
-    return `&ordering=${ordering}&platforms=${platforms}`;
-  } else if (ordering && !platforms) {
-    return `&ordering=${ordering}`;
-  } else if (!ordering && platforms) {
-    return `&platforms=${platforms}`;
-  } else {
-    return "";
-  }
-}
-
 export const getAdvancedGamesSearch = async (searchTerm: string, ordering?: string, platforms?: string): Promise<GamesSearch> => {
   let parameters = checkForParameters(ordering, platforms);
 
-  //search_precise=moderate strictness
   //search_exact=high strictness
+  //search_precise=moderate strictness
   //not using either=lowest strictness -> will get much more results but less accruate
   const res = await fetch(
-    `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true${
+    `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
       parameters && `${parameters}`
     }`
-    // `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
+    // `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true${
     //   parameters && `${parameters}`
     // }`
   );
@@ -366,19 +355,4 @@ export const fetchNextSearchPage = async (nextPage: string | null): Promise<Game
     // REACHED THE END OF THE SEARCH RESULTS
     return {} as GamesSearch;
   }
-};
-
-export const formatDescription = (description: string) => {
-  // Split the text into paragraphs by splitting on P TAGS and BR TAGS
-  const paragraphs = description.split(/<\/?p>|<br\s*\/?>/).filter((paragraph) => paragraph.trim() !== "");
-
-  // Removes <em> tags, replaces &amp; with & and replaces &#39; with '
-  const cleanedParagraphs = paragraphs.map((paragraph) =>
-    paragraph
-      .replace(/<\/?em\s*\/?>/g, "")
-      .replace(/&amp;/g, "&")
-      .replace(/&#39;/g, "'")
-  );
-
-  return cleanedParagraphs;
 };
