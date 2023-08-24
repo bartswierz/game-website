@@ -30,17 +30,10 @@ export function ComboboxOrdering({ platforms, path }: ComboboxOrderingProps) {
   const searchParams = useSearchParams();
   const searchID = searchParams.get("id");
   const [id, setId] = useState(searchID);
-  // const [id, setId] = useState(uid);
-  // const id = uid;
-  console.log("id passed to comboboxordering from searchParams: ", id);
 
   useEffect(() => {
     setId(searchID);
   }, [searchID]);
-
-  // useEffect(() => {
-  //   setId(uid);
-  // }, [uid]);
 
   useEffect(() => {
     setPlatformFilter(platforms);

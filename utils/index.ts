@@ -198,10 +198,8 @@ export const getNextPlatformPage = async (request: string | null): Promise<GameP
 };
 
 export const getGamesByPlatform = async (platformID: string | null, ordering?: string): Promise<GamesByPlatform> => {
-  console.log("getGamesByPlatform - ordering passed: ", ordering);
   let parameters = checkForParameters(ordering); //&ordering=${ordering} -> &ordering=rating
 
-  console.log("Platform Games - parameters: ", parameters);
   const res = await fetch(
     `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&platforms=${platformID}&page_size=12&search_exact=true${
       parameters && `${parameters}`

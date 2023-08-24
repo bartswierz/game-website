@@ -22,18 +22,14 @@ const PlatformPage = () => {
   const [pageTitle, setPageTitle] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log("useEffect searchParamsID: ", searchParamsID);
     setSearchID(searchParamsID);
   }, [searchParamsID]);
 
   useEffect(() => {
-    console.log("UPDATE ordering: ", searchOrdering);
     setOrdering(searchOrdering);
   }, [searchOrdering]);
 
   useEffect(() => {
-    console.log("inside useEffect: ", searchID, ordering);
-
     const fetchData = async (searchParamsID: string, ordering?: string) => {
       const data: GamesByPlatform = await getGamesByPlatform(searchParamsID, ordering);
 
@@ -51,10 +47,8 @@ const PlatformPage = () => {
   // Fetch the page title here
   useEffect(() => {
     const getTitle = async (searchParamsID: string | null) => {
-      console.log("searchParamsID in useEffect: ", searchParamsID);
       if (searchParamsID) {
         const title: string = await getPageTitle(searchParamsID);
-        console.log("title: ", title);
         setPageTitle(title);
       } else throw new Error("No searchParamsID");
     };
@@ -68,12 +62,12 @@ const PlatformPage = () => {
     <div className="text-white">
       {content && (
         <>
-          <div className="flex text-4xl font-semibold mb-6">
-            <span>PLATFORM GAMES</span>
-            <span className="text-base text-gray-500 ml-2 self-end">{content.count}+ Games</span>
+          <div className="flex text-4xl font-semibold mb-6 flex-col sm:flex-row justify-center- text-center sm:justify-start- sm:text-start align-items center">
+            <span className="text-xl xsm:text-3xl">PLATFORM GAMES</span>
+            <span className="text-base text-gray-500 sm:ml-2 sm:self-end">{content.count}+ Games</span>
           </div>
 
-          <div className="mb-6">
+          <div className="ml-4 sm:ml-0 mb-6 flex justify-center xsm:justify-start">
             <ComboboxOrdering path={`/platforms/${pageTitle}?id=${searchParamsID}`} />
           </div>
 
@@ -130,9 +124,9 @@ const PlatformPage = () => {
                       {/* NAVIGATES USER TO GAMES PAGE -> i.e.) http://localhost:3000/games/marvels-spider-man */}
                       <Link
                         href={`/games/${slug}`}
-                        className="flex justify-center items-center font-semibold rounded-full text-lg hover:bg-gray-400 border  bg-gray-300 text-gray-700 px-2 py-1  max-w-1/2"
+                        className="flex justify-center items-center font-semibold rounded-full hover:bg-gray-400 border  bg-gray-300 text-gray-700 px-2 py-1 max-w-1/2 text-base xsm:text-lg"
                       >
-                        See Game Details
+                        <span className="truncate">See Game Details</span>
                       </Link>
                     </div>
                   </div>
