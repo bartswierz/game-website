@@ -9,6 +9,7 @@ import Link from "next/link";
 import Loading from "./loading";
 import { getPlatformStoreLink, getPlatformIcon, getPageTitle } from "@/utils/utils";
 import { ComboboxOrdering } from "@/components/ui";
+import { MdBrokenImage } from "react-icons/md";
 
 const PlatformPage = () => {
   const searchParams = useSearchParams();
@@ -93,7 +94,10 @@ const PlatformPage = () => {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gray-700"></div>
+                      // IF NO IMAGE URL, DISPLAY BROKEN IMAGE ICON
+                      <div className="flex justify-center items-center h-full">
+                        <MdBrokenImage size={80} color="grey" />
+                      </div>
                     )}
                   </div>
 

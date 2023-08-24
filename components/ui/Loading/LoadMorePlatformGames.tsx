@@ -10,6 +10,7 @@ import { FaSteam, FaPlaystation, FaXbox, FaApple, FaGooglePlay } from "react-ico
 import { SiNintendo, SiGogdotcom, SiItchdotio, SiEpicgames, SiNintendoswitch } from "react-icons/si";
 import { PiDesktopTowerDuotone } from "react-icons/pi";
 import { BsAndroid2 } from "react-icons/bs";
+import { MdBrokenImage } from "react-icons/md";
 
 interface LoadMoreProps {
   searchQuery: string;
@@ -139,7 +140,7 @@ const LoadMorePlatform = ({ searchQuery }: LoadMoreProps) => {
 
   return (
     <>
-      <div>
+      <div className="mt-4">
         <div>
           {content && (
             <div className="grid grid-cols-1 px-4 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 justify-center">
@@ -147,13 +148,20 @@ const LoadMorePlatform = ({ searchQuery }: LoadMoreProps) => {
                 <div key={slug} className="flex flex-col max-w-[500px] rounded-xl overflow-hidden bg-gray-800 h-max">
                   {/* GAME IMAGE */}
                   <div className="h-48">
-                    <Image
-                      src={background_image}
-                      width={200}
-                      height={200}
-                      alt="Game Cover Display"
-                      className="w-full h-full object-cover"
-                    />
+                    {background_image ? (
+                      <Image
+                        src={background_image}
+                        width={200}
+                        height={200}
+                        alt="Game Cover Display"
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      // IF NO IMAGE URL, DISPLAY BROKEN IMAGE ICON
+                      <div className="flex justify-center items-center h-full">
+                        <MdBrokenImage size={80} color="grey" />
+                      </div>
+                    )}
                   </div>
 
                   {/* TEXT CONTAINER */}
