@@ -66,8 +66,6 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
             ) : (
               <ComboboxOrdering path={`/search/${searchTerm}`} />
             )}
-            {/* <ComboboxOrdering path={`/search/${searchTerm}`} platforms={platforms} /> */}
-            {/* {platforms && <ComboboxOrdering path={`/search/${searchTerm}`} platforms={platforms} />} */}
             <ComboboxPlatforms path={`/search/${searchTerm}`} ordering={ordering} />
           </div>
 
