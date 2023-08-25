@@ -70,7 +70,6 @@ export function ComboboxOrdering({ platforms, path, page }: ComboboxOrderingProp
       else if (platformFilter) return { pathname: path, query: { platforms: platformFilter } };
       //NOT A GENRE PAGE AND PLATFORM FILTER DOES NOT EXIST
       else return path;
-      // platformFilter ? { pathname: path, query: { platforms: platformFilter } } : path;
     };
 
     return (
@@ -78,7 +77,6 @@ export function ComboboxOrdering({ platforms, path, page }: ComboboxOrderingProp
         <Link
           // If platformFilter is currently used, then pass it along otherwise pass default search link
           href={handleClearOrderingFilter(platformFilter, genres ? genres : undefined)}
-          // href={platformFilter ? { pathname: path, query: { platforms: platformFilter } } : path}
           onClick={() => {
             setOpen(false);
             setOrdering("");
@@ -117,30 +115,7 @@ export function ComboboxOrdering({ platforms, path, page }: ComboboxOrderingProp
     if (isPlatformPage) return handlePlatformPage();
     else if (isGenrePage) return handleGenrePage();
     else return { pathname: path, query: { ordering: optionValue } };
-    //IF BOTH PLATFORM FILTER AND ID ARE PRESENT, THEN PASS THEM ALONG
-    // if (isPlatformPage) {
-    //   return { pathname: path, query: { id: id, ordering: optionValue } };
-    //   // return { pathname: path, query: { ordering: optionValue } };
-    // } else if (isGenrePage) {
-    //!isPlatformPage - THIS IS A SEARCH PAGE
-  }; //PLATFORM FILTER DOES NOT EXISTS, ONLY PASS THE ORDERING FILTER
-  //Neither genre page or platform page
-  // IF PLATFORM FILTER EXISTS, THEN PASS IT ALONG WITH THE ORDERING FILTER
-  // if (platformFilterExists) return { pathname: path, query: { ordering: optionValue, platforms: platformFilter } };
-  // else return { pathname: path, query: { ordering: optionValue } };
-  // if (isPlatformPage) {
-  //   return { pathname: path, query: { id: id, ordering: optionValue } };
-  //   // return { pathname: path, query: { ordering: optionValue } };
-  // } else {
-  //   //!isPlatformPage - THIS IS A SEARCH PAGE
-  //   const platformFilterExists = platformFilter ? true : false;
-
-  //   // IF PLATFORM FILTER EXISTS, THEN PASS IT ALONG WITH THE ORDERING FILTER
-  //   if (platformFilterExists) return { pathname: path, query: { ordering: optionValue, platforms: platformFilter } };
-  //   //PLATFORM FILTER DOES NOT EXISTS, ONLY PASS THE ORDERING FILTER
-  //   else return { pathname: path, query: { ordering: optionValue } };
-  // }
-  // };
+  };
 
   //Creates our filter options list to be displayed
   const FilterOptions = () => {
@@ -148,15 +123,7 @@ export function ComboboxOrdering({ platforms, path, page }: ComboboxOrderingProp
       <>
         {filterOptions.map((option) => (
           //IF PLATFORM FILTER IS CURRENTLY USED, THEN PASS IT ALONG OTHERWISE ONLY PASS THE ORDERING FILTER
-          <Link
-            href={handleHref(option.value)}
-            // href={
-            //   platformFilter
-            //     ? { pathname: path, query: { ordering: option.value, platforms: platformFilter } }
-            //     : { pathname: path, query: { ordering: option.value } }
-            // }
-            key={`${option.value}`}
-          >
+          <Link href={handleHref(option.value)} key={`${option.value}`}>
             <CommandItem
               onSelect={(currentValue) => {
                 //This would clear the value
