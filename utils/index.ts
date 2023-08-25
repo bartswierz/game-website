@@ -33,18 +33,34 @@ export const getGames = async (): Promise<Game[]> => {
 */
 // FETCHES GAMES BASED ON THEIR GENRE TYPE - ex. passed action will search for all games with the action genre
 //genreID = number | string ex.) genreID = 4 | "action"
-export const getGamesByGenre = async (genre: number | string): Promise<GamesByGenre> => {
-  // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
-  const res = await fetch(`https://api.rawg.io/api/games?genres=${genre}&page_size=12&key=${process.env.RAWG_API_KEY}`);
+export const getGamesByGenre = async (genre: number | string, ordering?: string, platforms?: string): Promise<GamesByGenre> => {
+  let parameters = checkForParameters(ordering, platforms);
+  console.log("genre parameters: ", parameters);
+  // const res = await fetch(`https://api.rawg.io/api/games?genres=${genre}&page_size=12&key=${process.env.RAWG_API_KEY}`);
+  const res = await fetch(
+    `https://api.rawg.io/api/games?genres=${genre}&page_size=12&key=${process.env.RAWG_API_KEY}${parameters && `${parameters}`}`
+  );
 
   if (!res.ok) {
     throw new Error("Failed to fetch");
   }
 
-  const data = await res.json();
+  const data: GamesByGenre = await res.json();
 
   return data;
 };
+// export const getGamesByGenre = async (genre: number | string): Promise<GamesByGenre> => {
+//   // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
+//   const res = await fetch(`https://api.rawg.io/api/games?genres=${genre}&page_size=12&key=${process.env.RAWG_API_KEY}`);
+
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch");
+//   }
+
+//   const data = await res.json();
+
+//   return data;
+// };
 
 // FETCH GAME DETAILS FOR A SPECIFIC GAME - ex. GTA 5 ID: 3498 -> fetch(https://api.rawg.io/api/games/3498?key=${process.env.RAWG_API_KEY})
 //TODO - replace this with an individual game call instead of pulling the entire section and then filtering. We DO NOT NEED FILTERING.

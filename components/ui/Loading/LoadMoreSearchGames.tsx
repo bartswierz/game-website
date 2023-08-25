@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { GamesSearch, GameSearchResults } from "@/types";
 import { GameLink, Spinner } from "@/components/ui";
 import { fetchNextSearchPage } from "@/utils";
+import { MdBrokenImage } from "react-icons/md";
 
 interface LoadMoreSearchGamesProps {
   secondPage: string | null;
@@ -58,7 +59,14 @@ const LoadMoreSearchGames = ({ secondPage }: LoadMoreSearchGamesProps) => {
           <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 px-4 md:px-0 gap-1">
             {content.map(({ slug, name, background_image }) => (
               <li key={slug} className="h-64 p-2">
-                <GameLink slug={slug} name={name} background_image={background_image} />
+                {background_image ? (
+                  <GameLink slug={slug} name={name} background_image={background_image} />
+                ) : (
+                  // IF NO IMAGE URL, DISPLAY BROKEN IMAGE ICON
+                  <div className="flex justify-center items-center h-full">
+                    <MdBrokenImage size={80} color="grey" />
+                  </div>
+                )}
               </li>
             ))}
           </ul>

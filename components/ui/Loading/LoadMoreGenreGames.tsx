@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { fetchNextPageGenreGames } from "@/utils";
 import { GamesByGenreResults, GamesByGenre } from "@/types";
 import { GameLink, Spinner } from "@/components/ui";
+import { MdBrokenImage } from "react-icons/md";
 
 interface LoadMoreGenreProps {
   searchQuery: string;
@@ -51,7 +52,12 @@ const LoadMoreGenreGames = ({ searchQuery }: LoadMoreGenreProps) => {
             {content.map(({ slug, name, background_image }) => (
               // Creates a Game Display for each game in the list as a link to the game page
               <div key={slug} className="h-64">
-                <GameLink slug={slug} name={name} background_image={background_image} />
+                {background_image ? <GameLink slug={slug} name={name} background_image={background_image} /> : 
+                // IF NO IMAGE URL, DISPLAY BROKEN IMAGE ICON
+                <div className="flex justify-center items-center h-full">
+                <MdBrokenImage size={80} color="grey" />
+              </div>
+                }
               </div>
             ))}
           </div>

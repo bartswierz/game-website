@@ -120,7 +120,7 @@ export function checkForParameters(ordering?: string, platforms?: string) {
   } else if (!ordering && platforms) {
     return `&platforms=${platforms}`;
   } else {
-    return;
+    return "";
   }
 }
 

@@ -11,6 +11,8 @@ import { platformOptions } from "@/constants";
 interface ComboboxPlatformsProps {
   ordering: string | null;
   path: string; //href="/search/${searchTerm}"
+  genres?: string;
+  page?: string;
 }
 
 type FilterType = {

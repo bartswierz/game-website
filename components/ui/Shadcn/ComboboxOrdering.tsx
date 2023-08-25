@@ -14,6 +14,8 @@ interface ComboboxOrderingProps {
   platforms?: string;
   path: string; //href="/search/${searchTerm}"
   uid?: string; //Required for platforms page -> href="/platforms/${id}"
+  genres?: string;
+  page: string;
 }
 
 type FilterType = {
@@ -22,15 +24,22 @@ type FilterType = {
 };
 
 // export function ComboboxOrdering({ platforms, path, uid }: ComboboxOrderingProps) {
-export function ComboboxOrdering({ platforms, path }: ComboboxOrderingProps) {
+export function ComboboxOrdering({ platforms, path, page }: ComboboxOrderingProps) {
   const [open, setOpen] = useState(false);
   const [ordering, setOrdering] = useState("");
   const [platformFilter, setPlatformFilter] = useState(platforms);
   const [filterOptions, setFilterOptions] = useState<FilterType[]>(orderingOptions);
   const searchParams = useSearchParams();
+  // PLATFORM PAGE - id is required for href="/platforms/${id}"
   const searchID = searchParams.get("id");
   const [id, setId] = useState(searchID);
 
+  // GENRES PAGE - genres is required for href="/genres/${genres}"
+  const searchGenres = searchParams.get("genres");
+  const [genres, setGenres] = useState(searchGenres);
+  console.log("COMBOBOX ORDERING - genres passed: ", searchGenres);
+
+  //TODO - update into an object
   useEffect(() => {
     setId(searchID);
   }, [searchID]);
@@ -39,13 +48,37 @@ export function ComboboxOrdering({ platforms, path }: ComboboxOrderingProps) {
     setPlatformFilter(platforms);
   }, [platforms]);
 
+  useEffect(() => {
+    setGenres(searchGenres);
+  }, [searchGenres]);
+
+  //FOR DEBUGGING remove after
+  useEffect(() => {
+    console.log("searchGenres Update: ", genres);
+  }, [searchGenres]);
+
   // CLEAR ORDERING SELECTED FILTER & ROUTE BACK TO DEFAULT SEARCH PAGE PASSING THE PLATFORMS FILTER(IF EXISTS) OR DEFAULT SEARCH PAGE
   const ClearOrderingFilter = () => {
+    const handleClearOrderingFilter = (platformFilter?: string, genres?: string) => {
+      console.log("inside handleClearOrderingFilter - platformFilter: ", platformFilter, "& genres: ", genres);
+      //IF ITS A GENRE PAGE
+      if (genres) {
+        if (platformFilter) return { pathname: path, query: { genres: genres, platforms: platformFilter } };
+        else return { pathname: path, query: { genres: genres } };
+      }
+      //NOT A GENRE PAGE, AND PLATFORM FILTER EXISTS
+      else if (platformFilter) return { pathname: path, query: { platforms: platformFilter } };
+      //NOT A GENRE PAGE AND PLATFORM FILTER DOES NOT EXIST
+      else return path;
+      // platformFilter ? { pathname: path, query: { platforms: platformFilter } } : path;
+    };
+
     return (
       <>
         <Link
           // If platformFilter is currently used, then pass it along otherwise pass default search link
-          href={platformFilter ? { pathname: path, query: { platforms: platformFilter } } : path}
+          href={handleClearOrderingFilter(platformFilter, genres ? genres : undefined)}
+          // href={platformFilter ? { pathname: path, query: { platforms: platformFilter } } : path}
           onClick={() => {
             setOpen(false);
             setOrdering("");
@@ -59,46 +92,55 @@ export function ComboboxOrdering({ platforms, path }: ComboboxOrderingProps) {
 
   // const handleHref = (optionValue: string, platformFilter?: string, id?: string) => {
   const handleHref = (optionValue: string) => {
-    /* ORIGINAL
-    platformFilter
-       ? { pathname: path, query: { ordering: option.value, platforms: platformFilter } }
-       : { pathname: path, query: { ordering: option.value } }
-    */
-
-    /*
-    if (platformFilter && id) {
-       return { pathname: path, query: { ordering: optionValue, platforms: platformFilter } };
-     }
-     //IF ONLY ID IS PRESENT, THEN PASS IT ALONG
-     else if (platformFilter && !id) {
-       return { pathname: path, query: { ordering: optionValue, platformFilter: platformFilter } };
-     }
-     //IF ONLY PLATFORM FILTER IS PRESENT, THEN PASS IT ALONG
-     else if (!platformFilter && id) {
-       return { pathname: path, query: { ordering: optionValue, id: id } };
-     }
-     //IF NEITHER ARE PRESENT, THEN PASS ONLY ORDERING FILTER
-     else {
-       return { pathname: path, query: { ordering: optionValue } };
-     }
-    */
+    console.log("genrePage passed: ", page);
     //IF id exists, then that means we are in the PLATFORMS PAGE, we need to pass the id along with the ordering filter
     const isPlatformPage = id ? true : false;
+    // If genre value exists then we are GENRES PAGE - need to pass ordering and genres
+    // const isGenrePage = genres ? true : false;
+    const platformFilterExists = platformFilter ? true : false;
+    const isGenrePage = page === "genre" ? true : false;
 
+    //if isPlatformPage YES, then we need to pass the id along with the ordering filter
+    const handlePlatformPage = () => {
+      console.log("inside handlePlatformPage - id: ", id);
+      if (platformFilterExists) return { pathname: path, query: { id: id, ordering: optionValue, platforms: platformFilter } };
+      else return { pathname: path, query: { id: id, ordering: optionValue } };
+    };
+
+    //if isGenrePage YES, then we need to pass the genres along with the ordering filter
+    const handleGenrePage = () => {
+      console.log("inside handleGenrePage - genres: ", genres);
+      if (platformFilterExists) return { pathname: path, query: { genres: genres, ordering: optionValue, platforms: platformFilter } };
+      else return { pathname: path, query: { genres: genres, ordering: optionValue } };
+    };
+
+    if (isPlatformPage) return handlePlatformPage();
+    else if (isGenrePage) return handleGenrePage();
+    else return { pathname: path, query: { ordering: optionValue } };
     //IF BOTH PLATFORM FILTER AND ID ARE PRESENT, THEN PASS THEM ALONG
-    if (isPlatformPage) {
-      return { pathname: path, query: { id: id, ordering: optionValue } };
-      // return { pathname: path, query: { ordering: optionValue } };
-    } else {
-      //!isPlatformPage - THIS IS A SEARCH PAGE
-      const platformFilterExists = platformFilter ? true : false;
+    // if (isPlatformPage) {
+    //   return { pathname: path, query: { id: id, ordering: optionValue } };
+    //   // return { pathname: path, query: { ordering: optionValue } };
+    // } else if (isGenrePage) {
+    //!isPlatformPage - THIS IS A SEARCH PAGE
+  }; //PLATFORM FILTER DOES NOT EXISTS, ONLY PASS THE ORDERING FILTER
+  //Neither genre page or platform page
+  // IF PLATFORM FILTER EXISTS, THEN PASS IT ALONG WITH THE ORDERING FILTER
+  // if (platformFilterExists) return { pathname: path, query: { ordering: optionValue, platforms: platformFilter } };
+  // else return { pathname: path, query: { ordering: optionValue } };
+  // if (isPlatformPage) {
+  //   return { pathname: path, query: { id: id, ordering: optionValue } };
+  //   // return { pathname: path, query: { ordering: optionValue } };
+  // } else {
+  //   //!isPlatformPage - THIS IS A SEARCH PAGE
+  //   const platformFilterExists = platformFilter ? true : false;
 
-      // IF PLATFORM FILTER EXISTS, THEN PASS IT ALONG WITH THE ORDERING FILTER
-      if (platformFilterExists) return { pathname: path, query: { ordering: optionValue, platforms: platformFilter } };
-      //PLATFORM FILTER DOES NOT EXISTS, ONLY PASS THE ORDERING FILTER
-      else return { pathname: path, query: { ordering: optionValue } };
-    }
-  };
+  //   // IF PLATFORM FILTER EXISTS, THEN PASS IT ALONG WITH THE ORDERING FILTER
+  //   if (platformFilterExists) return { pathname: path, query: { ordering: optionValue, platforms: platformFilter } };
+  //   //PLATFORM FILTER DOES NOT EXISTS, ONLY PASS THE ORDERING FILTER
+  //   else return { pathname: path, query: { ordering: optionValue } };
+  // }
+  // };
 
   //Creates our filter options list to be displayed
   const FilterOptions = () => {
