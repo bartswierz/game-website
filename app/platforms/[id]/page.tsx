@@ -63,13 +63,13 @@ const PlatformPage = () => {
     <div className="text-white">
       {content && (
         <>
-          <div className="flex text-4xl font-semibold mb-6 flex-col sm:flex-row justify-center- text-center sm:justify-start- sm:text-start align-items center">
+          <div className="flex text-4xl font-semibold mb-6 flex-col sm:flex-row  text-center sm:text-start align-items center">
             <span className="text-xl xsm:text-3xl">PLATFORM GAMES</span>
             <span className="text-base text-gray-500 sm:ml-2 sm:self-end">{content.count}+ Games</span>
           </div>
 
           <div className="ml-4 sm:ml-0 mb-6 flex justify-center xsm:justify-start">
-            <ComboboxOrdering path={`/platforms/${pageTitle}?id=${searchParamsID}`} />
+            <ComboboxOrdering path={`/platforms/${pageTitle}?id=${searchParamsID}`} page="platforms" />
           </div>
 
           {/* http://localhost:3000/platforms/pc%3Fid=4?ordering=name */}

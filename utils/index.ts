@@ -35,7 +35,6 @@ export const getGames = async (): Promise<Game[]> => {
 //genreID = number | string ex.) genreID = 4 | "action"
 export const getGamesByGenre = async (genre: number | string, ordering?: string, platforms?: string): Promise<GamesByGenre> => {
   let parameters = checkForParameters(ordering, platforms);
-  console.log("genre parameters: ", parameters);
   // const res = await fetch(`https://api.rawg.io/api/games?genres=${genre}&page_size=12&key=${process.env.RAWG_API_KEY}`);
   const res = await fetch(
     `https://api.rawg.io/api/games?genres=${genre}&page_size=12&key=${process.env.RAWG_API_KEY}${parameters && `${parameters}`}`
@@ -221,9 +220,6 @@ export const getGamesByPlatform = async (platformID: string | null, ordering?: s
       parameters && `${parameters}`
     }`
   );
-  // const res = await fetch(
-  //   `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&platforms=${platformID}&page_size=12&search_exact=true&ordering=${ordering}`
-  // );
 
   if (!res.ok) throw new Error("Failed to fetch Games by Platform");
 
@@ -231,19 +227,9 @@ export const getGamesByPlatform = async (platformID: string | null, ordering?: s
 
   return data;
 };
-// export const getGamesByPlatform = async (platformID: string | null): Promise<GamesByPlatform> => {
-//   const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&platforms=${platformID}&page_size=12`);
-
-//   if (!res.ok) throw new Error("Failed to fetch Games by Platform");
-
-//   const data: GamesByPlatform = await res.json();
-
-//   return data;
-// };
 
 // https://api.rawg.io/api/games?key=19bf6456aed44d52b0a064df2f54ef4a&search=diablo
 export const getGamesSearch = async (searchTerm: string): Promise<GamesSearch> => {
-  console.log("searchTerm search: ", searchTerm);
   // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}`);
   const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true`);
 
@@ -264,9 +250,6 @@ export const getAdvancedGamesSearch = async (searchTerm: string, ordering?: stri
     `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_exact=true${
       parameters && `${parameters}`
     }`
-    // `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true${
-    //   parameters && `${parameters}`
-    // }`
   );
 
   if (!res.ok) throw new Error("Failed to fetch Games by Search Term & Order By");
@@ -345,15 +328,6 @@ export const fetchNextDevelopersPage = async (pageNumber: number): Promise<GameD
 
   return data;
 };
-
-// export const fetchNextSearchPage = async (pageNumber: number, searchTerm: string): Promise<GamesSearch> => {
-//   const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&page=${pageNumber}`);
-
-//   if (!res.ok) throw new Error("Failed to fetch Search Results");
-
-//   const data: GamesSearch = await res.json();
-
-// };
 
 export const fetchNextSearchPage = async (nextPage: string | null): Promise<GamesSearch> => {
   // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&page=${pageNumber}`);

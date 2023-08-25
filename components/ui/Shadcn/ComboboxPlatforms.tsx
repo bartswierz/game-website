@@ -31,12 +31,10 @@ export function ComboboxPlatforms({ ordering, path, page }: ComboboxPlatformsPro
   // GENRES PAGE - genres is required for href="/genres/${genres}"
   const searchGenres = searchParams.get("genres");
   const [genres, setGenres] = useState(searchGenres);
-  console.log("COMBOBOX ORDERING - genres passed: ", searchGenres);
 
   const searchID = searchParams.get("id");
   const [id, setId] = useState(searchID);
 
-  //TODO - update into an object
   useEffect(() => {
     setId(searchID);
   }, [searchID]);
@@ -53,7 +51,6 @@ export function ComboboxPlatforms({ ordering, path, page }: ComboboxPlatformsPro
   // CLEAR PLATFORMS SELECTED FILTER & ROUTE BACK TO DEFAULT SEARCH PAGE PASSING THE ORDERING FILTER(IF EXISTS) OR DEFAULT SEARCH PAGE
   const ClearPlatformFilter = () => {
     const handleClearPlatformFilter = (orderingFilter?: string, genres?: string) => {
-      console.log("inside handleClearOrderingFilter - orderingFilter: ", orderingFilter, "& genres: ", genres);
       //IF ITS A GENRE PAGE
       if (genres) {
         if (orderingFilter) return { pathname: path, query: { genres: genres, ordering: orderingFilter } };
@@ -83,30 +80,40 @@ export function ComboboxPlatforms({ ordering, path, page }: ComboboxPlatformsPro
 
   // const handleHref = (optionValue: string, platformFilter?: string, id?: string) => {
   const handleHref = (optionValue: string) => {
-    console.log("genrePage passed: ", page);
     //IF id exists, then that means we are in the PLATFORMS PAGE, we need to pass the id along with the ordering filter
     const isPlatformPage = id ? true : false;
     // If genre value exists then we are GENRES PAGE - need to pass ordering and genres
     // const isGenrePage = genres ? true : false;
     const orderingFilterExists = orderingFilter ? true : false;
     const isGenrePage = page === "genre" ? true : false;
+    const isSearchPage = page === "search" ? true : false;
 
     //if isPlatformPage YES, then we need to pass the id along with the ordering filter
     const handlePlatformPage = () => {
-      console.log("inside handlePlatformPage - id: ", id);
       if (orderingFilterExists) return { pathname: path, query: { id: id, ordering: orderingFilter, platforms: optionValue } };
       else return { pathname: path, query: { id: id, platforms: optionValue } };
     };
 
     //if isGenrePage YES, then we need to pass the genres along with the ordering filter
     const handleGenrePage = () => {
-      console.log("inside handleGenrePage - genres: ", genres);
       if (orderingFilterExists) return { pathname: path, query: { genres: genres, ordering: orderingFilter, platforms: optionValue } };
       else return { pathname: path, query: { genres: genres, ordering: optionValue } };
     };
 
+    const handleSearchPage = () => {
+      //PASS PLATFORM FILTER & ORDERING FILTER
+      if (orderingFilterExists) return { pathname: path, query: { ordering: orderingFilter, platforms: optionValue } };
+      //PASS PLATFORM FILTER ONLY
+      else return { pathname: path, query: { platforms: optionValue } };
+    };
+
+    //IF USER ON PLATFORM PAGE
     if (isPlatformPage) return handlePlatformPage();
+    //IF USER ON GENRE PAGE
     else if (isGenrePage) return handleGenrePage();
+    //IF USER ON SEARCH PAGE
+    else if (isSearchPage) return handleSearchPage();
+    //RETURN PLATFORM FILTER ONLY
     else return { pathname: path, query: { platforms: optionValue } };
   };
 

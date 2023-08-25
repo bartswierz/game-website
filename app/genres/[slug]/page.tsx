@@ -23,7 +23,6 @@ const GenrePage = ({ params }: { params: { slug: string } }) => {
   const [ordering, setOrdering] = useState<string | null>(searchOrdering);
   const [searchSlug, setSearchSlug] = useState<string | null>(searchGenres);
 
-  console.log("platforms: ", platforms, "& ordering: ", ordering, "& searchGenres: ", searchSlug);
   //UPDATING ORDERING STATE FROM COMBOBOX, WE WILL PASS IT TO THE COMBOBOX TO BE READY FOR THE NEXT FILTER SEARCH
   useEffect(() => {
     setOrdering(searchOrdering);
@@ -59,41 +58,21 @@ const GenrePage = ({ params }: { params: { slug: string } }) => {
       else if (!searchOrdering && searchPlatforms) fetchData(searchGenres, searchPlatforms);
       else fetchData(searchGenres);
     }
-    // fetchData(slug);
-    // }, [slug, searchOrdering, searchPlatforms]);
   }, [searchGenres, searchOrdering, searchPlatforms]);
-  // useEffect(() => {
-  //   // const fetchData = async (slug: string) => {
-  //   const fetchData = async (slug: string, searchOrdering?: string, searchPlatforms?: string) => {
-  //     // value can be null or undefined if user only types in the search box
-  //     // const data: GamesByGenre = await getGamesByGenre(slug, searchOrdering, searchPlatforms);
-  //     //TODO - pass in ordering and platforms as extra params
-  //     const data: GamesByGenre = await getGamesByGenre(slug, searchOrdering, searchPlatforms);
-
-  //     if (data) {
-  //       setContent(data);
-  //     } else throw new Error("No data returned from getGamesSearch");
-  //   };
-
-  //   if (slug) {
-  //     if (searchOrdering && searchPlatforms) fetchData(slug, searchOrdering, searchPlatforms);
-  //     else if (searchOrdering && !searchPlatforms) fetchData(slug, searchOrdering);
-  //     else if (!searchOrdering && searchPlatforms) fetchData(slug, searchPlatforms);
-  //     else fetchData(slug);
-  //   }
-  //   // fetchData(slug);
-  // }, [slug, searchOrdering, searchPlatforms]);
 
   if (!content) return <Loading />;
 
   return (
     <div className="text-white mx-4 xsm:mx-0">
-      <div className="text-4xl font-semibold uppercase flex flex-wrap mb-8">
+      {/* <div className="text-4xl font-semibold uppercase flex flex-wrap mb-8">
         {slug} GAMES
         <span className="text-base text-gray-500 ml-2 items-end self-end justify-end">{content.count}+ Games</span>
+      </div> */}
+      <div className="flex text-4xl font-semibold mb-6 flex-col sm:flex-row  text-center sm:text-start align-items center">
+        <span className="text-xl xsm:text-3xl uppercase">{slug} GAMES</span>
+        <span className="text-base text-gray-500 sm:ml-2 sm:self-end">{content.count}+ Games</span>
       </div>
 
-      {/* TODO ~5AM 8/24 - PASS THE GENRES AS A PARAMETER INTO THE COMBOBOXS SO THAT WE CAN GET THE SEARCH BECAUSE AT THE MOMENT, AFTER WE SEARCH A FILTER, OUR searchGenres will come back null, BUT UPON OPENING THE FIRST TIME IT WILL BE CORRECT. ONCE WE PASS THE GENRE IT SHOULD ALL WORK - PASS GENRE AS A PROP THEN PASS THIS WITHIN THE QUERY */}
       {/* http://localhost:3000/genres/action?genres=action */}
       <div className="flex justify-center items-center md:justify-start md:items-start gap-4 my-4">
         {platforms ? (
@@ -103,30 +82,6 @@ const GenrePage = ({ params }: { params: { slug: string } }) => {
         )}
         <ComboboxPlatforms path={`/genres/${slug}`} ordering={ordering} genres={slug} page="genre" />
       </div>
-      {/* <div className="flex justify-center items-center md:justify-start md:items-start gap-4 my-4">
-        {platforms ? (
-          <ComboboxOrdering path={`/genres/${slug}?genres=${slug}`} platforms={platforms} genres={slug} page="genre" />
-        ) : (
-          <ComboboxOrdering path={`/genres/${slug}?genres=${slug}`} genres={slug} page="genre" />
-        )}
-        <ComboboxPlatforms path={`/genres/${slug}?genres=${slug}`} ordering={ordering} genres={slug} page="genre" />
-      </div> */}
-      {/* <div className="flex justify-center items-center md:justify-start md:items-start gap-4 my-4">
-        {platforms ? (
-          <ComboboxOrdering path={`/genres/${slug}?genres=${slug}`} platforms={platforms} />
-        ) : (
-          <ComboboxOrdering path={`/genres/${slug}?genres=${slug}`} />
-        )}
-        <ComboboxPlatforms path={`/genres/${slug}?genres=${slug}`} ordering={ordering} />
-      </div> */}
-      {/* <div className="flex justify-center items-center md:justify-start md:items-start gap-4 my-4">
-        {platforms ? (
-          <ComboboxOrdering path={`/genres/${slug}`} platforms={platforms} />
-        ) : (
-          <ComboboxOrdering path={`/genres/${slug}`} />
-        )}
-        <ComboboxPlatforms path={`/genres/${slug}`} ordering={ordering} />
-      </div> */}
 
       {content && (
         <div className="grid grid-cols-1 px-2 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-auto gap-4 ">
