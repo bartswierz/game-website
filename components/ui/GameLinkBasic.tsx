@@ -38,8 +38,13 @@ const GameLinkBasic = ({ id, name, games_count, games }: GameLinkBasicProps) => 
     <div key={id} className="z-40 h-max max-w-[650px]">
       {/* HEADER */}
       <h2 className="mb-6">
-        <Link href={handleLink(id)} className="text-3xl font-bold cursor-pointer hover:text-gray-700">
-          {name}
+        {/* <div className="flex justify-center- items-center- group gap-x-1.5"> */}
+        <Link
+          href={handleLink(id)}
+          className="text-3xl font-bold cursor-pointer flex justify-start items-center gap-x-1 group w-max duration-300"
+        >
+          <span className="group-hover:underline">{name}</span>
+          <BsBoxArrowRight size={26} color="gray" className="group-hover:fill-white transition-colors" />
         </Link>
         <span className="text-gray-500 pl-1">{games_count}+ Games</span>
       </h2>
@@ -61,7 +66,7 @@ const GameLinkBasic = ({ id, name, games_count, games }: GameLinkBasicProps) => 
 
             {/* GAME NAME TEXT */}
             <p className="absolute flex justify-center items-center text-white  bottom-5 w-full">
-              <BsBoxArrowRight size={40} color="gray" className="group-hover:fill-white" />
+              <BsBoxArrowRight size={40} color="gray" className="group-hover:fill-white transition-colors ease-in-out" />
             </p>
           </Link>
         ))}
