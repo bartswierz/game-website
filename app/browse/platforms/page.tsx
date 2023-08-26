@@ -5,6 +5,8 @@ import { GamePlatforms } from "@/types";
 import GameLinkBasic from "@/components/ui/GameLinkBasic";
 import LoadMorePlatforms from "@/components/ui/Loading/LoadMorePlatforms";
 import Loading from "./loading";
+import { ComboboxOrdering } from "@/components/ui";
+
 //{ params }: { params: { genres: string; page_size: number } }
 const Platforms = async () => {
   const [content, setContent] = useState<GamePlatforms | null>(null);
@@ -27,6 +29,10 @@ const Platforms = async () => {
         <span className="text-4xl font-semibold">Platforms</span>{" "}
         <span className="text-gray-500 text-base">{content.count} Platforms</span>
       </h1>
+
+      <div>
+        <ComboboxOrdering path={`/browse/platforms`} page="platforms" />
+      </div>
 
       {/* <div className="flex flex-wrap gap-4"> */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
