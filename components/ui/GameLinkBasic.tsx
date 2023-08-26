@@ -20,6 +20,7 @@ interface GameLinkBasicProps {
 // INDIVIDUAL PLATFORM GAME - Contains Platform Name, Game Count, and 6 Games with Links
 const GameLinkBasic = ({ id, name, games_count, games, page }: GameLinkBasicProps) => {
   const [displayLimit, setDisplayLimit] = useState(4);
+  console.log("page passed: ", page);
 
   // WE WILL DISPLAY THE FIRST THREE GAMES AND HIDE THE REST BEHIND A "SHOW MORE" BUTTON
   const handleShowMore = () => {
