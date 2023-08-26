@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { BsBoxArrowRight } from "react-icons/bs";
 import { useState } from "react";
+import { getPageTitle } from "@/utils/utils";
 
 interface GameLinkBasicProps {
   id: number;
@@ -15,6 +16,7 @@ interface GameLinkBasicProps {
   }[];
 }
 
+// INDIVIDUAL PLATFORM GAME - Contains Platform Name, Game Count, and 6 Games with Links
 const GameLinkBasic = ({ id, name, games_count, games }: GameLinkBasicProps) => {
   const [displayLimit, setDisplayLimit] = useState(4);
 
@@ -23,10 +25,23 @@ const GameLinkBasic = ({ id, name, games_count, games }: GameLinkBasicProps) => 
     displayLimit === 4 ? setDisplayLimit(games.length) : setDisplayLimit(4);
   };
 
+  //CREATE LINK TO INDIVIDUAL PLATFORM PAGE i.e. /platforms/pc?id=4
+  const handleLink = (id: number) => {
+    // const formattedName: string = await getPageTitle(String(id));
+    const platformNameSlug: string = getPageTitle(id); //xbox-series-x
+    const link = { pathname: `/platforms/${platformNameSlug}`, query: { id: id } };
+    console.log("link: ", link);
+    return link;
+  };
+
   return (
     <div key={id} className="z-40 h-max max-w-[650px]">
+      {/* HEADER */}
       <h2 className="mb-6">
-        <span className="text-3xl font-bold">{name}</span> <span className="text-gray-500 pl-1">{games_count}+ Games</span>
+        <Link href={handleLink(id)} className="text-3xl font-bold cursor-pointer hover:text-gray-700">
+          {name}
+        </Link>
+        <span className="text-gray-500 pl-1">{games_count}+ Games</span>
       </h2>
 
       {/* SIX GAMES FETCHES */}

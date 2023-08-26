@@ -89,6 +89,7 @@ export function ComboboxOrdering({ platforms, path, page }: ComboboxOrderingProp
     const platformFilterExists = platformFilter ? true : false;
     const isGenrePage = page === "genre" ? true : false;
     const isSearchPage = page === "search" ? true : false;
+    // const isBrowsePlatformPage = page === "browse-platform" ? true : false;
     //if isPlatformPage YES, then we need to pass the id along with the ordering filter
     const handlePlatformPage = () => {
       if (platformFilterExists) return { pathname: path, query: { id: id, ordering: optionValue, platforms: platformFilter } };
@@ -107,6 +108,12 @@ export function ComboboxOrdering({ platforms, path, page }: ComboboxOrderingProp
       //PASS ORDERING FILTER ONLY
       else return { pathname: path, query: { ordering: optionValue } };
     };
+
+    // const handleBrowsePlatformPage = () => {
+    //   console.log("inside handleBrowsePlatformPage");
+    //   if (platformFilterExists) return { pathname: path, query: { ordering: optionValue, platforms: platformFilter } };
+    //   else return { pathname: path, query: { ordering: optionValue } };
+    // };
 
     if (isPlatformPage) return handlePlatformPage();
     else if (isGenrePage) return handleGenrePage();

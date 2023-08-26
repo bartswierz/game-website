@@ -141,7 +141,11 @@ export const formatDescription = (description: string) => {
 };
 
 //Grabs the platform page title. ex. /platforms/PC -> PC
-export const getPageTitle = async (platformID: string): Promise<string> => {
+// export const getPageTitle = async (platformID: number | string): Promise<string> => {
+export const getPageTitle = (platformID: number | string): string => {
+  //If platformID is a number, convert it to a string
+  typeof platformID === "number" ? (platformID = String(platformID)) : (platformID = platformID);
+
   switch (platformID) {
     case "4":
       return "pc";
