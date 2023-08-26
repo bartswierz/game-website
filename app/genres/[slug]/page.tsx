@@ -64,10 +64,6 @@ const GenrePage = ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className="text-white mx-4 xsm:mx-0">
-      {/* <div className="text-4xl font-semibold uppercase flex flex-wrap mb-8">
-        {slug} GAMES
-        <span className="text-base text-gray-500 ml-2 items-end self-end justify-end">{content.count}+ Games</span>
-      </div> */}
       <div className="flex text-4xl font-semibold mb-6 flex-col sm:flex-row  text-center sm:text-start align-items center">
         <span className="text-xl xsm:text-3xl uppercase">{slug} GAMES</span>
         <span className="text-base text-gray-500 sm:ml-2 sm:self-end">{content.count}+ Games</span>
