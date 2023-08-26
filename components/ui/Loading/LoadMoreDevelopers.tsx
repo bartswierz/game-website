@@ -47,7 +47,7 @@ const LoadMoreDevelopers = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {content.map(({ id, name, games_count, games }) => (
             <div key={name}>
-              <GameLinkBasic id={id} name={name} games_count={games_count} games={games} />
+              <GameLinkBasic id={id} name={name} games_count={games_count} games={games} page="developer" />
             </div>
           ))}
         </div>

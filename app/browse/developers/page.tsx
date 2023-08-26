@@ -33,7 +33,7 @@ const Developers = () => {
         {content.results.map(({ id, name, games_count, games }: GameDevelopersResults) => {
           return (
             <div key={id}>
-              <GameLinkBasic id={id} name={name} games_count={games_count} games={games} />
+              <GameLinkBasic id={id} name={name} games_count={games_count} games={games} page="developer" />
             </div>
           );
         })}

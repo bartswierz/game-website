@@ -89,6 +89,7 @@ export function ComboboxOrdering({ platforms, path, page }: ComboboxOrderingProp
     const platformFilterExists = platformFilter ? true : false;
     const isGenrePage = page === "genre" ? true : false;
     const isSearchPage = page === "search" ? true : false;
+    const isDeveloperPage = page === "developer" ? true : false;
     // const isBrowsePlatformPage = page === "browse-platform" ? true : false;
     //if isPlatformPage YES, then we need to pass the id along with the ordering filter
     const handlePlatformPage = () => {
@@ -100,6 +101,12 @@ export function ComboboxOrdering({ platforms, path, page }: ComboboxOrderingProp
     const handleGenrePage = () => {
       if (platformFilterExists) return { pathname: path, query: { genres: genres, ordering: optionValue, platforms: platformFilter } };
       else return { pathname: path, query: { genres: genres, ordering: optionValue } };
+    };
+
+    //if isGenrePage YES, then we need to pass the genres along with the ordering filter
+    const handleDeveloperPage = () => {
+      if (platformFilterExists) return { pathname: path, query: { id: id, ordering: optionValue, platforms: platformFilter } };
+      else return { pathname: path, query: { id: id, ordering: optionValue } };
     };
 
     const handleSearchPage = () => {
@@ -118,6 +125,7 @@ export function ComboboxOrdering({ platforms, path, page }: ComboboxOrderingProp
     if (isPlatformPage) return handlePlatformPage();
     else if (isGenrePage) return handleGenrePage();
     else if (isSearchPage) return handleSearchPage();
+    else if (isDeveloperPage) return handleDeveloperPage();
     else return { pathname: path, query: { ordering: optionValue } };
   };
 

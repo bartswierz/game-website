@@ -8,6 +8,7 @@ interface GameLinkBasicProps {
   id: number;
   name: string;
   games_count: number;
+  page: "platforms" | "developer";
   games: {
     id: number;
     slug: string;
@@ -17,7 +18,7 @@ interface GameLinkBasicProps {
 }
 
 // INDIVIDUAL PLATFORM GAME - Contains Platform Name, Game Count, and 6 Games with Links
-const GameLinkBasic = ({ id, name, games_count, games }: GameLinkBasicProps) => {
+const GameLinkBasic = ({ id, name, games_count, games, page }: GameLinkBasicProps) => {
   const [displayLimit, setDisplayLimit] = useState(4);
 
   // WE WILL DISPLAY THE FIRST THREE GAMES AND HIDE THE REST BEHIND A "SHOW MORE" BUTTON
@@ -27,11 +28,19 @@ const GameLinkBasic = ({ id, name, games_count, games }: GameLinkBasicProps) => 
 
   //CREATE LINK TO INDIVIDUAL PLATFORM PAGE i.e. /platforms/pc?id=4
   const handleLink = (id: number) => {
+    //TODO - CHECK IF PLATFORM OR DEVELOPER PAGE AND RETURN CORRECT LINK
     // const formattedName: string = await getPageTitle(String(id));
     const platformNameSlug: string = getPageTitle(id); //xbox-series-x
-    const link = { pathname: `/platforms/${platformNameSlug}`, query: { id: id } };
-    console.log("link: ", link);
-    return link;
+    if (page === "platforms") {
+      const link = { pathname: `/platforms/${platformNameSlug}`, query: { id: id } };
+      // console.log("link: ", link);
+      return link;
+    } else if (page === "developer") {
+      // const link = { pathname: `/developers/${platformNameSlug}`, query: { id: id } };
+      const link = { pathname: `/developers/`, query: { id: id } };
+      // console.log("link: ", link);
+      return link;
+    } else throw new Error("Invalid page type passed to GameLinkBasic"); //TODO - currently it works when we LOAD INTO THE PAGE, HOWEVER, when we scroll down to load more games, it throws an error - TODO - NEED TO CREATE A LoadMoreDeveloperGames component. THIS ERROR ONLY HAPPENS FOR DEVELOPERS, PLATFORMS WORKS - needs to duplicate the LoadMorePlatformGames component into dev component
   };
 
   return (

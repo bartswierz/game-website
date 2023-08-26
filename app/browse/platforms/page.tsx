@@ -41,7 +41,7 @@ const Platforms = async () => {
         {content.results.map(({ id, name, games_count, games }) => (
           <div key={name}>
             {/* <span className="font-bold text-3xl text-green-500">ID: {id}</span> */}
-            <GameLinkBasic id={id} name={name} games_count={games_count} games={games} />
+            <GameLinkBasic id={id} name={name} games_count={games_count} games={games} page="platforms" />
           </div>
         ))}
       </div>

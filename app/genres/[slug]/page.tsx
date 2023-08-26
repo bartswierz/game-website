@@ -13,6 +13,7 @@ const GenrePage = ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
   // const content = await getGamesByGenre(params.slug);
   // const content = await getGamesByGenre(slug);
+  //TODO - Change to GamesByDeveloper - Need to create this first
   const [content, setContent] = useState<GamesByGenre | null>(null);
   const searchGenres = searchParams.get("genres");
   // const [searchTerm, setSlugTerm] = useState<string | null>(slug);
@@ -34,6 +35,7 @@ const GenrePage = ({ params }: { params: { slug: string } }) => {
     setPlatforms(searchPlatforms);
   }, [searchPlatforms]);
 
+  //TODO - change to searchDevelopers - this may be the ID or SLUG - i.e. ID:1612 OR valve-software is a valid search parameter
   useEffect(() => {
     // User selected a platform, we will update the state so it can be passed to the combobox
     setSearchSlug(searchGenres);

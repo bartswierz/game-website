@@ -228,6 +228,33 @@ export const getGamesByPlatform = async (platformID: string | null, ordering?: s
   return data;
 };
 
+export const getGamesByDeveloper = async (developerID: string | null, ordering?: string): Promise<GamesByGenre> => {
+  console.log("inside getGamesByDeveloper");
+  let parameters = checkForParameters(ordering); //&ordering=${ordering} -> &ordering=rating
+  console.log(
+    `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&developers=${developerID}&page_size=12${
+      parameters && `${parameters}`
+    }`
+  );
+  const res = await fetch(
+    `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&developers=${developerID}&page_size=12${
+      parameters && `${parameters}`
+    }`
+  );
+  // `https://api.rawg.io/api/games?genres=${searchQuery}&key=${process.env.RAWG_API_KEY}&page=${pageNumber}&page_size=12`
+  // const res = await fetch(
+  //   `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&platforms=${developerID}&page_size=12&search_exact=true${
+  //     parameters && `${parameters}`
+  //   }`
+  // );
+
+  if (!res.ok) throw new Error("Failed to fetch Games by Platform");
+
+  const data: GamesByGenre = await res.json();
+  console.log("GamesbyDeveloper Data: ", data);
+  return data;
+};
+
 // https://api.rawg.io/api/games?key=19bf6456aed44d52b0a064df2f54ef4a&search=diablo
 export const getGamesSearch = async (searchTerm: string): Promise<GamesSearch> => {
   // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}`);
