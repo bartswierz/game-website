@@ -245,19 +245,12 @@ export const getGamesByDeveloper = async (developerID: string | null, ordering?:
   if (!res.ok) throw new Error("Failed to fetch Games by Platform");
 
   const data: GamesByGenre = await res.json();
-  console.log("GamesbyDeveloper Data: ", data);
+
   return data;
 };
 
 // Fetches the next 12 Genre Games for the Genre/[id] page
 export const fetchNextPageDeveloperGames = async (pageNumber: number, searchQuery: string | number): Promise<GamesByGenre> => {
-  // const res = await fetch(
-  //   `https://api.rawg.io/api/games?genres=${searchQuery}&key=${process.env.RAWG_API_KEY}&page=${pageNumber}&page_size=12`
-  // );
-
-  // const res = await fetch(
-  //   `https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&developers=${searchQuery}&page=${pageNumber}&page_size=12`
-  // );
   const res = await fetch(
     `https://api.rawg.io/api/games?developers=${searchQuery}&key=${process.env.RAWG_API_KEY}&page=${pageNumber}`
   );

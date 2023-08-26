@@ -29,7 +29,7 @@ const GameLink = ({ slug, name, background_image }: GameLinkProps) => {
   return (
     // <div className="cursor-pointer rounded-xl overflow-hidden">
     <div className="cursor-pointer rounded-xl overflow-hidden w-full h-full">
-      <Link href={`/games/${slug}`} key={slug} className="cursor-pointer rounded-lg overflow-hidden h-full">
+      <Link href={`/games/${slug}`} key={slug} className="cursor-pointer rounded-lg overflow-hidden h-full bg-green-500">
         <div className="relative h-full">
           <BackgroundImage />
 

@@ -20,7 +20,6 @@ interface GameLinkBasicProps {
 // INDIVIDUAL PLATFORM GAME - Contains Platform Name, Game Count, and 6 Games with Links
 const GameLinkBasic = ({ id, name, games_count, games, page }: GameLinkBasicProps) => {
   const [displayLimit, setDisplayLimit] = useState(4);
-  console.log("page passed: ", page);
 
   // WE WILL DISPLAY THE FIRST THREE GAMES AND HIDE THE REST BEHIND A "SHOW MORE" BUTTON
   const handleShowMore = () => {
@@ -41,20 +40,19 @@ const GameLinkBasic = ({ id, name, games_count, games, page }: GameLinkBasicProp
       const link = { pathname: `/developers/`, query: { id: id } };
       // console.log("link: ", link);
       return link;
-    } else throw new Error("Invalid page type passed to GameLinkBasic"); //TODO - currently it works when we LOAD INTO THE PAGE, HOWEVER, when we scroll down to load more games, it throws an error - TODO - NEED TO CREATE A LoadMoreDeveloperGames component. THIS ERROR ONLY HAPPENS FOR DEVELOPERS, PLATFORMS WORKS - needs to duplicate the LoadMorePlatformGames component into dev component
+    } else throw new Error("Invalid page type passed to GameLinkBasic");
   };
 
   return (
     <div key={id} className="z-40 h-max max-w-[650px]">
       {/* HEADER */}
       <h2 className="mb-6">
-        {/* <div className="flex justify-center- items-center- group gap-x-1.5"> */}
         <Link
           href={handleLink(id)}
-          className="text-3xl font-bold cursor-pointer flex justify-start items-center gap-x-1 group w-max duration-300"
+          className="group text-3xl font-bold cursor-pointer flex justify-start items-center gap-x-[5px] w-max max-w-full duration-300"
         >
-          <span className="group-hover:underline">{name}</span>
-          <BsBoxArrowRight size={26} color="gray" className="group-hover:fill-white transition-colors" />
+          <span className="group-hover:underline truncate">{name}</span>
+          <BsBoxArrowRight size={22} color="gray" className="mt-[6px] group-hover:fill-white transition-colors" />
         </Link>
         <span className="text-gray-500 pl-1">{games_count}+ Games</span>
       </h2>
