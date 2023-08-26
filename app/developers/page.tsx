@@ -1,6 +1,6 @@
 "use client";
 import { getGamesByGenre, getGamesByDeveloper } from "@/utils";
-import { ComboboxOrdering, ComboboxPlatforms, GameLink, LoadMoreGenreGames } from "@/components/ui";
+import { ComboboxOrdering, ComboboxPlatforms, GameLink, LoadMoreGenreGames, LoadMoreDeveloperGames } from "@/components/ui";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { GamesByGenre, GamesByPlatform } from "@/types";
@@ -51,22 +51,11 @@ const DeveloperPage = ({ params }: { params: { id: string } }) => {
     // User selected a platform, we will update the state so it can be passed to the combobox
     setDeveloperID(params.id);
   }, [params.id]);
-  // useEffect(() => {
-  //   // User selected a platform, we will update the state so it can be passed to the combobox
-  //   setSearchSlug(searchDevelopers);
-  // }, [searchDevelopers]);
 
   useEffect(() => {
-    // const fetchData = async (slug: string) => {
-    // const fetchData = async (searchDevelopers: string, searchOrdering?: string, searchPlatforms?: string) => {
     const fetchData = async (searchDeveloperID: string, searchOrdering?: string) => {
       console.log("inside fetchData");
-      // value can be null or undefined if user only types in the search box
-      // const data: GamesByGenre = await getGamesByGenre(searchDevelopers, searchOrdering, searchPlatforms);
-      //TODO - CREATE A getGamesByDeveloper
-      // const data: GamesByGenre = await getGamesByGenre(searchDevelopers, searchOrdering, searchPlatforms);
-      // const data: GamesByGenre = await getGamesByDeveloper(searchDevelopers, searchOrdering, searchPlatforms);
-      //TODO - replace GamesByPlatform with GamesByDeveloper or neutral name if they are similar data structure
+      //TODO - replace GamesByGenre with GamesByDeveloper or neutral name if they are similar data structure
       const data: GamesByGenre = await getGamesByDeveloper(searchDeveloperID, searchOrdering);
 
       if (data) {
@@ -98,6 +87,7 @@ const DeveloperPage = ({ params }: { params: { id: string } }) => {
 
       {/* http://localhost:3000/genres/action?genres=action */}
       <div className="flex justify-center items-center md:justify-start md:items-start gap-4 my-4">
+        {/* TODO - FIX ORDERING FILTER - NOTE: AT THE MOMENT WE ARE ONLY GOING TO USE ORDERING BECAUSE PLATFORMS CAUSES NULL DATA FETCHES */}
         <ComboboxOrdering path={`/developer/${params.id}`} genres={params.id} page="developer" />
         {/* {platforms ? (
           <ComboboxOrdering path={`/developer/${params.id}`} platforms={platforms} genres={params.id} page="developer" />
@@ -119,9 +109,7 @@ const DeveloperPage = ({ params }: { params: { id: string } }) => {
       )}
 
       {/* LOADING ICON AT THE BOTTOM */}
-      {/* TODO - replace component with LoadMoreDeveloperGames once created */}
-      {/* {params.slug && <LoadMoreGenreGames searchQuery={params.slug} />} */}
-      {params.id && <LoadMoreGenreGames searchQuery={params.id} />}
+      {searchDeveloperID && <LoadMoreDeveloperGames searchQuery={searchDeveloperID} />}
     </div>
   );
 };
