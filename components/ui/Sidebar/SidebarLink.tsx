@@ -27,6 +27,12 @@ const SidebarLink = ({ pathname, linkTitle, linkObj }: SidebarLinkProps) => {
       <Link
         href={{ pathname: `/${pathname}/${slugify(link)}`, query: { id: platformID } }}
         // href={{ pathname: `/${pathname}/`, query: { id: platformID } }}
+        //TODO - Figure out a way to pass active and the handleSidebar function to properly close the sidebar on mobile screens - Browse links and Genres work
+        // onClick={() => {
+        //   setIsActive(link);
+        //   // CLOSES SIDEBAR AS WE ROUTE USER TO NEW PAGE IF USER IS ON MOBILE
+        //   handleSidebar(windowWidth);
+        // }}
         className="flex items-center p-2 text-white rounded-lg  hover:bg-gray-800  group"
       >
         <IoGameControllerOutline />

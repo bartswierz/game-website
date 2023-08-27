@@ -32,7 +32,8 @@ const Sidebar = () => {
    */
   const handleSidebar = (windowWidth: number) => {
     const isMobile = windowWidth < 768;
-
+    console.log("inside handleSidebar - windowWidth: ", windowWidth);
+    console.log("isSidebarOpen: ", isSidebarOpen);
     //MOBILE SCREEN < 768px
     if (isMobile) {
       if (isSidebarOpen) dispatch(closeSidebar());
@@ -118,8 +119,13 @@ const Sidebar = () => {
                 <li key={link}>
                   <Link
                     href={{ pathname: `/${browse.title}/${link}` }}
-                    className="flex items-center p-2 text-white rounded-lg hover:bg-gray-800 group"
-                    onClick={() => setIsActive(link)}
+                    className="flex items-center p-2 text-white rounded-lg hover:bg-gray-800 group bg-green-500"
+                    // onClick={() => setIsActive(link)}
+                    onClick={() => {
+                      setIsActive(link);
+                      // CLOSES SIDEBAR AS WE ROUTE USER TO NEW PAGE IF USER IS ON MOBILE
+                      handleSidebar(windowWidth);
+                    }}
                     key={link}
                   >
                     <IoGameControllerOutline />
@@ -156,7 +162,12 @@ const Sidebar = () => {
                   <Link
                     href={{ pathname: `/${genres.title}/${link}`, query: { genres: link } }}
                     className="flex items-center p-2 text-white rounded-lg hover:bg-gray-800  group"
-                    onClick={() => setIsActive(link)}
+                    // onClick={() => setIsActive(link)}
+                    onClick={() => {
+                      setIsActive(link);
+                      // CLOSES SIDEBAR AS WE ROUTE USER TO NEW PAGE IF USER IS ON MOBILE
+                      handleSidebar(windowWidth);
+                    }}
                     key={link}
                   >
                     <IoGameControllerOutline />
