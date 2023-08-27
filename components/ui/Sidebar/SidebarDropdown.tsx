@@ -11,9 +11,10 @@ interface SidebarDropdownProps {
     platformID: number;
   }[];
   uid: number;
+  handleLinkCallBack: (link: string) => void;
 }
 // CONTAINS THE DROPDOWN MENU FOR SIDEBAR LINKS
-const SidebarDropdown = ({ pathname, linkTitle, linkList, uid }: SidebarDropdownProps) => {
+const SidebarDropdown = ({ pathname, linkTitle, linkList, uid, handleLinkCallBack }: SidebarDropdownProps) => {
   const [isActive, setIsActive] = useState<number | null>(null);
 
   const slugify = (link: string) => {
@@ -24,6 +25,11 @@ const SidebarDropdown = ({ pathname, linkTitle, linkList, uid }: SidebarDropdown
   const handleDropdown = (dropdownID: number) => {
     //isActive !== uid ? OPEN DROPDOWN : CLOSE DROPDOWN
     isActive !== uid ? setIsActive(dropdownID) : setIsActive(null);
+  };
+
+  //Callback function back to Sidebar component to update ACTIVE LINK & CLOSE SIDEBAR IF MOBILE SCREEN UPON CLICKING LINK
+  const handleLink = (link: string) => {
+    handleLinkCallBack(link);
   };
 
   if (!uid) return <div>Loading...</div>;
@@ -51,6 +57,7 @@ const SidebarDropdown = ({ pathname, linkTitle, linkList, uid }: SidebarDropdown
           <li key={platformID}>
             <Link
               href={{ pathname: `/${pathname}/${slugify(link)}`, query: { id: platformID } }}
+              onClick={() => handleLink(link)}
               className="flex items-center w-full p-2 text-white  transition duration-75 rounded-lg pl-11 group hover:bg-gray-800 "
             >
               {link}

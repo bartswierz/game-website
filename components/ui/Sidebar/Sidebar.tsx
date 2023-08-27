@@ -10,41 +10,45 @@ import { useDispatch } from "react-redux";
 import { closeSidebar, openSidebar, toggleSidebar } from "@/redux/features/sidebar-slice";
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
   const [isActive, setIsActive] = useState<string | null>(null);
   const [windowWidth, setWindowWidth] = useState<number>(0);
-  // const [isMobile, setIsMobile] = useState<boolean>(false);
-  // const [isDesktop, setIsDesktop] = useState<boolean>(false);
-
-  const dispatch = useDispatch();
-  // const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
-
   const { pc, xbox, playstation, iOS, android, macOS, linux, nintendo, atari, commodore, SEGA, browse, genres } = sidebarData;
 
-  //TODO - get the isSidebarOpen value from redux store
+  //Get the isSidebarOpen & isMenuToggled value from redux store
   const isSidebarOpen = useAppSelector((state) => state.sidebarSlice.value.isSidebarOpen);
   const isMenuToggled = useAppSelector((state) => state.sidebarSlice.value.isMenuToggled);
 
-  /* SCENARIOS
+  /* CLOSE/OPENS SIDEBAR DEPENDING ON WINDOW WIDTH AND IF SIDEBAR IS ALREADY OPEN/CLOSED
+   *SCENARIOS
    *#1 Mobile - Sidebar open, and width below 768px - CLOSE SIDEBAR
-   *#2 Desktop - Sidebar closed, and width above 768px - OPEN SIDEBAR
-   *#3 Mobile - Sidebar closed, and width below 768px - do nothing
-   *#4 Desktop - Sidebar open, and width above 768px - do nothing
+   *#2 Mobile - Sidebar closed, and width below 768px - DO NOTHING
+   *#3 Desktop - Sidebar closed, and width above 768px - OPEN SIDEBAR
+   *#4 Desktop - Sidebar open, and width above 768px - DO NOTHING
    */
   const handleSidebar = (windowWidth: number) => {
     const isMobile = windowWidth < 768;
-    console.log("inside handleSidebar - windowWidth: ", windowWidth);
-    console.log("isSidebarOpen: ", isSidebarOpen);
+
     //MOBILE SCREEN < 768px
     if (isMobile) {
-      if (isSidebarOpen) dispatch(closeSidebar());
+      if (isSidebarOpen) dispatch(closeSidebar()); //#1
       //do nothing
-      else return;
+      else return; //#2
     } //DESKTOP SCREEN >= 768px
     else {
-      if (!isSidebarOpen) dispatch(openSidebar());
+      if (!isSidebarOpen) dispatch(openSidebar()); //#3
       //do nothing
-      else return;
+      else return; //#4
     }
+  };
+
+  // PASSED DOWN TO SidebarLink & SidebarDropdown as a callback function to update activeLink and close sidebar if on mobile screen
+  const handleLinkCallback = (link: string) => {
+    //Adds bold text to active link
+    setIsActive(link);
+
+    //Closes if user is on mobile screen
+    handleSidebar(windowWidth);
   };
 
   // Used to remove the sidebar width when the viewport is under 768px
@@ -119,7 +123,7 @@ const Sidebar = () => {
                 <li key={link}>
                   <Link
                     href={{ pathname: `/${browse.title}/${link}` }}
-                    className="flex items-center p-2 text-white rounded-lg hover:bg-gray-800 group bg-green-500"
+                    className="flex items-center p-2 text-white rounded-lg hover:bg-gray-800 group"
                     // onClick={() => setIsActive(link)}
                     onClick={() => {
                       setIsActive(link);
@@ -129,6 +133,7 @@ const Sidebar = () => {
                     key={link}
                   >
                     <IoGameControllerOutline />
+                    {/* IF ACTIVE, LINK HAS BOLD TEXT */}
                     <span className={`ml-3 cursor-pointer ${link === isActive ? "text-white font-bold" : ""}`}>
                       {capitalizeWord(link)}
                     </span>
@@ -141,17 +146,58 @@ const Sidebar = () => {
             <ul>
               {/* Passing uid to differentiate dropdown open actions for each dropdown */}
               <span className="text-xl text-white">Platforms</span>
-              <SidebarLink pathname={"platforms"} linkTitle={"PC"} linkObj={pc} />
-              <SidebarDropdown pathname={"platforms"} linkTitle={"Xbox"} linkList={xbox} uid={1} />
-              <SidebarDropdown pathname={"platforms"} linkTitle={"Playstation"} linkList={playstation} uid={2} />
-              <SidebarDropdown pathname={"platforms"} linkTitle={"Nintendo"} linkList={nintendo} uid={3} />
-              <SidebarLink pathname={"platforms"} linkTitle={"iOS"} linkObj={iOS} />
-              <SidebarLink pathname={"platforms"} linkTitle={"Android"} linkObj={android} />
-              <SidebarDropdown pathname={"platforms"} linkTitle={"macOS"} linkList={macOS} uid={4} />
-              <SidebarLink pathname={"platforms"} linkTitle={"Linux"} linkObj={linux} />
-              <SidebarDropdown pathname={"platforms"} linkTitle={"Atari"} linkList={atari} uid={5} />
-              <SidebarLink pathname={"platforms"} linkTitle={"Commodore"} linkObj={commodore} />
-              <SidebarDropdown pathname={"platforms"} linkTitle={"SEGA"} linkList={SEGA} uid={6} />
+              <SidebarLink pathname={"platforms"} linkTitle={"PC"} linkObj={pc} handleLinkCallBack={handleLinkCallback} />
+              <SidebarDropdown
+                pathname={"platforms"}
+                linkTitle={"Xbox"}
+                linkList={xbox}
+                handleLinkCallBack={handleLinkCallback}
+                uid={1}
+              />
+              <SidebarDropdown
+                pathname={"platforms"}
+                linkTitle={"Playstation"}
+                linkList={playstation}
+                handleLinkCallBack={handleLinkCallback}
+                uid={2}
+              />
+              <SidebarDropdown
+                pathname={"platforms"}
+                linkTitle={"Nintendo"}
+                linkList={nintendo}
+                handleLinkCallBack={handleLinkCallback}
+                uid={3}
+              />
+              <SidebarLink pathname={"platforms"} linkTitle={"iOS"} linkObj={iOS} handleLinkCallBack={handleLinkCallback} />
+              <SidebarLink pathname={"platforms"} linkTitle={"Android"} linkObj={android} handleLinkCallBack={handleLinkCallback} />
+              <SidebarDropdown
+                pathname={"platforms"}
+                linkTitle={"macOS"}
+                linkList={macOS}
+                handleLinkCallBack={handleLinkCallback}
+                uid={4}
+              />
+              <SidebarLink pathname={"platforms"} linkTitle={"Linux"} linkObj={linux} handleLinkCallBack={handleLinkCallback} />
+              <SidebarDropdown
+                pathname={"platforms"}
+                linkTitle={"Atari"}
+                linkList={atari}
+                handleLinkCallBack={handleLinkCallback}
+                uid={5}
+              />
+              <SidebarLink
+                pathname={"platforms"}
+                linkTitle={"Commodore"}
+                linkObj={commodore}
+                handleLinkCallBack={handleLinkCallback}
+              />
+              <SidebarDropdown
+                pathname={"platforms"}
+                linkTitle={"SEGA"}
+                linkList={SEGA}
+                handleLinkCallBack={handleLinkCallback}
+                uid={6}
+              />
             </ul>
 
             {/* GENRES LINKS */}
@@ -162,10 +208,8 @@ const Sidebar = () => {
                   <Link
                     href={{ pathname: `/${genres.title}/${link}`, query: { genres: link } }}
                     className="flex items-center p-2 text-white rounded-lg hover:bg-gray-800  group"
-                    // onClick={() => setIsActive(link)}
                     onClick={() => {
                       setIsActive(link);
-                      // CLOSES SIDEBAR AS WE ROUTE USER TO NEW PAGE IF USER IS ON MOBILE
                       handleSidebar(windowWidth);
                     }}
                     key={link}
