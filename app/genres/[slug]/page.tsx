@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { GamesByGenre } from "@/types";
 import Loading from "./loading";
-
+import { PageHeader } from "@/components/ui";
 //ex. http://localhost:3000/genres/sports?genres=sports
 // const GenrePage = async ({ params }: { params: { slug: string } }) => {
 const GenrePage = ({ params }: { params: { slug: string } }) => {
@@ -66,10 +66,7 @@ const GenrePage = ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className="text-white mx-4 xsm:mx-0">
-      <div className="flex text-4xl font-semibold mb-6 flex-col sm:flex-row  text-center sm:text-start align-items center">
-        <span className="text-xl xsm:text-3xl uppercase">{slug} GAMES</span>
-        <span className="text-base text-gray-500 sm:ml-2 sm:self-end">{content.count}+ Games</span>
-      </div>
+      <PageHeader title={`${slug} Games`} count={content.count} countType="Games" />
 
       {/* http://localhost:3000/genres/action?genres=action */}
       <div className="flex justify-center items-center md:justify-start md:items-start gap-4 my-4">

@@ -10,6 +10,7 @@ import Loading from "./loading";
 import { getPlatformStoreLink, getPlatformIcon, getPageTitle } from "@/utils/utils";
 import { ComboboxOrdering } from "@/components/ui";
 import { MdBrokenImage } from "react-icons/md";
+import { PageHeader } from "@/components/ui";
 
 const PlatformPage = () => {
   const searchParams = useSearchParams();
@@ -63,10 +64,7 @@ const PlatformPage = () => {
     <div className="text-white">
       {content && (
         <>
-          <div className="flex text-4xl font-semibold mb-6 flex-col sm:flex-row  text-center sm:text-start align-items center">
-            <span className="text-xl xsm:text-3xl">PLATFORM GAMES</span>
-            <span className="text-base text-gray-500 sm:ml-2 sm:self-end">{content.count}+ Games</span>
-          </div>
+          <PageHeader title="Platform Games" count={content.count} countType="Games" />
 
           <div className="ml-4 sm:ml-0 mb-6 flex justify-center xsm:justify-start">
             <ComboboxOrdering path={`/platforms/${pageTitle}?id=${searchParamsID}`} page="platforms" />
@@ -74,14 +72,8 @@ const PlatformPage = () => {
 
           {/* http://localhost:3000/platforms/pc%3Fid=4?ordering=name */}
           <div>
-            {/* BELOW ARE FOR DEVELOPING PURPOSES */}
-            {/* <p>Next: {content.next}</p> */}
-            {/* <p>Previous: {content.previous}</p> */}
-
             <div className="grid grid-cols-1 px-4 sm:px-0 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 justify-center">
               {content.results.map(({ slug, background_image, name, stores }) => (
-                // {/* {content && */}
-                // content.results.map(({ slug, background_image, name, stores }) => (
                 <div key={slug} className="flex flex-col max-w-[500px] rounded-xl overflow-hidden bg-gray-800 h-max">
                   {/* GAME IMAGE */}
                   <div className="h-48">

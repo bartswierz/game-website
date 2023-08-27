@@ -21,6 +21,7 @@ import GameLinkBasic from "./GameLinkBasic";
 import Spinner from "./Loading/Spinner";
 import HomepageLinks from "./HomepageLinks";
 import WordList from "./WordList";
+import PageHeader from "./PageHeader";
 import { ComboboxOrdering } from "./Shadcn/ComboboxOrdering";
 import { ComboboxPlatforms } from "./Shadcn/ComboboxPlatforms";
 // Export all components as a single object for cleaner imports in other files
@@ -49,4 +50,5 @@ export {
   WordList,
   ComboboxOrdering,
   ComboboxPlatforms,
+  PageHeader,
 };

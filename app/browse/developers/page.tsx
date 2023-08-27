@@ -5,6 +5,7 @@ import { GameDevelopers, GameDevelopersResults } from "@/types";
 import GameLinkBasic from "@/components/ui/GameLinkBasic";
 import LoadMoreDevelopers from "@/components/ui/Loading/LoadMoreDevelopers";
 import Loading from "./loading";
+import { PageHeader } from "@/components/ui";
 
 const Developers = () => {
   const [content, setContent] = useState<GameDevelopers | null>(null);
@@ -25,9 +26,7 @@ const Developers = () => {
   // Once data is ready to display
   return (
     <div className="text-white">
-      <div className="text-4xl font-bold mb-8">
-        DEVELOPERS <span className="text-sm text-gray-500">{content.count} Developers</span>
-      </div>
+      <PageHeader title="Developers" count={content.count} countType="Developers" />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         {content.results.map(({ id, name, games_count, games }: GameDevelopersResults) => {
