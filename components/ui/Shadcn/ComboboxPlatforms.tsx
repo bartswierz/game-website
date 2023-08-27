@@ -97,7 +97,8 @@ export function ComboboxPlatforms({ ordering, path, page }: ComboboxPlatformsPro
     //if isGenrePage YES, then we need to pass the genres along with the ordering filter
     const handleGenrePage = () => {
       if (orderingFilterExists) return { pathname: path, query: { genres: genres, ordering: orderingFilter, platforms: optionValue } };
-      else return { pathname: path, query: { genres: genres, ordering: optionValue } };
+      // else return { pathname: path, query: { genres: genres, ordering: optionValue } };
+      else return { pathname: path, query: { genres: genres, platforms: optionValue } };
     };
 
     const handleSearchPage = () => {
