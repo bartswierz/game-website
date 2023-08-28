@@ -129,7 +129,7 @@ export const platformOptions: FilterType[] = [
     label: "PC",
   },
   {
-    value: "188",
+    value: "186",
     label: "Xbox Series S/X",
   },
   {
