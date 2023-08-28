@@ -10,6 +10,9 @@ module.exports = {
         xxsm: "320px",
         xsm: "480px",
       },
+      transitionProperty: {
+        height: "height",
+      },
       fontSize: {
         xxs: "0.625rem",
         // xs: "0.75rem",
