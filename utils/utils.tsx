@@ -112,7 +112,7 @@ export const getPage = (url: string): number => {
 };
 
 //Checks if there was ordering or platforms parameters passed, and if they were, adds the parameters to the URL
-export function checkForParameters(ordering?: string, platforms?: string) {
+export function checkForParameters(ordering?: string | null, platforms?: string | null) {
   if (ordering && platforms) {
     return `&ordering=${ordering}&platforms=${platforms}`;
   } else if (ordering && !platforms) {

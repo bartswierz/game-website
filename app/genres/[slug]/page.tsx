@@ -3,7 +3,7 @@ import { getGamesByGenre } from "@/utils";
 import { ComboboxOrdering, ComboboxPlatforms, GameLink, LoadMoreGenreGames } from "@/components/ui";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { GamesByGenre } from "@/types";
+import { GamesByGenre, ParameterObj } from "@/types";
 import Loading from "./loading";
 import { PageHeader } from "@/components/ui";
 //ex. http://localhost:3000/genres/sports?genres=sports
@@ -43,10 +43,10 @@ const GenrePage = ({ params }: { params: { slug: string } }) => {
 
   useEffect(() => {
     // const fetchData = async (slug: string) => {
-    const fetchData = async (searchGenres: string, searchOrdering?: string, searchPlatforms?: string) => {
+    // const fetchData = async (searchGenres: string, searchOrdering?: string, searchPlatforms?: string) => {
+    // const fetchData = async ({searchGenres: searchGenres, searchOrdering?: searchOrdering, searchPlatforms?: searchPlatforms}) => {
+    const fetchData = async (searchGenres: string | number, searchOrdering: string | null, searchPlatforms: string | null) => {
       // value can be null or undefined if user only types in the search box
-      // const data: GamesByGenre = await getGamesByGenre(searchGenres, searchOrdering, searchPlatforms);
-      //TODO - pass in ordering and platforms as extra params
       const data: GamesByGenre = await getGamesByGenre(searchGenres, searchOrdering, searchPlatforms);
 
       if (data) {
@@ -54,12 +54,7 @@ const GenrePage = ({ params }: { params: { slug: string } }) => {
       } else throw new Error("No data returned from getGamesSearch");
     };
 
-    if (searchGenres) {
-      if (searchOrdering && searchPlatforms) fetchData(searchGenres, searchOrdering, searchPlatforms);
-      else if (searchOrdering && !searchPlatforms) fetchData(searchGenres, searchOrdering);
-      else if (!searchOrdering && searchPlatforms) fetchData(searchGenres, searchPlatforms);
-      else fetchData(searchGenres);
-    }
+    if (searchGenres) fetchData(searchGenres, searchOrdering, searchPlatforms);
   }, [searchGenres, searchOrdering, searchPlatforms]);
 
   if (!content) return <Loading />;

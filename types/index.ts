@@ -629,3 +629,9 @@ export interface FilterType {
   value: string;
   label: string;
 }
+
+export interface ParameterObj {
+  genres: string | number;
+  ordering?: string;
+  platforms?: string;
+}

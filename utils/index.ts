@@ -12,6 +12,7 @@ import {
   GamesSearch,
   GameScreenshots,
   StoresWithGame,
+  ParameterObj,
 } from "@/types";
 import { checkForParameters } from "@/utils/utils";
 
@@ -33,9 +34,13 @@ export const getGames = async (): Promise<Game[]> => {
 */
 // FETCHES GAMES BASED ON THEIR GENRE TYPE - ex. passed action will search for all games with the action genre
 //genreID = number | string ex.) genreID = 4 | "action"
-export const getGamesByGenre = async (genre: number | string, ordering?: string, platforms?: string): Promise<GamesByGenre> => {
+export const getGamesByGenre = async (
+  genre: number | string,
+  ordering?: string | null,
+  platforms?: string | null
+): Promise<GamesByGenre> => {
   let parameters = checkForParameters(ordering, platforms);
-  // const res = await fetch(`https://api.rawg.io/api/games?genres=${genre}&page_size=12&key=${process.env.RAWG_API_KEY}`);
+
   const res = await fetch(
     `https://api.rawg.io/api/games?genres=${genre}&page_size=12&key=${process.env.RAWG_API_KEY}${parameters && `${parameters}`}`
   );
@@ -48,18 +53,6 @@ export const getGamesByGenre = async (genre: number | string, ordering?: string,
 
   return data;
 };
-// export const getGamesByGenre = async (genre: number | string): Promise<GamesByGenre> => {
-//   // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
-//   const res = await fetch(`https://api.rawg.io/api/games?genres=${genre}&page_size=12&key=${process.env.RAWG_API_KEY}`);
-
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch");
-//   }
-
-//   const data = await res.json();
-
-//   return data;
-// };
 
 // FETCH GAME DETAILS FOR A SPECIFIC GAME - ex. GTA 5 ID: 3498 -> fetch(https://api.rawg.io/api/games/3498?key=${process.env.RAWG_API_KEY})
 //TODO - replace this with an individual game call instead of pulling the entire section and then filtering. We DO NOT NEED FILTERING.
@@ -77,7 +70,6 @@ export const getGameDetails = async (id: string): Promise<GameDetails> => {
 };
 
 // FETCH GAME DEVELOPERS
-// export const getGameDevelopers = async (page?: number): Promise<GameDevelopers> => {
 export const getGameDevelopers = async (): Promise<GameDevelopers> => {
   // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}`);
 
