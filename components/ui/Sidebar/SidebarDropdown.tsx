@@ -38,7 +38,7 @@ const SidebarDropdown = ({ pathname, linkTitle, linkList, uid, handleLinkCallBac
     <li>
       <button
         type="button"
-        className="flex items-center w-full p-2 text-base text-white animate-in animate-out duration-75- rounded-lg group hover:bg-gray-800 transition-[height] duration-500 border"
+        className="flex items-center w-full p-2 text-base text-white animate-in animate-out duration-75 rounded-lg group hover:bg-gray-800 transition-[height]- "
         aria-controls={`dropdown-example-${uid}`}
         data-collapse-toggle={`dropdown-example-${uid}`}
         onClick={() => handleDropdown(uid)}
@@ -56,21 +56,9 @@ const SidebarDropdown = ({ pathname, linkTitle, linkList, uid, handleLinkCallBac
       {/* 2ND LEVEL DROPDOWN ITEM */}
       <ul
         id={`dropdown-example-${uid}`}
-        // className={`${uid === isActive ? "visible" : "hidden"} py-2 space-y-2`}
-        //IF uid === isActive then we want to do the dropdown transition, on the second click it should animate up
-        //Version #1
-        // className={`${
-        //   uid === isActive
-        //     ? "max-h-full transition-transform- transition-all transition-max-[height]- transition-[height]-  animate-accordion-down duration-1000- ease-in-out ease-out-"
-        //     : "max-h-0 animate-accordion-up transition-height duration-300"
-        // } overflow-hidden transition-all transition-transform- py-2 space-y-2`}
-        //Version #2
-        className={`transition-[height] overflow-hidden py-2 space-y-2 duration-500 ease-in-out border ${
-          uid === isActive ? "max-h-full animate-accordion-down accordion-down animate-in" : "max-h-0 animate-accordion-up animate-out"
+        className={`transition-all overflow-hidden ease-in-out- animate-accordion-down- duration-300 ${
+          uid === isActive ? "max-h-full- max-h-[height] animate-accordion-up- animate-accordion-down" : "max-h-0 animate-accordion-up"
         } `}
-        // className={`${
-        //   uid === isActive ? "max-h-full transition-max-height" : "max-h-0"
-        // } overflow-hidden transition-transform py-2 space-y-2`}
       >
         {linkList.map(({ link, platformID }) => (
           <li key={platformID}>
