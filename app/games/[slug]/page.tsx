@@ -92,6 +92,8 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
 
   // FORMATS RELEASED DATE TO MM/DD/YYYY
   const formatReleasedDate = (released: string) => {
+    if (!released) return "N/A";
+
     const dateValue = released.split("-"); // ["2023", "07", "13"]
     const date = dateValue[1] + "/" + dateValue[2] + "/" + dateValue[0]; // "07/13/2023"
 
@@ -100,6 +102,7 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
 
   const formattedReleasedDate = formatReleasedDate(released);
 
+  console.log("GENRES: ", genres);
   return (
     <div className="container">
       <div className="text-white flex flex-row gap-8 max-w-[1500px]">
@@ -170,14 +173,7 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
               {/* GENRES */}
               <div>
                 <h2 className="text-gray-500 font-semibold mb-2">Genre</h2>
-                {/* <ul className="flex flex-row">
-                  {genres.map(({ id, name }) => (
-                    <li key={id} className="pr-2">
-                      {name}
-                    </li>
-                  ))}
-                </ul> */}
-                <WordList stringList={genres} />
+                {genres.length === 0 ? "N/A" : <WordList stringList={genres} />}
               </div>
 
               {/* RELEASE DATE */}
@@ -189,29 +185,13 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
               {/* DEVELOPER */}
               <div>
                 <h2 className="text-gray-500 font-semibold mb-2">Developer(s)</h2>
-                {/* <ul>
-                  {developers.map(({ id, name }, idx) => (
-                    <li key={id}>
-                      {name}
-                      {idx !== publishers.length - 1 && <>,</>}
-                    </li>
-                  ))}
-                </ul> */}
                 <WordList stringList={developers} />
               </div>
 
               {/* PUBLISHER */}
               <div>
                 <h2 className="text-gray-500 font-semibold mb-2">Publisher(s)</h2>
-                {/* <ul>
-                  {publishers.map(({ id, name }, idx) => (
-                    <li key={id} className="pr-2">
-                      {name}
-                      {idx !== publishers.length - 1 && <>,</>}
-                    </li>
-                  ))}
-                </ul> */}
-                <WordList stringList={publishers} />
+                {publishers.length === 0 ? "N/A" : <WordList stringList={publishers} />}
               </div>
 
               {/* AGE RATING */}
@@ -223,15 +203,7 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
               {/* TAGS */}
               <div>
                 <h2 className="text-gray-500 font-semibold mb-2">Tags</h2>
-                {/* <ul className="flex flex-row flex-wrap">
-                  {tags.map(({ id, name }, idx) => (
-                    <li key={id} className="pr-2">
-                      {name}
-                      {idx !== tags.length - 1 && <>,</>}
-                    </li>
-                  ))}
-                </ul> */}
-                <WordList stringList={tags} />
+                {tags.length === 0 ? "N/A" : <WordList stringList={tags} />}
               </div>
 
               {/* WEBSITE */}
@@ -243,7 +215,6 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
                     className="overflow-ellipsis w-max px-2 py-1 text-sm font-semibold rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300"
                     target="_blank"
                   >
-                    {/* {website} */}
                     Publisher Site
                   </Link>
 
