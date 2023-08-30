@@ -51,7 +51,7 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
     description,
     // description_raw,
     developers,
-    // esrb_rating,
+    esrb_rating,
     genres,
     id,
     metacritic,
@@ -102,7 +102,6 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
 
   const formattedReleasedDate = formatReleasedDate(released);
 
-  console.log("GENRES: ", genres);
   return (
     <div className="container">
       <div className="text-white flex flex-row gap-8 max-w-[1500px]">
@@ -144,9 +143,6 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
             {/* ABOUT/DESCRIPTION */}
             <h2 className="text-3xl font-bold">About</h2>
             <div className="flex flex-col gap-6 w-full">
-              {/* {descriptionText.map((sentence) => (
-                <p>{sentence}</p>
-              ))} */}
               <ShowMore text={description} />
             </div>
 
@@ -195,10 +191,10 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
               </div>
 
               {/* AGE RATING */}
-              {/* <div>
+              <div>
                 <h2 className="text-gray-500 font-semibold mb-2">Age Rating</h2>
-                {esrb_rating.name && <span>{esrb_rating.name === "Mature" ? `17+ ${esrb_rating.name}` : esrb_rating.name}</span>}
-              </div> */}
+                {esrb_rating ? <span>{esrb_rating.name === "Mature" ? `17+ ${esrb_rating.name}` : esrb_rating.name}</span> : "N/A"}
+              </div>
 
               {/* TAGS */}
               <div>
