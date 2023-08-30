@@ -2,70 +2,130 @@
 // TODO Pass through Ratings
 import { Ratings } from "@/types";
 import { useEffect, useState } from "react";
+import { Progress } from "@/components/ui/Shadcn/progress";
+import { AiFillStar } from "react-icons/ai";
 // import * as Progress from "@radix-ui/react-progress";
 
 type RatingsProps = {
-  averageRating: number;
-  ratingsList: Ratings[];
-  ratingsCount: number;
+  averageRating: number; //'rating' within the list -> 3.64
+  ratingsList: Ratings[]; //ratings: [{ id: 1, title: "Exceptional", count: 0, percent: 0 }]
+  ratingsCount: number; //2
 };
 
 const Ratings = ({ averageRating, ratingsList, ratingsCount }: RatingsProps) => {
   const [progress, setProgress] = useState(0);
-  const [exceptional, setExceptional] = useState({ count: 0, id: -1, percent: 0, title: "" });
-  const [recommended, setRecommended] = useState({ count: 0, id: -1, percent: 0, title: "" });
-  const [meh, setMeh] = useState({ count: 0, id: -1, percent: 0, title: "" });
-  const [skip, setSkip] = useState({ count: 0, id: -1, percent: 0, title: "" });
+  // const [exceptional, setExceptional] = useState({ id: -1, title: "", count: 0, percent: 0 });
+  // const [recommended, setRecommended] = useState({ id: -1, title: "", count: 0, percent: 0 });
+  // const [meh, setMeh] = useState({ id: -1, title: "", count: 0, percent: 0 });
+  // const [skip, setSkip] = useState({ id: -1, title: "", count: 0, percent: 0 });
+  const [exceptional, setExceptional] = useState(ratingsList[0]);
+  const [recommended, setRecommended] = useState(ratingsList[1]);
+  const [meh, setMeh] = useState(ratingsList[2]);
+  const [skip, setSkip] = useState(ratingsList[3]);
 
+  useEffect(() => {
+    //Percentage of the bar - TODO - make this piece equal to the 'percent' in ratings.percent
+    const timer = setTimeout(() => setProgress(50), 500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  //Setting ratings list values
+  // useEffect(() => {
+  //   setExceptional(ratingsList[0]);
+  //   setRecommended(ratingsList[1]);
+  //   setMeh(ratingsList[2]);
+  //   setSkip(ratingsList[3]);
+  // });
+
+  // useEffect(() => {
+  //   console.log("exceptional: ", exceptional);
+  //   console.log("recommended: ", recommended);
+  //   console.log("meh: ", meh);
+  //   console.log("skip: ", skip);
+  // });
+
+  // return <Progress value={progress} className="w-[60%] text-yellow-700 border border-yellow-500 bg-gray-300" />;
   return (
-    <div>
-      <p className="text-sm font-medium text-white">{ratingsCount} global ratings</p>
+    <>
+      <div>Player Ratings</div>
+      <div className="flex flex-col max-w-[500px] border gap-2 flex-grow-">
+        <div className="flex">
+          <span className="w-[84px] border">Excellent</span>
 
-      {/* PROGRESS BAR */}
-      <div className="border h-64- w-full">
-        {/* <Progress.Root className="ProgressRoot" value={progress}> */}
-        {/* <Progress.Root className="ProgressRoot" value={10}>
-          <Progress.Indicator className="ProgressIndicator" style={{ transform: `translateX(-${100 - progress}%)` }} />
-        </Progress.Root>
-        <Progress.Root className="ProgressRoot" value={10}>
-          <Progress.Indicator className="ProgressIndicator" style={{ transform: `translateX(-${100 - progress}%)` }} />
-        </Progress.Root>
-        <Progress.Root className="ProgressRoot" value={10}>
-          <Progress.Indicator className="ProgressIndicator" style={{ transform: `translateX(-${100 - progress}%)` }} />
-        </Progress.Root>
-        <Progress.Root className="ProgressRoot" value={10}>
-          <Progress.Indicator className="ProgressIndicator" style={{ transform: `translateX(-${100 - progress}%)` }} />
-        </Progress.Root> */}
-        {ratingsList.map(({ id, title, count, percent }) => (
-          <div>
-            <div className="relative border w-full h-4 z-1 bg-gray-500 opacity-50">
-              <div className={`absolute left-0 top-0 z-40 bg-yellow w-${Number(percent)}`} style={{ width: `${10}%` }}></div>
-            </div>
+          <Progress
+            value={exceptional.percent}
+            className="w-[60%] text-yellow-700 border border-yellow-500 bg-gray-300 flex-grow self-center"
+          />
 
-            <p>{id}</p>
-            <p>{title}</p>
-            <p>{count}</p>
-            <p>{percent} %</p>
-          </div>
-        ))}
-      </div>
-
-      {/* RATING BAR */}
-      {ratingsList.map((rating) => (
-        <div className="flex items-center my-4" key={rating.id}>
-          {/* RATING TITLE */}
-          <p className="w-28 text-sm font-medium text-white">{rating.title.toUpperCase()}</p>
-
-          {/* PERCENTAGE BAR */}
-          <div className="flex items-center flex-grow max-w-xs md:min-w-max h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
-            {/* <div className={`h-5 bg-yellow-300 rounded w-[${rating.percent}%]`}></div> */}
-            <div className={`h-5 bg-yellow-300 rounded w-[70%]`}></div>
-          </div>
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">{rating.percent}%</span>
+          <span>{exceptional.percent}%</span>
         </div>
-      ))}
-    </div>
+
+        <div className="flex">
+          <span className="w-[84px] border">Good</span>
+          <Progress
+            value={recommended.percent}
+            className="w-[60%] text-yellow-700 border border-yellow-500 bg-gray-300 flex-grow self-center"
+          />
+          <span>{recommended.percent}%</span>
+        </div>
+
+        <div className="flex">
+          <span className="w-[84px] border">Fair</span>
+          <Progress
+            value={meh.percent}
+            className="w-[60%] text-yellow-700 border border-yellow-500 bg-gray-300 flex-grow self-center"
+          />
+          <span>{meh.percent}%</span>
+        </div>
+
+        <div className="flex">
+          <span className="w-[84px] border">Poor</span>
+          <Progress
+            value={skip.percent}
+            className="w-[60%] text-yellow-700 border border-yellow-500 bg-gray-300 flex-grow self-center"
+          />
+          <span>{skip.percent}%</span>
+        </div>
+      </div>
+    </>
   );
+
+  // return (
+  //   <div>
+  //     <p className="text-sm font-medium text-white">{ratingsCount} global ratings</p>
+
+  //     {/* PROGRESS BAR */}
+  //     <div className="border h-64- w-full">
+  //       {ratingsList.map(({ id, title, count, percent }) => (
+  //         <div>
+  //           <div className="relative border w-full h-4 z-1 bg-gray-500 opacity-50">
+  //             <div className={`absolute left-0 top-0 z-40 bg-yellow w-${Number(percent)}`} style={{ width: `${10}%` }}></div>
+  //           </div>
+
+  //           <p>ID: {id}</p>
+  //           <p>Title: {title}</p>
+  //           <p>Count: {count}</p>
+  //           <p>Percent: {percent} %</p>
+  //         </div>
+  //       ))}
+  //     </div>
+
+  //     {/* RATING BAR */}
+  //     {ratingsList.map((rating) => (
+  //       <div className="flex items-center my-4" key={rating.id}>
+  //         {/* RATING TITLE */}
+  //         <p className="w-28 text-sm font-medium text-white">{rating.title.toUpperCase()}</p>
+
+  //         {/* PERCENTAGE BAR */}
+  //         <div className="flex items-center flex-grow max-w-xs md:min-w-max h-5 mx-4 bg-gray-200 rounded dark:bg-gray-700">
+  //           {/* <div className={`h-5 bg-yellow-300 rounded w-[${rating.percent}%]`}></div> */}
+  //           <div className={`h-5 bg-yellow-300 rounded w-[70%]`}></div>
+  //         </div>
+  //         <span className="text-sm font-medium text-gray-500 dark:text-gray-400">{rating.percent}%</span>
+  //       </div>
+  //     ))}
+  //   </div>
+  // );
 };
 
 export default Ratings;

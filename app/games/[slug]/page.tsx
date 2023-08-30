@@ -60,9 +60,9 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
     name,
     // platforms,
     publishers,
-    // rating,
-    // ratings,
-    // ratings_count,
+    rating,
+    ratings,
+    ratings_count,
     // reddit_description,
     // reddit_name,
     reddit_url,
@@ -127,9 +127,6 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
               </h2>
             </div>
 
-            {/* <div className=" border-2 "> */}
-            {/* <Image src={background_image} alt={name} width={300} height={200} /> */}
-
             {/* SCREENSHOTS */}
             <div className="grid grid-cols-1 xsm:grid-cols-2 gap-4 lg:hidden">
               {gameScreenshots.results.map(({ id, image }) => (
@@ -138,7 +135,6 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
                 </div>
               ))}
             </div>
-            {/* </div> */}
 
             {/* ABOUT/DESCRIPTION */}
             <h2 className="text-3xl font-bold">About</h2>
@@ -220,7 +216,6 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
                       target="_blank"
                       className="overflow-ellipsis w-max px-2 py-1 text-sm font-semibold rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300"
                     >
-                      {/* {reddit_url} */}
                       Reddit Game Discussion
                     </Link>
                   )}
@@ -231,7 +226,6 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
                       className="overflow-ellipsis w-max px-2 py-1 text-sm font-semibold rounded-md bg-gray-200 text-gray-700 hover:bg-gray-300"
                       target="_blank"
                     >
-                      {/* {metacritic_url} */}
                       Metacritic Game Review
                     </Link>
                   )}
@@ -239,9 +233,7 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
               </div>
             </div>
           </div>
-
           <br />
-
           {/* AVAILABLE STORES */}
           <div>
             <h2 className="text-gray-500 mb-2">Available Stores</h2>
@@ -262,6 +254,10 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
                 : "N/A"}
             </div>
           </div>
+
+          {/* rating, ratings, ratings_count, */}
+          {/* RATINGS */}
+          <Ratings averageRating={rating} ratingsList={ratings} ratingsCount={ratings_count} />
         </div>
 
         {/* SCREENSHOTS - RIGHT COLUMN */}

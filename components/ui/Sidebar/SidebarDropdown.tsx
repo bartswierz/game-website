@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { IoGameControllerOutline } from "react-icons/io5";
 import { useState } from "react";
-import { Accordion, AccordionContent, AccordionTrigger } from "../accordion";
+import { Accordion, AccordionContent, AccordionTrigger } from "../Shadcn/accordion";
 import { AccordionItem } from "@radix-ui/react-accordion";
 
 interface SidebarDropdownProps {
