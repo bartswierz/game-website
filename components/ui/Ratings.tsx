@@ -1,9 +1,5 @@
-"use client";
-// TODO Pass through Ratings
 import { Ratings } from "@/types";
-import { useEffect, useState } from "react";
 import { Progress } from "@/components/ui/Shadcn/progress";
-// import * as Progress from "@radix-ui/react-progress";
 
 type RatingsProps = {
   averageRating: number; //'rating' within the list -> 3.64
@@ -12,73 +8,48 @@ type RatingsProps = {
 };
 
 const Ratings = ({ averageRating, ratingsList, ratingsCount }: RatingsProps) => {
-  const [progress, setProgress] = useState(0);
-  // const [exceptional, setExceptional] = useState({ id: -1, title: "", count: 0, percent: 0 });
-  // const [recommended, setRecommended] = useState({ id: -1, title: "", count: 0, percent: 0 });
-  // const [meh, setMeh] = useState({ id: -1, title: "", count: 0, percent: 0 });
-  // const [skip, setSkip] = useState({ id: -1, title: "", count: 0, percent: 0 });
-  const [exceptional, setExceptional] = useState(ratingsList[0]);
-  const [recommended, setRecommended] = useState(ratingsList[1]);
-  const [meh, setMeh] = useState(ratingsList[2]);
-  const [skip, setSkip] = useState(ratingsList[3]);
+  const exceptional = ratingsList[0];
+  const recommended = ratingsList[1];
+  const meh = ratingsList[2];
+  const skip = ratingsList[3];
 
-  useEffect(() => {
-    //Percentage of the bar - TODO - make this piece equal to the 'percent' in ratings.percent
-    const timer = setTimeout(() => setProgress(50), 500);
-    return () => clearTimeout(timer);
-  }, []);
+  const averageRatingPercent = ((averageRating / 5) * 100).toFixed(2) + "%"; //78.75%
 
-  //Setting ratings list values
-  // useEffect(() => {
-  //   setExceptional(ratingsList[0]);
-  //   setRecommended(ratingsList[1]);
-  //   setMeh(ratingsList[2]);
-  //   setSkip(ratingsList[3]);
-  // });
+  // Each individual rating component
+  const RatingComponent__ = ({ ratingObject, name }: { ratingObject: Ratings; name: string }) => {
+    const { id, percent, count } = ratingObject;
 
-  // useEffect(() => {
-  //   console.log("exceptional: ", exceptional);
-  //   console.log("recommended: ", recommended);
-  //   console.log("meh: ", meh);
-  //   console.log("skip: ", skip);
-  // });
+    return (
+      <div className="flex w-full items-center" key={id}>
+        <p className="w-max pr-2">
+          {/* {name} */}
+          {id}-Star
+          {/* DISPLAY ABOVE 480px */}
+          <span className="hidden xsm:block">({count})</span>
+          {/* DISPLAY BELOW 480px */}
+          <span className="block xsm:hidden">{percent}%</span>
+        </p>
+        <Progress value={percent} className="w-[60%] bg-gray-700 flex-grow h-6- h-8- h-[28px] rounded-md" />
 
-  // return <Progress value={progress} className="w-[60%] text-yellow-700 border border-yellow-500 bg-gray-300" />;
-  return (
-    <>
-      <div>Game Ratings({ratingsCount})</div>
-      <div className="flex flex-col max-w-[500px] border gap-2 flex-grow-">
-        <div className="flex">
-          <span className="w-[84px]">Excellent</span>
-
-          <Progress
-            value={exceptional.percent}
-            className="w-[60%] bg-gray-700 flex-grow self-center h-6 rounded-md"
-            color={`#d9a411`}
-          />
-
-          <span className="w-[68px] pl-2">{exceptional.percent}%</span>
-        </div>
-
-        <div className="flex">
-          <span className="w-[84px]">Good</span>
-          <Progress value={recommended.percent} className="w-[60%] bg-gray-700 flex-grow self-center h-6 rounded-md" />
-          <span className="w-[68px] pl-2">{recommended.percent}%</span>
-        </div>
-
-        <div className="flex">
-          <span className="w-[84px]">Fair</span>
-          <Progress value={meh.percent} className="w-[60%] bg-gray-700 flex-grow self-center h-6 rounded-md" />
-          <span className="w-[68px] pl-2">{meh.percent}%</span>
-        </div>
-
-        <div className="flex">
-          <span className="w-[84px]">Poor</span>
-          <Progress value={skip.percent} className="w-[60%] bg-gray-700 flex-grow self-center h-6 rounded-md" />
-          <span className="w-[68px] pl-2">{skip.percent}%</span>
-        </div>
+        {/* Display ABOVE 480px */}
+        <span className="hidden xsm:block w-[68px] pl-2">{percent}%</span>
       </div>
-    </>
+    );
+  };
+
+  return (
+    <div className="my-4">
+      <div>Game Ratings({ratingsCount} Ratings)</div>
+      <div>
+        Overall Rating: {averageRating} out of 5({averageRatingPercent})
+      </div>
+      <div className="flex flex-col max-w-[700px] gap-2 flex-grow- items-center justify-center">
+        <RatingComponent__ ratingObject={exceptional} name="5-Star" />
+        <RatingComponent__ ratingObject={recommended} name="4-Star" />
+        <RatingComponent__ ratingObject={meh} name="3-Star" />
+        <RatingComponent__ ratingObject={skip} name="1-Star" />
+      </div>
+    </div>
   );
 };
 

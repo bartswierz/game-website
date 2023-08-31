@@ -103,7 +103,7 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
   const formattedReleasedDate = formatReleasedDate(released);
 
   return (
-    <div className="container">
+    <div className="w-full xsm:container">
       <div className="text-white flex flex-row gap-8 max-w-[1500px]">
         {/* LEFT COLUMN */}
         <div className="p-4 flex-[60]">
