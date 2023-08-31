@@ -9,9 +9,8 @@ interface WordListProps {
   }[];
 }
 
-//TODO - accepts a string list of words and displays them in a list split by a ,
+//Accepts a string list of words and displays them in a list split by a ,
 const WordList = ({ stringList }: WordListProps) => {
-  console.log("stringList passed: ", stringList);
   return (
     <div>
       {stringList.map(({ id, name }, idx) => {

@@ -8,15 +8,17 @@ type RatingsProps = {
 };
 
 const Ratings = ({ averageRating, ratingsList, ratingsCount }: RatingsProps) => {
-  const exceptional = ratingsList[0];
-  const recommended = ratingsList[1];
-  const meh = ratingsList[2];
-  const skip = ratingsList[3];
+  // Find the rating object that matches the id - { averageRating, ratingsList, ratingsCount }
+  const fiveStar = ratingsList.find((rating) => rating.id === 5);
+  const fourStar = ratingsList.find((rating) => rating.id === 4);
+  const threeStar = ratingsList.find((rating) => rating.id === 3);
+  const oneStar = ratingsList.find((rating) => rating.id === 1);
 
-  const averageRatingPercent = ((averageRating / 5) * 100).toFixed(2) + "%"; //78.75%
+  // const averageRatingPercent = ((averageRating / 5) * 100).toFixed(2) + "%"; //78.75%
 
   // Each individual rating component
-  const RatingComponent__ = ({ ratingObject, name }: { ratingObject: Ratings; name: string }) => {
+  const RatingComponent__ = ({ ratingObject }: { ratingObject: Ratings }) => {
+    if (!ratingObject) return;
     const { id, percent, count } = ratingObject;
 
     return (
@@ -37,17 +39,25 @@ const Ratings = ({ averageRating, ratingsList, ratingsCount }: RatingsProps) => 
     );
   };
 
+  // Data doesn't exist or not loaded yet
+  if (!ratingsList) return;
+
   return (
-    <div className="my-4">
-      <div>Game Ratings({ratingsCount} Ratings)</div>
-      <div>
-        Overall Rating: {averageRating} out of 5({averageRatingPercent})
-      </div>
+    <div className="my-6">
+      <h2 className="mb-2">
+        <span className="text-2xl font-semibold">Game Rating</span>
+        <span className="text-gray-500 text-lg"> {ratingsCount} Ratings</span>
+      </h2>
+      <p className="mb-1">
+        <span className="font-semibold">Overall Rating</span>: <span className="text-primary font-bold">{averageRating}</span> out of 5
+        Stars
+      </p>
       <div className="flex flex-col max-w-[700px] gap-2 flex-grow- items-center justify-center">
-        <RatingComponent__ ratingObject={exceptional} name="5-Star" />
-        <RatingComponent__ ratingObject={recommended} name="4-Star" />
-        <RatingComponent__ ratingObject={meh} name="3-Star" />
-        <RatingComponent__ ratingObject={skip} name="1-Star" />
+        {/* Since the find function can return 'undefined' we need to check if we have a returned value */}
+        {fiveStar && <RatingComponent__ ratingObject={fiveStar} />}
+        {fourStar && <RatingComponent__ ratingObject={fourStar} />}
+        {threeStar && <RatingComponent__ ratingObject={threeStar} />}
+        {oneStar && <RatingComponent__ ratingObject={oneStar} />}
       </div>
     </div>
   );
