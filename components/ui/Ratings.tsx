@@ -41,8 +41,8 @@ const Ratings = ({ averageRating, ratingsList, ratingsCount }: RatingsProps) => 
     );
   };
 
-  // Data doesn't exist or not loaded yet
-  if (!ratingsList) return;
+  // Data doesn't exist for ratings OR averageRating is 0
+  if (!ratingsList || !averageRating) return;
 
   return (
     <div className="my-6">
