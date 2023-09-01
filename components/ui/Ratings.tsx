@@ -22,16 +22,18 @@ const Ratings = ({ averageRating, ratingsList, ratingsCount }: RatingsProps) => 
     const { id, percent, count } = ratingObject;
 
     return (
-      <div className="flex w-full items-center" key={id}>
-        <p className="w-max pr-2">
+      // flex flex-col xsm:flex-row
+      <div className="flex flex-col xxsm:flex-row w-full items-center gap-2" key={id}>
+        {/* AT 400px we want to make the same sized width */}
+        <p className="flex flex-col- 3xsm:flex-row w-max xxsm:w-[84px] xsm:min-w-[108px] flex-wrap gap-x-[3px] mr-1 ">
           {/* {name} */}
-          {id}-Star
+          <span className="block-">{id}-Star</span>
           {/* DISPLAY ABOVE 480px */}
-          <span className="hidden xsm:block">({count})</span>
+          <span className="hidden xsm:block w-[50px]-">({count})</span>
           {/* DISPLAY BELOW 480px */}
           <span className="block xsm:hidden">{percent}%</span>
         </p>
-        <Progress value={percent} className="w-[60%] bg-gray-700 flex-grow h-6- h-8- h-[28px] rounded-md" />
+        <Progress value={percent} className="w-full xsm:w-[60%] bg-gray-700 flex-grow h-[26px] rounded-md max-w-[90vw]-" />
 
         {/* Display ABOVE 480px */}
         <span className="hidden xsm:block w-[68px] pl-2">{percent}%</span>

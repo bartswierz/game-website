@@ -7,7 +7,8 @@ module.exports = {
 
     extend: {
       screens: {
-        xxsm: "320px",
+        "3xsm": "320px",
+        xxsm: "400px",
         xsm: "480px",
       },
       transitionProperty: {
