@@ -176,13 +176,13 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
 
               {/* DEVELOPER */}
               <div>
-                <h2 className="text-gray-500 font-semibold mb-2">Developer(s)</h2>
+                <h2 className="text-gray-500 font-semibold mb-2">Developers</h2>
                 <WordList stringList={developers} />
               </div>
 
               {/* PUBLISHER */}
               <div>
-                <h2 className="text-gray-500 font-semibold mb-2">Publisher(s)</h2>
+                <h2 className="text-gray-500 font-semibold mb-2">Publishers</h2>
                 {publishers.length === 0 ? "N/A" : <WordList stringList={publishers} />}
               </div>
 
@@ -200,7 +200,7 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
 
               {/* WEBSITE */}
               <div className="w-full">
-                <h2 className="text-gray-500 font-semibold mb-2">Website(s)</h2>
+                <h2 className="text-gray-500 font-semibold mb-2">Websites</h2>
                 <div className="flex flex-wrap gap-2 pr-2 ">
                   <Link
                     href={website}
@@ -236,7 +236,7 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
           <br />
           {/* AVAILABLE STORES */}
           <div>
-            <h2 className="text-gray-500 mb-2">Available Stores</h2>
+            <h2 className="text-gray-500 font-semibold mb-2">Available Stores</h2>
             <div className="flex flex-row flex-wrap gap-2">
               {/* Displays list of stores if available, otherwise displays N/A */}
               {gameStoreList.length !== 0

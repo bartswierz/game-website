@@ -46,9 +46,9 @@ const Ratings = ({ averageRating, ratingsList, ratingsCount }: RatingsProps) => 
 
   return (
     <div className="my-6">
-      <h2 className="mb-2">
+      <h2 className="flex flex-wrap mb-2 gap-x-1">
         <span className="text-2xl font-semibold">Game Rating</span>
-        <span className="text-gray-500 text-lg"> {ratingsCount} Ratings</span>
+        <span className="text-gray-500 font-bold text-base self-end"> {ratingsCount} Ratings</span>
       </h2>
       <p className="mb-1">
         <span className="font-semibold">Overall Rating</span>: <span className="text-primary font-bold">{averageRating}</span> out of 5
