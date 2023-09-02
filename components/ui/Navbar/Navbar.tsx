@@ -1,14 +1,20 @@
 "use client";
 import { BrandLogo, HamburgerMenu, Searchbar } from "@/components/ui";
 
+import { useAppSelector } from "@/redux/store";
+
 //BUILT CUSTOM GAME ICON - https://game-icons.net/1x1/caro-asercion/warlord-helmet.html
 const Navbar = () => {
+  // Get the isSidebarOpen value from redux store to hide hamburger menu when sidebar is open
+  const isSidebarOpen: boolean = useAppSelector(({ sidebarSlice }) => sidebarSlice.value.isSidebarOpen);
+
   return (
     <header>
       <nav className="flex flex-row w-full items-center bg-gray-900 p-4 shadow text-white font-bold">
         <BrandLogo />
         <Searchbar />
-        <HamburgerMenu />
+        {/* Hides menu icon when sidebar is opened */}
+        {isSidebarOpen ? <div className="w-10 h-10"></div> : <HamburgerMenu />}
       </nav>
     </header>
   );

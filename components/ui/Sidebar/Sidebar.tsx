@@ -91,17 +91,22 @@ const Sidebar = () => {
     <>
       {
         // ADDS BLACK BACKGROUND OPACITY WHEN USER OPENS UP THE SIDEBAR, CLICKING ANYWHERE OUTSIDE THE SIDEBAR WILL REMOVE IT AND CLOSE THE SIDEBAR
-        isMenuToggled && <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-30" onClick={handleCloseSidebar}></div>
+        isMenuToggled && (
+          <div
+            className="fixed top-0 left-0 w-full h-full bg-black transition-opacity opacity-50 z-30"
+            onClick={handleCloseSidebar}
+          ></div>
+        )
       }
 
       <aside
         /* translate-x-0 -> Slides the sidebar to the left OFF SCREEN
           -translate-x-full -> Slides the sidebar to the right ON SCREEN*/
-        className={`w-60 md:w-60 z-40 h-screen transition-transform block translate-x-0
-        ${isMenuToggled && "-translate-x-full fixed top-0 left-0"}`}
+        className={`w-60 md:w-60 z-40 h-screen transition-transform block translate-x-0 
+        ${isMenuToggled ? "-translate-x-full fixed top-0 left-0" : ""}`}
         aria-label="Sidebar"
       >
-        <div className={`w-60 h-full md:h-[85vh] px-3 overflow-y-auto bg-gray-900 pb-8 ${isMenuToggled && "pt-6- w-full-"}`}>
+        <div className={`w-60 h-full md:h-[85vh] px-3 overflow-y-auto bg-gray-900 pb-8`}>
           {
             //DISPLAYS THE LOGO WITHIN SIDBAR
             isMenuToggled && (
@@ -134,7 +139,7 @@ const Sidebar = () => {
                   >
                     <IoGameControllerOutline />
                     {/* IF ACTIVE, LINK HAS BOLD TEXT */}
-                    <span className={`ml-3 cursor-pointer ${link === isActive ? "text-white font-bold" : ""}`}>
+                    <span className={`ml-3 cursor-pointer ${link === isActive ? "text-white font-bold" : "text-gray-300"}`}>
                       {capitalizeWord(link)}
                     </span>
                   </Link>
