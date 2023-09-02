@@ -51,7 +51,7 @@ const Searchbar = () => {
             placeholder="Search 850,000+ games"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="text-white min-w-full bg-gray-800 h-12 pl-10 rounded-full group-hover:bg-white group-hover:text-gray-900 transition-colors duration-300 ease-in-out focus:outline-none"
+            className="text-white min-w-full bg-gray-800 h-12 pl-10 rounded-full group-hover:bg-white group-hover:text-gray-900 transition-colors duration-300 ease-in-out focus:outline-none truncate"
           />
           <button type="submit" className="absolute rounded-full h-12 px-4 py-2 left-[0%] bottom-[0%]">
             <BiSearch size={20} color="gray" />
