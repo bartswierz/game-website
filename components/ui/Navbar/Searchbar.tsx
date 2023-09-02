@@ -42,7 +42,7 @@ const Searchbar = () => {
   };
 
   return (
-    <div className="max-w-[50vw] w-full mx-auto ">
+    <div className="max-w-[65vw] md:max-w-[50vw] xl:max-w-[40vw] w-full mx-auto ">
       <form onSubmit={handleSearch} className="max-w-1/2 flex flex-[50%] p-2 gap-2 min-w-[150px] justify-center">
         <label htmlFor="search" className="relative w-full flex flex-row transition-colors duration-500 ease-in-out group">
           <input
