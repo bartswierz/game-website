@@ -24,6 +24,7 @@ const GenrePage = ({ params }: { params: { slug: string } }) => {
   const [ordering, setOrdering] = useState<string | null>(searchOrdering);
   const [searchSlug, setSearchSlug] = useState<string | null>(searchGenres);
 
+  console.log("params.slug: ", params.slug);
   //UPDATING ORDERING STATE FROM COMBOBOX, WE WILL PASS IT TO THE COMBOBOX TO BE READY FOR THE NEXT FILTER SEARCH
   useEffect(() => {
     setOrdering(searchOrdering);

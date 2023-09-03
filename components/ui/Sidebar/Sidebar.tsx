@@ -205,12 +205,13 @@ const Sidebar = () => {
               />
             </ul>
 
-            {/* GENRES LINKS */}
+            {/* GENRES LINKS TODO - fix RPG - role-playing-games-rpg is passed as a slug, need to replace it with RPG*/}
             <ul>
               <span className="text-xl text-white">Genres</span>
               {genres.linkList.map((link) => (
                 <li key={link}>
                   <Link
+                    // TODO - instead of passing genres, we need to pass the id of the genre
                     href={{ pathname: `/${genres.title}/${link}`, query: { genres: link } }}
                     className="flex items-center p-2 text-white rounded-lg hover:bg-gray-800  group"
                     onClick={() => {
