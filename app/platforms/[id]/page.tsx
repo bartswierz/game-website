@@ -75,7 +75,7 @@ const PlatformPage = () => {
               {content.results.map(({ slug, background_image, name, stores }) => (
                 <div
                   key={slug}
-                  className="flex flex-col max-w-[500px] rounded-xl overflow-hidden  drop-shadow-md h-max shadow-2xl bg-gray-800 hover:ring-4 hover:ring-primary transition duration-300 ease-in-out"
+                  className="flex flex-col max-w-[500px] rounded-xl overflow-hidden-  drop-shadow-md h-max shadow-2xl bg-gray-800 hover:ring-4 hover:ring-primary transition duration-300 ease-in-out"
                 >
                   {/* GAME IMAGE */}
                   <div className="h-48">
@@ -97,7 +97,9 @@ const PlatformPage = () => {
 
                   {/* TEXT CONTAINER */}
                   <div className="text-center p-4">
-                    <h2 className="text-xl pb-2 font-bold mb-1 truncate">{name}</h2>
+                    <div className="flex w-full justify-center text-xl pb-2 font-bold mb-1 text-center ">
+                      <h2 className="text-xl pb-2 font-bold mb-1 truncate">{name}</h2>
+                    </div>
 
                     {/* NAVIGATES USER TO GAMES PAGE -> i.e.) http://localhost:3000/games/marvels-spider-man */}
                     <Link
