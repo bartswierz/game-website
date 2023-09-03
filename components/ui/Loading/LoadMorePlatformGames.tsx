@@ -83,7 +83,7 @@ const LoadMorePlatform = ({ searchQuery }: LoadMoreProps) => {
                     {/* NAVIGATES USER TO GAMES PAGE -> i.e.) http://localhost:3000/games/marvels-spider-man */}
                     <Link
                       href={`/games/${slug}`}
-                      className="flex justify-center items-center font-semibold rounded-full text-lg hover:bg-gray-400 border  bg-gray-300 text-gray-700 px-2 py-1  max-w-1/2"
+                      className="flex justify-center items-center font-semibold rounded-full text-lg hover:bg-gray-400 bg-gray-300 text-gray-700 px-2 py-1  max-w-1/2"
                     >
                       See Game Details
                     </Link>

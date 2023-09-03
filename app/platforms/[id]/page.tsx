@@ -103,7 +103,7 @@ const PlatformPage = () => {
                     {/* NAVIGATES USER TO GAMES PAGE -> i.e.) http://localhost:3000/games/marvels-spider-man */}
                     <Link
                       href={`/games/${slug}`}
-                      className="flex justify-center items-center font-semibold rounded-full hover:bg-gray-400 border bg-gray-300 text-gray-700 px-2 py-1 max-w-1/2 text-base xsm:text-lg "
+                      className="flex justify-center items-center font-semibold rounded-full hover:bg-gray-400  bg-gray-300 text-gray-700 px-2 py-1 max-w-1/2 text-base xsm:text-lg "
                     >
                       <span className="truncate">See Game Details</span>
                     </Link>
