@@ -7,7 +7,7 @@ import Image from "next/image";
 import { LoadMorePlatformGames } from "@/components/ui";
 import Link from "next/link";
 import Loading from "./loading";
-import { getPlatformStoreLink, getPlatformIcon, getPageTitle } from "@/utils/utils";
+import { getPageTitle } from "@/utils/utils";
 import { ComboboxOrdering } from "@/components/ui";
 import { MdBrokenImage } from "react-icons/md";
 import { PageHeader } from "@/components/ui";
@@ -97,7 +97,7 @@ const PlatformPage = () => {
 
                   {/* TEXT CONTAINER */}
                   <div className="text-center p-4">
-                    <h2 className="text-xl pb-2 font-bold border- h-[66px]- mb-1 truncate">{name}</h2>
+                    <h2 className="text-xl pb-2 font-bold mb-1 truncate">{name}</h2>
 
                     {/* NAVIGATES USER TO GAMES PAGE -> i.e.) http://localhost:3000/games/marvels-spider-man */}
                     <Link
