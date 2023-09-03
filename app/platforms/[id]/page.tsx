@@ -13,6 +13,7 @@ import { MdBrokenImage } from "react-icons/md";
 import { PageHeader } from "@/components/ui";
 
 const PlatformPage = () => {
+  // if (1 === 1) return <Loading />;
   const searchParams = useSearchParams();
   const [content, setContent] = useState<GamesByPlatform | null>(null);
 
@@ -97,9 +98,7 @@ const PlatformPage = () => {
 
                   {/* TEXT CONTAINER */}
                   <div className="text-center p-4">
-                    <div className="flex w-full justify-center text-xl pb-2 font-bold mb-1 text-center ">
-                      <h2 className="text-xl pb-2 font-bold mb-1 truncate">{name}</h2>
-                    </div>
+                    <h2 className="text-xl mb-3 font-bold truncate">{name}</h2>
 
                     {/* NAVIGATES USER TO GAMES PAGE -> i.e.) http://localhost:3000/games/marvels-spider-man */}
                     <Link

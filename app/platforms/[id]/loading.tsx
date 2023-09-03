@@ -21,11 +21,9 @@ export default function Loading() {
                 {/* GAME NAME */}
                 <Skeleton className="mb-2 font-bold w-[60%] h-8 mx-auto"></Skeleton>
 
-                {/* STORES */}
+                {/* Button */}
                 <div className="flex flex-col gap-y-4 p-2">
-                  {Array.from({ length: 4 }).map((_, idx: Key) => (
-                    <Skeleton className="flex gap-x-2 items-center justify-center  border  rounded-full h-[42px]" key={idx}></Skeleton>
-                  ))}
+                  <Skeleton className="flex gap-x-2 items-center justify-center  border rounded-full h-[42px]" key={idx}></Skeleton>
                 </div>
               </div>
             </div>
