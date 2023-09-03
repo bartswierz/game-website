@@ -76,7 +76,7 @@ const PlatformPage = () => {
               {content.results.map(({ slug, background_image, name, stores }) => (
                 <div
                   key={slug}
-                  className="flex flex-col max-w-[500px] rounded-xl overflow-hidden-  drop-shadow-md h-max shadow-2xl bg-gray-800 hover:ring-4 hover:ring-primary transition duration-300 ease-in-out"
+                  className="flex flex-col max-w-[500px] rounded-xl  drop-shadow-md h-max shadow-2xl bg-gray-800 hover:ring-4 hover:ring-primary transition duration-300 ease-in-out"
                 >
                   {/* GAME IMAGE */}
                   <div className="h-48">
@@ -86,7 +86,7 @@ const PlatformPage = () => {
                         width={200}
                         height={200}
                         alt="Game Cover Display"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover rounded-t-md "
                       />
                     ) : (
                       // IF NO IMAGE URL, DISPLAY BROKEN IMAGE ICON
