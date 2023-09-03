@@ -6,9 +6,8 @@ import { useState, useEffect } from "react";
 import { LoadMoreSearchGames } from "@/components/ui";
 import { useSearchParams } from "next/navigation";
 import { ComboboxOrdering, ComboboxPlatforms } from "@/components/ui";
-import Loading from "./loading";
+
 const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
-  if (1 === 1) return <Loading />;
   const searchParams = useSearchParams();
   const { searchTerm } = params;
   const [content, setContent] = useState<GamesSearch | null>(null);
