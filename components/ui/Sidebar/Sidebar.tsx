@@ -208,21 +208,20 @@ const Sidebar = () => {
             {/* GENRES LINKS TODO - fix RPG - role-playing-games-rpg is passed as a slug, need to replace it with RPG*/}
             <ul>
               <span className="text-xl text-white">Genres</span>
-              {genres.linkList.map((link) => (
-                <li key={link}>
+              {genres.linkList.map(({ genre, id }) => (
+                <li key={id}>
                   <Link
-                    // TODO - instead of passing genres, we need to pass the id of the genre
-                    href={{ pathname: `/${genres.title}/${link}`, query: { genres: link } }}
+                    href={{ pathname: `/genres/${genre}`, query: { genres: id } }}
                     className="flex items-center p-2 text-white rounded-lg hover:bg-gray-800  group"
                     onClick={() => {
-                      setIsActive(link);
+                      setIsActive(genre);
                       handleSidebar(windowWidth);
                     }}
-                    key={link}
+                    key={id}
                   >
                     <IoGameControllerOutline />
-                    <span className={`ml-3 cursor-pointer ${link === isActive ? "text-white font-bold" : ""}`}>
-                      {capitalizeWord(link)}
+                    <span className={`ml-3 cursor-pointer ${genre === isActive ? "text-white font-bold" : ""}`}>
+                      {capitalizeWord(genre)}
                     </span>
                   </Link>
                 </li>
