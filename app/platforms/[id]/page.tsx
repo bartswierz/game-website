@@ -58,7 +58,7 @@ const PlatformPage = () => {
     if (searchParamsID) getTitle(searchParamsID);
   }, [searchParamsID]);
 
-  if (!content) return <Loading />;
+  if (!content || !searchParamsID) return <Loading />;
 
   return (
     <div className="text-white">
