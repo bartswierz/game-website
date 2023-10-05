@@ -88,7 +88,7 @@ const DeveloperPage = ({ params }: { params: { id: string } }) => {
       {/* http://localhost:3000/genres/action?genres=action */}
       <div className="flex justify-center items-center md:justify-start md:items-start gap-4 my-4">
         {/* TODO - FIX ORDERING FILTER - NOTE: AT THE MOMENT WE ARE ONLY GOING TO USE ORDERING BECAUSE PLATFORMS CAUSES NULL DATA FETCHES */}
-        <ComboboxOrdering path={`/developer/${params.id}`} genres={params.id} page="developer" />
+        {/* <ComboboxOrdering path={`/developer/${params.id}`} genres={params.id} page="developer" /> */}
         {/* {platforms ? (
           <ComboboxOrdering path={`/developer/${params.id}`} platforms={platforms} genres={params.id} page="developer" />
         ) : (
