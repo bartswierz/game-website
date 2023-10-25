@@ -114,7 +114,7 @@ export default function Loading() {
         <div className="hidden lg:block flex-[30]">
           <div className="grid grid-cols-1 3xl:grid-cols-2 gap-4">
             {skeletonScreenshotArray.map((_, idx: Key) => (
-              <Skeleton className="h-36 max-w-96"></Skeleton>
+              <Skeleton className="h-36 max-w-96" key={idx}></Skeleton>
             ))}
           </div>
         </div>

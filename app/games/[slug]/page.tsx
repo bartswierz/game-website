@@ -130,8 +130,8 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
             {/* SCREENSHOTS */}
             <div className="grid grid-cols-1 xsm:grid-cols-2 gap-4 lg:hidden">
               {gameScreenshots.results.map(({ id, image }) => (
-                <div className="h-32">
-                  <Image src={image} alt={name} width={300} height={200} key={id} className="rounded-lg w-full h-full object-cover" />
+                <div className="h-32" key={id}>
+                  <Image src={image} alt={name} width={300} height={200} className="rounded-lg w-full h-full object-cover" />
                 </div>
               ))}
             </div>
@@ -264,8 +264,8 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
         <div className="hidden lg:block flex-[30]">
           <div className="grid grid-cols-1 3xl:grid-cols-2 gap-4">
             {gameScreenshots.results.map(({ id, image }) => (
-              <div className="h-36 max-w-96">
-                <Image src={image} alt={name} width={300} height={200} key={id} className="rounded-lg w-full h-full object-cover" />
+              <div className="h-36 max-w-96" key={id}>
+                <Image src={image} alt={name} width={300} height={200} className="rounded-lg w-full h-full object-cover" />
               </div>
             ))}
           </div>

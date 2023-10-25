@@ -10,16 +10,16 @@ const Stores = async () => {
 
   // Company Icon List for Stores
   const iconList = [
-    <FaSteam size={50} />,
-    <FaXbox size={50} />,
-    <FaPlaystation size={50} />,
-    <FaApple size={50} />,
-    <SiGogdotcom size={50} />,
-    <SiNintendo size={50} />,
-    <FaXbox size={50} />,
-    <FaGooglePlay size={50} />,
-    <SiItchdotio size={50} />,
-    <SiEpicgames size={50} />,
+    <FaSteam size={50} key={1} />,
+    <FaXbox size={50} key={2} />,
+    <FaPlaystation size={50} key={3} />,
+    <FaApple size={50} key={4} />,
+    <SiGogdotcom size={50} key={5} />,
+    <SiNintendo size={50} key={6} />,
+    <FaXbox size={50} key={7} />,
+    <FaGooglePlay size={50} key={8} />,
+    <SiItchdotio size={50} key={9} />,
+    <SiEpicgames size={50} key={10} />,
   ];
 
   return (
@@ -31,6 +31,7 @@ const Stores = async () => {
             href={`https://${store.domain}`}
             className="flex flex-col sm:flex-row justify-center sm:justify-start gap-2 text-white items-center rounded-lg w-80 max-w-[86vw] p-2 bg-slate-700 hover:bg-gray-500 text-center sm:text-start sm:gap-4"
             target="_blank"
+            key={idx}
           >
             {/* COMPANY ICON */}
             <p>{iconList[idx]}</p>
