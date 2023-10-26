@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/ui";
 const Genres = async () => {
   const genres: GameGenres = await getGamesGenres();
   const { results } = genres;
+  // console.log("results", results);
 
   return (
     <>
