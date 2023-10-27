@@ -122,13 +122,13 @@ export const getDeveloperInfo = async (id: string): Promise<DeveloperInfo> => {
 // GET ALL GAME GENRES
 export const getGamesGenres = async (): Promise<GameGenres> => {
   const res = await fetch(`https://api.rawg.io/api/genres?key=${process.env.RAWG_API_KEY}`);
-
+  // console.log('res: ', res);
   if (!res.ok) {
     throw new Error("Failed to fetch All Game Genres");
   }
 
   const data = await res.json();
-
+  // console.log("data from getGamesGenres: ", data);
   return data;
 };
 

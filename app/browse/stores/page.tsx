@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FaSteam, FaXbox, FaPlaystation, FaGooglePlay, FaApple } from "react-icons/fa";
 import { SiNintendo, SiEpicgames, SiItchdotio, SiGogdotcom } from "react-icons/si";
 import { PageHeader } from "@/components/ui";
+
 const Stores = async () => {
   const storesList: GameStores = await getStores();
 

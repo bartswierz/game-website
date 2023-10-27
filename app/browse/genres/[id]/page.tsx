@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import { useSearchParams } from "next/navigation";
 import { getGenreInfo } from "@/utils";
 import { GenreInfo } from "@/types";
@@ -7,25 +7,32 @@ import Image from "next/image";
 import Link from "next/link";
 import { ShowMore } from "@/components/ui";
 
+//TODO - this page has an id passed from previous page as a query parameter
 // const GenrePage = async ({ params }: { params: { slug: string; query: { id: string } } }) => {
-const GenrePage = async () => {
+// const GenrePage = async ({ params }: { params: { id: string } }) => {
+const GenrePage = async ({ params }: { params: { id: string } }) => {
+  // console.log("id: ", params.id);
   // Grabs the ID from the URL
-  const searchParams = useSearchParams();
-  const searchID = searchParams.get("id");
-  const [genreInfo, setGenreInfo] = useState<GenreInfo>();
-
+  // const searchParams = useSearchParams();
+  // const searchID = searchParams.get("id");
+  // console.log("search ID: ", searchID);
+  // const [genreInfo, setGenreInfo] = useState<GenreInfo>();
+  // let data = await getGenreInfo(searchID);
+  let data = await getGenreInfo(params.id);
+  const genreInfo = data;
+  // console.log("data: ", data);
   // Fetch Genre Info using the passed ID from browse/genres Page
-  useEffect(() => {
-    const fetchGenreInfo = async (searchID: string) => {
-      const data: GenreInfo = await getGenreInfo(searchID);
+  // useEffect(() => {
+  //   const fetchGenreInfo = async (searchID: string) => {
+  //     const data: GenreInfo = await getGenreInfo(searchID);
 
-      if (data) {
-        setGenreInfo(data);
-      } else throw new Error("No data returned from getGenreInfo");
-    };
+  //     if (data) {
+  //       setGenreInfo(data);
+  //     } else throw new Error("No data returned from getGenreInfo");
+  //   };
 
-    if (searchID) fetchGenreInfo(searchID);
-  }, [searchID]);
+  //   if (searchID) fetchGenreInfo(searchID);
+  // }, [searchID]);
 
   return (
     <div className="max-w-[1200px] text-white bg-slate-800 rounded-lg overflow-hidden mx-4 lg:mx-0">
