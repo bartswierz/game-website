@@ -1,7 +1,9 @@
 "use server";
 
+import { signIn } from "@/auth";
 import { z } from "zod";
 
+//Reference: https://vercel.com/docs/storage/vercel-postgres/quickstart
 // const InvoiceSchema = z.object({
 //   id: z.string(),
 //   customerId: z.string(),
@@ -16,3 +18,19 @@ const favoriteSchema = z.object({
   //id
   //date - time stamp
 });
+
+const loginSchema = z.object({
+  //username
+  //password
+});
+
+export async function authenticate(prevState: string | undefined, formData: FormData) {
+  try {
+    await signIn("credentials", Object.fromEntries(formData));
+  } catch (error) {
+    if ((error as Error).message.includes("CredentialsSignin")) {
+      return "CredentialSignin";
+    }
+    throw error;
+  }
+}

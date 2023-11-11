@@ -43,6 +43,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "eslint": "^8.52.0",
     "eslint-plugin-next": "^0.0.0"
   }
