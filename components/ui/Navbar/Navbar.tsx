@@ -16,7 +16,11 @@ const Navbar = () => {
         <Searchbar />
         {/* Hides menu icon when sidebar is opened */}
         {isSidebarOpen ? <div className="w-10 h-10"></div> : <HamburgerMenu />}
-        <Link href={"/login"}>Sign In</Link>
+        {/* <Link href={"/login"}>Sign In</Link> */}
+        <Link href={"/login"} className="hidden md:block">
+          Sign In
+        </Link>
+        {/* {isSidebarOpen ? null : <Link href={"/login"}>Sign In</Link>} */}
       </nav>
     </header>
   );

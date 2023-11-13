@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { closeSidebar, openSidebar, toggleSidebar } from "@/redux/features/sidebar-slice";
+import { BiLogIn, BiLogOut } from "react-icons/bi";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -108,13 +109,19 @@ const Sidebar = () => {
       >
         <div className={`w-60 h-full md:h-[85vh] px-3 overflow-y-auto bg-gray-900 pb-8`}>
           {
-            //DISPLAYS THE LOGO WITHIN SIDBAR
+            //DISPLAYS THE LOGO WITHIN SIDEBAR
             isMenuToggled && (
               <div className="relative flex flex-col justify-center items-center text-white font-bold text-xl pb-4 pt-6">
                 <BrandLogo />
                 <span>Next-Level Games</span>
                 <div className="absolute top-1 right-[-0.625rem] ">
                   <HamburgerMenu />
+                </div>
+                {/* SIGN IN / SIGN OUT BUTTON */}
+                <div className="absolute top-3 left-0 z-[9999]">
+                  {/* TODO - add conditional when user is logged in and logged out */}
+                  <BiLogIn size={26} />
+                  {/* <BiLogOut size={26} /> */}
                 </div>
               </div>
             )
