@@ -118,11 +118,14 @@ const Sidebar = () => {
                   <HamburgerMenu />
                 </div>
                 {/* SIGN IN / SIGN OUT BUTTON */}
-                <div className="absolute top-3 left-0 z-[9999]">
+                <Link
+                  href="/login"
+                  className="absolute top-2 left-[-5px] hover:bg-gray-500 rounded-full text-start pl-[5px] pt-[5px] pr-[5px] pb-[5px]"
+                >
                   {/* TODO - add conditional when user is logged in and logged out */}
-                  <BiLogIn size={26} />
-                  {/* <BiLogOut size={26} /> */}
-                </div>
+                  <BiLogIn size={24} />
+                  {/* <BiLogOut size={24} /> */}
+                </Link>
               </div>
             )
           }
