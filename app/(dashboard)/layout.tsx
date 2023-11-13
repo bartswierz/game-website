@@ -1,4 +1,6 @@
-import "./globals.css";
+// import "./globals.css";
+// import "@/globals.css";
+import "../globals.css";
 import { Footer, Navbar, Sidebar } from "@/components/ui";
 import { ReduxProvider } from "@/redux/features/provider";
 import { Metadata } from "next";
@@ -36,7 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           <div className="flex">
             <Sidebar />
-            <main className="container mx-auto m-6 px-2 md:px-4 ">{children}</main>
+            <main className="container mx-auto m-6 px-2 md:px-4">{children}</main>
           </div>
           <Footer />
         </ReduxProvider>
