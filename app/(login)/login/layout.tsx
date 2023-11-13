@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             src={`/images/RacingImage.png`}
             alt="Racing Cars moving at a rapid pace - Image rendered by ChatGPT - DALL-E"
             fill
-            className="z-[-1] bg-gradient-to-r from-indigo-500 opacity-40 "
+            className="z-[-1] bg-gradient-to-r from-indigo-500 opacity-20"
             priority
             objectFit="cover"
           />

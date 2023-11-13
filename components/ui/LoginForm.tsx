@@ -4,11 +4,12 @@
 // import { AtSymbolIcon, KeyIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
 // import { ArrowRightIcon } from "@heroicons/react/20/solid";
 // import { Button } from "./button";
-// @ts-expect-error
 
-import { HiOutlineMail, HiOutlineKey } from "react-icons/hi";
+// @ts-expect-error
 import { useFormState, useFormStatus } from "react-dom";
+import { HiOutlineMail, HiOutlineKey } from "react-icons/hi";
 import { BsExclamationCircleFill } from "react-icons/bs";
+import { BiLogIn, BiArrowBack } from "react-icons/bi";
 // import { experimental_useFormStatus as useFormState, experimental } from "react-dom";
 // import { experimental_useFormState as useFormState } from "react-dom";
 // import { experimental_useFormStatus as useFormStatus } from "react-dom";
@@ -19,10 +20,9 @@ export default function LoginForm() {
   const [code, action] = useFormState(authenticate, undefined);
 
   return (
-    <form action={action} className="space-y-3 text-white m-2 w-[280px] md:w-[400px]">
+    // <form action={action} className="space-y-3 text-white m-2 w-[280px] md:w-[400px]">
+    <form action={action} className="space-y-3 text-white m-2 w-[280px] md:w-[400px] relative">
       <div className="flex-1 rounded-lg bg-gray-50- px-6 pb-4 pt-8 bg-slate-900 drop-shadow-2xl shadow-2xl">
-        {/* <h1 className={`${lusitana.className} mb-3 text-2xl`}>Please log in to continue.</h1> */}
-        {/* <h1 className={`mb-3 text-2xl`}>Please log in to continue.</h1> */}
         <h1 className={`mb-3 text-2xl w-full text-center font-bold`}>Next-Level Games</h1>
         <div className="w-full">
           <div>
@@ -77,10 +77,21 @@ export default function LoginForm() {
             href={"/"}
             className="bg-gray-500 flex text-center justify-center items-center rounded-sm py-2 px-4 hover:bg-gray-600 transition-colors duration-300"
           >
-            Back
+            <span className="flex items-center gap-0.5">
+              <BiArrowBack />
+              Back
+            </span>
           </Link>
         </div>
       </div>
+
+      {/* Animated Border */}
+      {/* <a
+        href="#"
+        className="animate-background animate-border inline-block bg-white from-pink-500 via-red-500 to-yellow-500 bg-[length:_400%_400%] p-0.5 [animation-duration:_6s] hover:bg-gradient-to-r"
+      >
+        <span className="block bg-gray-900 px-5 py-3 text-white"> Get Started </span>
+      </a> */}
     </form>
   );
 }
@@ -88,14 +99,15 @@ export default function LoginForm() {
 function LoginButton() {
   const { pending } = useFormStatus();
 
-  // <Button className="mt-4 w-full" aria-disabled={pending}>
+  /* Log in */
   return (
     <button
       className="mt-4 w-full bg-blue-600 flex text-center justify-center items-center rounded-sm py-2 px-4 hover:bg-blue-700 transition-colors duration-300"
       aria-disabled={pending}
     >
-      Log in
-      {/* Log in <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" /> */}
+      <span className="flex items-center">
+        Log in <BiLogIn className="ml-auto h-5 w-5 text-gray-50" />
+      </span>
     </button>
   );
 }
