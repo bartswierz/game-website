@@ -15,8 +15,8 @@ export default function LoginForm() {
   const [code, action] = useFormState(authenticate, undefined);
 
   return (
-    <form action={action} className="space-y-3 text-white-">
-      <div className="flex-1 rounded-lg bg-gray-50- px-6 pb-4 pt-8 bg-slate-900">
+    <form action={action} className="space-y-3 text-white ">
+      <div className="flex-1 rounded-lg bg-gray-50- px-6 pb-4 pt-8 bg-slate-900 drop-shadow-2xl shadow-2xl">
         {/* <h1 className={`${lusitana.className} mb-3 text-2xl`}>Please log in to continue.</h1> */}
         <h1 className={`mb-3 text-2xl`}>Please log in to continue.</h1>
         <div className="w-full">
