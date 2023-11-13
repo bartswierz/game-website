@@ -1,6 +1,7 @@
 "use server";
 
 import { signIn } from "@/auth";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
 //Reference: https://vercel.com/docs/storage/vercel-postgres/quickstart
@@ -26,7 +27,14 @@ const loginSchema = z.object({
 
 export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
+    //ORIGINAL
     await signIn("credentials", Object.fromEntries(formData));
+    // const success = await signIn("credentials", Object.fromEntries(formData));
+    // console.log("success: ", success);
+    // if (successful) {
+    //   console.log("success! getting user data from signIn function");
+    //   redirect("/dashboard");
+    // }
   } catch (error) {
     if ((error as Error).message.includes("CredentialsSignin")) {
       return "CredentialSignin";

@@ -15,12 +15,20 @@ import { BiLogIn, BiArrowBack } from "react-icons/bi";
 // import { experimental_useFormStatus as useFormStatus } from "react-dom";
 import { authenticate } from "@/lib/actions";
 import Link from "next/link";
+import { FormEvent } from "react";
 
 export default function LoginForm() {
   const [code, action] = useFormState(authenticate, undefined);
 
+  // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+  //   console.log("inside handle submit");
+  // };
+
   return (
     // <form action={action} className="space-y-3 text-white m-2 w-[280px] md:w-[400px]">
+    // <form action={action} className="space-y-3 text-white m-2 w-[280px] md:w-[400px] relative">
+    // <form onSubmit={handleSubmit} action={action} className="space-y-3 text-white m-2 w-[280px] md:w-[400px] relative">
     <form action={action} className="space-y-3 text-white m-2 w-[280px] md:w-[400px] relative">
       <div className="flex-1 rounded-lg bg-gray-50- px-6 pb-4 pt-8 bg-slate-900 drop-shadow-2xl shadow-2xl">
         <h1 className={`mb-3 text-2xl w-full text-center font-bold`}>Next-Level Games</h1>
