@@ -2,6 +2,7 @@
 import { BrandLogo, HamburgerMenu, Searchbar } from "@/components/ui";
 
 import { useAppSelector } from "@/redux/store";
+import Link from "next/link";
 
 //BUILT CUSTOM GAME ICON - https://game-icons.net/1x1/caro-asercion/warlord-helmet.html
 const Navbar = () => {
@@ -15,6 +16,7 @@ const Navbar = () => {
         <Searchbar />
         {/* Hides menu icon when sidebar is opened */}
         {isSidebarOpen ? <div className="w-10 h-10"></div> : <HamburgerMenu />}
+        <Link href={"/login"}>Sign In</Link>
       </nav>
     </header>
   );
