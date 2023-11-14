@@ -18,6 +18,7 @@ import Link from "next/link";
 import { FormEvent } from "react";
 
 export default function LoginForm() {
+  // Using useFormState to CALL THE SERVER ACTION and HANDLE FORM ERRORS, and useFormStatus to handle the pending state of the form
   const [code, action] = useFormState(authenticate, undefined);
 
   // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {

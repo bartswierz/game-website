@@ -9,6 +9,7 @@ import { useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { closeSidebar, openSidebar, toggleSidebar } from "@/redux/features/sidebar-slice";
 import { BiLogIn, BiLogOut } from "react-icons/bi";
+import { signOut } from "@/auth"; //server action to sign user out
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -126,6 +127,17 @@ const Sidebar = () => {
                   <BiLogIn size={24} />
                   {/* <BiLogOut size={24} /> */}
                 </Link>
+                <form
+                  // action={async () => signOut()}
+                  action={async () => {
+                    // "use server";
+                    await signOut();
+                  }}
+                >
+                  <button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
+                    <BiLogOut size={24} />
+                  </button>
+                </form>
               </div>
             )
           }

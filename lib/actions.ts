@@ -25,6 +25,7 @@ const loginSchema = z.object({
   //password
 });
 
+//Connecting auth logic with our login form
 export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
     //ORIGINAL

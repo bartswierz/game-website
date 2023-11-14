@@ -3,7 +3,8 @@ import { BrandLogo, HamburgerMenu, Searchbar } from "@/components/ui";
 
 import { useAppSelector } from "@/redux/store";
 import Link from "next/link";
-
+import { signOut } from "@/auth";
+import { BiLogOut } from "react-icons/bi";
 //BUILT CUSTOM GAME ICON - https://game-icons.net/1x1/caro-asercion/warlord-helmet.html
 const Navbar = () => {
   // Get the isSidebarOpen value from redux store to hide hamburger menu when sidebar is open
@@ -17,9 +18,21 @@ const Navbar = () => {
         {/* Hides menu icon when sidebar is opened */}
         {isSidebarOpen ? <div className="w-10 h-10"></div> : <HamburgerMenu />}
         {/* <Link href={"/login"}>Sign In</Link> */}
-        <Link href={"/login"} className="hidden md:block">
+        {/* <Link href={"/login"} className="hidden md:block">
           Sign In
-        </Link>
+        </Link> */}
+        <form
+          // action={async () => signOut()}
+          action={async () => {
+            // "use server";
+            await signOut();
+          }}
+        >
+          <button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50- p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
+            {/* <BiLogOut size={24} /> */}
+            Sign Out
+          </button>
+        </form>
         {/* {isSidebarOpen ? null : <Link href={"/login"}>Sign In</Link>} */}
       </nav>
     </header>

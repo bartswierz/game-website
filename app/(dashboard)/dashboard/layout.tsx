@@ -1,6 +1,6 @@
 // import "./globals.css";
 // import "@/globals.css";
-import "../globals.css";
+import "@/app/globals.css";
 import { Footer, Navbar, Sidebar } from "@/components/ui";
 import { ReduxProvider } from "@/redux/features/provider";
 import { Metadata } from "next";

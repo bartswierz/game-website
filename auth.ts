@@ -1,3 +1,4 @@
+"use server";
 import NextAuth from "next-auth";
 import { authConfig } from "./auth.config";
 import Credentials from "next-auth/providers/credentials"; //The Credentials provider allows users to log in with a username and a password.
@@ -23,6 +24,11 @@ async function getUser(email: string): Promise<User | undefined> {
 export const { auth, signIn, signOut } = NextAuth({
   ...authConfig,
   providers: [
+    /* 
+    1. Checks to see if the credentials are valid types using ZOD BEFORE checking if the USER EXISTS IN THE DATABASE
+    2. Compare password(user input password) and user.password(Inside DB) 
+    3. If the passwords match, we return the user object otherwise null(if no match is found to PREVENT USER FROM LOGGING IN)
+    */
     Credentials({
       async authorize(credentials) {
         //Checking to see if the credentials given from the user are valid types
@@ -60,9 +66,11 @@ export const { auth, signIn, signOut } = NextAuth({
           if (passwordMatches) {
             console.log("SUCCESS! WE HAVE A PASSWORD MATCH! returning user: ", user);
             // return user, redirect('/login');
-            // redirect('/login')
+            // redirect('/login');
             // return {user, redirect('/')};
-            return user;
+            // Response.redirect(new URL("/", nextUrl));
+            // Response.redirect(new URL("/", "http://localhost:3000"));
+            return user; //user is confirmed, return user
             // redirect("/dashboardTest");
             // return {user, redirect({destination: '/dashboardtest', permanent: false}})};
           }
