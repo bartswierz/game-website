@@ -29,7 +29,7 @@ const SidebarLink = ({ pathname, linkTitle, linkObj, handleLinkCallBack }: Sideb
   return (
     <li>
       <Link
-        href={{ pathname: `/${pathname}/${slugify(link)}`, query: { id: platformID } }}
+        href={{ pathname: `/dashboard/${pathname}/${slugify(link)}`, query: { id: platformID } }}
         onClick={() => handleLink(link)}
         className="flex items-center p-2 text-white rounded-lg  hover:bg-gray-800  group"
       >

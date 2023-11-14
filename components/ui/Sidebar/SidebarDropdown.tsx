@@ -50,7 +50,7 @@ const SidebarDropdown = ({ pathname, linkTitle, linkList, uid, handleLinkCallBac
           {linkList.map(({ link, platformID }) => (
             <li key={platformID}>
               <Link
-                href={{ pathname: `/${pathname}/${slugify(link)}`, query: { id: platformID } }}
+                href={{ pathname: `/dashboard/${pathname}/${slugify(link)}`, query: { id: platformID } }}
                 onClick={() => handleLink(link)}
                 className="flex items-center w-full p-2 text-white rounded-lg pl-11 hover:bg-gray-800"
               >

@@ -149,7 +149,7 @@ const Sidebar = () => {
               {browse.linkList.map((link) => (
                 <li key={link}>
                   <Link
-                    href={{ pathname: `/${browse.title}/${link}` }}
+                    href={{ pathname: `/dashboard/${browse.title}/${link}` }}
                     className="flex items-center p-2 text-white rounded-lg hover:bg-gray-800 group"
                     // onClick={() => setIsActive(link)}
                     onClick={() => {
@@ -233,7 +233,7 @@ const Sidebar = () => {
               {genres.linkList.map(({ genre, id }) => (
                 <li key={id}>
                   <Link
-                    href={{ pathname: `/genres/${genre}`, query: { genres: id } }}
+                    href={{ pathname: `/dashboard/genres/${genre}`, query: { genres: id } }}
                     className="flex items-center p-2 text-white rounded-lg hover:bg-gray-800  group"
                     onClick={() => {
                       setIsActive(genre);
