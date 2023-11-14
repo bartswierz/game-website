@@ -66,11 +66,11 @@ const GenrePage = ({ params }: { params: { slug: string } }) => {
       {/* http://localhost:3000/genres/action?genres=action */}
       <div className="flex justify-center items-center md:justify-start md:items-start gap-4 my-4">
         {platforms ? (
-          <ComboboxOrdering path={`/genres/${slug}`} platforms={platforms} genres={slug} page="genre" />
+          <ComboboxOrdering path={`/dashboard/genres/${slug}`} platforms={platforms} genres={slug} page="genre" />
         ) : (
-          <ComboboxOrdering path={`/genres/${slug}`} genres={slug} page="genre" />
+          <ComboboxOrdering path={`/dashboard/genres/${slug}`} genres={slug} page="genre" />
         )}
-        <ComboboxPlatforms path={`/genres/${slug}`} ordering={ordering} genres={slug} page="genre" />
+        <ComboboxPlatforms path={`/dashboard/genres/${slug}`} ordering={ordering} genres={slug} page="genre" />
       </div>
 
       {content && (

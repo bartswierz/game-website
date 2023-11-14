@@ -62,11 +62,11 @@ const SearchPage = ({ params }: { params: { searchTerm: string } }) => {
 
           <div className="flex justify-center items-center md:justify-start md:items-start gap-4 my-4">
             {platforms ? (
-              <ComboboxOrdering path={`/search/${searchTerm}`} platforms={platforms} page="search" />
+              <ComboboxOrdering path={`/dashboard/search/${searchTerm}`} platforms={platforms} page="search" />
             ) : (
-              <ComboboxOrdering path={`/search/${searchTerm}`} page="search" />
+              <ComboboxOrdering path={`/dashboard/search/${searchTerm}`} page="search" />
             )}
-            <ComboboxPlatforms path={`/search/${searchTerm}`} ordering={ordering} page="search" />
+            <ComboboxPlatforms path={`/dashboard/search/${searchTerm}`} ordering={ordering} page="search" />
           </div>
 
           <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 px-4 md:px-0 gap-1">

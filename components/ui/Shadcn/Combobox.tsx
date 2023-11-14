@@ -91,6 +91,7 @@ export function Combobox({ searchTerm, type, platforms, ordering }: ComboboxProp
                 // href={`/search/${searchTerm}`}
                 // href={{ pathname: `/search/${searchTerm}`, query: { [type]: null, [type]: null } }}
                 href={{ pathname: `/dashboard/search/${searchTerm}`, query: { ordering: null, platforms: null } }}
+                // href={{ pathname: `/search/${searchTerm}`, query: { ordering: null, platforms: null } }}
                 onClick={() => {
                   setOpen(false);
                   //TODO here - if type is ordering, we will set the orderingFilter to null, if type is platform, we will set the platformFilter to null and vice versa

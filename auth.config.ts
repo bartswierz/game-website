@@ -39,7 +39,7 @@ export const authConfig = {
         // return Response.redirect(new URL("/", nextUrl)); //may have to update dashboard path
         // return Response.redirect(new URL("localhost:3000/", nextUrl)); //may have to update dashboard path
         // return Response.redirect(new URL("/", nextUrl)); //may have to update dashboard path
-      }
+      } else if (!isLoggedIn) return false;
       return true;
     },
   },
