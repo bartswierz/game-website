@@ -62,7 +62,7 @@ const GenrePage = async ({ params }: { params: { id: string } }) => {
               <div className="flex justify-center mt-4">
                 <Link
                   href={{
-                    pathname: `/genres/${genreInfo.name.toLowerCase()}`,
+                    pathname: `/dashboard/genres/${genreInfo.name.toLowerCase()}`,
                     query: { genres: `${genreInfo.name.toLowerCase()}`, page_size: 6 },
                   }}
                   className="bg-gray-200 text-gray-500 font-semibold rounded-md py-1 px-2 text-center hover:bg-gray-300 w-full max-w-2xl"

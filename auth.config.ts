@@ -22,20 +22,21 @@ export const authConfig = {
   // THIS PREVENTS USERS FROM ACCESSING DASHBOARD PAGES UNLESS THEY ARE SIGNED IN(WE WILL PLACE OUR ACCOUNT ONLY PAGE IN HERE LATER)
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      console.log("request {nextUrl}: ", nextUrl);
+      console.log("request { nextUrl }: ", nextUrl);
       const isLoggedIn = !!auth?.user;
       // if (isLoggedIn) return true;
       // console.log("isLoggedIn: ", isLoggedIn);
-      console.log("auth: ", auth);
+      // console.log("auth: ", auth);
       const isOnDashboard = nextUrl.pathname.startsWith("/dashboard"); //may have to update dashboard path
-      console.log("nextUrl: ", nextUrl);
-      console.log("nextUrl.pathname: ", nextUrl.pathname);
+      // console.log("nextUrl: ", nextUrl);
+      // console.log("nextUrl.pathname: ", nextUrl.pathname);
       // const isOnDashboard = nextUrl.pathname.startsWith("/"); //may have to update dashboard path
       if (isOnDashboard) {
         if (isLoggedIn) return true;
         return false; // Redirect unauthenticated users to login page
       } else if (isLoggedIn) {
         return Response.redirect(new URL("/dashboard", nextUrl)); //may have to update dashboard path
+        // return Response.redirect(new URL("/", nextUrl)); //may have to update dashboard path
         // return Response.redirect(new URL("localhost:3000/", nextUrl)); //may have to update dashboard path
         // return Response.redirect(new URL("/", nextUrl)); //may have to update dashboard path
       }

@@ -67,7 +67,7 @@ export function Combobox({ searchTerm, type, platforms, ordering }: ComboboxProp
               {filterOptions.map((option) => (
                 // type passed is either 'ordering' or 'platforms', option value = slug or id of the option to be passed
                 <Link
-                  href={{ pathname: `/search/${searchTerm}`, query: { [type]: option.value } }}
+                  href={{ pathname: `/dashboard/search/${searchTerm}`, query: { [type]: option.value } }}
                   key={`${option.value}`}
                   onClick={() => handleLink()}
                 >
@@ -90,7 +90,7 @@ export function Combobox({ searchTerm, type, platforms, ordering }: ComboboxProp
               <Link
                 // href={`/search/${searchTerm}`}
                 // href={{ pathname: `/search/${searchTerm}`, query: { [type]: null, [type]: null } }}
-                href={{ pathname: `/search/${searchTerm}`, query: { ordering: null, platforms: null } }}
+                href={{ pathname: `/dashboard/search/${searchTerm}`, query: { ordering: null, platforms: null } }}
                 onClick={() => {
                   setOpen(false);
                   //TODO here - if type is ordering, we will set the orderingFilter to null, if type is platform, we will set the platformFilter to null and vice versa
