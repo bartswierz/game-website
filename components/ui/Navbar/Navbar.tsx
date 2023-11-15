@@ -17,6 +17,17 @@ const Navbar = () => {
     router.push("/login"); //cleans up our route to localhost:3000/login
   };
 
+  const LogoutComponent = () => {
+    return (
+      <form action={handleSignOut} className="hidden md:block">
+        <button className="flex gap-2 bg-blue-600 px-4 py-2 rounded-full hover:bg-blue-700 focus:bg-blue-800 transition-colors duration-300 shadow-lg">
+          {/* <BiLogOut size={24} /> */}
+          Sign Out
+        </button>
+      </form>
+    );
+  };
+
   return (
     <header>
       <nav className="flex flex-row w-full items-center bg-gray-900 p-4 shadow text-white font-bold">
@@ -24,12 +35,7 @@ const Navbar = () => {
         <Searchbar />
         {/* Hides menu icon when sidebar is opened */}
         {isSidebarOpen ? <div className="w-10 h-10"></div> : <HamburgerMenu />}
-        <form action={handleSignOut}>
-          <button className="flex gap-2 bg-blue-600 px-4 py-2 rounded-full hover:bg-blue-700 focus:bg-blue-800 transition-colors duration-300 shadow-lg">
-            <BiLogOut size={24} />
-            Sign Out
-          </button>
-        </form>
+        <LogoutComponent />
         {/* {isSidebarOpen ? null : <Link href={"/login"}>Sign In</Link>} */}
       </nav>
     </header>

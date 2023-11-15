@@ -1,6 +1,7 @@
 import "@/app/globals.css";
 import { Metadata } from "next";
 import Image from "next/image";
+
 export const metadata: Metadata = {
   title: {
     template: "Next-Level Games | %s", // %s is the page title that will be replaces with the custom title given
@@ -10,7 +11,6 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://next-learn-dashboard.vercel.sh"),
 };
 
-// TODO - add our custom image as the background
 //Reference for multiple layouts used: https://nextjs.org/docs/app/building-your-application/routing/route-groups#creating-multiple-root-layouts
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -28,12 +28,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="flex justify-center items-center w-screen h-screen">
           {children}
           <Image
-            src={`/images/RacingImage.png`}
+            src={`/static/RacingImage.png`}
+            // src={`/images/NextLevelGamesLogo.png`}
             alt="Racing Cars moving at a rapid pace - Image rendered by ChatGPT - DALL-E"
             fill
-            className="z-[-1] bg-gradient-to-r from-indigo-500 opacity-20"
+            className="z-[-1] bg-gradient-to-r from-indigo-500 opacity-20 object-cover w-screen h-screen"
             priority
-            objectFit="cover"
           />
         </main>
       </body>

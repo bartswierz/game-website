@@ -4,6 +4,7 @@ import "@/app/globals.css";
 import { Footer, Navbar, Sidebar } from "@/components/ui";
 import { ReduxProvider } from "@/redux/features/provider";
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: {
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Sidebar />
             <main className="container mx-auto m-6 px-2 md:px-4">{children}</main>
           </div>
+          {/* <Image src={`/RacingImage.png`} fill alt="" /> */}
           <Footer />
         </ReduxProvider>
       </body>
