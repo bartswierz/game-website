@@ -22,7 +22,7 @@ export const authConfig = {
   // THIS PREVENTS USERS FROM ACCESSING DASHBOARD PAGES UNLESS THEY ARE SIGNED IN(WE WILL PLACE OUR ACCOUNT ONLY PAGE IN HERE LATER)
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
-      console.log("request { nextUrl }: ", nextUrl);
+      // console.log("request { nextUrl }: ", nextUrl);
       const isLoggedIn = !!auth?.user;
       // if (isLoggedIn) return true;
       // console.log("isLoggedIn: ", isLoggedIn);

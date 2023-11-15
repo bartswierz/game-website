@@ -1,14 +1,14 @@
 "use client";
 import { sidebarData } from "@/constants";
 import Link from "next/link";
-import { IoGameController, IoGameControllerOutline } from "react-icons/io5";
+import { IoGameControllerOutline } from "react-icons/io5";
 import SidebarDropdown from "./SidebarDropdown";
 import { SidebarLink, BrandLogo, HamburgerMenu } from "@/components/ui";
 import { useState, useEffect } from "react";
 import { useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { closeSidebar, openSidebar, toggleSidebar } from "@/redux/features/sidebar-slice";
-import { BiLogIn, BiLogOut } from "react-icons/bi";
+import { BiLogOut } from "react-icons/bi";
 import { signOut } from "@/auth"; //server action to sign user out
 
 const Sidebar = () => {
@@ -89,6 +89,23 @@ const Sidebar = () => {
 
   if (!isSidebarOpen) return null;
 
+  // Sign user out by calling the server action, 'signOut' inside auth
+  const LogoutButton = () => {
+    return (
+      <form
+        action={async () => {
+          // "use server";
+          await signOut();
+        }}
+        className="absolute top-3 left-[-2px] text-start bg-blue-600 hover:bg-blue-700 focus:bg-blue-800 transition-color duration-200 text-sm border-2 border-gray-300 hover:border-white hover:shadow-white shadow-md rounded-sm"
+      >
+        <button className="flex grow items-center justify-center gap-2 px-1 py-1 text-sm font-medium md:flex-none md:justify-start text-gray-300 hover:text-white">
+          <BiLogOut size={22} />
+        </button>
+      </form>
+    );
+  };
+
   return (
     <>
       {
@@ -118,26 +135,7 @@ const Sidebar = () => {
                 <div className="absolute top-1 right-[-0.625rem] ">
                   <HamburgerMenu />
                 </div>
-                {/* SIGN IN / SIGN OUT BUTTON */}
-                <Link
-                  href="/login"
-                  className="absolute top-2 left-[-5px] hover:bg-gray-500 rounded-full text-start pl-[5px] pt-[5px] pr-[5px] pb-[5px]"
-                >
-                  {/* TODO - add conditional when user is logged in and logged out */}
-                  <BiLogIn size={24} />
-                  {/* <BiLogOut size={24} /> */}
-                </Link>
-                <form
-                  // action={async () => signOut()}
-                  action={async () => {
-                    // "use server";
-                    await signOut();
-                  }}
-                >
-                  <button className="flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3">
-                    <BiLogOut size={24} />
-                  </button>
-                </form>
+                <LogoutButton />
               </div>
             )
           }

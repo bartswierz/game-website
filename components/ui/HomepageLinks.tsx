@@ -23,10 +23,6 @@ const HomepageLinks = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[70vh] p-4">
-      {/* <LinkCard hrefText="/browse/genres" linkText="Genres" secondaryText="19 Genres" /> */}
-      {/* <LinkCard hrefText="/browse/developers" linkText="Developers" secondaryText="436000+ Developers" />
-      <LinkCard hrefText="/browse/platforms" linkText="Platforms" secondaryText="51 Platforms" />
-      <LinkCard hrefText="/browse/stores" linkText="Stores" secondaryText="10 Stores" /> */}
       <LinkCard hrefText="/dashboard/browse/genres" linkText="Genres" secondaryText="19 Genres" />
       <LinkCard hrefText="/dashboard/browse/developers" linkText="Developers" secondaryText="436000+ Developers" />
       <LinkCard hrefText="/dashboard/browse/platforms" linkText="Platforms" secondaryText="51 Platforms" />
