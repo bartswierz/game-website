@@ -92,6 +92,15 @@ export default function LoginForm() {
             </span>
           </Link>
         </div>
+        <div>
+          <span className="underline">Demo Account</span>
+          <p>
+            Email: <b>user@nextmail.com</b>
+          </p>
+          <p>
+            Password: <b>123456</b>
+          </p>
+        </div>
       </div>
 
       {/* Animated Border */}
