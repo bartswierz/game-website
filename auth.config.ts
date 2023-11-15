@@ -27,19 +27,36 @@ export const authConfig = {
       // if (isLoggedIn) return true;
       // console.log("isLoggedIn: ", isLoggedIn);
       // console.log("auth: ", auth);
+      const isOnAllowedPage = nextUrl.pathname === "/login" || nextUrl.pathname === "/signup";
       const isOnDashboard = nextUrl.pathname.startsWith("/dashboard"); //may have to update dashboard path
       // console.log("nextUrl: ", nextUrl);
       // console.log("nextUrl.pathname: ", nextUrl.pathname);
       // const isOnDashboard = nextUrl.pathname.startsWith("/"); //may have to update dashboard path
-      if (isOnDashboard) {
-        if (isLoggedIn) return true;
-        return false; // Redirect unauthenticated users to login page
+      //---------------------------
+      // PREVIOUS
+      // if (isOnDashboard) {
+      //   if (isLoggedIn) return true;
+      //   return false; // Redirect unauthenticated users to login page
+      // } else if (isLoggedIn) {
+      //   return Response.redirect(new URL("/dashboard", nextUrl)); //may have to update dashboard path
+      //   // return Response.redirect(new URL("/", nextUrl)); //may have to update dashboard path
+      //   // return Response.redirect(new URL("localhost:3000/", nextUrl)); //may have to update dashboard path
+      //   // return Response.redirect(new URL("/", nextUrl)); //may have to update dashboard path
+      // } else if (!isLoggedIn) return false;
+      // return true;
+      //---------------------------
+      if (isOnDashboard && !isLoggedIn) {
+        // Redirect unauthenticated users trying to access dashboard pages to login page
+        return false;
+      } else if (isOnAllowedPage) {
+        // Always allow access to login and signup pages
+        return true;
       } else if (isLoggedIn) {
-        return Response.redirect(new URL("/dashboard", nextUrl)); //may have to update dashboard path
-        // return Response.redirect(new URL("/", nextUrl)); //may have to update dashboard path
-        // return Response.redirect(new URL("localhost:3000/", nextUrl)); //may have to update dashboard path
-        // return Response.redirect(new URL("/", nextUrl)); //may have to update dashboard path
-      } else if (!isLoggedIn) return false;
+        // Redirect authenticated users to the dashboard
+        return Response.redirect(new URL("/dashboard", nextUrl));
+      }
+
+      // For all other cases, return true to allow access
       return true;
     },
   },

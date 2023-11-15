@@ -25,6 +25,22 @@ export default function LoginForm() {
   //   event.preventDefault();
   //   console.log("inside handle submit");
   // };
+  const DemoAccountCredentials = () => {
+    {
+      /* DEMO CREDENTIALS */
+    }
+    return (
+      <div className="divide-double border-t-2 border-gray-500 mt-2 pt-2 text-gray-500">
+        <span className="underline font-semibold">Demo Account</span>
+        <p>
+          Email: <b>user@nextmail.com</b>
+        </p>
+        <p>
+          Password: <b>123456</b>
+        </p>
+      </div>
+    );
+  };
 
   return (
     // <form action={action} className="space-y-3 text-white m-2 w-[280px] md:w-[400px]">
@@ -92,7 +108,14 @@ export default function LoginForm() {
             </span>
           </Link>
         </div>
-        <div>
+        <p>
+          Don&#39;t have an account yet?{" "}
+          <Link href={"/signup"} className="underline text-blue-500 hover:text-blue-600 focus:text-blue-700">
+            Sign up
+          </Link>
+        </p>
+        {/* DEMO CREDENTIALS */}
+        {/* <div>
           <span className="underline">Demo Account</span>
           <p>
             Email: <b>user@nextmail.com</b>
@@ -100,7 +123,8 @@ export default function LoginForm() {
           <p>
             Password: <b>123456</b>
           </p>
-        </div>
+        </div> */}
+        <DemoAccountCredentials />
       </div>
 
       {/* Animated Border */}
