@@ -21,14 +21,8 @@ export default function LoginForm() {
   // Using useFormState to CALL THE SERVER ACTION and HANDLE FORM ERRORS, and useFormStatus to handle the pending state of the form
   const [code, action] = useFormState(authenticate, undefined);
 
-  // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   console.log("inside handle submit");
-  // };
+  // GIVING ACCOUNT CREDENTIALS TO A DEMO ACCOUNT TO MAKE IT EASY FOR VIEWERS TO CHECKOUT THE APP WITHOUT HAVING TO CREATE AN ACCOUNT
   const DemoAccountCredentials = () => {
-    {
-      /* DEMO CREDENTIALS */
-    }
     return (
       <div className="divide-double border-t-2 border-gray-500 mt-2 pt-2 text-gray-500">
         <span className="underline font-semibold">Demo Account</span>
@@ -43,10 +37,7 @@ export default function LoginForm() {
   };
 
   return (
-    // <form action={action} className="space-y-3 text-white m-2 w-[280px] md:w-[400px]">
-    // <form action={action} className="space-y-3 text-white m-2 w-[280px] md:w-[400px] relative">
-    // <form onSubmit={handleSubmit} action={action} className="space-y-3 text-white m-2 w-[280px] md:w-[400px] relative">
-    <form action={action} className="space-y-3 text-white m-2 w-[280px] md:w-[400px] relative">
+    <form action={action} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
       <div className="flex-1 rounded-lg bg-gray-50- px-6 pb-4 pt-8 bg-slate-900 drop-shadow-2xl shadow-2xl">
         <h1 className={`mb-3 text-2xl w-full text-center font-bold`}>Next-Level Games</h1>
         <div className="w-full">
@@ -114,16 +105,6 @@ export default function LoginForm() {
             Sign up
           </Link>
         </p>
-        {/* DEMO CREDENTIALS */}
-        {/* <div>
-          <span className="underline">Demo Account</span>
-          <p>
-            Email: <b>user@nextmail.com</b>
-          </p>
-          <p>
-            Password: <b>123456</b>
-          </p>
-        </div> */}
         <DemoAccountCredentials />
       </div>
 

@@ -25,16 +25,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* <link rel="icon" type="image/svg" href="../app/SiteLogo.svg" sizes="32x32" /> */}
       </head>
       <body className={`bg-gray-900`}>
-        <main className="flex justify-center items-center w-screen h-screen">
+        <main className="flex justify-center items-center w-screen h-screen relative">
           {children}
+          {/* <div className="relative w-full h-full"> */}
           <Image
             src={`/static/RacingImage.png`}
             // src={`/images/NextLevelGamesLogo.png`}
+            sizes="100vw"
             alt="Racing Cars moving at a rapid pace - Image rendered by ChatGPT - DALL-E"
             fill
-            className="z-[-1] bg-gradient-to-r from-indigo-500 opacity-20 object-cover w-screen h-screen"
+            className="absolute z-[-1] bg-gradient-to-r from-indigo-500 opacity-20 object-cover w-screen h-screen"
             priority
           />
+          {/* </div> */}
         </main>
       </body>
     </html>

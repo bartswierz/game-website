@@ -3,7 +3,8 @@
 import { signIn } from "@/auth";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-
+import { sql } from "@vercel/postgres";
+import { revalidatePath } from "next/cache";
 //Reference: https://vercel.com/docs/storage/vercel-postgres/quickstart
 // const InvoiceSchema = z.object({
 //   id: z.string(),
@@ -42,4 +43,43 @@ export async function authenticate(prevState: string | undefined, formData: Form
     }
     throw error;
   }
+}
+
+const AccountSchema = z.object({
+  id: z.string(),
+  // profileName: z.string(),
+  name: z.string(),
+  email: z.string().email(),
+  password: z.string().min(6),
+  // date: z.string(),
+});
+
+// const CreateAccount = AccountSchema.omit({ id: true, date: true });
+const CreateAccount = AccountSchema.omit({ id: true });
+
+export async function createAccount(formData: FormData) {
+  console.log("inside create account, data passed: ", formData);
+  const { email, password, name } = CreateAccount.parse({
+    name: formData.get("name"), //Bart
+    email: formData.get("email"), //test@email.com
+    password: formData.get("password"), //123456
+  });
+
+  console.log("email: ", email);
+  console.log("password", password);
+  console.log("name", name);
+  // const date = new Date().toISOString().split("T")[0]; //Creates a date string in the format YYYY-MM-DD for account creation
+
+  // try {
+  // INSERT INTO invoices (email, password, name, date)
+  // VALUES (${email}, ${password}, ${name}, ${date})
+  await sql`
+      INSERT INTO users (name, email, password)
+      VALUES (${name}, ${email}, ${password})
+    `;
+  // } catch (error) {
+  //   console.error("Error creating account: ", error);
+  // }
+  revalidatePath("/signup");
+  redirect("/login"); //commented out as it currently is requesting multiple times
 }
