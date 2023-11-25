@@ -39,10 +39,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           <div className="flex">
             <Sidebar />
-            <main className="container mx-auto m-6 px-2 md:px-4">{children}</main>
+            <main className="container mx-auto m-6 px-2 md:px-4 mb-[2vh] min-h-full">{children}</main>
           </div>
           {/* <Image src={`/RacingImage.png`} fill alt="" /> */}
-          <Footer />
+          <div className="mt-[4vh]">
+            <Footer />
+          </div>
         </ReduxProvider>
       </body>
     </html>
