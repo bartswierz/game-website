@@ -76,6 +76,7 @@ export default function LoginForm() {
             </div>
           </div>
         </div>
+        {/* IF user inputs wrong username or password, displays, 'Invalid credentials; under the password input */}
         <div className="flex h-8 items-end- space-x-1 align-middle items-center">
           {code === "CredentialSignin" && (
             <>

@@ -5,6 +5,8 @@ import { redirect } from "next/navigation";
 import { z } from "zod";
 import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
+import type { User } from "@/types/index";
+
 //Reference: https://vercel.com/docs/storage/vercel-postgres/quickstart
 // const InvoiceSchema = z.object({
 //   id: z.string(),
@@ -27,6 +29,7 @@ const loginSchema = z.object({
 });
 
 //Connecting auth logic with our login form
+//TODO - add a function to check if the email already exists in the database
 export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
     //ORIGINAL
@@ -57,27 +60,49 @@ const AccountSchema = z.object({
 // const CreateAccount = AccountSchema.omit({ id: true, date: true });
 const CreateAccount = AccountSchema.omit({ id: true });
 
+//TODO - add a function to check if the email already exists in the database
 export async function createAccount(formData: FormData) {
-  console.log("inside create account, data passed: ", formData);
-  const { email, password, name } = CreateAccount.parse({
-    name: formData.get("name"), //Bart
-    email: formData.get("email"), //test@email.com
-    password: formData.get("password"), //123456
-  });
+  try {
+    console.log("inside create account, data passed: ", formData);
+    const { email, password, name } = CreateAccount.parse({
+      name: formData.get("name"), //Bart
+      email: formData.get("email"), //test@email.com
+      password: formData.get("password"), //123456
+    });
 
-  console.log("email: ", email);
-  console.log("password", password);
-  console.log("name", name);
-  // const date = new Date().toISOString().split("T")[0]; //Creates a date string in the format YYYY-MM-DD for account creation
+    console.log("email: ", email);
+    console.log("password:", password);
+    console.log("name:", name);
+    // const date = new Date().toISOString().split("T")[0]; //Creates a date string in the format YYYY-MM-DD for account creation
 
-  // try {
-  // INSERT INTO invoices (email, password, name, date)
-  // VALUES (${email}, ${password}, ${name}, ${date})
-  await sql`
+    /*
+    const alreadyExists = await sql<User>`SELECT * from USERS where email=${email}`;
+    // console.log("alreadyExists: ", alreadyExists);
+    if (alreadyExists) {
+      console.log("account with this email already exists");
+      // return null;
+      return "alreadyExists";
+      // return new Error("Email already exists");
+    }
+    */
+    // try {
+    // INSERT INTO invoices (email, password, name, date)
+    // VALUES (${email}, ${password}, ${name}, ${date})
+    // if user exists, return error
+
+    console.log("INSERT INTO users (name, email, password) VALUES (${name}, ${email}, ${password})");
+    // PLACE USER DATA INTO DATABASE IF IT DOESNT ALREADY EXIST
+    await sql`
       INSERT INTO users (name, email, password)
       VALUES (${name}, ${email}, ${password})
     `;
-  // } catch (error) {
+  } catch (error) {
+    if ((error as Error).message.includes("CredentialsSignin")) {
+      return "CredentialSignin";
+    }
+    throw error;
+  }
+  // catch (error) {
   //   console.error("Error creating account: ", error);
   // }
   revalidatePath("/signup");

@@ -24,7 +24,7 @@ export default function CreateAccountForm() {
   // Using useFormState to CALL THE SERVER ACTION and HANDLE FORM ERRORS, and useFormStatus to handle the pending state of the form
   // const [code, action] = useFormState(authenticate, undefined); //replace authenticate with createAccount
   const [code, action] = useFormState(createAccount, undefined); //replace authenticate with createAccount
-
+  console.log("code", code);
   // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
   //   event.preventDefault();
   //   console.log("inside handle submit");
@@ -47,6 +47,7 @@ export default function CreateAccountForm() {
   // };
 
   return (
+    // <form action={action} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
     // <form action={action} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
     <form action={createAccount} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
       <div className="flex-1 rounded-lg bg-gray-50- px-6 pb-4 pt-8 bg-slate-900 drop-shadow-2xl shadow-2xl">
@@ -107,15 +108,33 @@ export default function CreateAccountForm() {
             </div>
           </div>
         </div>
+        {/* TODO - add different conditional to check if userExists display message "User already exists" */}
         <div className="flex h-8 items-end- space-x-1 align-middle items-center">
+          {code === "alreadyExists" && (
+            <>
+              <BsExclamationCircleFill className="h-4 w-4 text-red-500" />
+              <p aria-live="polite" className="text-sm text-red-500">
+                Account with this email already exists
+              </p>
+            </>
+          )}
           {code === "CredentialSignin" && (
+            <>
+              <BsExclamationCircleFill className="h-4 w-4 text-red-500" />
+              <p aria-live="polite" className="text-sm text-red-500">
+                Invalid credentials2
+              </p>
+            </>
+          )}
+          {/* ORIGINAL */}
+          {/* {code === "CredentialSignin" && (
             <>
               <BsExclamationCircleFill className="h-4 w-4 text-red-500" />
               <p aria-live="polite" className="text-sm text-red-500">
                 Invalid credentials
               </p>
             </>
-          )}
+          )} */}
         </div>
         <div className="flex flex-col gap-4 mb-4">
           {/* <LoginButton /> */}

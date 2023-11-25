@@ -9,7 +9,7 @@ import bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
 //Reference: https://nextjs.org/learn/dashboard-app/adding-authentication
 // Queries the user table in our database and returns the user object if it exists
-async function getUser(email: string): Promise<User | undefined> {
+export async function getUser(email: string): Promise<User | undefined> {
   try {
     const user = await sql<User>`SELECT * from USERS where email=${email}`;
     // console.log("selecting user - value row: ", user.rows[0]);
@@ -65,14 +65,7 @@ export const { auth, signIn, signOut } = NextAuth({
           // TODO - need to redirect user back to home page after successful login
           if (passwordMatches) {
             console.log("SUCCESS! WE HAVE A PASSWORD MATCH! returning user: ", user);
-            // return user, redirect('/login');
-            // redirect('/login');
-            // return {user, redirect('/')};
-            // Response.redirect(new URL("/", nextUrl));
-            // Response.redirect(new URL("/", "http://localhost:3000"));
             return user; //user is confirmed, return user
-            // redirect("/dashboardTest");
-            // return {user, redirect({destination: '/dashboardtest', permanent: false}})};
           }
         }
 

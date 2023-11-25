@@ -16,8 +16,6 @@ const HomepageLinks = () => {
   }
 
   const LinkCard = ({ hrefText, linkText, secondaryText, imagePath }: linksProps) => {
-    console.log("imagePath", imagePath);
-
     return (
       <Link
         href={`${hrefText}`}
