@@ -23,8 +23,23 @@ import { FormEvent } from "react";
 export default function CreateAccountForm() {
   // Using useFormState to CALL THE SERVER ACTION and HANDLE FORM ERRORS, and useFormStatus to handle the pending state of the form
   // const [code, action] = useFormState(authenticate, undefined); //replace authenticate with createAccount
-  const [code, action] = useFormState(createAccount, undefined); //replace authenticate with createAccount
-  console.log("code", code);
+  // const [code, action] = useFormState(createAccount, undefined); //replace authenticate with createAccount
+  const [state, dispatch] = useFormState(createAccount, undefined); //replace authenticate with createAccount
+  console.log("state", state);
+  console.log("dispatch", dispatch);
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    // const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log("inside handle submit");
+    console.log("event: ", event);
+    // const formData: FormData = new FormData(event.currentTarget); // or event.target
+    // const formData: FormData = new FormData(event); // or event.target
+    // console.log("formData type: ", typeof formData);
+    // const data = Object.fromEntries(formData.entries());
+    // dispatch(createAccount(data)); // Assuming dispatch correctly calls your action
+    // dispatch(createAccount(formData)); // Assuming dispatch correctly calls your action
+  };
   // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
   //   event.preventDefault();
   //   console.log("inside handle submit");
@@ -49,7 +64,12 @@ export default function CreateAccountForm() {
   return (
     // <form action={action} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
     // <form action={action} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
-    <form action={createAccount} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
+    <form
+      onSubmit={handleSubmit}
+      action={dispatch}
+      className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative"
+    >
+      {/* // <form action={createAccount} className="space-y-3 text-white m-2 w-full max-w-[98vw] md:w-[400px] relative"> */}
       <div className="flex-1 rounded-lg bg-gray-50- px-6 pb-4 pt-8 bg-slate-900 drop-shadow-2xl shadow-2xl">
         <h1 className={`mb-3 text-2xl w-full text-center font-bold`}>Next-Level Games</h1>
         <div className="w-full">
@@ -109,8 +129,9 @@ export default function CreateAccountForm() {
           </div>
         </div>
         {/* TODO - add different conditional to check if userExists display message "User already exists" */}
-        <div className="flex h-8 items-end- space-x-1 align-middle items-center">
-          {code === "alreadyExists" && (
+        <div className="flex h-8 items-end- space-x-1 align-middle items-center bg-blue-500 text-white">
+          {/* {code === "alreadyExists" && ( */}
+          {dispatch === "alreadyExists" && (
             <>
               <BsExclamationCircleFill className="h-4 w-4 text-red-500" />
               <p aria-live="polite" className="text-sm text-red-500">
@@ -118,7 +139,8 @@ export default function CreateAccountForm() {
               </p>
             </>
           )}
-          {code === "CredentialSignin" && (
+          {/* {code === "CredentialSignin" && ( */}
+          {dispatch === "CredentialSignin" && (
             <>
               <BsExclamationCircleFill className="h-4 w-4 text-red-500" />
               <p aria-live="polite" className="text-sm text-red-500">
@@ -126,6 +148,7 @@ export default function CreateAccountForm() {
               </p>
             </>
           )}
+          <span>State:{state}</span>
           {/* ORIGINAL */}
           {/* {code === "CredentialSignin" && (
             <>
@@ -171,13 +194,13 @@ export default function CreateAccountForm() {
 }
 
 function CreateButton() {
-  // const { pending } = useFormStatus();
+  const { pending } = useFormStatus();
 
   /* Log in */
   return (
     <button
       className="mt-4 w-full bg-blue-600 flex text-center justify-center items-center rounded-sm py-2 px-4 hover:bg-blue-700 transition-colors duration-300"
-      // aria-disabled={pending}
+      aria-disabled={pending}
       type="submit"
     >
       <span className="flex items-center">

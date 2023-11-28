@@ -62,6 +62,8 @@ const CreateAccount = AccountSchema.omit({ id: true });
 
 //TODO - add a function to check if the email already exists in the database
 export async function createAccount(formData: FormData) {
+  // TODO - error from FormData being undefined as it is passed
+  console.log("formData: ", formData);
   try {
     console.log("inside create account, data passed: ", formData);
     const { email, password, name } = CreateAccount.parse({
@@ -90,15 +92,19 @@ export async function createAccount(formData: FormData) {
     // VALUES (${email}, ${password}, ${name}, ${date})
     // if user exists, return error
 
-    console.log("INSERT INTO users (name, email, password) VALUES (${name}, ${email}, ${password})");
+    console.log(`INSERT INTO users (name, email, password) VALUES (${name}, ${email}, ${password})`);
     // PLACE USER DATA INTO DATABASE IF IT DOESNT ALREADY EXIST
     await sql`
       INSERT INTO users (name, email, password)
       VALUES (${name}, ${email}, ${password})
     `;
   } catch (error) {
+    // Error is getting undefined for our form data
+    console.log("error trying to create account: ", error, "\n");
     if ((error as Error).message.includes("CredentialsSignin")) {
       return "CredentialSignin";
+    } else if ((error as Error).message.includes("already exists")) {
+      return "alreadyExists";
     }
     throw error;
   }

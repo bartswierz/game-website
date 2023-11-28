@@ -19,8 +19,8 @@ import { FormEvent } from "react";
 
 export default function LoginForm() {
   // Using useFormState to CALL THE SERVER ACTION and HANDLE FORM ERRORS, and useFormStatus to handle the pending state of the form
-  const [code, action] = useFormState(authenticate, undefined);
-
+  // const [code, action] = useFormState(authenticate, undefined);
+  const [state, dispatch] = useFormState(authenticate, undefined);
   // GIVING ACCOUNT CREDENTIALS TO A DEMO ACCOUNT TO MAKE IT EASY FOR VIEWERS TO CHECKOUT THE APP WITHOUT HAVING TO CREATE AN ACCOUNT
   const DemoAccountCredentials = () => {
     return (
@@ -37,12 +37,13 @@ export default function LoginForm() {
   };
 
   return (
-    <form action={action} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
+    // <form action={action} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
+    <form action={dispatch} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
       <div className="flex-1 rounded-lg bg-gray-50- px-6 pb-4 pt-8 bg-slate-900 drop-shadow-2xl shadow-2xl">
         <h1 className={`mb-3 text-2xl w-full text-center font-bold`}>Next-Level Games</h1>
         <div className="w-full">
           <div>
-            <label className="mb-3 mt-5 block text-xs font-medium text-gray-900-" htmlFor="email">
+            <label className="mb-3 mt-5 block text-xs font-medium" htmlFor="email">
               Email
             </label>
             <div className="relative">
@@ -78,7 +79,8 @@ export default function LoginForm() {
         </div>
         {/* IF user inputs wrong username or password, displays, 'Invalid credentials; under the password input */}
         <div className="flex h-8 items-end- space-x-1 align-middle items-center">
-          {code === "CredentialSignin" && (
+          {/* {code === "CredentialSignin" && ( */}
+          {state === "CredentialSignin" && (
             <>
               <BsExclamationCircleFill className="h-4 w-4 text-red-500" />
               <p aria-live="polite" className="text-sm text-red-500">

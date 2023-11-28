@@ -24,7 +24,7 @@ export const authConfig = {
     authorized({ auth, request: { nextUrl } }) {
       // console.log("request { nextUrl }: ", nextUrl);
       const isLoggedIn = !!auth?.user;
-      console.log("auth.user: ", auth?.user);
+      // console.log("auth.user: ", auth?.user);
 
       const isOnAllowedPage = nextUrl.pathname === "/login" || nextUrl.pathname === "/signup";
       const isOnDashboard = nextUrl.pathname.startsWith("/dashboard"); //may have to update dashboard path
