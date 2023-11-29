@@ -28,18 +28,18 @@ export default function CreateAccountForm() {
   console.log("state", state);
   console.log("dispatch", dispatch);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    // const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("inside handle submit");
-    console.log("event: ", event);
-    // const formData: FormData = new FormData(event.currentTarget); // or event.target
-    // const formData: FormData = new FormData(event); // or event.target
-    // console.log("formData type: ", typeof formData);
-    // const data = Object.fromEntries(formData.entries());
-    // dispatch(createAccount(data)); // Assuming dispatch correctly calls your action
-    // dispatch(createAccount(formData)); // Assuming dispatch correctly calls your action
-  };
+  // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  //   // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   console.log("inside handle submit");
+  //   console.log("event: ", event);
+  //   // const formData: FormData = new FormData(event.currentTarget); // or event.target
+  //   // const formData: FormData = new FormData(event); // or event.target
+  //   // console.log("formData type: ", typeof formData);
+  //   // const data = Object.fromEntries(formData.entries());
+  //   // dispatch(createAccount(data)); // Assuming dispatch correctly calls your action
+  //   // dispatch(createAccount(formData)); // Assuming dispatch correctly calls your action
+  // };
   // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
   //   event.preventDefault();
   //   console.log("inside handle submit");
@@ -65,7 +65,7 @@ export default function CreateAccountForm() {
     // <form action={action} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
     // <form action={action} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
     <form
-      onSubmit={handleSubmit}
+      // onSubmit={handleSubmit}
       action={dispatch}
       className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative"
     >
@@ -75,7 +75,7 @@ export default function CreateAccountForm() {
         <div className="w-full">
           {/* Name */}
           <div className="mt-4">
-            <label className="mb-3 mt-5 block text-xs font-medium text-gray-900-" htmlFor="password">
+            <label className="mb-3 mt-5 block text-xs font-medium" htmlFor="password">
               Name
             </label>
             <div className="relative">
@@ -131,7 +131,7 @@ export default function CreateAccountForm() {
         {/* TODO - add different conditional to check if userExists display message "User already exists" */}
         <div className="flex h-8 items-end- space-x-1 align-middle items-center bg-blue-500 text-white">
           {/* {code === "alreadyExists" && ( */}
-          {dispatch === "alreadyExists" && (
+          {state === "alreadyExists" && (
             <>
               <BsExclamationCircleFill className="h-4 w-4 text-red-500" />
               <p aria-live="polite" className="text-sm text-red-500">
@@ -140,7 +140,7 @@ export default function CreateAccountForm() {
             </>
           )}
           {/* {code === "CredentialSignin" && ( */}
-          {dispatch === "CredentialSignin" && (
+          {state === "CredentialSignin" && (
             <>
               <BsExclamationCircleFill className="h-4 w-4 text-red-500" />
               <p aria-live="polite" className="text-sm text-red-500">
@@ -163,15 +163,15 @@ export default function CreateAccountForm() {
           {/* <LoginButton /> */}
           <CreateButton />
 
-          {/* <Link
-            href={"/"}
+          <Link
+            href={"/login"}
             className="bg-gray-500 flex text-center justify-center items-center rounded-sm py-2 px-4 hover:bg-gray-600 transition-colors duration-300"
           >
             <span className="flex items-center gap-0.5">
               <BiArrowBack />
-              Back
+              Back to Login
             </span>
-          </Link> */}
+          </Link>
         </div>
         <p>
           Already have an account?{" "}

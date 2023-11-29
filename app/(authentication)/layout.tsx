@@ -1,6 +1,7 @@
 import "@/app/globals.css";
 import { Metadata } from "next";
 import Image from "next/image";
+import RacingImage from "@/public/static/RacingImage.png";
 
 export const metadata: Metadata = {
   title: {
@@ -22,22 +23,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap"
           rel="stylesheet"
         />
-        {/* <link rel="icon" type="image/svg" href="../app/SiteLogo.svg" sizes="32x32" /> */}
       </head>
       <body className={`bg-gray-900`}>
         <main className="flex justify-center items-center w-screen h-screen relative">
           {children}
-          {/* <div className="relative w-full h-full"> */}
           <Image
-            src={`/static/RacingImage.png`}
-            // src={`/images/NextLevelGamesLogo.png`}
+            src={RacingImage}
             sizes="100vw"
             alt="Racing Cars moving at a rapid pace - Image rendered by ChatGPT - DALL-E"
             fill
             className="absolute z-[-1] bg-gradient-to-r from-indigo-500 opacity-20 object-cover w-screen h-screen"
             priority
           />
-          {/* </div> */}
         </main>
       </body>
     </html>

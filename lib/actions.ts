@@ -66,6 +66,7 @@ export async function createAccount(formData: FormData) {
   console.log("formData: ", formData);
   try {
     console.log("inside create account, data passed: ", formData);
+    // TODO - uncomment once fixed
     const { email, password, name } = CreateAccount.parse({
       name: formData.get("name"), //Bart
       email: formData.get("email"), //test@email.com
@@ -75,6 +76,8 @@ export async function createAccount(formData: FormData) {
     console.log("email: ", email);
     console.log("password:", password);
     console.log("name:", name);
+
+    //******************* */
     // const date = new Date().toISOString().split("T")[0]; //Creates a date string in the format YYYY-MM-DD for account creation
 
     /*

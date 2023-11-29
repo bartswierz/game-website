@@ -20,6 +20,7 @@ import { FormEvent } from "react";
 export default function LoginForm() {
   // Using useFormState to CALL THE SERVER ACTION and HANDLE FORM ERRORS, and useFormStatus to handle the pending state of the form
   // const [code, action] = useFormState(authenticate, undefined);
+  // undefined as 2nd parameter is the INITIAL STATE of the form
   const [state, dispatch] = useFormState(authenticate, undefined);
   // GIVING ACCOUNT CREDENTIALS TO A DEMO ACCOUNT TO MAKE IT EASY FOR VIEWERS TO CHECKOUT THE APP WITHOUT HAVING TO CREATE AN ACCOUNT
   const DemoAccountCredentials = () => {
@@ -92,7 +93,7 @@ export default function LoginForm() {
         <div className="flex flex-col gap-4 mb-4">
           <LoginButton />
 
-          <Link
+          {/* <Link
             href={"/"}
             className="bg-gray-500 flex text-center justify-center items-center rounded-sm py-2 px-4 hover:bg-gray-600 transition-colors duration-300"
           >
@@ -100,7 +101,7 @@ export default function LoginForm() {
               <BiArrowBack />
               Back
             </span>
-          </Link>
+          </Link> */}
         </div>
         <p>
           Don&#39;t have an account yet?{" "}
