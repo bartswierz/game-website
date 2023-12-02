@@ -25,48 +25,27 @@ export default function CreateAccountForm() {
   // const [code, action] = useFormState(authenticate, undefined); //replace authenticate with createAccount
   // const [code, action] = useFormState(createAccount, undefined); //replace authenticate with createAccount
   const [state, dispatch] = useFormState(createAccount, undefined); //replace authenticate with createAccount
-  console.log("state", state);
-  console.log("dispatch", dispatch);
-
   // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-  //   // const handleSubmit = (event) => {
   //   event.preventDefault();
   //   console.log("inside handle submit");
-  //   console.log("event: ", event);
-  //   // const formData: FormData = new FormData(event.currentTarget); // or event.target
-  //   // const formData: FormData = new FormData(event); // or event.target
-  //   // console.log("formData type: ", typeof formData);
+  //   console.log("event.target: ", event.target);
+  //   const formData = new FormData(event.target as HTMLFormElement);
   //   // const data = Object.fromEntries(formData.entries());
+  //   // console.log("formData: ", formData);
+  //   // console.log("data: ", data);
   //   // dispatch(createAccount(data)); // Assuming dispatch correctly calls your action
-  //   // dispatch(createAccount(formData)); // Assuming dispatch correctly calls your action
+  //   // dispatch(createAccount(event)); // Assuming dispatch correctly calls your action
+  //   dispatch(createAccount(formData)); // Assuming dispatch correctly calls your action
   // };
-  // const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-  //   event.preventDefault();
-  //   console.log("inside handle submit");
-  // // };
-  // const DemoAccountCredentials = () => {
-  //   {
-  //     /* DEMO CREDENTIALS */
-  //   }
-  //   return (
-  //     <div className="divide-double border-t-2 border-gray-500 mt-2 pt-2 text-gray-500">
-  //       <span className="underline font-semibold">Demo Account</span>
-  //       <p>
-  //         Email: <b>user@nextmail.com</b>
-  //       </p>
-  //       <p>
-  //         Password: <b>123456</b>
-  //       </p>
-  //     </div>
-  //   );
-  // };
+  //************************** */
 
   return (
     // <form action={action} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
     // <form action={action} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
     <form
-      // onSubmit={handleSubmit}
-      action={dispatch}
+      // onSubmit={(event) => handleSubmit(event)}
+      // Passing formData to our createAccount action in action.ts to add new user to database if it doesn't already exist
+      action={(e) => dispatch(createAccount(e))}
       className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative"
     >
       {/* // <form action={createAccount} className="space-y-3 text-white m-2 w-full max-w-[98vw] md:w-[400px] relative"> */}
@@ -129,8 +108,24 @@ export default function CreateAccountForm() {
           </div>
         </div>
         {/* TODO - add different conditional to check if userExists display message "User already exists" */}
-        <div className="flex h-8 items-end- space-x-1 align-middle items-center bg-blue-500 text-white">
+        <div className="flex h-8 items-end- space-x-1 align-middle items-center bg-blue-500 text-whiteX text-red-500">
           {/* {code === "alreadyExists" && ( */}
+          {state === "duplicate key value" && (
+            <>
+              <BsExclamationCircleFill className="h-4 w-4 text-red-500" />
+              <p aria-live="polite" className="text-sm text-red-500">
+                Account with this email already exists
+              </p>
+            </>
+          )}
+          {state === "unique constraint" && (
+            <>
+              <BsExclamationCircleFill className="h-4 w-4 text-red-500" />
+              <p aria-live="polite" className="text-sm text-red-500">
+                Account with this email already exists
+              </p>
+            </>
+          )}
           {state === "alreadyExists" && (
             <>
               <BsExclamationCircleFill className="h-4 w-4 text-red-500" />
@@ -148,7 +143,15 @@ export default function CreateAccountForm() {
               </p>
             </>
           )}
-          <span>State:{state}</span>
+          {state === "users_email_key" && (
+            <>
+              <BsExclamationCircleFill className="h-4 w-4 text-red-500" />
+              <p aria-live="polite" className="text-sm text-red-500">
+                Invalid credentials2
+              </p>
+            </>
+          )}
+          {/* <span>State:{state}</span> */}
           {/* ORIGINAL */}
           {/* {code === "CredentialSignin" && (
             <>
@@ -162,7 +165,7 @@ export default function CreateAccountForm() {
         <div className="flex flex-col gap-4 mb-4">
           {/* <LoginButton /> */}
           <CreateButton />
-
+          {/* 
           <Link
             href={"/login"}
             className="bg-gray-500 flex text-center justify-center items-center rounded-sm py-2 px-4 hover:bg-gray-600 transition-colors duration-300"
@@ -171,7 +174,7 @@ export default function CreateAccountForm() {
               <BiArrowBack />
               Back to Login
             </span>
-          </Link>
+          </Link> */}
         </div>
         <p>
           Already have an account?{" "}

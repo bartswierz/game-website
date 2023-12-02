@@ -22,6 +22,7 @@ export default function LoginForm() {
   // const [code, action] = useFormState(authenticate, undefined);
   // undefined as 2nd parameter is the INITIAL STATE of the form
   const [state, dispatch] = useFormState(authenticate, undefined);
+
   // GIVING ACCOUNT CREDENTIALS TO A DEMO ACCOUNT TO MAKE IT EASY FOR VIEWERS TO CHECKOUT THE APP WITHOUT HAVING TO CREATE AN ACCOUNT
   const DemoAccountCredentials = () => {
     return (
