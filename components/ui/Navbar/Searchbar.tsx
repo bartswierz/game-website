@@ -38,7 +38,7 @@ const Searchbar = () => {
     }
 
     // VALID INPUT - Navigate to the /search page and pass the searchTerm as a query
-    router.push(`/search/${searchTerm}`);
+    router.push(`/dashboard/search/${searchTerm}`);
   };
 
   return (

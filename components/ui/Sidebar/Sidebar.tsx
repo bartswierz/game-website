@@ -1,13 +1,15 @@
 "use client";
 import { sidebarData } from "@/constants";
 import Link from "next/link";
-import { IoGameController, IoGameControllerOutline } from "react-icons/io5";
+import { IoGameControllerOutline } from "react-icons/io5";
 import SidebarDropdown from "./SidebarDropdown";
 import { SidebarLink, BrandLogo, HamburgerMenu } from "@/components/ui";
 import { useState, useEffect } from "react";
 import { useAppSelector } from "@/redux/store";
 import { useDispatch } from "react-redux";
 import { closeSidebar, openSidebar, toggleSidebar } from "@/redux/features/sidebar-slice";
+import { BiLogOut } from "react-icons/bi";
+import { signOut } from "@/auth"; //server action to sign user out
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -87,6 +89,23 @@ const Sidebar = () => {
 
   if (!isSidebarOpen) return null;
 
+  // Sign user out by calling the server action, 'signOut' inside auth
+  const LogoutButton = () => {
+    return (
+      <form
+        action={async () => {
+          // "use server";
+          await signOut();
+        }}
+        className="absolute top-3 left-[-2px] text-start bg-blue-600 hover:bg-blue-700 focus:bg-blue-800 transition-color duration-200 text-sm border-2 border-gray-300 hover:border-white hover:shadow-white shadow-md rounded-sm"
+      >
+        <button className="flex grow items-center justify-center gap-2 px-1 py-1 text-sm font-medium md:flex-none md:justify-start text-gray-300 hover:text-white">
+          <BiLogOut size={22} />
+        </button>
+      </form>
+    );
+  };
+
   return (
     <>
       {
@@ -108,7 +127,7 @@ const Sidebar = () => {
       >
         <div className={`w-60 h-full md:h-[85vh] px-3 overflow-y-auto bg-gray-900 pb-8`}>
           {
-            //DISPLAYS THE LOGO WITHIN SIDBAR
+            //DISPLAYS THE LOGO WITHIN SIDEBAR
             isMenuToggled && (
               <div className="relative flex flex-col justify-center items-center text-white font-bold text-xl pb-4 pt-6">
                 <BrandLogo />
@@ -116,6 +135,7 @@ const Sidebar = () => {
                 <div className="absolute top-1 right-[-0.625rem] ">
                   <HamburgerMenu />
                 </div>
+                <LogoutButton />
               </div>
             )
           }
@@ -127,7 +147,7 @@ const Sidebar = () => {
               {browse.linkList.map((link) => (
                 <li key={link}>
                   <Link
-                    href={{ pathname: `/${browse.title}/${link}` }}
+                    href={{ pathname: `/dashboard/${browse.title}/${link}` }}
                     className="flex items-center p-2 text-white rounded-lg hover:bg-gray-800 group"
                     // onClick={() => setIsActive(link)}
                     onClick={() => {
@@ -211,7 +231,7 @@ const Sidebar = () => {
               {genres.linkList.map(({ genre, id }) => (
                 <li key={id}>
                   <Link
-                    href={{ pathname: `/genres/${genre}`, query: { genres: id } }}
+                    href={{ pathname: `/dashboard/genres/${genre}`, query: { genres: id } }}
                     className="flex items-center p-2 text-white rounded-lg hover:bg-gray-800  group"
                     onClick={() => {
                       setIsActive(genre);
