@@ -6,7 +6,6 @@ import { z } from "zod";
 import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
 import type { User } from "@/types/index";
-
 //Reference: https://vercel.com/docs/storage/vercel-postgres/quickstart
 // const InvoiceSchema = z.object({
 //   id: z.string(),
@@ -69,73 +68,33 @@ export async function createAccount(formData: FormData) {
   // console.log("form: ", form);
   if (formData !== undefined) {
     try {
-      console.log("inside create account, data passed: ", formData);
-      // const { email, password, name } = CreateAccount.parse({
+      console.log("Form Data Passed: ", formData);
       const form = Object.fromEntries(formData);
       console.log("form: ", form);
 
-      // TODO - uncomment once fixed
-      // const { email, password, name } = CreateAccount.parse({
       const { email, password, name } = CreateAccount.parse({
         name: formData.get("name"), //Bart
         email: formData.get("email"), //test@email.com
         password: formData.get("password"), //123456
-        // name: form.get("name"), //Bart
-        // email: form.get("email"), //test@email.com
-        // password: form.get("password"), //123456
       });
 
-      console.log("email: ", email);
-      console.log("password:", password);
-      console.log("name:", name);
-
-      //******************* */
-
-      // UNCOMMENT AFTER TESTING
-      console.log(`INSERT INTO users (name, email, password) VALUES (${name}, ${email}, ${password})`);
       // PLACE USER DATA INTO DATABASE IF IT DOESNT ALREADY EXIST
       await sql`
       INSERT INTO users (name, email, password)
       VALUES (${name}, ${email}, ${password})
     `;
     } catch (error) {
+      console.log("ERROR: ", error); //ERROR:  NeonDbError: db error: ERROR: duplicate key value violates unique constraint "users_email_key"
       // Error is getting undefined for our form data
       console.log("error trying to create account: ", error, "\n");
-      if ((error as Error).message.includes("CredentialsSignin")) {
-        return "CredentialSignin";
-      } else if ((error as Error).message.includes("duplicate key value")) {
+
+      if ((error as Error).message.includes("duplicate key value")) {
         console.log("duplicate key value"); //THIS ERROR DISPLAYS ON DUPLICATE EMAIL ALREADY IN USER TABLE
-        return "duplicate key value";
-      } else if ((error as Error).message.includes("unique constraint")) {
-        console.log("unique constraint");
-        return "unique constraint";
-      } else if ((error as Error).message.includes("already exists")) {
-        console.log("already exists");
-        return "alreadyExists";
-      } else if ((error as Error).message.includes("users_email_key")) {
-        console.log("users_email_key unique constraint");
-        return "users_email_key";
+        return "An account with this email already exists.";
       }
-      throw error;
+      return `Error didn't include any of the above: UNIQUE MESSAGE: ${error}`;
     }
     revalidatePath("/signup");
     redirect("/login"); //commented out as it currently is requesting multiple times
   }
 }
-
-// const date = new Date().toISOString().split("T")[0]; //Creates a date string in the format YYYY-MM-DD for account creation
-
-/*
-    const alreadyExists = await sql<User>`SELECT * from USERS where email=${email}`;
-    // console.log("alreadyExists: ", alreadyExists);
-    if (alreadyExists) {
-      console.log("account with this email already exists");
-      // return null;
-      return "alreadyExists";
-      // return new Error("Email already exists");
-    }
-    */
-// try {
-// INSERT INTO invoices (email, password, name, date)
-// VALUES (${email}, ${password}, ${name}, ${date})
-// if user exists, return error
