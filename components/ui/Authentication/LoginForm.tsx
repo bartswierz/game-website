@@ -132,6 +132,9 @@ function LoginButton() {
     <button
       className="mt-4 w-full bg-blue-600 flex text-center justify-center items-center rounded-sm py-2 px-4 hover:bg-blue-700 transition-colors duration-300"
       aria-disabled={pending}
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
     >
       <span className="flex items-center">
         Log in <BiLogIn className="ml-auto h-5 w-5 text-gray-50" />
