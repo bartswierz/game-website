@@ -62,6 +62,78 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+:root {
+  /* --clr-1: #052b2f;
+  --clr-2: #073438;
+  --clr-3: #0e4b50;
+  --clr-4: #2d8f85;
+  --clr-5: #637c54; */
+
+  --clr-1: #0945de;
+  --clr-2: #0945de;
+  --clr-3: #0945de;
+  --clr-4: #f50223;
+  /* --clr-4: #7402f5; */
+  --clr-5: #f50223;
+  --clr-6: #f50223;
+}
+
+.card {
+  /* height: 60vh; */
+  /* aspect-ratio: 1 / 1.5; */
+  /* background: var(--clr-1); */
+  /* border-radius: 0.5rem; */
+  border-radius: 1rem;
+  /* margin: 2rem; */
+  position: relative;
+  /* overflow: hidden; */
+}
+
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+  inset: -0.5rem;
+  z-index: -1;
+  /* background: conic-gradient(from var(--gradient-angle), var(--clr-3), var(--clr-4), var(--clr-5), var(--clr-4), var(--clr-3)); */
+  background: conic-gradient(
+    from var(--gradient-angle),
+    var(--clr-1),
+    var(--clr-2),
+    var(--clr-3),
+    var(--clr-4),
+    var(--clr-5),
+    var(--clr-6)
+  );
+  border-radius: inherit;
+  animation: rotation 20s linear infinite;
+  /* transform: rotate(90deg); */
+}
+
+.card::after {
+  filter: blur(3.5rem);
+  /* transform: rotate(90deg); */
+}
+
+/* @keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */
+@keyframes rotation {
+  0% {
+    --gradient-angle: 0deg;
+    /* transform: rotate(0deg); */
+  }
+  100% {
+    --gradient-angle: 360deg;
+    /* transform: rotate(360deg); */
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 12px; /* Set the width of the scrollbar */
@@ -85,7 +157,7 @@ body {
 /* Thumb (the part you drag to scroll) */
 ::-webkit-scrollbar-thumb {
   background-color: #6b7280; /* Set your custom color for the thumb */
-  border-radius: 4px; /* Optional: Add some border-radius to make it rounder */
+  border-radius: 4px;
 }
 
 .ProgressRoot {
@@ -111,3 +183,49 @@ body {
 .b {
   border: 2px solid blue;
 }
+
+/* SIGN-IN/SIGN-UP BORDER ANIMATION */
+/* @keyframes spin-border {
+  0% {
+    border-color: white;
+    border-width: 2px;
+    transform: rotate(0deg);
+  }
+  100% {
+    border-color: blue;
+    border-width: 2px;
+    transform: rotate(360deg);
+  }
+} */
+
+/* .background-test {
+  background-color: #777231;
+  animation: spin-border 2s linear infinite;
+}
+
+.box::before {
+  content: "";
+  position: absolute;
+  width: 50px;
+  height: 100%;
+  background-color: white;
+  box-shadow: 0 0 20px rgb(8, 8, 8);
+  animation: animate 4s linear infinite;
+}
+
+.box::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  background-color: rgb(4, 75, 97);
+  border-radius: 16px;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */
