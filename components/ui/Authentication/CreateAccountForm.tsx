@@ -66,7 +66,7 @@ export default function CreateAccountForm() {
       onSubmit={(event) => handleSubmit(event)}
       // Passing formData to our createAccount action in action.ts to add new user to database if it doesn't already exist
       // action={(e) => dispatch(createAccount(e))}
-      className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative card"
+      className="space-y-3 text-white m-2 w-full max-w-[88vw] md:w-[400px] relative card"
     >
       {/* <form action={createAccount} className="space-y-3 text-white m-2 w-full max-w-[98vw] md:w-[400px] relative"> */}
       <div className="flex-1 rounded-lg bg-gray-50- px-6 pb-4 pt-8 bg-slate-900 drop-shadow-2xl shadow-2xl">
