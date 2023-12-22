@@ -1,20 +1,11 @@
 "use client";
 
-// import { lusitana } from "@/app/ui/fonts";
-// import { AtSymbolIcon, KeyIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
-// import { ArrowRightIcon } from "@heroicons/react/20/solid";
-// import { Button } from "./button";
-
 // @ts-expect-error
 import { useFormState, useFormStatus } from "react-dom";
 import { HiOutlineMail, HiOutlineKey } from "react-icons/hi";
 import { BsExclamationCircleFill } from "react-icons/bs";
 import { BiLogIn, BiArrowBack } from "react-icons/bi";
 import { MdAccountCircle } from "react-icons/md";
-
-// import { experimental_useFormStatus as useFormState, experimental } from "react-dom";
-// import { experimental_useFormState as useFormState } from "react-dom";
-// import { experimental_useFormStatus as useFormStatus } from "react-dom";
 import { authenticate } from "@/lib/actions";
 import { createAccount } from "@/lib/actions";
 import Link from "next/link";
@@ -75,11 +66,12 @@ export default function CreateAccountForm() {
       onSubmit={(event) => handleSubmit(event)}
       // Passing formData to our createAccount action in action.ts to add new user to database if it doesn't already exist
       // action={(e) => dispatch(createAccount(e))}
-      className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative"
+      className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative card"
     >
       {/* <form action={createAccount} className="space-y-3 text-white m-2 w-full max-w-[98vw] md:w-[400px] relative"> */}
       <div className="flex-1 rounded-lg bg-gray-50- px-6 pb-4 pt-8 bg-slate-900 drop-shadow-2xl shadow-2xl">
         <h1 className={`mb-3 text-2xl w-full text-center font-bold`}>Next-Level Games</h1>
+        <h2 className={`mb-3 text-2xl w-full text-center font-bold`}>Sign up</h2>
         <div className="w-full">
           {/* Name */}
           <div className="mt-4">

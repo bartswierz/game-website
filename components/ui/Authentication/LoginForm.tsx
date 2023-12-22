@@ -42,9 +42,10 @@ export default function LoginForm() {
     // <form action={action} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
     // <div className="overflow-hidden">
     // <div className="card z-[1]- bg-slate-700/10X">
-    <form action={dispatch} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[88vw] md:w-[400px] relative card z-1X mx-2">
-      <div className="flex-1 rounded-lg bg-gray-50- px-6 pb-4 pt-8 bg-slate-900X drop-shadow-2xl shadow-2xl cardX bg-slate-900/95 z-[2]">
+    <form action={dispatch} className="space-y-3 text-white m-2 w-full max-w-[88vw] md:w-[400px] relative card mx-2">
+      <div className="flex-1 rounded-lg px-6 pb-4 pt-8 drop-shadow-2xl shadow-2xl bg-slate-900/95">
         <h1 className={`mb-3 text-2xl w-full text-center font-bold`}>Next-Level Games</h1>
+        <h2 className={`mb-3 text-2xl w-full text-center font-bold`}>Login</h2>
         <div className="w-full">
           <div>
             <label className="mb-3 mt-5 block text-xs font-medium" htmlFor="email">
