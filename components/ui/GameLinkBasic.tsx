@@ -61,7 +61,7 @@ const GameLinkBasic = ({ id, name, games_count, games, page }: GameLinkBasicProp
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4 m-4 max-w-[95%]">
         {games.slice(0, displayLimit).map(({ slug, name }) => (
           <Link
-            href={`/games/${slug}`}
+            href={`/dashboard/games/${slug}`}
             key={slug}
             className="relative flex flex-grow justify-center text-center shadow-xl h-48 group cursor-pointer p-2"
           >
