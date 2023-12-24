@@ -68,13 +68,13 @@ export const { auth, signIn, signOut } = NextAuth({
             return user; //user is confirmed, return user
           } else {
             console.log("Invalid credentials returning null...");
-            return null;
-          } //prevents the user from logging in IF password is INVALID
+            return null; //INVALID PASSWORD - return null to prevent route to dashboard
+          }
         }
 
         console.log("Invalid credentials");
         // Invalid credentials, return null
-        return null; //prevents the user from logging in
+        return null; //INVALID PARSED INPUTS - prevents the user from logging in
       },
     }),
   ], //used for authentication with 'username' and 'password'. We can add more providers here in the future, OAuth or email providers

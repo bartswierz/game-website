@@ -85,14 +85,15 @@ export default function LoginForm() {
         {/* IF user inputs wrong username or password, displays, 'Invalid credentials; under the password input */}
         <div className="flex h-8 items-end- space-x-1 align-middle items-center">
           {/* {code === "CredentialSignin" && ( */}
-          {state === "CredentialSignin" && (
+          {/* TODO - uncomment after testing production build */}
+          {/* {state === "CredentialSignin" && (
             <>
               <BsExclamationCircleFill className="h-4 w-4 text-red-500" />
               <p aria-live="polite" className="text-sm text-red-500">
                 Invalid credentials
               </p>
             </>
-          )}
+          )} */}
         </div>
         <div className="flex flex-col gap-4 mb-4">
           <LoginButton />

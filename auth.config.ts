@@ -4,7 +4,6 @@ import { signIn } from "./auth";
 //Reference: https://nextjs.org/learn/dashboard-app/adding-authentication
 //Callbacks: This will prevent users from accessing the dashboard/account-only restricted pages unless they are logged in.
 export const authConfig = {
-  providers: [],
   //This pages object will allow us to use OUR OWN CUSTOM LOGIN PAGE, otherwise if its not provided we will use the default nextjs sign-in, sign-out, error pages
   pages: {
     signIn: "/login", //clicking on the login button will redirect to /login page route -> (http://localhost:3000/login)
@@ -26,6 +25,7 @@ export const authConfig = {
       const isLoggedIn = !!auth?.user;
       // console.log("auth.user: ", auth?.user);
 
+      //User is not logged in yet, ONLY ALLOWED PAGES ARE "LOGIN" AND "SIGNUP"
       const isOnAllowedPage = nextUrl.pathname === "/login" || nextUrl.pathname === "/signup";
       const isOnDashboard = nextUrl.pathname.startsWith("/dashboard"); //may have to update dashboard path
 
@@ -47,8 +47,8 @@ export const authConfig = {
       return true;
     },
   },
+  providers: [],
 } satisfies NextAuthConfig;
-
 //---------------------------
 // PREVIOUS
 // if (isOnDashboard) {
