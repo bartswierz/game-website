@@ -19,7 +19,7 @@ export const authConfig = {
   //   },
   // },
   //************************************************ */
-  // THIS PREVENTS USERS FROM ACCESSING DASHBOARD PAGES UNLESS THEY ARE SIGNED IN(WE WILL PLACE OUR ACCOUNT ONLY PAGE IN HERE LATER)
+  // THIS PREVENTS USERS FROM ACCESSING DASHBOARD PAGES UNLESS THEY ARE SIGNED IN
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       // console.log("request { nextUrl }: ", nextUrl);

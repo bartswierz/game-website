@@ -66,7 +66,10 @@ export const { auth, signIn, signOut } = NextAuth({
           if (passwordMatches) {
             console.log("SUCCESS! WE HAVE A PASSWORD MATCH! returning user: ", user);
             return user; //user is confirmed, return user
-          }
+          } else {
+            console.log("Invalid credentials returning null...");
+            return null;
+          } //prevents the user from logging in IF password is INVALID
         }
 
         console.log("Invalid credentials");
