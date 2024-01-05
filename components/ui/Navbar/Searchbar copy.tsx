@@ -1,9 +1,7 @@
 "use client";
-import { useCallback, useState, ChangeEvent } from "react";
+import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { useRouter } from "next/navigation";
-import debounce from "lodash/debounce";
-
 /*
 TODO - BUILD FORM TO COLLECT USER INPUT AND PASS IT TO THE RAWG API UPON SUBMIT
 REQUIREMENTS: FORM must specify the following:
@@ -24,51 +22,36 @@ REQUIREMENTS: FORM must specify the following:
 
 const Searchbar = () => {
   const router = useRouter();
-  const [searchTermValue, setSearchTermValue] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   // TODO - add a debounce to the searchbar to prevent too many API calls BUT also not require user to have to submit the form - we need to change onSubmit to onChange
   // We want to navigate to the /search page AND PASS THE searchTerm as a query
-  // const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-  // const handleSearch = (e: string) => {
-  const handleSearch = (searchTerm: string) => {
-    // Conditional check to ensure the user inputs a valid search term containing either words, letters, numbers, or spaces
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // const validCharacters = /^[A-Za-z0-9]+$/;
     const validCharacters = /^[A-Za-z0-9\s-]+$/;
 
     //IF SEARCH TERM IS EMPTY OR DOES NOT CONTAIN ALPHABET OR NUMBERS, ALERT USER
-    // if (!searchTerm || !validCharacters.test(searchTerm)) {
     if (!searchTerm || !validCharacters.test(searchTerm)) {
-      // alert("Invalid Input - Must contain alphabet or numbers"); //may have to remove this alert and just leave it as a return to not search the term
+      alert("Invalid Input - Must contain alphabet or numbers");
       return;
     }
 
     // VALID INPUT - Navigate to the /search page and pass the searchTerm as a query
-    // router.push(`/dashboard/search/${searchTerm}`);
     router.push(`/dashboard/search/${searchTerm}`);
-  };
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedHandleSearch = useCallback(debounce(handleSearch, 500), []);
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchTermValue(e.target.value);
-    // Call the debounced handleSearch function when the user stops typing for 1 second
-    debouncedHandleSearch(e.target.value);
   };
 
   return (
     <div className="w-full max-w-[75vw] md:max-w-[50vw] xl:max-w-[40vw] mx-auto">
-      {/* <form onSubmit={handleSearch} className="max-w-1/2 flex flex-[50%] p-2 gap-2 min-w-[150px]X justify-center"> */}
-      <form className="max-w-1/2 flex flex-[50%] p-2 gap-2 min-w-[150px]X justify-center">
+      <form onSubmit={handleSearch} className="max-w-1/2 flex flex-[50%] p-2 gap-2 min-w-[150px]X justify-center">
         <label htmlFor="search" className="relative w-full flex flex-row transition-colors duration-500 ease-in-out group">
           <input
             type="text"
             name="search"
             placeholder="Search 850,000+ games"
-            value={searchTermValue}
-            //TODO add debounce here
-            // onChange={(e) => setSearchTerm(e.target.value)}
-            // onChange={(e) => debouncedHandleSearch(e.target.value)}
-            onChange={handleChange}
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             className="text-white min-w-full bg-gray-800 h-12 pl-10 rounded-full group-hover:bg-white group-hover:text-gray-900 transition-colors duration-300 ease-in-out focus:outline-none truncate text-sm xsm:text-base"
           />
           <button type="submit" className="absolute rounded-full h-12 px-4 py-2 left-[0%] bottom-[0%]">
