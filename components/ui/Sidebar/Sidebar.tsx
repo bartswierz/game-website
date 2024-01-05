@@ -121,7 +121,7 @@ const Sidebar = () => {
       <aside
         /* translate-x-0 -> Slides the sidebar to the left OFF SCREEN
           -translate-x-full -> Slides the sidebar to the right ON SCREEN*/
-        className={`w-60 md:w-60 z-40 h-screen transition-transform block translate-x-0 
+        className={`w-60 md:w-60 z-40 h-screenX h-[90vh] transition-transform block translate-x-0 
         ${isMenuToggled ? "-translate-x-full fixed top-0 left-0" : ""}`}
         aria-label="Sidebar"
       >
