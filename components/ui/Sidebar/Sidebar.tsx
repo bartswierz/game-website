@@ -112,7 +112,7 @@ const Sidebar = () => {
         // ADDS BLACK BACKGROUND OPACITY WHEN USER OPENS UP THE SIDEBAR, CLICKING ANYWHERE OUTSIDE THE SIDEBAR WILL REMOVE IT AND CLOSE THE SIDEBAR
         isMenuToggled && (
           <div
-            className="fixed top-0 left-0 w-full h-full bg-black transition-opacity opacity-50 z-30"
+            className="fixed top-0 left-0 w-full h-full bg-black transition-opacity opacity-80 z-30"
             onClick={handleCloseSidebar}
           ></div>
         )
@@ -121,11 +121,11 @@ const Sidebar = () => {
       <aside
         /* translate-x-0 -> Slides the sidebar to the left OFF SCREEN
           -translate-x-full -> Slides the sidebar to the right ON SCREEN*/
-        className={`w-60 md:w-60 z-40 h-screenX h-[90vh] transition-transform block translate-x-0 
+        className={`w-60 md:w-60 z-40 pb-10 md:pb-0 h-full transition-transform block translate-x-0 bg-gray-900
         ${isMenuToggled ? "-translate-x-full fixed top-0 left-0" : ""}`}
         aria-label="Sidebar"
       >
-        <div className={`w-60 h-full md:h-[85vh] px-3 overflow-y-auto bg-gray-900 pb-8`}>
+        <div className={`w-60 h-full md:h-[85vh] px-3 overflow-y-auto bg-gray-900X pb-8`}>
           {
             //DISPLAYS THE LOGO WITHIN SIDEBAR
             isMenuToggled && (
