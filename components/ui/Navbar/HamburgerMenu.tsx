@@ -29,7 +29,7 @@ const HamburgerMenu = () => {
   return (
     <button
       type="button"
-      className="rounded-full md:hidden p-2 mt-1 mr-1 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-200- focus:ring-transparent dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+      className="rounded-full md:hidden p-2 mt-1 mr-1 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-transparent dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
       onClick={handleToggleSidebar}
     >
       {/* CLOSE ICON */}

@@ -2,7 +2,10 @@ import Link from "next/link";
 
 const BrandLogo = () => {
   return (
-    <Link href="/" className="flex justify-center items-center cursor-pointer hover:text-gray-300 text-xl group ">
+    <Link
+      href="/"
+      className="flex flex-colX xsm:Flex-rowX justify-center items-center cursor-pointer hover:text-gray-300 text-xl group "
+    >
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style={{ height: "60px", width: "60px" }}>
         <defs>
           <filter id="shadow-1" height="300%" width="300%" x="-100%" y="-100%">
@@ -40,7 +43,8 @@ const BrandLogo = () => {
           ></path>
         </g>
       </svg>
-      <span className="hidden md:block p-2 text-base">Next-Level Games</span>
+      {/* <span className="block xsm:hidden xsm:blockX md:blockX p-2 text-base">Next-Level Games</span> */}
+      {/* <span className="p-2 text-base">Next-Level Games</span> */}
     </Link>
   );
 };
