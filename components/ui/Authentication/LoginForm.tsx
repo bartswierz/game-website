@@ -1,21 +1,13 @@
 "use client";
 
-// import { lusitana } from "@/app/ui/fonts";
-// import { AtSymbolIcon, KeyIcon, ExclamationCircleIcon } from "@heroicons/react/24/outline";
-// import { ArrowRightIcon } from "@heroicons/react/20/solid";
-// import { Button } from "./button";
-
 // @ts-expect-error
 import { useFormState, useFormStatus } from "react-dom";
 import { HiOutlineMail, HiOutlineKey } from "react-icons/hi";
 import { BsExclamationCircleFill } from "react-icons/bs";
 import { BiLogIn, BiArrowBack } from "react-icons/bi";
-// import { experimental_useFormStatus as useFormState, experimental } from "react-dom";
-// import { experimental_useFormState as useFormState } from "react-dom";
-// import { experimental_useFormStatus as useFormStatus } from "react-dom";
 import { authenticate } from "@/lib/actions";
 import Link from "next/link";
-import { FormEvent } from "react";
+import ClipboardBtn from "../ClipboardBtn";
 
 export default function LoginForm() {
   // Using useFormState to CALL THE SERVER ACTION and HANDLE FORM ERRORS, and useFormStatus to handle the pending state of the form
@@ -25,23 +17,28 @@ export default function LoginForm() {
 
   // GIVING ACCOUNT CREDENTIALS TO A DEMO ACCOUNT TO MAKE IT EASY FOR VIEWERS TO CHECKOUT THE APP WITHOUT HAVING TO CREATE AN ACCOUNT
   const DemoAccountCredentials = () => {
+    const demoEmail = "user@nextmail.com";
+    const demoPassword = "123456";
+
     return (
       <div className="divide-double border-t-2 border-gray-500 mt-2 pt-2 text-gray-500">
         <span className="underline font-semibold">Demo Account</span>
-        <p>
-          Email: <b>user@nextmail.com</b>
-        </p>
-        <p>
-          Password: <b>123456</b>
-        </p>
+        {/* EMAIL & PASSWORD*/}
+        <div className="flex flex-col">
+          <span className="self-start items-center justify-center flex gap-2">
+            Email: <b>user@nextmail.com</b>
+            <ClipboardBtn text={demoEmail} />
+          </span>
+          <span className="self-start items-center justify-center flex gap-2">
+            Password: <b>123456</b>
+            <ClipboardBtn text={demoPassword} />
+          </span>
+        </div>
       </div>
     );
   };
 
   return (
-    // <form action={action} className="space-y-3 text-white m-2 w-[280px]- w-full max-w-[98vw] md:w-[400px] relative">
-    // <div className="overflow-hidden">
-    // <div className="card z-[1]- bg-slate-700/10X">
     <form action={dispatch} className="space-y-3 text-white m-2 w-full max-w-[88vw] md:w-[400px] relative card mx-2">
       <div className="flex-1 rounded-lg px-6 pb-4 pt-8 drop-shadow-2xl shadow-2xl bg-slate-900/95">
         <h1 className={`mb-3 text-2xl w-full text-center font-bold`}>Next-Level Games</h1>
@@ -61,7 +58,6 @@ export default function LoginForm() {
                 required
               />
               <HiOutlineMail className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
-              {/* <AtSymbolIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" /> */}
             </div>
           </div>
           <div className="mt-4">
@@ -85,7 +81,6 @@ export default function LoginForm() {
         {/* IF user inputs wrong username or password, displays, 'Invalid credentials; under the password input */}
         <div className="flex h-8 items-end- space-x-1 align-middle items-center">
           {/* {code === "CredentialSignin" && ( */}
-          {/* TODO - uncomment after testing production build */}
           {state === "CredentialSignin" && (
             <>
               <BsExclamationCircleFill className="h-4 w-4 text-red-500" />
@@ -97,16 +92,6 @@ export default function LoginForm() {
         </div>
         <div className="flex flex-col gap-4 mb-4">
           <LoginButton />
-
-          {/* <Link
-            href={"/"}
-            className="bg-gray-500 flex text-center justify-center items-center rounded-sm py-2 px-4 hover:bg-gray-600 transition-colors duration-300"
-          >
-            <span className="flex items-center gap-0.5">
-              <BiArrowBack />
-              Back
-            </span>
-          </Link> */}
         </div>
         <p>
           Don&#39;t have an account yet?{" "}
@@ -125,8 +110,6 @@ export default function LoginForm() {
         <span className="block bg-gray-900 px-5 py-3 text-white"> Get Started </span>
       </a> */}
     </form>
-    //   </div>
-    // </div>
   );
 }
 
