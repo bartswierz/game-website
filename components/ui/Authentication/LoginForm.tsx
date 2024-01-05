@@ -2,18 +2,36 @@
 
 // @ts-expect-error
 import { useFormState, useFormStatus } from "react-dom";
+import { useState } from "react";
 import { HiOutlineMail, HiOutlineKey } from "react-icons/hi";
 import { BsExclamationCircleFill } from "react-icons/bs";
 import { BiLogIn, BiArrowBack } from "react-icons/bi";
 import { authenticate } from "@/lib/actions";
 import Link from "next/link";
 import ClipboardBtn from "../ClipboardBtn";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function LoginForm() {
   // Using useFormState to CALL THE SERVER ACTION and HANDLE FORM ERRORS, and useFormStatus to handle the pending state of the form
   // const [code, action] = useFormState(authenticate, undefined);
   // undefined as 2nd parameter is the INITIAL STATE of the form
   const [state, dispatch] = useFormState(authenticate, undefined);
+  const [showPassword, setShowPassword] = useState(false);
+
+  // Display/Hide Password on click
+  const PasswordToggle = () => {
+    const handleTogglePassword = () => setShowPassword(!showPassword);
+
+    return (
+      <button
+        type="button"
+        onClick={handleTogglePassword}
+        className="absolute right-4X right-2 top-1/2 transform -translate-y-1/2 cursor-pointer p-2"
+      >
+        {showPassword ? <FaEye color="black" /> : <FaEyeSlash color="black" />}
+      </button>
+    );
+  };
 
   // GIVING ACCOUNT CREDENTIALS TO A DEMO ACCOUNT TO MAKE IT EASY FOR VIEWERS TO CHECKOUT THE APP WITHOUT HAVING TO CREATE AN ACCOUNT
   const DemoAccountCredentials = () => {
@@ -26,11 +44,11 @@ export default function LoginForm() {
         {/* EMAIL & PASSWORD*/}
         <div className="flex flex-col">
           <span className="self-start items-center justify-center flex gap-2">
-            Email: <b>user@nextmail.com</b>
+            <b>user@nextmail.com</b>
             <ClipboardBtn text={demoEmail} />
           </span>
           <span className="self-start items-center justify-center flex gap-2">
-            Password: <b>123456</b>
+            <b>123456</b>
             <ClipboardBtn text={demoPassword} />
           </span>
         </div>
@@ -44,6 +62,7 @@ export default function LoginForm() {
         <h1 className={`mb-3 text-2xl w-full text-center font-bold`}>Next-Level Games</h1>
         <h2 className={`mb-3 text-2xl w-full text-center font-bold`}>Login</h2>
         <div className="w-full">
+          {/* EMAIL INPUT */}
           <div>
             <label className="mb-3 mt-5 block text-xs font-medium" htmlFor="email">
               Email
@@ -60,6 +79,7 @@ export default function LoginForm() {
               <HiOutlineMail className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>
+          {/* PASSWORD INPUT */}
           <div className="mt-4">
             <label className="mb-3 mt-5 block text-xs font-medium text-gray-900-" htmlFor="password">
               Password
@@ -68,12 +88,14 @@ export default function LoginForm() {
               <input
                 className="peer block w-full rounded-sm border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 text-black"
                 id="password"
-                type="password"
+                // type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Password"
-                required
                 minLength={6}
+                required
               />
+              <PasswordToggle />
               <HiOutlineKey className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
             </div>
           </div>
