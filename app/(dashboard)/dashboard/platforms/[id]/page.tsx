@@ -65,7 +65,7 @@ const PlatformPage = () => {
       <PageHeader title="Platform Games" count={content.count} countType="Games" />
 
       <div className="ml-4 sm:ml-0 mb-6 flex justify-center xsm:justify-start">
-        <ComboboxOrdering path={`/platforms/${pageTitle}?id=${searchParamsID}`} page="platforms" />
+        <ComboboxOrdering path={`/dashboard/platforms/${pageTitle}?id=${searchParamsID}`} page="platforms" />
       </div>
 
       {/* http://localhost:3000/platforms/pc%3Fid=4?ordering=name */}
@@ -100,7 +100,7 @@ const PlatformPage = () => {
 
                 {/* NAVIGATES USER TO GAMES PAGE -> i.e.) http://localhost:3000/games/marvels-spider-man */}
                 <Link
-                  href={`/games/${slug}`}
+                  href={`/dashboard/games/${slug}`}
                   className="flex justify-center items-center font-semibold rounded-full hover:bg-gray-400  bg-gray-300 text-gray-700 px-2 py-1 max-w-1/2 text-base xsm:text-lg "
                 >
                   <span className="truncate">See Game Details</span>

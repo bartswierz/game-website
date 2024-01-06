@@ -1,6 +1,6 @@
 //Help keep the import lists cleaner in files by exporting from here and import using @/components
 import Navbar from "./Navbar/Navbar";
-import Sidebar from "./Sidebar/Sidebar";
+import Sidebar from "./Sidebar/SidebarDesktop";
 import Footer from "./Footer";
 import NavigationButton from "./Navbar/NavigationButton";
 import Ratings from "./Ratings";
