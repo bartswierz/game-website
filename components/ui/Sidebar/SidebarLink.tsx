@@ -1,37 +1,37 @@
 "use client";
+
 import Link from "next/link";
 import { IoGameControllerOutline } from "react-icons/io5";
-// import { nanoid } from "nanoid";
-// import { useEffect, useState } from "react";
 
 interface SidebarLinkProps {
   pathname: string; // ex. 'platforms'
-  linkTitle: string; // ex. 'PC'
-  linkObj: {
+  linkData: {
+    linkTitle: string; // ex. 'PC'
     link: string; // ex. 'PC'
-    platformID: number; // ex. 4
+    linkID: number; // ex. 4
   };
-  handleLinkCallBack: (link: string) => void;
+  closeMenuCallback?: () => void;
 }
-// SINGLE SIDEBAR LINK
-const SidebarLink = ({ pathname, linkTitle, linkObj, handleLinkCallBack }: SidebarLinkProps) => {
-  const { link, platformID } = linkObj;
+
+const SidebarLink = ({ pathname, linkData, closeMenuCallback }: SidebarLinkProps) => {
+  // const { link, platformID } = linkObj;
+  const { linkTitle, link, linkID } = linkData;
 
   const slugify = (link: string) => {
     return link.toLowerCase().replaceAll(" ", "-");
   };
 
-  //Callback function back to Sidebar component to update ACTIVE LINK & CLOSE SIDEBAR IF MOBILE SCREEN UPON CLICKING LINK
-  const handleLink = (link: string) => {
-    handleLinkCallBack(link);
+  const closeSidebarMenu = () => {
+    if (closeMenuCallback) closeMenuCallback(); //Function Callback inside Navbar component to close menu
   };
 
   return (
     <li>
       <Link
-        href={{ pathname: `/dashboard/${pathname}/${slugify(link)}`, query: { id: platformID } }}
-        onClick={() => handleLink(link)}
+        href={{ pathname: `/dashboard/${pathname}/${slugify(link)}`, query: { id: linkID } }}
+        // onClick={() => handleLink(link)}
         className="flex items-center p-2 text-white rounded-lg  hover:bg-gray-800  group"
+        onClick={closeSidebarMenu}
       >
         <IoGameControllerOutline />
         <span className="ml-3">{linkTitle}</span>
@@ -41,21 +41,3 @@ const SidebarLink = ({ pathname, linkTitle, linkObj, handleLinkCallBack }: Sideb
 };
 
 export default SidebarLink;
-
-// "use client";
-// import Link from "next/link";
-// import { IoGameController, IoGameControllerOutline } from "react-icons/io5";
-
-// interface SidebarLinkProps {
-//   title: string;
-//   links: string[];
-//   pathname?: string;
-//   query?: string;
-// }
-
-// //TODO - give the pathname, optional query, pass in the object containing list
-// const SidebarLink = ({ title, links, pathname, query }: SidebarLinkProps) => {
-//   return <div></div>;
-// };
-
-// export default SidebarLink;

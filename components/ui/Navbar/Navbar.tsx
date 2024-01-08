@@ -1,16 +1,21 @@
 "use client";
+
+import { useState } from "react";
 import { BrandLogo, HamburgerMenu, Searchbar } from "@/components/ui";
-import { useAppSelector } from "@/redux/store";
 import { signOut } from "@/auth";
 import { useRouter } from "next/navigation";
 import { VscHome } from "react-icons/vsc";
 import Link from "next/link";
+import SidebarMobile from "../Sidebar/SidebarMobile";
 
 //BUILT CUSTOM GAME ICON - https://game-icons.net/1x1/caro-asercion/warlord-helmet.html
 const Navbar = () => {
-  // Get the isSidebarOpen value from redux store to hide hamburger menu when sidebar is open
-  const isSidebarOpen: boolean = useAppSelector(({ sidebarSlice }) => sidebarSlice.value.isSidebarOpen);
   const router = useRouter(); //will be used to on SIGNOUT to give a clean url back to /login without the added callback url params
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+
+  const closeMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   const handleSignOut = async () => {
     await signOut({ redirect: false });
@@ -45,13 +50,11 @@ const Navbar = () => {
         <div className="flex items-center gap-2 justify-between w-full">
           <Searchbar />
           <HomeButton />
-          {isSidebarOpen ? <span className=""></span> : <HamburgerMenu />}
+          <HamburgerMenu isMenuOpen={isMenuOpen} closeMenuCallback={closeMenu} />
           <LogoutButton />
         </div>
-        {/* {isSidebarOpen ? <HamburgerMenu /> : <span className=""></span>} */}
-        {/* Hides menu icon when sidebar is opened */}
-        {/* {isSidebarOpen ? <div className="w-10 h-10"></div> : <HamburgerMenu />} */}
-        {/* {isSidebarOpen ? null : <Link href={"/login"}>Sign In</Link>} */}
+        {/* Sidebar Navigation will display when user clicks on the hamburger menu */}
+        <SidebarMobile isMenuOpen={isMenuOpen} closeMenuCallback={closeMenu} />
       </nav>
     </header>
   );

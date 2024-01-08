@@ -4,6 +4,8 @@ import { FilterType } from "@/types";
 export const sidebarData = {
   // BROWSE DATA
   browse: { title: "browse", linkList: ["genres", "developers", "stores", "platforms"] },
+
+  // PLATFORMS DATA
   pc: { link: "PC", platformID: 4 },
   iOS: { link: "iOS", platformID: 3 },
   android: { link: "Android", platformID: 21 },
@@ -94,6 +96,89 @@ export const sidebarData = {
     ],
   },
 };
+
+export const sidebarPlatformData = [
+  { linkTitle: "PC", link: "PC", linkID: 4 },
+  {
+    linkTitle: "Xbox",
+    linkList: [
+      { link: "Xbox Series X", linkID: 186 },
+      { link: "Xbox One", linkID: 1 },
+      { link: "Xbox 360", linkID: 14 },
+      { link: "Xbox", linkID: 80 },
+    ],
+  },
+  {
+    linkTitle: "Playstation",
+    linkList: [
+      { link: "PlayStation 5", linkID: 187 },
+      { link: "PlayStation 4", linkID: 18 },
+      { link: "PlayStation 3", linkID: 16 },
+      { link: "PlayStation 2", linkID: 15 },
+      { link: "PlayStation", linkID: 27 },
+      { link: "PS Vita", linkID: 19 },
+      { link: "PSP", linkID: 17 },
+    ],
+  },
+  {
+    linkTitle: "Nintendo",
+    linkList: [
+      { link: "Nintendo Switch", linkID: 7 },
+      { link: "Nintendo 3DS", linkID: 8 },
+      { link: "Nintendo DS", linkID: 9 },
+      { link: "Nintendo DSi", linkID: 13 },
+      { link: "Nintendo 64", linkID: 83 },
+      { link: "Wii U", linkID: 10 },
+      { link: "Wii", linkID: 11 },
+      { link: "GameCube", linkID: 105 },
+      { link: "Game Boy Advance", linkID: 24 },
+      { link: "Game Boy Color", linkID: 43 },
+      { link: "Game Boy", linkID: 26 },
+      { link: "SNES", linkID: 79 },
+      { link: "NES", linkID: 49 },
+    ],
+  },
+  { linkTitle: "iOS", link: "iOS", linkID: 3 },
+  { linkTitle: "Android", link: "Android", linkID: 21 },
+  {
+    linkTitle: "Mac",
+    linkList: [
+      { link: "macOS", linkID: 5 },
+      { link: "Classic Macintosh", linkID: 55 },
+      { link: "Apple II", linkID: 41 },
+    ],
+  },
+  { linkTitle: "Linux", link: "Linux", linkID: 6 },
+  { linkTitle: "Commodore", link: "Commodore", linkID: 166 },
+  { linkTitle: "3DO", link: "3DO", linkID: 111 },
+  { linkTitle: "Neo Geo", link: "Neo Geo", linkID: 12 },
+  {
+    linkTitle: "Atari",
+    linkList: [
+      { link: "Atari 7800", linkID: 28 },
+      { link: "Atari 5200", linkID: 31 },
+      { link: "Atari 2600", linkID: 23 },
+      { link: "Atari Flashback", linkID: 22 },
+      { link: "Atari 8-bit", linkID: 25 },
+      { link: "Atari ST", linkID: 34 },
+      { link: "Atari Lynx", linkID: 46 },
+      { link: "Atari XEGS", linkID: 50 },
+      { link: "Jaguar", linkID: 112 },
+    ],
+  },
+  {
+    linkTitle: "SEGA",
+    linkList: [
+      { link: "Genesis", linkID: 167 },
+      { link: "SEGA Saturn", linkID: 107 },
+      { link: "SEGA CD", linkID: 119 },
+      { link: "SEGA 32X", linkID: 117 },
+      { link: "SEGA Master System", linkID: 74 },
+      { link: "Dreamcast", linkID: 106 },
+      { link: "Game Gear", linkID: 77 },
+    ],
+  },
+];
 
 // ORDERING FILTER OPTIONS
 export const orderingOptions: FilterType[] = [

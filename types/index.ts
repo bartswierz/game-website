@@ -25,6 +25,66 @@ export interface SidebarDataProps {
   };
 }
 
+// export interface SidebarLinkProps {
+//   linkData: {
+//     platformType: string;
+//     link?: string;
+//     linkList?: {
+//       link: string;
+//       platformID: number;
+//     }[];
+//   };
+// }
+// export interface SidebarLinkProps {
+//   // SINGLE
+//   linkData: {
+//     platformType: string;
+//     platformID: number;
+//     link?: string;
+//     linkList?: {
+//       link: string;
+//       platformID: number;
+//     }[];
+//   };
+// }
+// export interface SidebarLinkProps {
+//   // SINGLE
+//   linkData: {
+//     platformType: string;
+//     platformID: number;
+//     link?: string;
+//     linkList?: {
+//       link: string;
+//       platformID: number;
+//     }[];
+//   };
+// }
+
+/*
+{ linkTitle: "Neo Geo", link: "Neo Geo", linkID: 12 }
+OR  
+{
+  linkTitle: "Xbox",
+  linkList: [
+    { link: "Xbox Series X", linkID: 186 },
+    { link: "Xbox One", linkID: 1 },
+    { link: "Xbox 360", linkID: 14 },
+    { link: "Xbox", linkID: 80 },
+  ],
+},
+*/
+export interface SidebarLinkProps {
+  linkTitle: string;
+  link?: string;
+  linkID?: number;
+  linkList?: [
+    {
+      link: string;
+      linkID: number;
+    }
+  ];
+}
+
 export interface Game {
   id: number;
   background_image: string;

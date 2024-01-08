@@ -5,36 +5,48 @@ import { useState } from "react";
 import { Accordion, AccordionContent, AccordionTrigger } from "../Shadcn/accordion";
 import { AccordionItem } from "@radix-ui/react-accordion";
 
+// interface SidebarDropdownProps {
+//   pathname: string;
+//   linkTitle: string;
+//   linkList: {
+//     link: string;
+//     platformID: number;
+//   }[];
+//   uid: number;
+//   handleLinkCallBack: (link: string) => void;
+// }
+
 interface SidebarDropdownProps {
-  pathname: string;
-  linkTitle: string;
-  linkList: {
-    link: string;
-    platformID: number;
-  }[];
-  uid: number;
-  handleLinkCallBack: (link: string) => void;
+  pathname: string; // ex. 'platforms'
+  linkData: {
+    linkTitle: string; // ex. 'PC'
+    linkList: {
+      link: string;
+      linkID: number;
+    }[];
+  };
+  closeMenuCallback?: () => void;
+  // linkData: {
+  //   linkTitle: string; // ex. 'PC'
+  //   link: string; // ex. 'PC'
+  //   linkID: number; // ex. 4
+  // };
 }
+
 // CONTAINS THE DROPDOWN MENU FOR SIDEBAR LINKS
-const SidebarDropdown = ({ pathname, linkTitle, linkList, uid, handleLinkCallBack }: SidebarDropdownProps) => {
+// const SidebarDropdown = ({ pathname, linkTitle, linkList, uid, handleLinkCallBack }: SidebarDropdownProps) => {
+const SidebarDropdown = ({ pathname, linkData, closeMenuCallback }: SidebarDropdownProps) => {
+  const { linkTitle, linkList } = linkData;
   const [isActive, setIsActive] = useState<number | null>(null);
 
   const slugify = (link: string) => {
     return link.toLowerCase().replaceAll(" ", "-");
   };
-
-  // OPEN/CLOSES DROPDOWN
-  const handleDropdown = (dropdownID: number) => {
-    //isActive !== uid ? OPEN DROPDOWN : CLOSE DROPDOWN
-    isActive !== uid ? setIsActive(dropdownID) : setIsActive(null);
+  // If user opened sidebar menu on mobile via hamburger menu, this will close the menu via callback function back to navbar.
+  const closeSidebarMenu = () => {
+    if (closeMenuCallback) closeMenuCallback();
   };
-
-  //Callback function back to Sidebar component to update ACTIVE LINK & CLOSE SIDEBAR IF MOBILE SCREEN UPON CLICKING LINK
-  const handleLink = (link: string) => {
-    handleLinkCallBack(link);
-  };
-
-  if (!uid) return <div>Loading...</div>;
+  // if (!uid) return <div>Loading...</div>;
 
   return (
     <Accordion type="single" collapsible>
@@ -47,12 +59,14 @@ const SidebarDropdown = ({ pathname, linkTitle, linkList, uid, handleLinkCallBac
           <span className="text-white w-full text-start">{linkTitle}</span>
         </AccordionTrigger>
         <AccordionContent>
-          {linkList.map(({ link, platformID }) => (
-            <li key={platformID}>
+          {/* {linkList.map(({ link, platformID }) => ( */}
+          {linkList.map(({ link, linkID }) => (
+            <li key={linkID}>
               <Link
-                href={{ pathname: `/dashboard/${pathname}/${slugify(link)}`, query: { id: platformID } }}
-                onClick={() => handleLink(link)}
+                href={{ pathname: `/dashboard/${pathname}/${slugify(link)}`, query: { id: linkID } }}
+                // onClick={() => handleLink(link)}
                 className="flex items-center w-full p-2 text-white rounded-lg pl-11 hover:bg-gray-800"
+                onClick={closeSidebarMenu}
               >
                 {link}
               </Link>

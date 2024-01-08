@@ -15,8 +15,6 @@ const ClipboardBtn = ({ text }: ClipboardBtnProps) => {
   const iconStyles = "text-red-500 hover:cursor-pointer transition-all duration-300";
 
   const handleCopyClick = () => {
-    console.log("inside handleCopyClick");
-
     // Icon change => TRUE = Checked Clipboard Icon, FALSE = Default Clipboard Icon
     setIsCopied(true);
 

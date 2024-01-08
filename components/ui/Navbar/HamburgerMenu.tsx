@@ -1,16 +1,18 @@
-import { useAppSelector } from "@/redux/store";
-import { useDispatch } from "react-redux";
-import { toggleSidebar } from "@/redux/features/sidebar-slice";
+"use client";
+
 import { GrClose } from "react-icons/gr";
 import { AiOutlineClose } from "react-icons/ai";
 
-const HamburgerMenu = () => {
-  const dispatch = useDispatch();
+interface HamburgerMenuProps {
+  isMenuOpen: boolean;
+  closeMenuCallback: () => void;
+}
 
-  const isSidebarOpen: boolean = useAppSelector(({ sidebarSlice }) => sidebarSlice.value.isSidebarOpen);
-
-  const handleToggleSidebar = () => {
-    dispatch(toggleSidebar());
+// TODO - pass down the isMenuOpened state from the sidebar component
+// const HamburgerMenu = ({ isMenuOpen }: HamburgerMenuProps) => {
+const HamburgerMenu = ({ closeMenuCallback, isMenuOpen }: HamburgerMenuProps) => {
+  const handleToggleMenu = () => {
+    closeMenuCallback();
   };
 
   // Hamburger Icon svg - created component for code reability
@@ -27,15 +29,18 @@ const HamburgerMenu = () => {
   }
 
   return (
-    <button
-      type="button"
-      className="rounded-full md:hidden p-2 mt-1 mr-1 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-transparent dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-      onClick={handleToggleSidebar}
-    >
-      {/* CLOSE ICON */}
-      <span className="sr-only">Open sidebar</span>
-      {isSidebarOpen ? <AiOutlineClose size={22} /> : <HamburgerIcon />}
-    </button>
+    <>
+      <button
+        type="button"
+        className="rounded-full md:hidden p-2 mt-1 mr-1 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-transparent dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        onClick={handleToggleMenu}
+        // onClick={handleToggleSidebar}
+      >
+        {/* CLOSE ICON */}
+        <span className="sr-only">Open sidebar</span>
+        {isMenuOpen ? <AiOutlineClose size={22} /> : <HamburgerIcon />}
+      </button>
+    </>
   );
 };
 

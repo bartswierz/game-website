@@ -1,10 +1,6 @@
-// import "./globals.css";
-// import "@/globals.css";
 import "@/app/globals.css";
 import { Footer, Navbar, Sidebar } from "@/components/ui";
-import { ReduxProvider } from "@/redux/features/provider";
 import { Metadata } from "next";
-import Image from "next/image";
 
 export const metadata: Metadata = {
   title: {
@@ -34,18 +30,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       {/* <body className={`${inter.className} bg-gray-900`}> */}
       <body className={`bg-gray-900`}>
-        {/* Wrapping children & layout components to have access to our REDUX STORE */}
-        <ReduxProvider>
-          <Navbar />
-          <div className="flex">
+        <Navbar />
+        <div className="flex">
+          <div className="hidden md:block">
             <Sidebar />
-            <main className="container mx-auto m-6 px-2 md:px-4 mb-[2vh] min-h-full">{children}</main>
           </div>
-          {/* <Image src={`/RacingImage.png`} fill alt="" /> */}
-          <div className="mt-[4vh]">
-            <Footer />
-          </div>
-        </ReduxProvider>
+          <main className="container mx-auto m-6 px-2 md:px-4 mb-[2vh] min-h-full">{children}</main>
+        </div>
+        <div className="mt-[4vh]">
+          <Footer />
+        </div>
       </body>
     </html>
   );
