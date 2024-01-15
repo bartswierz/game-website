@@ -22,7 +22,7 @@ export const authConfig = {
   callbacks: {
     authorized({ auth, request: { nextUrl } }) {
       // console.log("request { nextUrl }: ", nextUrl);
-      console.log("inside auth.config ts authorized - auth: ", auth);
+      // console.log("inside auth.config ts authorized - auth: ", auth);
       const isLoggedIn = !!auth?.user;
       // console.log("auth.user: ", auth?.user);
 
