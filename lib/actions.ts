@@ -6,6 +6,7 @@ import { z } from "zod";
 import { sql } from "@vercel/postgres";
 import { revalidatePath } from "next/cache";
 import type { User } from "@/types/index";
+import { auth } from "@/auth";
 //Reference: https://vercel.com/docs/storage/vercel-postgres/quickstart
 // const InvoiceSchema = z.object({
 //   id: z.string(),
@@ -98,3 +99,11 @@ export async function createAccount(formData: FormData) {
     redirect("/login"); //commented out as it currently is requesting multiple times
   }
 }
+
+export const addGameToFavorites = async () => {
+  const user = await auth();
+  // const user = auth();
+  console.log("addGameToFavorites - user: ", user);
+};
+
+// addGameToFavorites();

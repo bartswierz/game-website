@@ -3,7 +3,8 @@ import { findStoresForGame, getGameDetails, getGameScreenshots } from "@/utils";
 import { Ratings, ShowMore, WordList } from "@/components/ui";
 import Link from "next/link";
 import Image from "next/image";
-
+import { addGameToFavorites } from "@/lib/actions";
+import AddGameToFavoritesBtn from "@/components/ui/AddGameToFavoritesBtn";
 // DISPLAY GAME DETAILS FOR A SINGLE GAME BASED ON ID
 const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
   // FOR SKELETON LOADING DEVELOPMENT PURPOSES
@@ -125,6 +126,11 @@ const GameDetailsPage = async ({ params }: { params: { slug: string } }) => {
               <h2 className="text-4xl font-bold mt-2">
                 {name} <span className="text-gray-500 text-base">#{id}</span>
               </h2>
+
+              {/* <button className="bg-blue-500 text-white px-4 py-2" onClick={() => addGameToFavorites()}>
+                Add Game To Favorites
+              </button> */}
+              <AddGameToFavoritesBtn />
             </div>
 
             {/* SCREENSHOTS */}
