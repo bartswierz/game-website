@@ -1,5 +1,6 @@
 # Next-Level Games
-![NLG-browse-genre](https://github.com/bartswierz/game-website/assets/100662080/10561d73-faa9-4024-9f8a-125152d01777)
+<!-- ![NLG-browse-genre](https://github.com/bartswierz/game-website/assets/100662080/10561d73-faa9-4024-9f8a-125152d01777) -->
+![NLG-gamepage](https://github.com/bartswierz/game-website/assets/100662080/99fb6852-c4b3-4379-9243-4dca1b10a1a2)
 
 ## Table of Contents
 
@@ -21,7 +22,7 @@ View Platforms | **51** available platforms to browse through.
 View Stores | The stores page features links directly to available digital distribution services such as Steam, Playstation, Xbox, Epic Games, etc.
 View Developers | Access to over 420,000+ developers. Navigate to the developer page using the sidebar.
 Game Page | The individual game page features valuable game information for users such as the following: About Description, Game Screenshots, Available Platforms, Metascore, Genre, Release Date, Developer(s), Publisher(s), Tags, Publisher Website, Reddit Game Posts, Available Stores for Game Purchase(i.e. Xbox, Steam, etc.)
-Game Searchbar | Access to over 850,000+ games! Once the user inputs a game name into the field, games with similar names will be displayed with an infinite scroll.
+Game Searchbar | Access to over 850,000+ games! Once the user inputs a game name into the field, games with similar names will be displayed with an infinite scroll. Implemented Debounce to allow efficient searches without the need to submit by delaying the search until 300ms has passed since the last user input.
 Sidebar | A responsive sidebar containing an organized collection of available pages for users to choose from. The sidebar also features dropdown menus for various platforms organized by the parent company.
 Infinite Scroll | As the user reaches the bottom of the page, another 6-20 results(# varies depending on page) will be rendered. This was implemented for an improved user experience(UX) over navigation buttons.
 
@@ -56,6 +57,21 @@ You're all set! The app is ready to go, that's all you have to do to get the app
 
 ## Usage
 
+### LOGIN PAGE
+The Sign In page allows registered users to securely access their accounts and the wide range of site features in store for them. Note: Demo Account Credentials are provided for those who would like to quickly view the application without requiring a signup. Simply click the copy button icons, paste them in the input fields, and you're good to go!
+
+![NLG-Login](https://github.com/bartswierz/game-website/assets/100662080/7c362f67-8a24-494c-9744-e4095731461e)
+
+### SIGNUP PAGE
+The Sign Up page welcomes new users to join the platform, offering a straightforward registration process to create an account. 
+
+![NLG-Signup](https://github.com/bartswierz/game-website/assets/100662080/286730f0-b448-42d7-bce3-6b8d17ed00c3)
+
+### HOME PAGE
+- Home page contains quick links for Genres, Developers, Platforms, and Stores. 
+
+![NLG-homepage](https://github.com/bartswierz/game-website/assets/100662080/2df9704c-d0a2-48b0-bab6-fd418a2332c2)
+
 ### BROWSE GENRE PAGE PAGE
 - User can browse 19 different genres, upon choosing, the user will be redirected to games based on that genre.
    
@@ -80,23 +96,3 @@ You're all set! The app is ready to go, that's all you have to do to get the app
 - Games within the chosen platform are rendered with infinite scroll functionality to increase user experience(UX) to load more games without the need of navigation buttons.
    
 ![NLG-platforms](https://github.com/bartswierz/game-website/assets/100662080/a9dddc41-1c27-40fa-939e-7eaa324a92fd)
-
-### HOME PAGE
-- Home page contains quick links for Genres, Developers, Platforms, and Stores. 
-
-![NLG-homepage](https://github.com/bartswierz/game-website/assets/100662080/2df9704c-d0a2-48b0-bab6-fd418a2332c2)
-
-
-### LOGIN PAGE
-
-![NLG-Login](https://github.com/bartswierz/game-website/assets/100662080/7c362f67-8a24-494c-9744-e4095731461e)
-
-### SIGNUP PAGE
-
-![NLG-Signup](https://github.com/bartswierz/game-website/assets/100662080/286730f0-b448-42d7-bce3-6b8d17ed00c3)
-
-
-
-
-
-
