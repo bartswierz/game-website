@@ -83,10 +83,17 @@ You're all set! The app is ready to go, that's all you have to do to get the app
 
 ### HOME PAGE
 - Home page contains quick links for Genres, Developers, Platforms, and Stores. 
-   
-![NLG-homepage](https://github.com/bartswierz/game-website/assets/100662080/a4f3ceda-bc96-4665-9921-73965a39bb1a)
+
+![NLG-homepage](https://github.com/bartswierz/game-website/assets/100662080/2df9704c-d0a2-48b0-bab6-fd418a2332c2)
 
 
+### LOGIN PAGE
+
+![NLG-Login](https://github.com/bartswierz/game-website/assets/100662080/7c362f67-8a24-494c-9744-e4095731461e)
+
+### SIGNUP PAGE
+
+![NLG-Signup](https://github.com/bartswierz/game-website/assets/100662080/286730f0-b448-42d7-bce3-6b8d17ed00c3)
 
 
 
