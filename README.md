@@ -41,7 +41,7 @@ To run the application locally, follow the steps below(commands added for additi
 
 1. Create an **empty directory** on your desktop
 2. Clone the repository into the folder locally by using git clone: 
-   1. **git clone https://github.com/bartswierz/employee-records.git**
+   1. **git clone https://github.com/bartswierz/game-website.git**
 3. Navigate into the directory:
    1. **cd game-website**
 4. Install the necessary packages inside package.json:
