@@ -37,7 +37,7 @@ Infinite Scroll | As the user reaches the bottom of the page, another 6-20 resul
 - Shadcn UI
 
 ## Getting Started
-To run the application locally, follow the steps below(commands added for additional help):
+**To run the application locally, follow the steps below(commands added for additional help):**
 
 1. Create an **empty directory** on your desktop
 2. Clone the repository into the folder locally by using git clone: 
