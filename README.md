@@ -34,7 +34,7 @@ Infinite Scroll | As the user reaches the bottom of the page, another 6-20 resul
 - TypeScript
 - Tailwind CSS
 - Postman
-- Shadcn
+- Shadcn UI
 
 ## Getting Started
 To run the application locally, follow the steps below(commands added for additional help):
