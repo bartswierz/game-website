@@ -19,13 +19,13 @@ Feature  | Description
 ------------- | -------------
 Login | Clean beautiful login component that captures that game theme feel while also being relatively minimal to make the process quick and easy! Demo Credentials are also provided with copy link buttons provided for those who would like to view the application quickly without the need for a signup.
 Signup | Clean beautiful signup component that captures that game theme feel while also being relatively minimal to make the process quick and easy! Redirect link back to the login screen is provided for a seamless transition.
+Game Searchbar | Access to over 850,000+ games! Once the user inputs a game name into the field, games that start with those characters will do be used to fetch from RAWG API DB and retrieve all the game information. Games will then be displayed with an infinite scroll. Implemented **debounce** to prevent unecessary search requests each character, the search will be delayed for 300ms until the user's last input before sending the request. This dramatically improves the performance of the application!
+Sidebar | A responsive sidebar containing an organized collection of available pages for users to choose from. The sidebar also features dropdown menus for various platforms organized by the parent company.
 View Genres | **19** available game genres to browse through.
 View Platforms | **51** available platforms to browse through.
 View Stores | The stores page features links directly to available digital distribution services such as Steam, Playstation, Xbox, Epic Games, etc.
 View Developers | Access to over 420,000+ developers. Navigate to the developer page using the sidebar.
 Game Page | The individual game page features valuable game information for users such as the following: About Description, Game Screenshots, Available Platforms, Metascore, Genre, Release Date, Developer(s), Publisher(s), Tags, Publisher Website, Reddit Game Posts, Available Stores for Game Purchase(i.e. Xbox, Steam, etc.)
-Game Searchbar | Access to over 850,000+ games! Once the user inputs a game name into the field, games with similar names will be displayed with an infinite scroll. Implemented Debounce to allow efficient searches without the need to submit by delaying the search until 300ms has passed since the last user input.
-Sidebar | A responsive sidebar containing an organized collection of available pages for users to choose from. The sidebar also features dropdown menus for various platforms organized by the parent company.
 Infinite Scroll | As the user reaches the bottom of the page, another 6-20 results(# varies depending on page) will be rendered. This was implemented for an improved user experience(UX) over navigation buttons.
 
 
