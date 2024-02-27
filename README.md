@@ -17,6 +17,8 @@ Next.js web application similar to Steam focused on giving users access to view 
 ## Features
 Feature  | Description
 ------------- | -------------
+Login | Clean beautiful login component that captures that game theme feel while also being relatively minimal to make the process quick and easy! Demo Credentials are also provided with copy link buttons provided for those who would like to view the application quickly without the need for a signup.
+Signup | Clean beautiful signup component that captures that game theme feel while also being relatively minimal to make the process quick and easy! Redirect link back to the login screen is provided for a seamless transition.
 View Genres | **19** available game genres to browse through.
 View Platforms | **51** available platforms to browse through.
 View Stores | The stores page features links directly to available digital distribution services such as Steam, Playstation, Xbox, Epic Games, etc.
@@ -63,14 +65,19 @@ The Sign In page allows registered users to securely access their accounts and t
 ![NLG-Login](https://github.com/bartswierz/game-website/assets/100662080/7c362f67-8a24-494c-9744-e4095731461e)
 
 ### SIGNUP PAGE
-The Sign Up page welcomes new users to join the platform, offering a straightforward registration process to create an account. 
+The Sign Up page welcomes new users to join the platform, offering a straightforward registration process to create an account. Login redirect included for easy navigation back to the login screen.
 
 ![NLG-Signup](https://github.com/bartswierz/game-website/assets/100662080/286730f0-b448-42d7-bce3-6b8d17ed00c3)
 
 ### HOME PAGE
-- Home page contains quick links for Genres, Developers, Platforms, and Stores. 
+- Home page contains quick links for Genres, Developers, Platforms, and Stores. Users can also access these sections(and more!) through the sidebar menu if they have a specific topic in mind.
 
 ![NLG-homepage](https://github.com/bartswierz/game-website/assets/100662080/2df9704c-d0a2-48b0-bab6-fd418a2332c2)
+
+### GAME PAGE
+- Game page has an extensive amount of valuable information regarding the game that can prove useful to the user who wants an in-depth overview of the game.
+  
+![NLG-gamepage](https://github.com/bartswierz/game-website/assets/100662080/99fb6852-c4b3-4379-9243-4dca1b10a1a2)
 
 ### BROWSE GENRE PAGE PAGE
 - User can browse 19 different genres, upon choosing, the user will be redirected to games based on that genre.
@@ -82,17 +89,12 @@ The Sign Up page welcomes new users to join the platform, offering a straightfor
    
 ![NLG-browse-platforms](https://github.com/bartswierz/game-website/assets/100662080/05ca3134-f6a1-41fd-b64c-320d910d12e0)
 
-### GAME PAGE
-- Game page has an extensive amount of valuable information regarding the game that can prove useful to the user who wants an in-depth overview of the game.
-   
-![NLG-gamepage](https://github.com/bartswierz/game-website/assets/100662080/99fb6852-c4b3-4379-9243-4dca1b10a1a2)
-
 ### GENRES PAGE
-- Games are displayed that are within that genre.
+- Games within the chosen **genre** are rendered with **infinite scroll** functionality to increase user experience(UX) to load more games without the need of navigation buttons.
    
 ![NLG-genres](https://github.com/bartswierz/game-website/assets/100662080/a2183f7b-ec11-4e8d-9ceb-a41312095144)
 
 ### PLATFORMS PAGE
-- Games within the chosen platform are rendered with infinite scroll functionality to increase user experience(UX) to load more games without the need of navigation buttons.
+- Games within the chosen **platform** are rendered with **infinite scroll** functionality to increase user experience(UX) to load more games without the need of navigation buttons.
    
 ![NLG-platforms](https://github.com/bartswierz/game-website/assets/100662080/a9dddc41-1c27-40fa-939e-7eaa324a92fd)
