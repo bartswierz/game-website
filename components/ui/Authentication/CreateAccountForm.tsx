@@ -32,7 +32,8 @@ export default function CreateAccountForm() {
         setServerMessage(response);
       }
     } catch (error: any) {
-      setServerMessage(error.message);
+      // setServerMessage(error.message);
+      console.log("Create Account Error: ", error.message);
     }
   };
 
