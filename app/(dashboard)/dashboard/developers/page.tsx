@@ -12,40 +12,20 @@ import Loading from "./loading";
 // const DeveloperPage = ({ params }: { params: { slug: string } }) => {
 const DeveloperPage = ({ params }: { params: { id: string } }) => {
   const searchParams = useSearchParams();
-  // const { slug } = params;
   const { id } = params;
-  console.log("params.id: ", params.id);
-  // const content = await getGamesByGenre(params.slug);
-  // const content = await getGamesByGenre(slug);
-  const [content, setContent] = useState<GamesByGenre | null>(null);
 
-  //TODO
-  // const searchDevelopers = searchParams.get("genres");
-  // const searchDevelopers = searchParams.get("developers");
+  const [content, setContent] = useState<GamesByGenre | null>(null);
   const searchDeveloperID = searchParams.get("id");
-  console.log("searchDeveloperID: ", searchDeveloperID);
-  // const [searchTerm, setSlugTerm] = useState<string | null>(slug);
+
   // Collects our value inside query passed from Combobox
   const searchOrdering = searchParams.get("ordering");
-  // const searchPlatforms = searchParams.get("platforms");
-  // const [platforms, setPlatforms] = useState<string | null>(searchPlatforms);
   const [ordering, setOrdering] = useState<string | null>(searchOrdering);
-  //TODO - this 'may' not be necessary if all we need is just the id that is passed as a param
-  // const [searchSlug, setSearchSlug] = useState<string | null>(searchDevelopers);
-  // const [searchSlug, setSearchSlug] = useState<string | null>(id);
-  // const [developerID, setDeveloperID] = useState<string | null>(id);
   const [developerID, setDeveloperID] = useState<string | null>(searchDeveloperID);
 
   //UPDATING ORDERING STATE FROM COMBOBOX, WE WILL PASS IT TO THE COMBOBOX TO BE READY FOR THE NEXT FILTER SEARCH
   useEffect(() => {
     setOrdering(searchOrdering);
   }, [searchOrdering]);
-
-  //UPDATING PLATFORMS STATE FROM COMBOBOX, WE WILL PASS IT TO THE COMBOBOX TO BE READY FOR THE NEXT FILTER SEARCH
-  // useEffect(() => {
-  //   // User selected a platform, we will update the state so it can be passed to the combobox
-  //   setPlatforms(searchPlatforms);
-  // }, [searchPlatforms]);
 
   useEffect(() => {
     // User selected a platform, we will update the state so it can be passed to the combobox
@@ -54,12 +34,10 @@ const DeveloperPage = ({ params }: { params: { id: string } }) => {
 
   useEffect(() => {
     const fetchData = async (searchDeveloperID: string, searchOrdering?: string) => {
-      console.log("inside fetchData");
       //TODO - replace GamesByGenre with GamesByDeveloper or neutral name if they are similar data structure
       const data: GamesByGenre = await getGamesByDeveloper(searchDeveloperID, searchOrdering);
 
       if (data) {
-        console.log("DATA HAS BEEN FETCHED");
         setContent(data);
       } else throw new Error("No data returned from getGamesSearch");
     };
@@ -70,13 +48,9 @@ const DeveloperPage = ({ params }: { params: { id: string } }) => {
       //NO ORDERING FILTER SET, ONLY PASS THE SEARCH TERM
       else fetchData(searchDeveloperID);
     }
-    // }, [searchDevelopers, searchOrdering, searchPlatforms]);
-    // }, [searchDevelopers, searchOrdering]);
-    // }, [searchDeveloperID, searchOrdering]);
   }, [searchDeveloperID, searchOrdering]);
 
   if (!content) return <Loading />;
-  // if (!content) return <span className="text-white text-3xl">No developer data fetched yet...</span>;
 
   return (
     <div className="text-white mx-4 xsm:mx-0">

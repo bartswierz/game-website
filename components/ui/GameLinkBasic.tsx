@@ -28,17 +28,14 @@ const GameLinkBasic = ({ id, name, games_count, games, page }: GameLinkBasicProp
 
   //CREATE LINK TO INDIVIDUAL PLATFORM PAGE i.e. /platforms/pc?id=4
   const handleLink = (id: number) => {
-    //TODO - CHECK IF PLATFORM OR DEVELOPER PAGE AND RETURN CORRECT LINK
-    // const formattedName: string = await getPageTitle(String(id));
     const platformNameSlug: string = getPageTitle(id); //xbox-series-x
     if (page === "platforms") {
       const link = { pathname: `/dashboard/platforms/${platformNameSlug}`, query: { id: id } };
-      // console.log("link: ", link);
+
       return link;
     } else if (page === "developer") {
-      // const link = { pathname: `/developers/${platformNameSlug}`, query: { id: id } };
       const link = { pathname: `/dashboard/developers/`, query: { id: id } };
-      // console.log("link: ", link);
+
       return link;
     } else throw new Error("Invalid page type passed to GameLinkBasic");
   };

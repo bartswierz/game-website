@@ -5,7 +5,6 @@ export async function GET() {
   const posts = await res.json();
 
   return Response.json({ posts });
-  // return console.log("hello from server"), Response.json({ posts });
 }
 
 export async function POST(request) {

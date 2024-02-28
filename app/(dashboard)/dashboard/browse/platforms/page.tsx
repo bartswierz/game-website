@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import React, { useState, useEffect } from "react";
 import { getPlatforms } from "@/utils";
 import { GamePlatforms } from "@/types";
@@ -8,9 +8,9 @@ import Loading from "./loading";
 import { PageHeader } from "@/components/ui";
 
 //{ params }: { params: { genres: string; page_size: number } }
-const Platforms = async () => {
+const Platforms = () => {
   const [content, setContent] = useState<GamePlatforms | null>(null);
-  console.log("inside /dashboard/browse/platforms");
+
   // Ran once on page load
   useEffect(() => {
     const fetchData = async () => {

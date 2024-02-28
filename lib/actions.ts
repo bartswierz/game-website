@@ -80,7 +80,6 @@ export async function createAccount(formData: FormData) {
       VALUES (${name}, ${email}, ${password})
     `;
     } catch (error) {
-      console.log("ERROR: ", error); //ERROR:  NeonDbError: db error: ERROR: duplicate key value violates unique constraint "users_email_key"
       // Error is getting undefined for our form data
       console.log("error trying to create account: ", error, "\n");
 
@@ -88,7 +87,7 @@ export async function createAccount(formData: FormData) {
         console.log("duplicate key value"); //THIS ERROR DISPLAYS ON DUPLICATE EMAIL ALREADY IN USER TABLE
         return "An account with this email already exists.";
       }
-      return `Error didn't include any of the above: UNIQUE MESSAGE: ${error}`;
+      return `Invalid Email`;
     }
     revalidatePath("/signup");
     redirect("/login"); //commented out as it currently is requesting multiple times

@@ -11,7 +11,6 @@ import { ShowMore } from "@/components/ui";
 // const GenrePage = async ({ params }: { params: { slug: string; query: { id: string } } }) => {
 // const GenrePage = async ({ params }: { params: { id: string } }) => {
 const GenrePage = async ({ params }: { params: { id: string } }) => {
-  // console.log("id: ", params.id);
   // Grabs the ID from the URL
   // const searchParams = useSearchParams();
   // const searchID = searchParams.get("id");
