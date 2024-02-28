@@ -34,14 +34,12 @@ export async function authenticate(prevState: string | undefined, formData: Form
   try {
     //ORIGINAL
     await signIn("credentials", Object.fromEntries(formData));
-    // const success = await signIn("credentials", Object.fromEntries(formData));
-    // console.log("success: ", success);
-    // if (successful) {
-    //   console.log("success! getting user data from signIn function");
-    //   redirect("/dashboard");
-    // }
-  } catch (error) {
-    if ((error as Error).message.includes("CredentialsSignin")) {
+
+    console.log("User authentication was successful, redirecting to the dashboard page");
+    redirect("/dashboard");
+  } catch (error: any) {
+    if (error.type === "CredentialsSignin") {
+      console.log('inside if statement: error.type.includes("CredentialsSignin") is TRUE,');
       return "CredentialSignin";
     }
     throw error;
@@ -64,9 +62,6 @@ const CreateAccount = AccountSchema.omit({ id: true });
 // export async function createAccount(formData: FormData) {
 export async function createAccount(formData: FormData) {
   // TODO - error from FormData being undefined as it is passed
-  // console.log("formData: ", formData);
-  // const form = Object.fromEntries(formData);
-  // console.log("form: ", form);
   if (formData !== undefined) {
     try {
       console.log("Form Data Passed: ", formData);
