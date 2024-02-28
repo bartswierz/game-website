@@ -97,8 +97,5 @@ export async function createAccount(formData: FormData) {
 
 export const addGameToFavorites = async () => {
   const user = await auth();
-  // const user = auth();
   console.log("addGameToFavorites - user: ", user);
 };
-
-// addGameToFavorites();

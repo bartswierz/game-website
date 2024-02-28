@@ -34,11 +34,9 @@ export const { auth, signIn, signOut } = NextAuth({
         //Checking to see if the credentials given from the user are valid types
         // parsedCredentials === USER INPUT VALIDATION
         const parsedCredentials = z.object({ email: z.string().email(), password: z.string().min(6) }).safeParse(credentials);
-        // console.log("parsedCredentials", parsedCredentials);
 
         // If the credentials are valid, we will pass the email to our getUser function to query the database
         if (parsedCredentials.success) {
-          // console.log("credentials are valid time to compare passwords...");
           const { email, password } = parsedCredentials.data;
 
           // user === DATABASE QUERY CHECKING TO FIND A EMAIL MATCH
@@ -64,7 +62,7 @@ export const { auth, signIn, signOut } = NextAuth({
           // if (passwordsMatch) return user;
           // TODO - need to redirect user back to home page after successful login
           if (passwordMatches) {
-            console.log("SUCCESS! WE HAVE A PASSWORD MATCH! returning user: ", user);
+            console.log("Password matches, returning user");
             return user; //user is confirmed, return user
           } else {
             console.log("Invalid credentials returning null...");

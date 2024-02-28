@@ -8,8 +8,7 @@ export const metadata: Metadata = {
     template: "Next-Level Games | %s", // %s is the page title that will be replaces with the custom title given
     default: "Next-Level Games",
   },
-  description: "The official Next.js Learn Dashboard built with App Router.",
-  metadataBase: new URL("https://next-learn-dashboard.vercel.sh"),
+  description: "The only game information hub you will ever need to get to the Next-Level.",
 };
 
 //Reference for multiple layouts used: https://nextjs.org/docs/app/building-your-application/routing/route-groups#creating-multiple-root-layouts

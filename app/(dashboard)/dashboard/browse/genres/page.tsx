@@ -10,7 +10,10 @@ const Genres = async () => {
   const genres: GameGenres = await getGamesGenres();
   const { results } = genres;
   // console.log("results", results);
-
+  console.log(
+    "results: ",
+    results.map(({ id }) => console.log("id: ", id))
+  );
   return (
     <>
       <PageHeader title="Genres" count={19} countType="Genres" hidePlus />

@@ -180,52 +180,7 @@ body {
   transition: transform 660ms cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-.b {
+/* Used for temporary container visualization when building new components - Ctrl/F to find all and remove afterwards */
+.bb {
   border: 2px solid blue;
 }
-
-/* SIGN-IN/SIGN-UP BORDER ANIMATION */
-/* @keyframes spin-border {
-  0% {
-    border-color: white;
-    border-width: 2px;
-    transform: rotate(0deg);
-  }
-  100% {
-    border-color: blue;
-    border-width: 2px;
-    transform: rotate(360deg);
-  }
-} */
-
-/* .background-test {
-  background-color: #777231;
-  animation: spin-border 2s linear infinite;
-}
-
-.box::before {
-  content: "";
-  position: absolute;
-  width: 50px;
-  height: 100%;
-  background-color: white;
-  box-shadow: 0 0 20px rgb(8, 8, 8);
-  animation: animate 4s linear infinite;
-}
-
-.box::after {
-  content: "";
-  position: absolute;
-  inset: 10px;
-  background-color: rgb(4, 75, 97);
-  border-radius: 16px;
-}
-
-@keyframes animate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-} */

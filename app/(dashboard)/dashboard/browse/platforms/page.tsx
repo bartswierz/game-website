@@ -1,17 +1,16 @@
-"use client";
+// "use client";
 import React, { useState, useEffect } from "react";
 import { getPlatforms } from "@/utils";
 import { GamePlatforms } from "@/types";
 import GameLinkBasic from "@/components/ui/GameLinkBasic";
 import LoadMorePlatforms from "@/components/ui/Loading/LoadMorePlatforms";
 import Loading from "./loading";
-import { ComboboxOrdering } from "@/components/ui";
 import { PageHeader } from "@/components/ui";
 
 //{ params }: { params: { genres: string; page_size: number } }
 const Platforms = async () => {
   const [content, setContent] = useState<GamePlatforms | null>(null);
-
+  console.log("inside /dashboard/browse/platforms");
   // Ran once on page load
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +31,6 @@ const Platforms = async () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         {content.results.map(({ id, name, games_count, games }) => (
           <div key={name}>
-            {/* <span className="font-bold text-3xl text-green-500">ID: {id}</span> */}
             <GameLinkBasic id={id} name={name} games_count={games_count} games={games} page="platforms" />
           </div>
         ))}

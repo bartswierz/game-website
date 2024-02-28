@@ -8,9 +8,12 @@ import Loading from "./loading";
 import { PageHeader } from "@/components/ui";
 //ex. http://localhost:3000/genres/sports?genres=sports
 // const GenrePage = async ({ params }: { params: { slug: string } }) => {
-const GenrePage = ({ params }: { params: { slug: string } }) => {
+// const GenrePage = ({ params }: { params: { slug: string } }) => {
+const GenrePage = ({ params }: { params: { slug: string; genres: number } }) => {
   const searchParams = useSearchParams();
-  const { slug } = params;
+  const { slug, genres } = params;
+
+  console.log("INSIDE /dashboard/genres/[slug]: ", slug, genres);
   // const content = await getGamesByGenre(params.slug);
   // const content = await getGamesByGenre(slug);
   //TODO - Change to GamesByDeveloper - Need to create this first

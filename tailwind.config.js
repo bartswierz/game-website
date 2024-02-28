@@ -3,8 +3,6 @@ module.exports = {
   darkMode: ["class"],
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
-    // extend: {},
-
     extend: {
       screens: {
         "3xsm": "320px",
@@ -16,21 +14,7 @@ module.exports = {
       },
       fontSize: {
         xxs: "0.625rem",
-        // xs: "0.75rem",
-        // sm: "0.875rem",
-        // base: "1rem",
-        // lg: "1.125rem",
-        // xl: "1.25rem",
-        // "2xl": "1.5rem",
-        // "3xl": "1.875rem",
       },
-      // container: {
-      //   center: true,
-      //   padding: "2rem",
-      //   screens: {
-      //     "2xl": "1400px",
-      //   },
-      // },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -80,16 +64,7 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
-        // background: {
-        //   "0%, 100%": { backgroundPosition: "0% 50%" },
-        //   "50%": { backgroundPosition: "100% 50%" },
-        // },
       },
-      // animation: {
-      //   "accordion-down": "accordion-down 0.2s ease-out",
-      //   "accordion-up": "accordion-up 0.2s ease-out",
-      //   border: "background ease infinite",
-      // },
     },
   },
   plugins: [require("tailwindcss-animate"), require("tailwind-scrollbar")],

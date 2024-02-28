@@ -15,24 +15,8 @@ const GenrePage = async ({ params }: { params: { id: string } }) => {
   // Grabs the ID from the URL
   // const searchParams = useSearchParams();
   // const searchID = searchParams.get("id");
-  // console.log("search ID: ", searchID);
-  // const [genreInfo, setGenreInfo] = useState<GenreInfo>();
-  // let data = await getGenreInfo(searchID);
   let data = await getGenreInfo(params.id);
   const genreInfo = data;
-  // console.log("data: ", data);
-  // Fetch Genre Info using the passed ID from browse/genres Page
-  // useEffect(() => {
-  //   const fetchGenreInfo = async (searchID: string) => {
-  //     const data: GenreInfo = await getGenreInfo(searchID);
-
-  //     if (data) {
-  //       setGenreInfo(data);
-  //     } else throw new Error("No data returned from getGenreInfo");
-  //   };
-
-  //   if (searchID) fetchGenreInfo(searchID);
-  // }, [searchID]);
 
   return (
     <div className="max-w-[1200px] text-white bg-slate-800 rounded-lg overflow-hidden mx-4 lg:mx-0">

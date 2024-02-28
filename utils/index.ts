@@ -40,11 +40,14 @@ export const getGamesByGenre = async (
   platforms?: string | null
 ): Promise<GamesByGenre> => {
   let parameters = checkForParameters(ordering, platforms);
-
+  console.log("utils - getGamesByGenre");
+  console.log("utils genre: ", genre, "and parameters: ", parameters);
+  //TODO - this fetch is not working correctly
   const res = await fetch(
     `https://api.rawg.io/api/games?genres=${genre}&page_size=12&key=${process.env.RAWG_API_KEY}${parameters && `${parameters}`}`
   );
 
+  // code stops here, need to fix the API call
   if (!res.ok) {
     throw new Error("Failed to fetch");
   }
