@@ -39,7 +39,7 @@ export async function authenticate(prevState: string | undefined, formData: Form
     redirect("/dashboard");
   } catch (error: any) {
     if (error.type === "CredentialsSignin") {
-      console.log('inside if statement: error.type.includes("CredentialsSignin") is TRUE,');
+      console.log("error.type: CredentialsSignin");
       return "CredentialSignin";
     }
     throw error;

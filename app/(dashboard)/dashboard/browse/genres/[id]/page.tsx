@@ -1,20 +1,10 @@
-// "use client";
-import { useSearchParams } from "next/navigation";
 import { getGenreInfo } from "@/utils";
-import { GenreInfo } from "@/types";
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ShowMore } from "@/components/ui";
 
-//TODO - this page has an id passed from previous page as a query parameter
-// const GenrePage = async ({ params }: { params: { slug: string; query: { id: string } } }) => {
-// const GenrePage = async ({ params }: { params: { id: string } }) => {
-const GenrePage = async ({ params }: { params: { id: string } }) => {
-  // Grabs the ID from the URL
-  // const searchParams = useSearchParams();
-  // const searchID = searchParams.get("id");
-  let data = await getGenreInfo(params.id);
+const GenrePage = async ({ searchParams }: { params: { slug: string }; searchParams: { id: string } }) => {
+  let data = await getGenreInfo(searchParams.id);
   const genreInfo = data;
 
   return (
@@ -46,7 +36,7 @@ const GenrePage = async ({ params }: { params: { id: string } }) => {
                 <Link
                   href={{
                     pathname: `/dashboard/genres/${genreInfo.name.toLowerCase()}`,
-                    query: { genres: `${genreInfo.name.toLowerCase()}`, page_size: 6 },
+                    query: { genres: searchParams.id, page_size: 6 },
                   }}
                   className="bg-gray-200 text-gray-500 font-semibold rounded-md py-1 px-2 text-center hover:bg-gray-300 w-full max-w-2xl"
                 >

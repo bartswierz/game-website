@@ -26,23 +26,17 @@ const Searchbar = () => {
   const router = useRouter();
   const [searchTermValue, setSearchTermValue] = useState<string>("");
 
-  // TODO - add a debounce to the searchbar to prevent too many API calls BUT also not require user to have to submit the form - we need to change onSubmit to onChange
-  // We want to navigate to the /search page AND PASS THE searchTerm as a query
-  // const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-  // const handleSearch = (e: string) => {
   const handleSearch = (searchTerm: string) => {
     // Conditional check to ensure the user inputs a valid search term containing either words, letters, numbers, or spaces
     const validCharacters = /^[A-Za-z0-9\s-]+$/;
 
     //IF SEARCH TERM IS EMPTY OR DOES NOT CONTAIN ALPHABET OR NUMBERS, ALERT USER
-    // if (!searchTerm || !validCharacters.test(searchTerm)) {
     if (!searchTerm || !validCharacters.test(searchTerm)) {
       // alert("Invalid Input - Must contain alphabet or numbers"); //may have to remove this alert and just leave it as a return to not search the term
       return;
     }
 
     // VALID INPUT - Navigate to the /search page and pass the searchTerm as a query
-    // router.push(`/dashboard/search/${searchTerm}`);
     router.push(`/dashboard/search/${searchTerm}`);
   };
 
@@ -65,9 +59,6 @@ const Searchbar = () => {
             name="search"
             placeholder="Search 850,000+ games"
             value={searchTermValue}
-            //TODO add debounce here
-            // onChange={(e) => setSearchTerm(e.target.value)}
-            // onChange={(e) => debouncedHandleSearch(e.target.value)}
             onChange={handleChange}
             className="text-white min-w-full bg-gray-800 h-12 pl-10 rounded-full group-hover:bg-white group-hover:text-gray-900 transition-colors duration-300 ease-in-out focus:outline-none truncate text-sm xsm:text-base"
           />

@@ -3,22 +3,17 @@ import { getGamesByGenre } from "@/utils";
 import { ComboboxOrdering, ComboboxPlatforms, GameLink, LoadMoreGenreGames } from "@/components/ui";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { GamesByGenre, ParameterObj } from "@/types";
+import { GamesByGenre } from "@/types";
 import Loading from "./loading";
 import { PageHeader } from "@/components/ui";
 //ex. http://localhost:3000/genres/sports?genres=sports
-// const GenrePage = async ({ params }: { params: { slug: string } }) => {
-// const GenrePage = ({ params }: { params: { slug: string } }) => {
+
 const GenrePage = ({ params }: { params: { slug: string; genres: number } }) => {
   const searchParams = useSearchParams();
-  const { slug, genres } = params;
+  const { slug } = params;
 
-  // const content = await getGamesByGenre(params.slug);
-  // const content = await getGamesByGenre(slug);
-  //TODO - Change to GamesByDeveloper - Need to create this first
   const [content, setContent] = useState<GamesByGenre | null>(null);
   const searchGenres = searchParams.get("genres");
-  // const [searchTerm, setSlugTerm] = useState<string | null>(slug);
   // Collects our value inside query passed from Combobox
   const searchOrdering = searchParams.get("ordering");
   const searchPlatforms = searchParams.get("platforms");
@@ -37,16 +32,12 @@ const GenrePage = ({ params }: { params: { slug: string; genres: number } }) => 
     setPlatforms(searchPlatforms);
   }, [searchPlatforms]);
 
-  //TODO - change to searchDevelopers - this may be the ID or SLUG - i.e. ID:1612 OR valve-software is a valid search parameter
   useEffect(() => {
     // User selected a platform, we will update the state so it can be passed to the combobox
     setSearchSlug(searchGenres);
   }, [searchGenres]);
 
   useEffect(() => {
-    // const fetchData = async (slug: string) => {
-    // const fetchData = async (searchGenres: string, searchOrdering?: string, searchPlatforms?: string) => {
-    // const fetchData = async ({searchGenres: searchGenres, searchOrdering?: searchOrdering, searchPlatforms?: searchPlatforms}) => {
     const fetchData = async (searchGenres: string | number, searchOrdering: string | null, searchPlatforms: string | null) => {
       // value can be null or undefined if user only types in the search box
       const data: GamesByGenre = await getGamesByGenre(searchGenres, searchOrdering, searchPlatforms);
@@ -86,8 +77,8 @@ const GenrePage = ({ params }: { params: { slug: string; genres: number } }) => 
         </div>
       )}
 
-      {/* LOADING ICON AT THE BOTTOM */}
-      {params.slug && <LoadMoreGenreGames searchQuery={params.slug} />}
+      {/* INFINITE SCROLL - LOADING ICON AT THE BOTTOM BELOW THE FIRST 12 GAMES */}
+      {searchGenres && <LoadMoreGenreGames searchQuery={searchGenres} />}
     </div>
   );
 };

@@ -12,7 +12,6 @@ import {
   GamesSearch,
   GameScreenshots,
   StoresWithGame,
-  ParameterObj,
 } from "@/types";
 import { checkForParameters } from "@/utils/utils";
 
@@ -40,9 +39,7 @@ export const getGamesByGenre = async (
   platforms?: string | null
 ): Promise<GamesByGenre> => {
   let parameters = checkForParameters(ordering, platforms);
-  console.log("utils - getGamesByGenre");
-  console.log("utils genre: ", genre, "and parameters: ", parameters);
-  //TODO - this fetch is not working correctly
+
   const res = await fetch(
     `https://api.rawg.io/api/games?genres=${genre}&page_size=12&key=${process.env.RAWG_API_KEY}${parameters && `${parameters}`}`
   );
@@ -135,9 +132,11 @@ export const getGamesGenres = async (): Promise<GameGenres> => {
   return data;
 };
 
+//  genreID is passing 'RPG' instead of '5' - need to fix this to resolve infinite load issue
 // TODO - PASS IN GENRE ID TO GET INFORMATION FOR A SPECIFIC GENRE
 export const getGenreInfo = async (genreId: string | null): Promise<GenreInfo> => {
-  // https://api.rawg.io/api/genres/{id}?key={key}
+  console.log("genreInfo passed: ", genreId);
+  console.log(`API FETCH: https://api.rawg.io/api/genres/${genreId}?key=${process.env.RAWG_API_KEY}`);
   const res = await fetch(`https://api.rawg.io/api/genres/${genreId}?key=${process.env.RAWG_API_KEY}`);
 
   if (!res.ok) {
@@ -257,9 +256,8 @@ export const fetchNextPageDeveloperGames = async (pageNumber: number, searchQuer
   return data;
 };
 
-// https://api.rawg.io/api/games?key=19bf6456aed44d52b0a064df2f54ef4a&search=diablo
+// ex. searchTerm => 'skyrim'
 export const getGamesSearch = async (searchTerm: string): Promise<GamesSearch> => {
-  // const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}`);
   const res = await fetch(`https://api.rawg.io/api/games?key=${process.env.RAWG_API_KEY}&search=${searchTerm}&search_precise=true`);
 
   if (!res.ok) throw new Error("Failed to fetch Games by Search Term");

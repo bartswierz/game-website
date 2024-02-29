@@ -7,13 +7,9 @@ import { GamesByGenre, GamesByPlatform } from "@/types";
 import Loading from "./loading";
 
 //ex. http://localhost:3000/genres/sports?genres=sports
-// const GenrePage = async ({ params }: { params: { slug: string } }) => {
-//TODO - param is id
-// const DeveloperPage = ({ params }: { params: { slug: string } }) => {
 const DeveloperPage = ({ params }: { params: { id: string } }) => {
   const searchParams = useSearchParams();
   const { id } = params;
-
   const [content, setContent] = useState<GamesByGenre | null>(null);
   const searchDeveloperID = searchParams.get("id");
 

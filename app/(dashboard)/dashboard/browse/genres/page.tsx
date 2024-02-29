@@ -3,13 +3,10 @@ import { GameGenres, GenreResults } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { PageHeader } from "@/components/ui";
-//https://www.youtube.com/watch?v=jTYp49jxgsA
-// stores and games are SERVER FILES - SO ITS A SERVER ISSUE
-// -DEVELOPERS AND PLATFORMS ARE FINE BECAUSE THEY ARE CLIENT FILES
+
 const Genres = async () => {
   const genres: GameGenres = await getGamesGenres();
   const { results } = genres;
-  // console.log("results", results);
 
   return (
     <>
@@ -18,7 +15,6 @@ const Genres = async () => {
         {results.map(({ id, name, slug, games_count, image_background, games }: GenreResults) => (
           <Link
             href={{
-              // pathname: `/browse/genres/${slug}`,
               pathname: `/dashboard/browse/genres/${slug}`,
               query: { id: id },
             }}
